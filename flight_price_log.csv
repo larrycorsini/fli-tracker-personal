@@ -1,0 +1,15 @@
+Timestamp,Origin,Destination,Price,Currency
+2026-04-07 13:55:37,Provo Municipal Airport,Dallas-Fort Worth International Airport,325.0,USD
+2026-04-07 13:55:51,Provo Municipal Airport,Dallas-Fort Worth International Airport,325.0,USD
+2026-04-07 14:00:39,Provo Municipal Airport,Dallas-Fort Worth International Airport,325.0,USD
+2026-04-07 14:03:29,PVU,DFW,649.0,American Airlines,American Airlines
+2026-04-07 14:03:50,PVU,DFW,649.0,American Airlines,American Airlines
+2026-04-07 14:06:08,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-07 14:06:09,Trip 2: Apr 7-14 (Original Window),391.0,American Airlines,American Airlines,13:32
+2026-04-07 14:06:11,Trip 3: Apr 7-14 (SLC Alternative),423.0,American Airlines,American Airlines,10:34
+2026-04-07 14:06:27,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-07 14:06:28,Trip 2: Apr 7-14 (Original Window),391.0,American Airlines,American Airlines,13:32
+2026-04-07 14:06:29,Trip 3: Apr 7-14 (SLC Alternative),423.0,American Airlines,American Airlines,10:34
+2026-04-07 15:42:29,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-07 15:42:31,Trip 2: Apr 7-14 (Original Window),391.0,American Airlines,American Airlines,13:32
+2026-04-07 15:42:34,Trip 3: Apr 7-14 (SLC Alternative),423.0,American Airlines,American Airlines,10:34
