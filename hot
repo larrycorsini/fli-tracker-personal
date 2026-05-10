@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+import sys
+import argparse
+from datetime import datetime, timedelta
+from hot_core import search_hotels_core
+
+def main():
+    parser = argparse.ArgumentParser(description="Google Hotels CLI Search (Native)")
+    parser.add_argument("city", help="Destination city")
+    parser.add_argument("checkin", help="Check-in date (YYYY-MM-DD)")
+    parser.add_argument("checkout", help="Check-out date (YYYY-MM-DD)")
+    
+    args = parser.parse_args()
+    
+    print(f"Searching hotels in {args.city} from {args.checkin} to {args.checkout}...")
+    
+    try:
+        hotels = search_hotels_core(args.city, args.checkin, args.checkout)
+        
+        if not hotels:
+            print("No hotels found.")
+            return
+
+        print(f"\n{'-'*80}")
+        print(f"{'HOTEL NAME':<50} | {'PRICE':<10} | {'TOTAL':<10} | {'RATING'}")
+        print(f"{'-'*80}")
+        
+        for h in hotels:
+            name = h['name'][:48] + ".." if len(h['name']) > 50 else h['name']
+            print(f"{name:<50} | {h['price_per_night']:<10} | {h['total_price']:<10} | {h['rating']}")
+        
+        print(f"{'-'*80}")
+        print(f"Total found: {len(hotels)}")
+        
+    except Exception as e:
+        print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()

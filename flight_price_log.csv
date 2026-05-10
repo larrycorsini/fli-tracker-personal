@@ -13,3 +13,87 @@ Timestamp,Origin,Destination,Price,Currency
 2026-04-07 15:42:29,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
 2026-04-07 15:42:31,Trip 2: Apr 7-14 (Original Window),391.0,American Airlines,American Airlines,13:32
 2026-04-07 15:42:34,Trip 3: Apr 7-14 (SLC Alternative),423.0,American Airlines,American Airlines,10:34
+2026-04-07 16:10:25,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-07 16:10:29,Trip 3: Apr 7-14 (SLC Alternative),1050.0,Delta Air Lines,Delta Air Lines,10:15
+2026-04-07 16:13:21,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-07 16:13:23,Trip 3: Apr 7-14 (SLC Alternative),1050.0,Delta Air Lines,Delta Air Lines,10:15
+2026-04-08 09:55:10,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-08 10:00:30,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-08 10:01:17,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-08 10:01:19,Trip 2: Apr 8-14 (PVU Window),391.0,American Airlines,American Airlines,13:32
+2026-04-08 10:01:21,Trip 3: Apr 8-14 (SLC Window),423.0,American Airlines,American Airlines,10:34
+2026-04-09 14:16:03,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-09 14:17:13,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-09 14:17:14,Trip 2: Apr 9-14 (PVU Window),416.0,American Airlines,American Airlines,13:32
+2026-04-09 14:17:15,Trip 3: Apr 9-14 (SLC Window),459.0,American Airlines,American Airlines,10:34
+2026-04-10 10:23:20,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-13 11:40:00,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-13 11:41:30,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-13 11:41:31,Trip 2: Apr 15-19 (PVU Window),416.0,American Airlines,American Airlines,13:32
+2026-04-13 11:41:33,Trip 3: Apr 15-19 (SLC Window),459.0,American Airlines,American Airlines,10:34
+2026-04-13 11:41:53,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-13 11:41:55,Trip 2: Apr 15-19 (PVU Window),416.0,American Airlines,American Airlines,13:32
+2026-04-13 11:41:57,Trip 3: Apr 15-19 (SLC Window),459.0,American Airlines,American Airlines,10:34
+2026-04-14 12:16:59,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-14 12:17:02,Trip 2: Apr 15-19 (PVU Window),416.0,American Airlines,American Airlines,13:32
+2026-04-14 12:17:15,Trip 3: Apr 15-19 (SLC Window),459.0,American Airlines,American Airlines,10:34
+2026-04-15 10:49:59,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-15 10:50:08,Trip 2: Apr 16-19 (PVU Window),441.0,American Airlines,American Airlines,13:32
+2026-04-15 10:50:16,Trip 3: Apr 16-20 (PVU Window),441.0,American Airlines,American Airlines,13:01
+2026-04-15 10:50:32,Trip 4: Apr 16-19 (SLC Window),231.0,Frontier Airlines,Frontier Airlines,17:14
+2026-04-15 10:50:43,Trip 5: Apr 16-20 (SLC Window),182.0,Frontier Airlines,Frontier Airlines,16:49
+2026-04-15 11:33:59,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-15 11:34:28,Trip 2: Apr 16-19 (PVU Window),441.0,American Airlines,American Airlines,13:32
+2026-04-15 11:34:48,Trip 3: Apr 16-20 (PVU Window),441.0,American Airlines,American Airlines,13:01
+2026-04-15 11:34:55,Trip 4: Apr 16-19 (SLC Window),231.0,Frontier Airlines,Frontier Airlines,17:14
+2026-04-15 11:35:11,Trip 5: Apr 16-20 (SLC Window),182.0,Frontier Airlines,Frontier Airlines,16:49
+2026-04-16 10:20:32,Trip 1: May 19-20 (May Pivot),649.0,American Airlines,American Airlines,13:32
+2026-04-16 10:20:35,Trip 2: Apr 16-19 (PVU Window),441.0,American Airlines,American Airlines,13:32
+2026-04-16 10:20:36,Trip 3: Apr 16-20 (PVU Window),441.0,American Airlines,American Airlines,13:01
+2026-04-16 10:20:52,Trip 4: Apr 16-19 (SLC Window),231.0,Frontier Airlines,Frontier Airlines,17:14
+2026-04-16 10:21:07,Trip 5: Apr 16-20 (SLC Window),182.0,Frontier Airlines,Frontier Airlines,16:49
+2026-04-16 14:53:10,Trip 1: PVU Window Apr 17-21,416.0,American Airlines,American Airlines,13:32
+2026-04-16 14:53:28,Trip 3: PVU Window Apr 19-23,746.0,American Airlines,American Airlines,13:32
+2026-04-16 14:53:33,Trip 4: PVU Window Apr 20-24,343.0,Breeze Airways,Breeze Airways,13:29
+2026-04-16 14:53:35,Trip 5: PVU Window Apr 21-25,391.0,American Airlines,American Airlines,13:32
+2026-04-16 14:53:49,Trip 6: SLC Window Apr 17-21,459.0,American Airlines,American Airlines,10:34
+2026-04-16 14:54:03,Trip 7: SLC Window Apr 18-22,423.0,American Airlines,American Airlines,00:27
+2026-04-16 14:54:10,Trip 8: SLC Window Apr 19-23,276.0,Frontier Airlines,Frontier Airlines,17:14
+2026-04-16 14:54:22,Trip 9: SLC Window Apr 20-24,370.0,Frontier Airlines,Frontier Airlines,17:04
+2026-04-16 14:54:41,Trip 10: SLC Window Apr 21-25,423.0,American Airlines,American Airlines,10:34
+2026-04-16 15:06:15,SLC 5-Day (Apr 19-23),276.0,Frontier Airlines,Frontier Airlines,17:59,17:14
+2026-04-16 15:06:15,SLC 7-Day (Apr 17-23),276.0,Frontier Airlines,Frontier Airlines,17:49,17:14
+2026-04-16 15:06:15,PVU 5-Day (Apr 20-24),343.0,Breeze Airways,Breeze Airways,07:00,13:29
+2026-04-16 15:06:15,SLC 5-Day (Apr 20-24),370.0,Frontier Airlines,Frontier Airlines,17:34,17:04
+2026-04-16 15:06:15,SLC 6-Day (Apr 19-24),370.0,Frontier Airlines,Frontier Airlines,17:59,17:04
+2026-04-16 15:06:15,PVU 5-Day (Apr 21-25),391.0,American Airlines,American Airlines,07:00,13:32
+2026-04-16 15:06:15,PVU 5-Day (Apr 17-21),416.0,American Airlines,American Airlines,07:00,13:32
+2026-04-16 15:06:15,PVU 6-Day (Apr 20-25),416.0,American Airlines,American Airlines,07:00,13:32
+2026-04-16 15:06:15,PVU 7-Day (Apr 18-24),416.0,American Airlines,American Airlines,07:00,13:01
+2026-04-16 15:06:15,PVU 7-Day (Apr 19-25),416.0,American Airlines,American Airlines,16:04,13:32
+2026-04-16 15:06:15,SLC 5-Day (Apr 18-22),423.0,American Airlines,American Airlines,05:00,00:27
+2026-04-16 15:06:15,SLC 5-Day (Apr 21-25),423.0,American Airlines,American Airlines,05:00,10:34
+2026-04-16 15:06:15,PVU 6-Day (Apr 18-23),457.0,American Airlines,American Airlines,07:00,22:02
+2026-04-16 15:06:15,SLC 6-Day (Apr 17-22),458.0,American Airlines,American Airlines,05:00,10:34
+2026-04-16 15:06:15,SLC 5-Day (Apr 17-21),459.0,American Airlines,American Airlines,05:00,10:34
+2026-04-16 15:06:15,SLC 6-Day (Apr 18-23),459.0,American Airlines,American Airlines,05:00,00:27
+2026-04-16 15:06:15,SLC 6-Day (Apr 20-25),459.0,American Airlines,American Airlines,05:00,10:34
+2026-04-16 15:06:15,SLC 7-Day (Apr 19-25),459.0,American Airlines,American Airlines,05:00,10:34
+2026-04-16 15:06:15,SLC 7-Day (Apr 18-24),467.0,American Airlines,American Airlines,05:00,00:27
+2026-04-16 15:06:15,PVU 7-Day (Apr 17-23),482.0,American Airlines,American Airlines,07:00,22:02
+2026-04-16 15:06:15,PVU 6-Day (Apr 19-24),567.0,American Airlines,Breeze Airways,16:04,13:29
+2026-04-16 15:06:15,PVU 5-Day (Apr 18-22),732.0,American Airlines,American Airlines,07:00,22:02
+2026-04-16 15:06:15,PVU 5-Day (Apr 19-23),746.0,American Airlines,American Airlines,16:04,22:02
+2026-04-16 15:06:15,PVU 6-Day (Apr 17-22),757.0,American Airlines,American Airlines,07:00,22:02
+2026-04-16 15:56:31,PVU 5-Day (Apr 21-25),391.0,American Airlines,American Airlines,07:00,13:32
+2026-04-16 15:56:31,PVU 5-Day (Apr 17-21),416.0,American Airlines,American Airlines,07:00,13:32
+2026-04-16 15:56:31,PVU 6-Day (Apr 20-25),416.0,American Airlines,American Airlines,07:00,13:32
+2026-04-16 15:56:31,PVU 7-Day (Apr 18-24),416.0,American Airlines,American Airlines,07:00,13:01
+2026-04-16 15:56:31,PVU 7-Day (Apr 19-25),416.0,American Airlines,American Airlines,16:04,13:32
+2026-04-16 15:56:31,PVU 6-Day (Apr 18-23),457.0,American Airlines,American Airlines,07:00,22:02
+2026-04-16 15:56:31,PVU 7-Day (Apr 17-23),482.0,American Airlines,American Airlines,07:00,22:02
+2026-04-16 15:56:31,PVU 6-Day (Apr 19-24),567.0,American Airlines,American Airlines,16:04,13:01
+2026-04-16 15:56:31,PVU 5-Day (Apr 20-24),695.0,American Airlines,American Airlines,07:00,13:01
+2026-04-16 15:56:31,PVU 5-Day (Apr 18-22),732.0,American Airlines,American Airlines,07:00,22:02
+2026-04-16 15:56:31,PVU 5-Day (Apr 19-23),746.0,American Airlines,American Airlines,16:04,22:02
+2026-04-16 15:56:31,PVU 6-Day (Apr 17-22),757.0,American Airlines,American Airlines,07:00,22:02

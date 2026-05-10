@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Planner Pro — Smart Trip Search & Price Tracking</title>
+    <meta name="description" content="Premium travel planning dashboard. Search flights, hotels, and find the cheapest dates to fly — powered by Google Flights data.">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="header-left">
+                <h1>Travel Planner Pro</h1>
+                <div class="tagline">Flights · Hotels · Flexible Dates · Price Tracking — Powered by Native Engine</div>
+            </div>
+            <div class="header-right">
+                <select id="currency-select" onchange="updateCurrency()" style="background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 6px 12px; font-family: inherit;">
+                    <option value="USD">🇺🇸 USD</option>
+                    <option value="EUR">🇪🇺 EUR</option>
+                    <option value="GBP">🇬🇧 GBP</option>
+                    <option value="CAD">🇨🇦 CAD</option>
+                    <option value="AUD">🇦🇺 AUD</option>
+                    <option value="JPY">🇯🇵 JPY</option>
+                    <option value="INR">🇮🇳 INR</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-dot" id="statusDot"></div>
+            <div class="status-text" id="statusText">Ready to search</div>
+            <div class="status-trip" id="statusTrip"></div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tabs" id="mainTabs">
+            <div class="tab active" data-tab="flights">✈️ Flights</div>
+            <div class="tab" data-tab="hotels">🏨 Hotels</div>
+            <div class="tab" data-tab="combined">🎯 Flights + Hotels</div>
+            <div class="tab" data-tab="dates">📅 Cheapest Dates</div>
+            <div class="tab" data-tab="tracker">📊 My Flights</div>
+            <div class="tab" data-tab="trips">🎒 Trips</div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- FLIGHTS TAB -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="tab-panel active" id="panel-flights">
+            <div class="glass-panel">
+                <!-- Trip Type -->
+                <div class="trip-type-toggle">
+                    <button class="trip-type-btn active" data-trip="round_trip" id="flights-rt">Round Trip</button>
+                    <button class="trip-type-btn" data-trip="one_way" id="flights-ow">One Way</button>
+                </div>
+
+                <form id="flightsForm">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Origin(s)</label>
+                            <div class="autocomplete-wrapper">
+                                <input type="text" id="f-origins" value="PVU" autocomplete="off" placeholder="PVU, SLC" required>
+                                <ul class="autocomplete-list" id="ac-f-origins"></ul>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Destination(s)</label>
+                            <div class="autocomplete-wrapper">
+                                <input type="text" id="f-destinations" value="" autocomplete="off" placeholder="DFW, LAX" required>
+                                <ul class="autocomplete-list" id="ac-f-destinations"></ul>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Departure Date</label>
+                            <input type="date" id="f-start" required>
+                        </div>
+                        <div class="input-group" id="f-end-group">
+                            <label>Return Date</label>
+                            <input type="date" id="f-end" required>
+                        </div>
+                        <div class="input-group" id="f-dur-group">
+                            <label>Trip Durations (days)</label>
+                            <input type="text" id="f-durations" value="5, 7" placeholder="3, 5, 7">
+                        </div>
+                        <div class="input-group">
+                            <label>Max Stops</label>
+                            <select id="f-stops">
+                                <option value="ANY" selected>Any Stops</option>
+                                <option value="NON_STOP">Nonstop Only</option>
+                                <option value="ONE_STOP">Up to 1 Stop</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Filters -->
+                    <button type="button" class="advanced-toggle" id="flightsAdvToggle">
+                        <span class="arrow">▼</span> Advanced Filters
+                    </button>
+                    <div class="advanced-filters" id="flightsAdvFilters">
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label>Airline Filter</label>
+                                <input type="text" id="f-airline" placeholder="e.g. American">
+                            </div>
+                            <div class="input-group">
+                                <label>Cabin Class</label>
+                                <select id="f-cabin">
+                                    <option value="ECONOMY" selected>Economy</option>
+                                    <option value="PREMIUM_ECONOMY">Premium Economy</option>
+                                    <option value="BUSINESS">Business</option>
+                                    <option value="FIRST">First</option>
+                                    <option value="ECONOMY,PREMIUM_ECONOMY,BUSINESS,FIRST">All Cabins (Compare)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="recent-searches-container"></div>
+
+                    <button type="submit" class="btn-primary" id="flightsBtn">Search Flights</button>
+                </form>
+            </div>
+
+            <!-- Results -->
+            <div id="flights-results-header" class="results-header hidden">
+                <div class="header-main-row">
+                    <span class="results-count" id="flights-count"></span>
+                    <div class="sort-controls">
+                        <label>Sort:</label>
+                        <select id="flights-sort" onchange="renderFlights()">
+                            <option value="price">Price ↑</option>
+                            <option value="price-desc">Price ↓</option>
+                            <option value="departure">Departure ↑</option>
+                            <option value="airline">Airline</option>
+                            <option value="route">Route (O→D)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="local-filters">
+                    <select id="local-filter-stops" onchange="renderFlights()">
+                        <option value="any">Any Stops</option>
+                        <option value="0">Nonstop only</option>
+                        <option value="1">Up to 1 stop</option>
+                    </select>
+                    <select id="local-filter-airline" onchange="renderFlights()">
+                        <option value="any">All Airlines</option>
+                        <!-- Options generated dynamically -->
+                    </select>
+                    <select id="local-filter-cabin" onchange="renderFlights()">
+                        <option value="any">Any Cabin</option>
+                        <option value="ECONOMY">Economy</option>
+                        <option value="PREMIUM_ECONOMY">Premium Economy</option>
+                        <option value="BUSINESS">Business</option>
+                        <option value="FIRST">First</option>
+                    </select>
+                </div>
+            </div>
+            <div id="flights-insights" class="insights-banner hidden"></div>
+            <div id="flights-results" class="results-grid"></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- HOTELS TAB -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="tab-panel" id="panel-hotels">
+            <div class="glass-panel">
+                <form id="hotelsForm">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>City or Destination</label>
+                            <div class="autocomplete-wrapper">
+                                <input type="text" id="h-city" placeholder="Dallas TX, Miami FL" autocomplete="off" required>
+                                <ul class="autocomplete-list" id="ac-h-city"></ul>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Check-in</label>
+                            <input type="date" id="h-checkin" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Check-out</label>
+                            <input type="date" id="h-checkout" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary" id="hotelsBtn">Search Hotels</button>
+                </form>
+            </div>
+
+            <div id="hotels-results-header" class="results-header hidden">
+                <span class="results-count" id="hotels-count"></span>
+                <div class="sort-controls">
+                    <label>Sort:</label>
+                    <select id="hotels-sort" onchange="sortHotelResults()">
+                        <option value="price">Price ↑</option>
+                        <option value="price-desc">Price ↓</option>
+                        <option value="rating">Rating ↓</option>
+                        <option value="name">Name</option>
+                    </select>
+                </div>
+            </div>
+            <div id="hotels-results" class="results-grid"></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- COMBINED TAB -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="tab-panel" id="panel-combined">
+            <div class="glass-panel">
+                <form id="combinedForm">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Origin(s)</label>
+                            <div class="autocomplete-wrapper">
+                                <input type="text" id="c-origins" value="PVU" autocomplete="off" required>
+                                <ul class="autocomplete-list" id="ac-c-origins"></ul>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Destination(s)</label>
+                            <div class="autocomplete-wrapper">
+                                <input type="text" id="c-destinations" value="" autocomplete="off" required>
+                                <ul class="autocomplete-list" id="ac-c-destinations"></ul>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Hotel City (auto-filled)</label>
+                            <input type="text" id="c-hotel-city" placeholder="Auto-filled from destination">
+                        </div>
+                        <div class="input-group">
+                            <label>Start Date</label>
+                            <input type="date" id="c-start" required>
+                        </div>
+                        <div class="input-group">
+                            <label>End Date</label>
+                            <input type="date" id="c-end" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Durations (days)</label>
+                            <input type="text" id="c-durations" value="5, 7" placeholder="3, 5, 7">
+                        </div>
+                        <div class="input-group">
+                            <label>Max Stops</label>
+                            <select id="c-stops">
+                                <option value="ANY" selected>Any Stops</option>
+                                <option value="NON_STOP">Nonstop Only</option>
+                                <option value="ONE_STOP">Up to 1 Stop</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary" id="combinedBtn">Find Best Trip Combos</button>
+                </form>
+            </div>
+            <div id="combined-results"></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- CHEAPEST DATES TAB -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="tab-panel" id="panel-dates">
+            <div class="glass-panel">
+                <form id="datesForm">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Origin</label>
+                            <div class="autocomplete-wrapper">
+                                <input type="text" id="d-origin" value="PVU" autocomplete="off" required>
+                                <ul class="autocomplete-list" id="ac-d-origin"></ul>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Destination</label>
+                            <div class="autocomplete-wrapper">
+                                <input type="text" id="d-destination" value="" autocomplete="off" required>
+                                <ul class="autocomplete-list" id="ac-d-destination"></ul>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Window Start</label>
+                            <input type="date" id="d-start" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Window End</label>
+                            <input type="date" id="d-end" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Trip Duration (days)</label>
+                            <input type="number" id="d-duration" value="5" min="1" max="30">
+                        </div>
+                        <div class="input-group">
+                            <label>Max Stops</label>
+                            <select id="d-stops">
+                                <option value="ANY" selected>Any Stops</option>
+                                <option value="NON_STOP">Nonstop Only</option>
+                                <option value="ONE_STOP">Up to 1 Stop</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary" id="datesBtn">Find Cheapest Dates</button>
+                </form>
+            </div>
+            <div id="dates-results"></div>
+        </div>
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- MY FLIGHTS TRACKER TAB -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="tab-panel" id="panel-tracker">
+            <!-- Summary Stats Bar -->
+            <div class="tracker-stats" id="trackerStats">
+                <div class="stat-item">
+                    <span class="stat-value" id="stat-active">0</span>
+                    <span class="stat-label">Active</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value stat-savings" id="stat-savings">$0</span>
+                    <span class="stat-label">Savings Found</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="stat-drops">0</span>
+                    <span class="stat-label">Price Drops</span>
+                </div>
+                <div class="stat-item">
+                    <button class="btn-secondary" id="checkAllBtn" onclick="checkAllTracked()">🔄 Check All Now</button>
+                </div>
+            </div>
+
+            <!-- Add Flight Form -->
+            <div class="glass-panel">
+                <h3 class="panel-title">Track a Booked Flight</h3>
+                <p class="panel-subtitle">Add a flight you've already booked to monitor for price drops. We'll check periodically and alert you when the fare drops so you can claim an eCredit.</p>
+                <form id="trackerAddForm">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Origin</label>
+                            <div class="autocomplete-wrapper">
+                                <input type="text" id="t-origin" placeholder="SLC" autocomplete="off" required>
+                                <ul class="autocomplete-list" id="ac-t-origin"></ul>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Destination</label>
+                            <div class="autocomplete-wrapper">
+                                <input type="text" id="t-destination" placeholder="DFW" autocomplete="off" required>
+                                <ul class="autocomplete-list" id="ac-t-destination"></ul>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Departure Date</label>
+                            <input type="date" id="t-depart" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Return Date (optional)</label>
+                            <input type="date" id="t-return">
+                        </div>
+                        <div class="input-group">
+                            <label>Airline</label>
+                            <select id="t-airline" required>
+                                <option value="">Select Airline</option>
+                                <option value="American Airlines">American Airlines</option>
+                                <option value="Delta Air Lines">Delta Air Lines</option>
+                                <option value="United Airlines">United Airlines</option>
+                                <option value="Southwest Airlines">Southwest Airlines</option>
+                                <option value="Alaska Airlines">Alaska Airlines</option>
+                                <option value="JetBlue">JetBlue</option>
+                                <option value="Hawaiian Airlines">Hawaiian Airlines</option>
+                                <option value="Spirit Airlines">Spirit Airlines</option>
+                                <option value="Frontier Airlines">Frontier Airlines</option>
+                                <option value="Breeze Airways">Breeze Airways</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Price You Paid ($)</label>
+                            <input type="number" id="t-price" step="0.01" min="0" placeholder="249.00" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Fare Class</label>
+                            <select id="t-fare">
+                                <option value="main_cabin" selected>Main Cabin / Economy</option>
+                                <option value="basic_economy">Basic Economy</option>
+                                <option value="premium_economy">Premium Economy</option>
+                                <option value="business">Business</option>
+                                <option value="first">First</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Confirmation Code (optional)</label>
+                            <input type="text" id="t-confirmation" placeholder="ABC123">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary" id="trackerAddBtn">📊 Start Tracking</button>
+                </form>
+            </div>
+
+            <!-- Tracked Flights List -->
+            <div id="tracker-results" class="results-grid"></div>
+        </div>
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- TRIPS TAB -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="tab-panel" id="panel-trips">
+            <div class="glass-panel">
+                <div class="flex-between" style="margin-bottom:20px;">
+                    <h2>🎒 My Trips</h2>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn-outline" onclick="window.print()">🖨 Export / Print</button>
+                        <button class="btn-primary" onclick="openTripModal()">+ New Trip</button>
+                    </div>
+                </div>
+                <div id="trips-container" style="display: flex; flex-direction: column; gap: 20px;">
+                    <!-- Trips will be populated here -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modals -->
+    
+    <!-- New Trip Modal -->
+    <div id="tripModal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <div class="flex-between" style="margin-bottom: 20px;">
+                <h3>Create New Trip</h3>
+                <span class="modal-close" onclick="closeTripModal()">×</span>
+            </div>
+            <div class="input-group">
+                <label>Trip Name</label>
+                <input type="text" id="new-trip-name" placeholder="e.g. Summer Vacation 2026">
+            </div>
+            <button class="btn-primary" style="width: 100%; margin-top: 15px;" onclick="createTrip()">Create Trip</button>
+        </div>
+    </div>
+
+    <!-- Add to Trip Modal -->
+    <div id="addToTripModal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <div class="flex-between" style="margin-bottom: 20px;">
+                <h3>Add to Trip</h3>
+                <span class="modal-close" onclick="closeAddToTripModal()">×</span>
+            </div>
+            <div class="input-group">
+                <label>Select Trip</label>
+                <select id="add-trip-select"></select>
+            </div>
+            <button class="btn-primary" style="width: 100%; margin-top: 15px;" onclick="saveToTrip()">Add Item</button>
+        </div>
+    </div>
+
+    <!-- Track Price Modal -->
+    <div class="modal-overlay" id="trackModal" style="display:none">
+        <div class="modal-content glass-panel">
+            <h3>📊 Track This Flight</h3>
+            <p class="modal-route" id="modalRoute"></p>
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Price You Paid ($)</label>
+                    <input type="number" id="modal-price" step="0.01" min="0" required>
+                </div>
+                <div class="input-group">
+                    <label>Fare Class</label>
+                    <select id="modal-fare">
+                        <option value="main_cabin" selected>Main Cabin</option>
+                        <option value="basic_economy">Basic Economy</option>
+                        <option value="premium_economy">Premium Economy</option>
+                        <option value="business">Business</option>
+                        <option value="first">First</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Confirmation Code (optional)</label>
+                    <input type="text" id="modal-confirmation" placeholder="ABC123">
+                </div>
+            </div>
+            <input type="hidden" id="modal-origin">
+            <input type="hidden" id="modal-destination">
+            <input type="hidden" id="modal-depart">
+            <input type="hidden" id="modal-return">
+            <input type="hidden" id="modal-airline">
+            <input type="hidden" id="modal-cabin">
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeTrackModal()">Cancel</button>
+                <button class="btn-primary" onclick="submitTrackModal()">Start Tracking</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
