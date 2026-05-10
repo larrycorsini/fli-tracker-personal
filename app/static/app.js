@@ -52,11 +52,8 @@ function updateCurrency() {
   
   // Re-render UI
   // Flights
-  const fGrid = document.getElementById('flights-results');
-  if (fGrid) {
-    fGrid.innerHTML = '';
-    state.flightResults.forEach(f => appendFlightCard(f));
-  }
+  if (state.activeTab === 'flights') renderFlights();
+
   // Hotels
   const hGrid = document.getElementById('hotels-results');
   if (hGrid) {

@@ -58,7 +58,8 @@
                 </div>
 
                 <form id="flightsForm">
-                    <div class="form-grid">
+                    <!-- Primary Search Row -->
+                    <div class="search-main-row">
                         <div class="input-group">
                             <label>Origin(s)</label>
                             <div class="autocomplete-wrapper">
@@ -77,10 +78,14 @@
                             <label>Departure Date</label>
                             <input type="date" id="f-start" required>
                         </div>
-                        <div class="input-group" id="f-end-group">
+                        <div id="f-end-group" class="input-group">
                             <label>Return Date</label>
                             <input type="date" id="f-end" required>
                         </div>
+                    </div>
+
+                    <!-- Secondary Options Row -->
+                    <div class="search-options-row">
                         <div class="input-group" id="f-dur-group">
                             <label>Trip Durations (days)</label>
                             <input type="text" id="f-durations" value="5, 7" placeholder="3, 5, 7">
@@ -92,6 +97,9 @@
                                 <option value="NON_STOP">Nonstop Only</option>
                                 <option value="ONE_STOP">Up to 1 Stop</option>
                             </select>
+                        </div>
+                        <div class="search-actions">
+                            <button type="submit" class="btn-primary" id="flightsBtn">Search</button>
                         </div>
                     </div>
 
@@ -120,7 +128,7 @@
                     
                     <div id="recent-searches-container"></div>
 
-                    <button type="submit" class="btn-primary" id="flightsBtn">Search Flights</button>
+
                 </form>
             </div>
 
@@ -129,6 +137,9 @@
                 <div class="header-main-row">
                     <span class="results-count" id="flights-count"></span>
                     <div class="sort-controls">
+                        <button class="btn-secondary btn-sm" id="btn-track-prices" onclick="trackCurrentSearch()">
+                            <i class="icon">🔔</i> Track Prices
+                        </button>
                         <label>Sort:</label>
                         <select id="flights-sort" onchange="renderFlights()">
                             <option value="price">Price ↑</option>
