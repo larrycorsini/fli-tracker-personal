@@ -1416,3 +1416,14 @@ async function saveToTrip() {
     showToast('Failed to add to trip', 'error');
   }
 }
+
+function trackCurrentSearch() {
+  const origins = document.getElementById('f-origins').value;
+  const destinations = document.getElementById('f-destinations').value;
+  const start = document.getElementById('f-start').value;
+  const end = document.getElementById('f-end').value;
+  const tripType = state.tripType;
+
+  // Simple alert for now, in a real app this would save to a database
+  alert(`Price alert set for ${origins} to ${destinations} (${start} to ${end})! We'll notify you if prices drop.`);
+}

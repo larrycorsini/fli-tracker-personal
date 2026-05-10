@@ -350,6 +350,31 @@ select option {
     box-shadow: none;
 }
 
+.btn-secondary {
+    background: white;
+    color: var(--accent);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-secondary:hover {
+    background: var(--bg-surface-hover);
+    border-color: var(--accent-soft);
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+}
+
+.icon {
+    margin-right: 4px;
+}
+
 /* ── Autocomplete ────────────────────────────────────────────────────────── */
 .autocomplete-wrapper { position: relative; }
 
