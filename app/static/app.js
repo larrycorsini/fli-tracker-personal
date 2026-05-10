@@ -16,6 +16,8 @@ const state = {
   currency: 'USD',
   exchangeRates: { USD: 1.0 },
   combinedResults: [],
+  _lastAirlineOptionsKey: '',
+  _flightSearchActive: false,
 };
 
 // ── Init ──────────────────────────────────────────────────────────────────
@@ -26,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAutocompletes();
   initForms();
   initAdvancedFilters();
+  initFlightResultsControls();
   initTrackerForm();
   restoreFromStorage();
   fetchRates();
@@ -71,6 +74,39 @@ function updateCurrency() {
   if (state.activeTab === 'trips') fetchTrips();
 }
 
+function escapeAttr(str) {
+  return String(str ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;');
+}
+
+/** Stable numeric price for sorting and comparisons */
+function flightPriceNum(f) {
+  const n = Number(f?.price);
+  if (Number.isFinite(n)) return n;
+  const cleaned = parseFloat(String(f?.price ?? '').replace(/[^0-9.-]/g, ''));
+  return Number.isFinite(cleaned) ? cleaned : 0;
+}
+
+/** Departure hour 0–23 from "HH:MM" or null */
+function departureHour(f) {
+  const t = f?.departure_time;
+  if (!t || typeof t !== 'string') return null;
+  const m = t.match(/^(\d{1,2})/);
+  return m ? parseInt(m[1], 10) : null;
+}
+
+function matchesDepartureWindow(f, windowVal) {
+  if (!windowVal || windowVal === 'any') return true;
+  const h = departureHour(f);
+  if (h === null) return true;
+  if (windowVal === 'morning') return h < 12;
+  if (windowVal === 'afternoon') return h >= 12 && h < 17;
+  if (windowVal === 'evening') return h >= 17;
+  return true;
+}
+
 function formatPrice(val) {
   if (val === null || val === undefined || val === 'N/A' || val === '') return 'N/A';
   let num = typeof val === 'number' ? val : parseFloat(String(val).replace(/[$,a-zA-Z\s]/g, ''));
@@ -109,10 +145,15 @@ function initTabs() {
   document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => {
       const id = tab.dataset.tab;
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
       tab.classList.add('active');
-      document.getElementById(`panel-${id}`).classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      const panel = document.getElementById(`panel-${id}`);
+      if (panel) panel.classList.add('active');
       state.activeTab = id;
       if (id === 'tracker') loadTrackedFlights();
       if (id === 'trips') loadTrips();
@@ -234,7 +275,33 @@ function initAdvancedFilters() {
   btn.addEventListener('click', () => {
     btn.classList.toggle('open');
     panel.classList.toggle('visible');
+    const expanded = panel.classList.contains('visible');
+    btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
   });
+}
+
+/** Wire sort / filter controls so list stays sorted as SSE results arrive */
+function initFlightResultsControls() {
+  const sortEl = document.getElementById('flights-sort');
+  if (sortEl) sortEl.addEventListener('change', () => renderFlights());
+  ['local-filter-stops', 'local-filter-airline', 'local-filter-cabin', 'local-filter-departure'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('change', () => renderFlights());
+  });
+  const clearBtn = document.getElementById('btn-clear-flight-filters');
+  if (clearBtn) clearBtn.addEventListener('click', clearFlightFilters);
+}
+
+function clearFlightFilters() {
+  const stops = document.getElementById('local-filter-stops');
+  const airline = document.getElementById('local-filter-airline');
+  const cabin = document.getElementById('local-filter-cabin');
+  const dep = document.getElementById('local-filter-departure');
+  if (stops) stops.value = 'any';
+  if (airline) airline.value = 'any';
+  if (cabin) cabin.value = 'any';
+  if (dep) dep.value = 'any';
+  renderFlights();
 }
 
 // ── Form Submissions ──────────────────────────────────────────────────────
@@ -257,6 +324,8 @@ function handleFlightSearch(e) {
   e.preventDefault();
   cancelActiveSearch();
   state.flightResults = [];
+  state._lastAirlineOptionsKey = '';
+  state._flightSearchActive = true;
 
   const origins = document.getElementById('f-origins').value;
   const destinations = document.getElementById('f-destinations').value;
@@ -305,7 +374,7 @@ function handleFlightSearch(e) {
       }
     }).catch(console.error);
   setSearching(true, 'Starting flight search...');
-  setBtn('flightsBtn', true, 'Searching...');
+  setBtn('flightsBtn', true, 'Searching…');
 
   const params = new URLSearchParams({ origins, destinations, start_date: startDate, end_date: endDate, durations, max_stops: stops, cabin_class: cabin, airline, trip_type: state.tripType });
   const es = new EventSource(`/api/search/flights?${params}`);
@@ -338,47 +407,94 @@ function handleFlightSearch(e) {
     scheduleRenderFlights();
   });
   es.addEventListener('complete', e => {
-    const d = JSON.parse(e.data);
-    setSearching(false, `✅ Found ${state.flightResults.length} results`);
-    setBtn('flightsBtn', false, 'Search Flights');
-    renderFlights();
+    JSON.parse(e.data);
+    state._flightSearchActive = false;
+    setSearching(false, `Done — ${state.flightResults.length} flights collected`);
+    setBtn('flightsBtn', false, 'Search');
+    flushFlightResultsRender();
     if (!state.flightResults.length) showEmpty('flights-results', '✈️', 'No flights found for these parameters. Try adjusting your dates or stops filter.');
     es.close();
   });
   es.onerror = () => {
+    state._flightSearchActive = false;
     setSearching(false, '❌ Connection error — check console');
-    setBtn('flightsBtn', false, 'Search Flights');
+    setBtn('flightsBtn', false, 'Search');
     showToast('Search failed — see console for details', 'error');
     es.close();
   };
 }
 
-let renderTimer = null;
+let flightRenderRaf = null;
+
+/** Coalesce rapid SSE updates: one paint per frame, always re-sorts */
 function scheduleRenderFlights() {
-  if (renderTimer) cancelAnimationFrame(renderTimer);
-  renderTimer = requestAnimationFrame(() => renderFlights());
+  if (flightRenderRaf != null) return;
+  flightRenderRaf = requestAnimationFrame(() => {
+    flightRenderRaf = null;
+    renderFlights();
+  });
+}
+
+/** Final synchronous redraw after stream ends (fixes sort order with last batch) */
+function flushFlightResultsRender() {
+  if (flightRenderRaf != null) {
+    cancelAnimationFrame(flightRenderRaf);
+    flightRenderRaf = null;
+  }
+  renderFlights();
+}
+
+function syncAirlineFilterOptions() {
+  const airlineSelect = document.getElementById('local-filter-airline');
+  if (!airlineSelect) return;
+  const uniqueAirlines = [...new Set(state.flightResults.map(f => f.airline_name || f.airline).filter(Boolean))].sort();
+  const key = uniqueAirlines.join('\0');
+  if (key === state._lastAirlineOptionsKey) return;
+  state._lastAirlineOptionsKey = key;
+  const currentAirline = airlineSelect.value;
+  airlineSelect.innerHTML =
+    '<option value="any">All airlines</option>' +
+    uniqueAirlines.map(a => {
+      const sel = currentAirline === a ? ' selected' : '';
+      return `<option value="${escapeAttr(a)}"${sel}>${escapeAttr(a)}</option>`;
+    }).join('');
+}
+
+function sortFlightResultsInPlace(arr, mode) {
+  const airlineKey = f => String(f.airline_name || f.airline || '');
+  const routeKey = f => `${f.origin || ''}-${f.destination || ''}`;
+  arr.sort((a, b) => {
+    if (mode === 'price') return flightPriceNum(a) - flightPriceNum(b);
+    if (mode === 'price-desc') return flightPriceNum(b) - flightPriceNum(a);
+    if (mode === 'duration') return (a.duration || 0) - (b.duration || 0);
+    if (mode === 'duration-desc') return (b.duration || 0) - (a.duration || 0);
+    if (mode === 'departure') return (a.departure_time || '').localeCompare(b.departure_time || '');
+    if (mode === 'airline') return airlineKey(a).localeCompare(airlineKey(b));
+    if (mode === 'route') {
+      const c = routeKey(a).localeCompare(routeKey(b));
+      if (c !== 0) return c;
+      return flightPriceNum(a) - flightPriceNum(b);
+    }
+    return flightPriceNum(a) - flightPriceNum(b);
+  });
 }
 
 function renderFlights() {
   const grid = document.getElementById('flights-results');
-  
-  // Update filter dropdowns if this is the first render or if new airlines arrived
-  const airlineSelect = document.getElementById('local-filter-airline');
-  const currentAirline = airlineSelect.value;
-  const uniqueAirlines = [...new Set(state.flightResults.map(f => f.airline_name || f.airline).filter(Boolean))].sort();
-  
-  airlineSelect.innerHTML = '<option value="any">All Airlines</option>' + 
-    uniqueAirlines.map(a => `<option value="${a}" ${currentAirline === a ? 'selected' : ''}>${a}</option>`).join('');
+  if (!grid) return;
 
-  // Get active filters
-  const stopsFilter = document.getElementById('local-filter-stops').value;
-  const cabinFilter = document.getElementById('local-filter-cabin').value;
-  
-  // Filter results
+  syncAirlineFilterOptions();
+
+  const stopsFilter = document.getElementById('local-filter-stops')?.value ?? 'any';
+  const cabinFilter = document.getElementById('local-filter-cabin')?.value ?? 'any';
+  const airlineSelect = document.getElementById('local-filter-airline');
+  const currentAirline = airlineSelect?.value ?? 'any';
+  const depWindow = document.getElementById('local-filter-departure')?.value ?? 'any';
+
   let filtered = state.flightResults.filter(f => {
     if (stopsFilter !== 'any') {
-      const stops = parseInt(stopsFilter, 10);
-      if (f.stops > stops) return false;
+      const maxStops = parseInt(stopsFilter, 10);
+      if (Number.isFinite(maxStops) && (f.stops ?? 0) > maxStops) return false;
     }
     if (currentAirline !== 'any' && currentAirline !== '') {
       const name = f.airline_name || f.airline || '';
@@ -387,33 +503,40 @@ function renderFlights() {
     if (cabinFilter !== 'any' && cabinFilter !== '') {
       if (f.cabin_class !== cabinFilter) return false;
     }
+    if (!matchesDepartureWindow(f, depWindow)) return false;
     return true;
   });
 
-  // Sort results
-  const mode = document.getElementById('flights-sort').value;
-  filtered.sort((a, b) => {
-    if (mode === 'price') return parseFloat(a.price) - parseFloat(b.price);
-    if (mode === 'price-desc') return parseFloat(b.price) - parseFloat(a.price);
-    if (mode === 'departure') return (a.departure_time || '').localeCompare(b.departure_time || '');
-    if (mode === 'airline') return (a.airline || '').localeCompare(b.airline || '');
-    if (mode === 'route') {
-      const routeA = `${a.origin}-${a.destination}`;
-      const routeB = `${b.origin}-${b.destination}`;
-      const routeCmp = routeA.localeCompare(routeB);
-      if (routeCmp !== 0) return routeCmp;
-      return parseFloat(a.price) - parseFloat(b.price);
-    }
-    return 0;
-  });
+  const sortEl = document.getElementById('flights-sort');
+  const mode = sortEl ? sortEl.value : 'price';
+  sortFlightResultsInPlace(filtered, mode);
 
-  // Render
-  grid.innerHTML = filtered.map(f => buildFlightCardHTML(f)).join('');
-  updateResultsHeader('flights-results-header', 'flights-count', filtered.length, 'flights');
+  const cardsHtml = filtered.map(f => buildFlightCardHTML(f)).join('');
+  grid.innerHTML = cardsHtml;
+
+  const header = document.getElementById('flights-results-header');
+  const statusStrip = document.getElementById('flights-search-status');
+  const countEl = document.getElementById('flights-count');
+  if (state.flightResults.length > 0 && header && countEl) {
+    header.classList.remove('hidden');
+    const noun = filtered.length === 1 ? 'flight' : 'flights';
+    const showing = filtered.length === state.flightResults.length
+      ? `${filtered.length} ${noun}`
+      : `${filtered.length} of ${state.flightResults.length} ${noun}`;
+    countEl.textContent = showing;
+    if (statusStrip) {
+      statusStrip.textContent = state._flightSearchActive
+        ? `Still searching — ${showing}`
+        : `Showing ${showing}`;
+    }
+  } else if (header) {
+    header.classList.add('hidden');
+    if (countEl) countEl.textContent = '';
+    if (statusStrip) statusStrip.textContent = '';
+  }
 }
 
 function buildFlightCardHTML(f) {
-  const grid = document.getElementById('flights-results');
   const stopsLabel = f.stops === 0 ? '<span class="tag tag-nonstop">Nonstop</span>' : `<span class="tag tag-stops">${f.stops} stop${f.stops > 1 ? 's' : ''}</span>`;
   const returnRow = f.return_date ? `<div class="card-detail-row"><span>🛏 Return</span><span>${f.return_date}</span></div>` : '';
 
@@ -421,15 +544,25 @@ function buildFlightCardHTML(f) {
   let layoverWarnings = '';
   const allLayovers = (f.layovers || []).concat(f.return_layovers || []);
   allLayovers.forEach(lay => {
-    if (lay.duration < 60) layoverWarnings += `<div class="card-warning">⚠️ Short layover: ${lay.duration}m in ${lay.airport}</div>`;
-    else if (lay.duration > 240) layoverWarnings += `<div class="card-warning">⏳ Long layover: ${Math.floor(lay.duration/60)}h ${lay.duration%60}m in ${lay.airport}</div>`;
+    const ap = escapeAttr(lay.airport || '');
+    if (lay.duration < 60) layoverWarnings += `<div class="card-warning">Short layover: ${lay.duration} min in ${ap}</div>`;
+    else if (lay.duration > 240) layoverWarnings += `<div class="card-warning">Long layover: ${Math.floor(lay.duration / 60)}h ${lay.duration % 60}m in ${ap}</div>`;
   });
 
   // Refund eligibility badge
   let refundBadge = '';
   if (f.refund_badge) {
-    refundBadge = `<span class="refund-badge badge-${f.refund_badge}" title="${f.refund_type || ''}">${f.refund_badge_label || f.refund_badge}</span>`;
+    const rt = escapeAttr(f.refund_type || '');
+    refundBadge = `<span class="refund-badge badge-${f.refund_badge}" title="${rt}">${escapeAttr(f.refund_badge_label || f.refund_badge)}</span>`;
   }
+
+  const level = f.price_level ? String(f.price_level).trim() : '';
+  let levelClass = 'typical';
+  if (/great/i.test(level)) levelClass = 'great';
+  else if (/high/i.test(level)) levelClass = 'high';
+  const priceBadgeHtml = level
+    ? `<span class="price-level-badge price-level-${levelClass}">${escapeAttr(level)}</span>`
+    : '';
 
   // Track button
   const trackData = JSON.stringify({
@@ -449,13 +582,13 @@ function buildFlightCardHTML(f) {
       </div>
       <div class="card-price-group">
         <div class="card-price">${formatPrice(f.price)}</div>
-        <div class="card-price-level">${priceBadge}</div>
+        <div class="card-price-level">${priceBadgeHtml}</div>
       </div>
     </div>
     <div class="card-actions">
         ${trackBtn}
         <button class="btn-outline" onclick='openAddToTripModal("flight", ${trackData})'>🎒 Add to Trip</button>
-        ${f.refund_badge ? `<span class="tag tag-${f.refund_badge}">${f.refund_badge_label}</span>` : ''}
+        ${f.refund_badge ? `<span class="tag tag-${f.refund_badge}">${escapeAttr(f.refund_badge_label || '')}</span>` : ''}
     </div>
     <div class="card-details">
       ${layoverWarnings}

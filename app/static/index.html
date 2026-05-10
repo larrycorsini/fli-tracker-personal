@@ -37,27 +37,28 @@
         </div>
 
         <!-- Tab Navigation -->
-        <div class="tabs" id="mainTabs">
-            <div class="tab active" data-tab="flights">✈️ Flights</div>
-            <div class="tab" data-tab="hotels">🏨 Hotels</div>
-            <div class="tab" data-tab="combined">🎯 Flights + Hotels</div>
-            <div class="tab" data-tab="dates">📅 Cheapest Dates</div>
-            <div class="tab" data-tab="tracker">📊 My Flights</div>
-            <div class="tab" data-tab="trips">🎒 Trips</div>
+        <div class="tabs" id="mainTabs" role="tablist" aria-label="Main sections">
+            <button type="button" class="tab active" role="tab" aria-selected="true" aria-controls="panel-flights" id="tab-flights" data-tab="flights">Flights</button>
+            <button type="button" class="tab" role="tab" aria-selected="false" aria-controls="panel-hotels" id="tab-hotels" data-tab="hotels">Hotels</button>
+            <button type="button" class="tab" role="tab" aria-selected="false" aria-controls="panel-combined" id="tab-combined" data-tab="combined">Flights + Hotels</button>
+            <button type="button" class="tab" role="tab" aria-selected="false" aria-controls="panel-dates" id="tab-dates" data-tab="dates">Explore dates</button>
+            <button type="button" class="tab" role="tab" aria-selected="false" aria-controls="panel-tracker" id="tab-tracker" data-tab="tracker">Price tracker</button>
+            <button type="button" class="tab" role="tab" aria-selected="false" aria-controls="panel-trips" id="tab-trips" data-tab="trips">Trips</button>
         </div>
 
         <!-- ═══════════════════════════════════════════════════════════════ -->
         <!-- FLIGHTS TAB -->
         <!-- ═══════════════════════════════════════════════════════════════ -->
-        <div class="tab-panel active" id="panel-flights">
-            <div class="glass-panel">
+        <div class="tab-panel active" id="panel-flights" role="tabpanel" aria-labelledby="tab-flights">
+            <div class="glass-panel gf-search-card">
+                <p class="gf-search-intro">Search round-trip or one-way fares. Results stream in as each date combination is scanned — use sort and filters below to narrow options.</p>
                 <!-- Trip Type -->
-                <div class="trip-type-toggle">
-                    <button class="trip-type-btn active" data-trip="round_trip" id="flights-rt">Round Trip</button>
-                    <button class="trip-type-btn" data-trip="one_way" id="flights-ow">One Way</button>
+                <div class="trip-type-toggle" role="group" aria-label="Trip type">
+                    <button type="button" class="trip-type-btn active" data-trip="round_trip" id="flights-rt">Round trip</button>
+                    <button type="button" class="trip-type-btn" data-trip="one_way" id="flights-ow">One way</button>
                 </div>
 
-                <form id="flightsForm">
+                <form id="flightsForm" aria-label="Flight search">
                     <!-- Primary Search Row -->
                     <div class="search-main-row">
                         <div class="input-group">
@@ -99,13 +100,13 @@
                             </select>
                         </div>
                         <div class="search-actions">
-                            <button type="submit" class="btn-primary" id="flightsBtn">Search</button>
+                            <button type="submit" class="btn-primary gf-search-submit" id="flightsBtn">Search</button>
                         </div>
                     </div>
 
                     <!-- Advanced Filters -->
-                    <button type="button" class="advanced-toggle" id="flightsAdvToggle">
-                        <span class="arrow">▼</span> Advanced Filters
+                    <button type="button" class="advanced-toggle" id="flightsAdvToggle" aria-expanded="false" aria-controls="flightsAdvFilters">
+                        <span class="arrow" aria-hidden="true">▼</span> Filters &amp; cabin
                     </button>
                     <div class="advanced-filters" id="flightsAdvFilters">
                         <div class="form-grid">
@@ -132,42 +133,70 @@
                 </form>
             </div>
 
-            <!-- Results -->
-            <div id="flights-results-header" class="results-header hidden">
-                <div class="header-main-row">
-                    <span class="results-count" id="flights-count"></span>
-                    <div class="sort-controls">
-                        <button class="btn-secondary btn-sm" id="btn-track-prices" onclick="trackCurrentSearch()">
-                            <i class="icon">🔔</i> Track Prices
-                        </button>
-                        <label>Sort:</label>
-                        <select id="flights-sort" onchange="renderFlights()">
-                            <option value="price">Price ↑</option>
-                            <option value="price-desc">Price ↓</option>
-                            <option value="departure">Departure ↑</option>
-                            <option value="airline">Airline</option>
-                            <option value="route">Route (O→D)</option>
+            <!-- Results toolbar (sort + filters apply to all collected flights after search) -->
+            <div id="flights-results-header" class="gf-results-toolbar hidden">
+                <div class="gf-toolbar-top">
+                    <div class="gf-results-summary">
+                        <span class="results-count" id="flights-count" aria-live="polite"></span>
+                        <span class="gf-results-status" id="flights-search-status" aria-live="polite"></span>
+                    </div>
+                    <div class="gf-sort-row">
+                        <label class="gf-field-label" for="flights-sort">Sort by</label>
+                        <select id="flights-sort" class="gf-select">
+                            <option value="price">Price: lowest first</option>
+                            <option value="price-desc">Price: highest first</option>
+                            <option value="duration">Duration: shortest</option>
+                            <option value="duration-desc">Duration: longest</option>
+                            <option value="departure">Departure time</option>
+                            <option value="airline">Airline A–Z</option>
+                            <option value="route">Route, then price</option>
                         </select>
                     </div>
                 </div>
-                <div class="local-filters">
-                    <select id="local-filter-stops" onchange="renderFlights()">
-                        <option value="any">Any Stops</option>
-                        <option value="0">Nonstop only</option>
-                        <option value="1">Up to 1 stop</option>
-                    </select>
-                    <select id="local-filter-airline" onchange="renderFlights()">
-                        <option value="any">All Airlines</option>
-                        <!-- Options generated dynamically -->
-                    </select>
-                    <select id="local-filter-cabin" onchange="renderFlights()">
-                        <option value="any">Any Cabin</option>
-                        <option value="ECONOMY">Economy</option>
-                        <option value="PREMIUM_ECONOMY">Premium Economy</option>
-                        <option value="BUSINESS">Business</option>
-                        <option value="FIRST">First</option>
-                    </select>
-                </div>
+                <fieldset class="gf-filter-fieldset">
+                    <legend>Filter results</legend>
+                    <p class="gf-filter-hint">Narrow the list by stops, airline, cabin, or departure time of the outbound leg.</p>
+                    <div class="gf-filter-grid">
+                        <div class="gf-filter-item">
+                            <label class="gf-field-label" for="local-filter-stops">Stops</label>
+                            <select id="local-filter-stops" class="gf-select">
+                                <option value="any">Any</option>
+                                <option value="0">Nonstop only</option>
+                                <option value="1">1 stop or fewer</option>
+                                <option value="2">2 stops or fewer</option>
+                            </select>
+                        </div>
+                        <div class="gf-filter-item">
+                            <label class="gf-field-label" for="local-filter-airline">Airline</label>
+                            <select id="local-filter-airline" class="gf-select">
+                                <option value="any">All airlines</option>
+                            </select>
+                        </div>
+                        <div class="gf-filter-item">
+                            <label class="gf-field-label" for="local-filter-cabin">Cabin</label>
+                            <select id="local-filter-cabin" class="gf-select">
+                                <option value="any">All cabins</option>
+                                <option value="ECONOMY">Economy</option>
+                                <option value="PREMIUM_ECONOMY">Premium economy</option>
+                                <option value="BUSINESS">Business</option>
+                                <option value="FIRST">First</option>
+                            </select>
+                        </div>
+                        <div class="gf-filter-item">
+                            <label class="gf-field-label" for="local-filter-departure">Leave time</label>
+                            <select id="local-filter-departure" class="gf-select">
+                                <option value="any">Any time</option>
+                                <option value="morning">Morning (before noon)</option>
+                                <option value="afternoon">Afternoon (noon–5pm)</option>
+                                <option value="evening">Evening (after 5pm)</option>
+                            </select>
+                        </div>
+                        <div class="gf-filter-actions">
+                            <button type="button" class="btn-text" id="btn-clear-flight-filters">Clear filters</button>
+                            <button type="button" class="btn-secondary btn-sm" id="btn-track-prices" onclick="trackCurrentSearch()">Track prices</button>
+                        </div>
+                    </div>
+                </fieldset>
             </div>
             <div id="flights-insights" class="insights-banner hidden"></div>
             <div id="flights-results" class="results-grid"></div>

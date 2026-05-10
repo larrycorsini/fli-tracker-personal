@@ -499,8 +499,8 @@ async def stream_flight_search(
     total = len(trips)
     yield {"event": "status", "data": {"message": f"Scanning {total} flight combinations...", "total": total}}
 
-    # Process in batches to respect rate limiting but speed up search
-    BATCH_SIZE = 5
+    # Process in batches — fli client rate-limits (~10 req/s); 8 parallel stays safe
+    BATCH_SIZE = 8
     completed = 0
     for i in range(0, len(trips), BATCH_SIZE):
         batch = trips[i:i + BATCH_SIZE]
@@ -559,8 +559,8 @@ async def stream_flight_search(
                 "data": {"current": completed, "total": total, "trip": trip["label"]},
             }
 
-        # Small yield point for async
-        await asyncio.sleep(0)
+        # Yield so SSE can flush; tiny pause helps avoid burst 429s from upstream
+        await asyncio.sleep(0.02)
 
     yield {"event": "complete", "data": {"message": "Search complete", "total": total}}
 

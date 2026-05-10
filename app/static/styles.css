@@ -595,7 +595,200 @@ select option {
     transition: var(--transition);
 }
 
-.card-link:hover { color: #a78bfa; }
+.card-link:hover { color: var(--accent-hover); }
+
+.card-warning {
+  font-size: 0.8rem;
+  color: var(--warning);
+  background: var(--warning-soft);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+}
+
+/* Google Flights–style search & results */
+.gf-search-intro {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+  max-width: 56rem;
+}
+
+.gf-search-card { margin-bottom: 20px; }
+
+.gf-search-submit {
+  min-width: 100px;
+  min-height: 44px;
+}
+
+.gf-results-toolbar {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.gf-toolbar-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.gf-results-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.gf-results-status {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.gf-sort-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.gf-field-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.gf-select {
+  min-height: 40px;
+  padding: 8px 32px 8px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.gf-filter-fieldset {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px 16px;
+  margin: 0;
+}
+
+.gf-filter-fieldset legend {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  padding: 0 6px;
+}
+
+.gf-filter-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
+
+.gf-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px 16px;
+  align-items: end;
+}
+
+.gf-filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gf-filter-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  grid-column: 1 / -1;
+  padding-top: 4px;
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 8px 4px;
+  min-height: 44px;
+}
+
+.btn-text:hover {
+  color: var(--accent-hover);
+}
+
+.btn-outline {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.price-level-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.price-level-great {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.price-level-typical {
+  background: rgba(95, 99, 104, 0.12);
+  color: var(--text-secondary);
+}
+
+.price-level-high {
+  background: var(--error-soft);
+  color: var(--error);
+}
+
+.tabs button.tab {
+  font-family: inherit;
+  margin: 0;
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
 
 /* ── Combined Trip Card ──────────────────────────────────────────────────── */
 .trip-card {
