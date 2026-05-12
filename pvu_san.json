@@ -1,0 +1,3162 @@
+{
+  "success": true,
+  "data_source": "google_flights",
+  "search_type": "flights",
+  "trip_type": "ONE_WAY",
+  "query": {
+    "origin": "PVU",
+    "destination": "SAN",
+    "departure_date": "2026-05-28",
+    "return_date": null,
+    "departure_window": "5-11",
+    "airlines": null,
+    "cabin_class": "ECONOMY",
+    "max_stops": "ANY",
+    "sort_by": "CHEAPEST"
+  },
+  "count": 53,
+  "flights": [
+    {
+      "duration": 1089,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "departure_time": "2026-05-28T13:10:00",
+          "arrival_time": "2026-05-28T15:44:00",
+          "duration": 154,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2988"
+        },
+        {
+          "departure_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T21:17:00",
+          "arrival_time": "2026-05-28T23:39:00",
+          "duration": 262,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2457"
+        }
+      ],
+      "price": 485.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1654,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "departure_time": "2026-05-28T13:10:00",
+          "arrival_time": "2026-05-28T15:44:00",
+          "duration": 154,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2988"
+        },
+        {
+          "departure_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T06:45:00",
+          "arrival_time": "2026-05-29T09:04:00",
+          "duration": 259,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2484"
+        }
+      ],
+      "price": 485.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 964,
+      "stops": 3,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAT",
+            "name": "San Antonio International Airport"
+          },
+          "departure_time": "2026-05-28T13:47:00",
+          "arrival_time": "2026-05-28T14:56:00",
+          "duration": 69,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1539"
+        },
+        {
+          "departure_airport": {
+            "code": "SAT",
+            "name": "San Antonio International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T19:04:00",
+          "arrival_time": "2026-05-28T19:29:00",
+          "duration": 145,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2053"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T20:20:00",
+          "arrival_time": "2026-05-28T21:34:00",
+          "duration": 74,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "559"
+        }
+      ],
+      "price": 600.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 613,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T14:40:00",
+          "arrival_time": "2026-05-28T15:43:00",
+          "duration": 183,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2485"
+        }
+      ],
+      "price": 641.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 741,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T16:46:00",
+          "arrival_time": "2026-05-28T17:51:00",
+          "duration": 185,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2458"
+        }
+      ],
+      "price": 641.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 829,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T18:15:00",
+          "arrival_time": "2026-05-28T19:19:00",
+          "duration": 184,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1798"
+        }
+      ],
+      "price": 641.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 877,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T19:02:00",
+          "arrival_time": "2026-05-28T20:07:00",
+          "duration": 185,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1243"
+        }
+      ],
+      "price": 641.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1029,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T21:33:00",
+          "arrival_time": "2026-05-28T22:39:00",
+          "duration": 186,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1011"
+        }
+      ],
+      "price": 641.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1109,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T22:56:00",
+          "arrival_time": "2026-05-28T23:59:00",
+          "duration": 183,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2568"
+        }
+      ],
+      "price": 641.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1612,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T07:16:00",
+          "arrival_time": "2026-05-29T08:22:00",
+          "duration": 186,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2462"
+        }
+      ],
+      "price": 641.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1717,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T09:02:00",
+          "arrival_time": "2026-05-29T10:07:00",
+          "duration": 185,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2476"
+        }
+      ],
+      "price": 641.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1841,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T11:06:00",
+          "arrival_time": "2026-05-29T12:11:00",
+          "duration": 185,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "3102"
+        }
+      ],
+      "price": 641.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1970,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T13:17:00",
+          "arrival_time": "2026-05-29T14:20:00",
+          "duration": 183,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2459"
+        }
+      ],
+      "price": 641.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 2053,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T14:40:00",
+          "arrival_time": "2026-05-29T15:43:00",
+          "duration": 183,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2485"
+        }
+      ],
+      "price": 641.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 2181,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T16:46:00",
+          "arrival_time": "2026-05-29T17:51:00",
+          "duration": 185,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2458"
+        }
+      ],
+      "price": 641.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 2269,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T18:15:00",
+          "arrival_time": "2026-05-29T19:19:00",
+          "duration": 184,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1798"
+        }
+      ],
+      "price": 641.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 769,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T15:09:00",
+          "arrival_time": "2026-05-28T15:40:00",
+          "duration": 151,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2108"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T17:06:00",
+          "arrival_time": "2026-05-28T18:19:00",
+          "duration": 73,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2466"
+        }
+      ],
+      "price": 647.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 964,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T16:30:00",
+          "arrival_time": "2026-05-28T17:02:00",
+          "duration": 152,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1155"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T20:20:00",
+          "arrival_time": "2026-05-28T21:34:00",
+          "duration": 74,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "559"
+        }
+      ],
+      "price": 647.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 964,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T17:55:00",
+          "arrival_time": "2026-05-28T18:27:00",
+          "duration": 152,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1648"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T20:20:00",
+          "arrival_time": "2026-05-28T21:34:00",
+          "duration": 74,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "559"
+        }
+      ],
+      "price": 647.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 964,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T19:17:00",
+          "arrival_time": "2026-05-28T19:54:00",
+          "duration": 157,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1079"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T20:20:00",
+          "arrival_time": "2026-05-28T21:34:00",
+          "duration": 74,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "559"
+        }
+      ],
+      "price": 647.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1647,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-29T06:10:00",
+          "arrival_time": "2026-05-29T06:40:00",
+          "duration": 150,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "375"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T07:40:00",
+          "arrival_time": "2026-05-29T08:57:00",
+          "duration": 77,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2461"
+        }
+      ],
+      "price": 647.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1821,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-29T08:22:00",
+          "arrival_time": "2026-05-29T09:05:00",
+          "duration": 163,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "520"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T10:30:00",
+          "arrival_time": "2026-05-29T11:51:00",
+          "duration": 81,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2477"
+        }
+      ],
+      "price": 647.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1821,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-29T07:15:00",
+          "arrival_time": "2026-05-29T07:52:00",
+          "duration": 157,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "474"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T10:30:00",
+          "arrival_time": "2026-05-29T11:51:00",
+          "duration": 81,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2477"
+        }
+      ],
+      "price": 647.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1821,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-29T06:10:00",
+          "arrival_time": "2026-05-29T06:40:00",
+          "duration": 150,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "375"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T10:30:00",
+          "arrival_time": "2026-05-29T11:51:00",
+          "duration": 81,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2477"
+        }
+      ],
+      "price": 647.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 964,
+      "stops": 3,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAT",
+            "name": "San Antonio International Airport"
+          },
+          "departure_time": "2026-05-28T12:01:00",
+          "arrival_time": "2026-05-28T13:13:00",
+          "duration": 72,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4084"
+        },
+        {
+          "departure_airport": {
+            "code": "SAT",
+            "name": "San Antonio International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T19:04:00",
+          "arrival_time": "2026-05-28T19:29:00",
+          "duration": 145,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2053"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T20:20:00",
+          "arrival_time": "2026-05-28T21:34:00",
+          "duration": 74,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "559"
+        }
+      ],
+      "price": 650.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 964,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T15:09:00",
+          "arrival_time": "2026-05-28T15:40:00",
+          "duration": 151,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2108"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T20:20:00",
+          "arrival_time": "2026-05-28T21:34:00",
+          "duration": 74,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "559"
+        }
+      ],
+      "price": 657.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 959,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "departure_time": "2026-05-28T15:30:00",
+          "arrival_time": "2026-05-28T18:11:00",
+          "duration": 161,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2740"
+        },
+        {
+          "departure_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T18:59:00",
+          "arrival_time": "2026-05-28T21:29:00",
+          "duration": 270,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1924"
+        }
+      ],
+      "price": 667.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1089,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "departure_time": "2026-05-28T15:30:00",
+          "arrival_time": "2026-05-28T18:11:00",
+          "duration": 161,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2740"
+        },
+        {
+          "departure_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T21:17:00",
+          "arrival_time": "2026-05-28T23:39:00",
+          "duration": 262,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2457"
+        }
+      ],
+      "price": 667.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1089,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "departure_time": "2026-05-28T16:50:00",
+          "arrival_time": "2026-05-28T19:33:00",
+          "duration": 163,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2474"
+        },
+        {
+          "departure_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T21:17:00",
+          "arrival_time": "2026-05-28T23:39:00",
+          "duration": 262,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2457"
+        }
+      ],
+      "price": 667.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1089,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "departure_time": "2026-05-28T17:37:00",
+          "arrival_time": "2026-05-28T20:21:00",
+          "duration": 164,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1893"
+        },
+        {
+          "departure_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T21:17:00",
+          "arrival_time": "2026-05-28T23:39:00",
+          "duration": 262,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2457"
+        }
+      ],
+      "price": 667.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 769,
+      "stops": 3,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "AUS",
+            "name": "Austin-Bergstrom International Airport"
+          },
+          "departure_time": "2026-05-28T12:20:00",
+          "arrival_time": "2026-05-28T13:25:00",
+          "duration": 65,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4095"
+        },
+        {
+          "departure_airport": {
+            "code": "AUS",
+            "name": "Austin-Bergstrom International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T14:41:00",
+          "arrival_time": "2026-05-28T15:11:00",
+          "duration": 150,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "3181"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T17:06:00",
+          "arrival_time": "2026-05-28T18:19:00",
+          "duration": 73,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2466"
+        }
+      ],
+      "price": 677.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1647,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T22:59:00",
+          "arrival_time": "2026-05-28T23:33:00",
+          "duration": 154,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2319"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T07:40:00",
+          "arrival_time": "2026-05-29T08:57:00",
+          "duration": 77,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2461"
+        }
+      ],
+      "price": 687.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1647,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T17:55:00",
+          "arrival_time": "2026-05-28T18:27:00",
+          "duration": 152,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1648"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T07:40:00",
+          "arrival_time": "2026-05-29T08:57:00",
+          "duration": 77,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2461"
+        }
+      ],
+      "price": 687.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1647,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T16:30:00",
+          "arrival_time": "2026-05-28T17:02:00",
+          "duration": 152,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1155"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T07:40:00",
+          "arrival_time": "2026-05-29T08:57:00",
+          "duration": 77,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2461"
+        }
+      ],
+      "price": 687.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1647,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T15:09:00",
+          "arrival_time": "2026-05-28T15:40:00",
+          "duration": 151,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2108"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T07:40:00",
+          "arrival_time": "2026-05-29T08:57:00",
+          "duration": 77,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2461"
+        }
+      ],
+      "price": 687.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1647,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T20:30:00",
+          "arrival_time": "2026-05-28T21:08:00",
+          "duration": 158,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1133"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T07:40:00",
+          "arrival_time": "2026-05-29T08:57:00",
+          "duration": 77,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2461"
+        }
+      ],
+      "price": 687.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1647,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T21:28:00",
+          "arrival_time": "2026-05-28T22:06:00",
+          "duration": 158,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "3239"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T07:40:00",
+          "arrival_time": "2026-05-29T08:57:00",
+          "duration": 77,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2461"
+        }
+      ],
+      "price": 687.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1647,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T19:17:00",
+          "arrival_time": "2026-05-28T19:54:00",
+          "duration": 157,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1079"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T07:40:00",
+          "arrival_time": "2026-05-29T08:57:00",
+          "duration": 77,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2461"
+        }
+      ],
+      "price": 687.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 530,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T13:17:00",
+          "arrival_time": "2026-05-28T14:20:00",
+          "duration": 183,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2459"
+        }
+      ],
+      "price": 707.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 598,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T12:33:00",
+          "arrival_time": "2026-05-28T13:07:00",
+          "duration": 154,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1685"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T14:16:00",
+          "arrival_time": "2026-05-28T15:28:00",
+          "duration": 72,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2470"
+        }
+      ],
+      "price": 712.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 769,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T12:33:00",
+          "arrival_time": "2026-05-28T13:07:00",
+          "duration": 154,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1685"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T17:06:00",
+          "arrival_time": "2026-05-28T18:19:00",
+          "duration": 73,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2466"
+        }
+      ],
+      "price": 712.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 769,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T13:30:00",
+          "arrival_time": "2026-05-28T14:04:00",
+          "duration": 154,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2113"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T17:06:00",
+          "arrival_time": "2026-05-28T18:19:00",
+          "duration": 73,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2466"
+        }
+      ],
+      "price": 712.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 769,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T14:11:00",
+          "arrival_time": "2026-05-28T14:41:00",
+          "duration": 150,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2473"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T17:06:00",
+          "arrival_time": "2026-05-28T18:19:00",
+          "duration": 73,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2466"
+        }
+      ],
+      "price": 712.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 959,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "departure_time": "2026-05-28T13:10:00",
+          "arrival_time": "2026-05-28T15:44:00",
+          "duration": 154,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2988"
+        },
+        {
+          "departure_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T18:59:00",
+          "arrival_time": "2026-05-28T21:29:00",
+          "duration": 270,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1924"
+        }
+      ],
+      "price": 736.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 769,
+      "stops": 3,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAT",
+            "name": "San Antonio International Airport"
+          },
+          "departure_time": "2026-05-28T12:01:00",
+          "arrival_time": "2026-05-28T13:13:00",
+          "duration": 72,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4084"
+        },
+        {
+          "departure_airport": {
+            "code": "SAT",
+            "name": "San Antonio International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T15:44:00",
+          "arrival_time": "2026-05-28T16:10:00",
+          "duration": 146,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2495"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T17:06:00",
+          "arrival_time": "2026-05-28T18:19:00",
+          "duration": 73,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2466"
+        }
+      ],
+      "price": 773.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 769,
+      "stops": 3,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAT",
+            "name": "San Antonio International Airport"
+          },
+          "departure_time": "2026-05-28T13:47:00",
+          "arrival_time": "2026-05-28T14:56:00",
+          "duration": 69,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1539"
+        },
+        {
+          "departure_airport": {
+            "code": "SAT",
+            "name": "San Antonio International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T15:44:00",
+          "arrival_time": "2026-05-28T16:10:00",
+          "duration": 146,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2495"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T17:06:00",
+          "arrival_time": "2026-05-28T18:19:00",
+          "duration": 73,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2466"
+        }
+      ],
+      "price": 773.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 769,
+      "stops": 3,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "OKC",
+            "name": "Okc Will Rogers International Airport"
+          },
+          "departure_time": "2026-05-28T13:20:00",
+          "arrival_time": "2026-05-28T14:35:00",
+          "duration": 75,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4937"
+        },
+        {
+          "departure_airport": {
+            "code": "OKC",
+            "name": "Okc Will Rogers International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T15:08:00",
+          "arrival_time": "2026-05-28T15:36:00",
+          "duration": 148,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "6517"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T17:06:00",
+          "arrival_time": "2026-05-28T18:19:00",
+          "duration": 73,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2466"
+        }
+      ],
+      "price": 815.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1588,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T22:59:00",
+          "arrival_time": "2026-05-29T00:48:00",
+          "duration": 229,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "446"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T06:16:00",
+          "arrival_time": "2026-05-29T07:58:00",
+          "duration": 102,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "1407"
+        }
+      ],
+      "price": 1460.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1588,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T20:39:00",
+          "arrival_time": "2026-05-28T22:30:00",
+          "duration": 231,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2228"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T06:16:00",
+          "arrival_time": "2026-05-29T07:58:00",
+          "duration": 102,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "1407"
+        }
+      ],
+      "price": 1460.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1588,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T21:30:00",
+          "arrival_time": "2026-05-28T23:21:00",
+          "duration": 231,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2430"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T06:16:00",
+          "arrival_time": "2026-05-29T07:58:00",
+          "duration": 102,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "1407"
+        }
+      ],
+      "price": 1460.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1588,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T19:12:00",
+          "arrival_time": "2026-05-28T21:01:00",
+          "duration": 229,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1430"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T06:16:00",
+          "arrival_time": "2026-05-29T07:58:00",
+          "duration": 102,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "1407"
+        }
+      ],
+      "price": 1460.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1588,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T16:17:00",
+          "arrival_time": "2026-05-28T18:00:00",
+          "duration": 223,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2810"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T06:16:00",
+          "arrival_time": "2026-05-29T07:58:00",
+          "duration": 102,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "1407"
+        }
+      ],
+      "price": 1473.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1588,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "PVU",
+            "name": "Provo Municipal Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T10:19:00",
+          "duration": 169,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4917"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T17:22:00",
+          "arrival_time": "2026-05-28T19:10:00",
+          "duration": 228,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "3072"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-29T06:16:00",
+          "arrival_time": "2026-05-29T07:58:00",
+          "duration": 102,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "1407"
+        }
+      ],
+      "price": 1473.0,
+      "currency": "USD"
+    }
+  ]
+}

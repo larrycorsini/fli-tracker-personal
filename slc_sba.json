@@ -1,0 +1,3900 @@
+{
+  "success": true,
+  "data_source": "google_flights",
+  "search_type": "flights",
+  "trip_type": "ONE_WAY",
+  "query": {
+    "origin": "SLC",
+    "destination": "SBA",
+    "departure_date": "2026-05-28",
+    "return_date": null,
+    "departure_window": "5-11",
+    "airlines": null,
+    "cabin_class": "ECONOMY",
+    "max_stops": "ANY",
+    "sort_by": "BEST"
+  },
+  "count": 71,
+  "flights": [
+    {
+      "duration": 264,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T11:53:00",
+          "arrival_time": "2026-05-28T12:57:00",
+          "duration": 124,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3010"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T14:03:00",
+          "arrival_time": "2026-05-28T15:17:00",
+          "duration": 74,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3064"
+        }
+      ],
+      "price": 268.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 365,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-05-28T10:30:00",
+          "arrival_time": "2026-05-28T11:20:00",
+          "duration": 110,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4299"
+        },
+        {
+          "departure_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "arrival_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "departure_time": "2026-05-28T12:00:00",
+          "arrival_time": "2026-05-28T13:25:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3051"
+        },
+        {
+          "departure_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T14:25:00",
+          "arrival_time": "2026-05-28T15:35:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1903"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 475,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T10:55:00",
+          "arrival_time": "2026-05-28T11:25:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1101"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 125,
+      "stops": 0,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T10:50:00",
+          "arrival_time": "2026-05-28T11:55:00",
+          "duration": 125,
+          "airline": {
+            "code": "DL",
+            "name": "Delta Air Lines"
+          },
+          "flight_number": "3841"
+        }
+      ],
+      "price": 449.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 785,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DAL",
+            "name": "Dallas Love Field"
+          },
+          "departure_time": "2026-05-28T05:45:00",
+          "arrival_time": "2026-05-28T09:15:00",
+          "duration": 150,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1219"
+        },
+        {
+          "departure_airport": {
+            "code": "DAL",
+            "name": "Dallas Love Field"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T11:30:00",
+          "arrival_time": "2026-05-28T12:25:00",
+          "duration": 175,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "574"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 405,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T06:15:00",
+          "arrival_time": "2026-05-28T06:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1599"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T08:30:00",
+          "arrival_time": "2026-05-28T09:50:00",
+          "duration": 80,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "391"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T10:35:00",
+          "arrival_time": "2026-05-28T12:00:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1742"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 620,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T06:15:00",
+          "arrival_time": "2026-05-28T06:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1599"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "departure_time": "2026-05-28T10:05:00",
+          "arrival_time": "2026-05-28T12:10:00",
+          "duration": 125,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3834"
+        },
+        {
+          "departure_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T14:25:00",
+          "arrival_time": "2026-05-28T15:35:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1903"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 390,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T08:00:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4291"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T08:40:00",
+          "arrival_time": "2026-05-28T09:35:00",
+          "duration": 115,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1526"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T10:35:00",
+          "arrival_time": "2026-05-28T12:00:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1742"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 605,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T08:00:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4291"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "departure_time": "2026-05-28T10:50:00",
+          "arrival_time": "2026-05-28T12:25:00",
+          "duration": 155,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2040"
+        },
+        {
+          "departure_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T14:25:00",
+          "arrival_time": "2026-05-28T15:35:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1903"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 715,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "departure_time": "2026-05-28T06:55:00",
+          "arrival_time": "2026-05-28T07:50:00",
+          "duration": 115,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3317"
+        },
+        {
+          "departure_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T11:20:00",
+          "arrival_time": "2026-05-28T12:50:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "295"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 510,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T08:05:00",
+          "arrival_time": "2026-05-28T09:40:00",
+          "duration": 95,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3276"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "departure_time": "2026-05-28T10:50:00",
+          "arrival_time": "2026-05-28T12:25:00",
+          "duration": 155,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2040"
+        },
+        {
+          "departure_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T14:25:00",
+          "arrival_time": "2026-05-28T15:35:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1903"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 645,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T08:05:00",
+          "arrival_time": "2026-05-28T09:40:00",
+          "duration": 95,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3276"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T13:25:00",
+          "arrival_time": "2026-05-28T14:25:00",
+          "duration": 120,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1900"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 550,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T09:40:00",
+          "arrival_time": "2026-05-28T10:25:00",
+          "duration": 105,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1010"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T13:15:00",
+          "arrival_time": "2026-05-28T14:25:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2152"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 830,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T09:40:00",
+          "arrival_time": "2026-05-28T10:25:00",
+          "duration": 105,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1010"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T14:05:00",
+          "arrival_time": "2026-05-28T16:50:00",
+          "duration": 105,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2864"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T20:50:00",
+          "arrival_time": "2026-05-28T22:30:00",
+          "duration": 160,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1544"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 500,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-05-28T10:30:00",
+          "arrival_time": "2026-05-28T11:20:00",
+          "duration": 110,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4299"
+        },
+        {
+          "departure_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T14:00:00",
+          "arrival_time": "2026-05-28T15:10:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2720"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 755,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T10:55:00",
+          "arrival_time": "2026-05-28T11:25:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1101"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T15:15:00",
+          "arrival_time": "2026-05-28T18:10:00",
+          "duration": 115,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2024"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T20:50:00",
+          "arrival_time": "2026-05-28T22:30:00",
+          "duration": 160,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1544"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 755,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T10:55:00",
+          "arrival_time": "2026-05-28T11:25:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1101"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T14:20:00",
+          "arrival_time": "2026-05-28T17:15:00",
+          "duration": 115,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1513"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T20:50:00",
+          "arrival_time": "2026-05-28T22:30:00",
+          "duration": 160,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1544"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 470,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T11:00:00",
+          "arrival_time": "2026-05-28T11:55:00",
+          "duration": 115,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4309"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T13:05:00",
+          "arrival_time": "2026-05-28T14:35:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4082"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 470,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T11:00:00",
+          "arrival_time": "2026-05-28T11:55:00",
+          "duration": 115,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4309"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T14:15:00",
+          "arrival_time": "2026-05-28T15:45:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2310"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 750,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T11:00:00",
+          "arrival_time": "2026-05-28T11:55:00",
+          "duration": 115,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4309"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T14:35:00",
+          "arrival_time": "2026-05-28T18:05:00",
+          "duration": 150,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2859"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T20:50:00",
+          "arrival_time": "2026-05-28T22:30:00",
+          "duration": 160,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1544"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 750,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T11:00:00",
+          "arrival_time": "2026-05-28T11:55:00",
+          "duration": 115,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4309"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T15:35:00",
+          "arrival_time": "2026-05-28T19:00:00",
+          "duration": 145,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4069"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T20:50:00",
+          "arrival_time": "2026-05-28T22:30:00",
+          "duration": 160,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1544"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 440,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T11:30:00",
+          "arrival_time": "2026-05-28T12:10:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2415"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T13:15:00",
+          "arrival_time": "2026-05-28T14:25:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2152"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 720,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T11:30:00",
+          "arrival_time": "2026-05-28T12:10:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2415"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T15:25:00",
+          "arrival_time": "2026-05-28T18:10:00",
+          "duration": 105,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3786"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T20:50:00",
+          "arrival_time": "2026-05-28T22:30:00",
+          "duration": 160,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1544"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 720,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T11:30:00",
+          "arrival_time": "2026-05-28T12:10:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2415"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T14:05:00",
+          "arrival_time": "2026-05-28T16:50:00",
+          "duration": 105,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2864"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T20:50:00",
+          "arrival_time": "2026-05-28T22:30:00",
+          "duration": 160,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1544"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 415,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T06:05:00",
+          "arrival_time": "2026-05-28T06:30:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2283"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T10:35:00",
+          "arrival_time": "2026-05-28T12:00:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1742"
+        }
+      ],
+      "price": 275.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 785,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DAL",
+            "name": "Dallas Love Field"
+          },
+          "departure_time": "2026-05-28T05:45:00",
+          "arrival_time": "2026-05-28T09:15:00",
+          "duration": 150,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1219"
+        },
+        {
+          "departure_airport": {
+            "code": "DAL",
+            "name": "Dallas Love Field"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T10:20:00",
+          "arrival_time": "2026-05-28T11:15:00",
+          "duration": 175,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3188"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 281.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 630,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T06:05:00",
+          "arrival_time": "2026-05-28T06:30:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2283"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "departure_time": "2026-05-28T08:10:00",
+          "arrival_time": "2026-05-28T09:45:00",
+          "duration": 95,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2354"
+        },
+        {
+          "departure_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T14:25:00",
+          "arrival_time": "2026-05-28T15:35:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1903"
+        }
+      ],
+      "price": 281.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 620,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T06:15:00",
+          "arrival_time": "2026-05-28T06:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1599"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "departure_time": "2026-05-28T08:05:00",
+          "arrival_time": "2026-05-28T10:20:00",
+          "duration": 135,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1600"
+        },
+        {
+          "departure_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T14:25:00",
+          "arrival_time": "2026-05-28T15:35:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1903"
+        }
+      ],
+      "price": 281.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 755,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T06:15:00",
+          "arrival_time": "2026-05-28T06:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1599"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T09:25:00",
+          "arrival_time": "2026-05-28T10:40:00",
+          "duration": 75,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2764"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 281.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 755,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T06:15:00",
+          "arrival_time": "2026-05-28T06:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1599"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T10:55:00",
+          "arrival_time": "2026-05-28T12:05:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3806"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 281.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 740,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T08:00:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4291"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T09:55:00",
+          "arrival_time": "2026-05-28T11:00:00",
+          "duration": 125,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2110"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 281.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 740,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T08:00:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4291"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T13:25:00",
+          "arrival_time": "2026-05-28T14:25:00",
+          "duration": 120,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1900"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 281.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 740,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T06:30:00",
+          "arrival_time": "2026-05-28T08:00:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4291"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T10:55:00",
+          "arrival_time": "2026-05-28T11:50:00",
+          "duration": 115,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3335"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 281.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 715,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "departure_time": "2026-05-28T06:55:00",
+          "arrival_time": "2026-05-28T07:50:00",
+          "duration": 115,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3317"
+        },
+        {
+          "departure_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T10:20:00",
+          "arrival_time": "2026-05-28T11:55:00",
+          "duration": 95,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2802"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 281.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 705,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "departure_time": "2026-05-28T07:05:00",
+          "arrival_time": "2026-05-28T07:50:00",
+          "duration": 105,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4311"
+        },
+        {
+          "departure_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T12:50:00",
+          "arrival_time": "2026-05-28T14:20:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3270"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 281.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 705,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "departure_time": "2026-05-28T07:05:00",
+          "arrival_time": "2026-05-28T07:50:00",
+          "duration": 105,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4311"
+        },
+        {
+          "departure_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T09:05:00",
+          "arrival_time": "2026-05-28T10:35:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2715"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 281.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 705,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "departure_time": "2026-05-28T07:05:00",
+          "arrival_time": "2026-05-28T07:50:00",
+          "duration": 105,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4311"
+        },
+        {
+          "departure_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T11:55:00",
+          "arrival_time": "2026-05-28T13:25:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2588"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:25:00",
+          "arrival_time": "2026-05-28T17:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "736"
+        }
+      ],
+      "price": 281.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1045,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-05-28T06:05:00",
+          "arrival_time": "2026-05-28T06:30:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2283"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T12:10:00",
+          "arrival_time": "2026-05-28T15:10:00",
+          "duration": 120,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2586"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T20:50:00",
+          "arrival_time": "2026-05-28T22:30:00",
+          "duration": 160,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1544"
+        }
+      ],
+      "price": 286.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1035,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T06:15:00",
+          "arrival_time": "2026-05-28T06:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1599"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T12:25:00",
+          "arrival_time": "2026-05-28T15:10:00",
+          "duration": 105,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2176"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T20:50:00",
+          "arrival_time": "2026-05-28T22:30:00",
+          "duration": 160,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1544"
+        }
+      ],
+      "price": 286.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 985,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "departure_time": "2026-05-28T07:05:00",
+          "arrival_time": "2026-05-28T07:50:00",
+          "duration": 105,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4311"
+        },
+        {
+          "departure_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T13:05:00",
+          "arrival_time": "2026-05-28T16:25:00",
+          "duration": 140,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1479"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T20:50:00",
+          "arrival_time": "2026-05-28T22:30:00",
+          "duration": 160,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1544"
+        }
+      ],
+      "price": 286.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 540,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T07:17:00",
+          "arrival_time": "2026-05-28T08:24:00",
+          "duration": 127,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3312"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T14:03:00",
+          "arrival_time": "2026-05-28T15:17:00",
+          "duration": 74,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3064"
+        }
+      ],
+      "price": 303.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1058,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T07:17:00",
+          "arrival_time": "2026-05-28T08:24:00",
+          "duration": 127,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3312"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T22:39:00",
+          "arrival_time": "2026-05-28T23:55:00",
+          "duration": 76,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3063"
+        }
+      ],
+      "price": 303.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 782,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-05-28T11:53:00",
+          "arrival_time": "2026-05-28T12:57:00",
+          "duration": 124,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3010"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T22:39:00",
+          "arrival_time": "2026-05-28T23:55:00",
+          "duration": 76,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3063"
+        }
+      ],
+      "price": 303.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 508,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "departure_time": "2026-05-28T11:09:00",
+          "arrival_time": "2026-05-28T12:28:00",
+          "duration": 139,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "796"
+        },
+        {
+          "departure_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:06:00",
+          "arrival_time": "2026-05-28T18:37:00",
+          "duration": 151,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "686"
+        }
+      ],
+      "price": 365.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1015,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T05:00:00",
+          "arrival_time": "2026-05-28T06:39:00",
+          "duration": 99,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5683"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T19:19:00",
+          "arrival_time": "2026-05-28T20:55:00",
+          "duration": 156,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2479"
+        }
+      ],
+      "price": 373.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 895,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T07:00:00",
+          "arrival_time": "2026-05-28T08:42:00",
+          "duration": 102,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1232"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T19:19:00",
+          "arrival_time": "2026-05-28T20:55:00",
+          "duration": 156,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2479"
+        }
+      ],
+      "price": 373.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1125,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T05:00:00",
+          "arrival_time": "2026-05-28T06:39:00",
+          "duration": 99,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5683"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T17:54:00",
+          "arrival_time": "2026-05-28T19:40:00",
+          "duration": 166,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1007"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T21:23:00",
+          "arrival_time": "2026-05-28T22:45:00",
+          "duration": 82,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2866"
+        }
+      ],
+      "price": 379.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1125,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T05:00:00",
+          "arrival_time": "2026-05-28T06:39:00",
+          "duration": 99,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5683"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T15:47:00",
+          "arrival_time": "2026-05-28T17:30:00",
+          "duration": 163,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2633"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T21:23:00",
+          "arrival_time": "2026-05-28T22:45:00",
+          "duration": 82,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2866"
+        }
+      ],
+      "price": 379.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1005,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T07:00:00",
+          "arrival_time": "2026-05-28T08:42:00",
+          "duration": 102,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1232"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T17:54:00",
+          "arrival_time": "2026-05-28T19:40:00",
+          "duration": 166,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1007"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T21:23:00",
+          "arrival_time": "2026-05-28T22:45:00",
+          "duration": 82,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2866"
+        }
+      ],
+      "price": 379.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1005,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T07:00:00",
+          "arrival_time": "2026-05-28T08:42:00",
+          "duration": 102,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1232"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T15:47:00",
+          "arrival_time": "2026-05-28T17:30:00",
+          "duration": 163,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2633"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T21:23:00",
+          "arrival_time": "2026-05-28T22:45:00",
+          "duration": 82,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2866"
+        }
+      ],
+      "price": 379.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1064,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T07:00:00",
+          "arrival_time": "2026-05-28T08:42:00",
+          "duration": 102,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1232"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-05-28T19:43:00",
+          "arrival_time": "2026-05-28T21:18:00",
+          "duration": 155,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2791"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T22:44:00",
+          "arrival_time": "2026-05-28T23:44:00",
+          "duration": 60,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "4796"
+        }
+      ],
+      "price": 379.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1064,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T07:00:00",
+          "arrival_time": "2026-05-28T08:42:00",
+          "duration": 102,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1232"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-05-28T18:05:00",
+          "arrival_time": "2026-05-28T19:40:00",
+          "duration": 155,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2240"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T22:44:00",
+          "arrival_time": "2026-05-28T23:44:00",
+          "duration": 60,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "4796"
+        }
+      ],
+      "price": 379.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 612,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T06:05:00",
+          "arrival_time": "2026-05-28T07:19:00",
+          "duration": 134,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "4763"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T13:50:00",
+          "arrival_time": "2026-05-28T15:17:00",
+          "duration": 87,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5464"
+        }
+      ],
+      "price": 389.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 752,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T06:05:00",
+          "arrival_time": "2026-05-28T07:19:00",
+          "duration": 134,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "4763"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:10:00",
+          "arrival_time": "2026-05-28T17:37:00",
+          "duration": 87,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5862"
+        }
+      ],
+      "price": 389.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 407,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T06:05:00",
+          "arrival_time": "2026-05-28T07:19:00",
+          "duration": 134,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "4763"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T10:29:00",
+          "arrival_time": "2026-05-28T11:52:00",
+          "duration": 83,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1578"
+        }
+      ],
+      "price": 408.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 676,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T10:39:00",
+          "arrival_time": "2026-05-28T12:24:00",
+          "duration": 105,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2004"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T19:19:00",
+          "arrival_time": "2026-05-28T20:55:00",
+          "duration": 156,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2479"
+        }
+      ],
+      "price": 408.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 528,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T09:49:00",
+          "arrival_time": "2026-05-28T11:13:00",
+          "duration": 144,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5970"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:10:00",
+          "arrival_time": "2026-05-28T17:37:00",
+          "duration": 87,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5862"
+        }
+      ],
+      "price": 413.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 654,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T09:49:00",
+          "arrival_time": "2026-05-28T11:13:00",
+          "duration": 144,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5970"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T18:16:00",
+          "arrival_time": "2026-05-28T19:43:00",
+          "duration": 87,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5721"
+        }
+      ],
+      "price": 413.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 344,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PDX",
+            "name": "Portland International Airport"
+          },
+          "departure_time": "2026-05-28T08:35:00",
+          "arrival_time": "2026-05-28T09:41:00",
+          "duration": 126,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3497"
+        },
+        {
+          "departure_airport": {
+            "code": "PDX",
+            "name": "Portland International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T10:55:00",
+          "arrival_time": "2026-05-28T13:19:00",
+          "duration": 144,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3122"
+        }
+      ],
+      "price": 435.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 388,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T09:49:00",
+          "arrival_time": "2026-05-28T11:13:00",
+          "duration": 144,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5970"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T13:50:00",
+          "arrival_time": "2026-05-28T15:17:00",
+          "duration": 87,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5464"
+        }
+      ],
+      "price": 442.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 542,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T05:00:00",
+          "arrival_time": "2026-05-28T06:39:00",
+          "duration": 99,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5683"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T11:26:00",
+          "arrival_time": "2026-05-28T13:02:00",
+          "duration": 156,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "671"
+        }
+      ],
+      "price": 452.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 332,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T07:13:00",
+          "arrival_time": "2026-05-28T08:04:00",
+          "duration": 111,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "6327"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T10:04:00",
+          "arrival_time": "2026-05-28T11:45:00",
+          "duration": 101,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "3784"
+        }
+      ],
+      "price": 459.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 422,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T07:00:00",
+          "arrival_time": "2026-05-28T08:42:00",
+          "duration": 102,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1232"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T11:26:00",
+          "arrival_time": "2026-05-28T13:02:00",
+          "duration": 156,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "671"
+        }
+      ],
+      "price": 469.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1472,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "departure_time": "2026-05-28T11:09:00",
+          "arrival_time": "2026-05-28T12:28:00",
+          "duration": 139,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "796"
+        },
+        {
+          "departure_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-29T08:10:00",
+          "arrival_time": "2026-05-29T10:41:00",
+          "duration": 151,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2330"
+        }
+      ],
+      "price": 497.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 332,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T08:30:00",
+          "arrival_time": "2026-05-28T10:27:00",
+          "duration": 117,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5642"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T11:26:00",
+          "arrival_time": "2026-05-28T13:02:00",
+          "duration": 156,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "671"
+        }
+      ],
+      "price": 512.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 472,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-05-28T05:00:00",
+          "arrival_time": "2026-05-28T06:39:00",
+          "duration": 99,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5683"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T07:40:00",
+          "arrival_time": "2026-05-28T09:18:00",
+          "duration": 158,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2391"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T10:29:00",
+          "arrival_time": "2026-05-28T11:52:00",
+          "duration": 83,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1578"
+        }
+      ],
+      "price": 517.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1621,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-05-28T09:49:00",
+          "arrival_time": "2026-05-28T11:13:00",
+          "duration": 144,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5970"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-29T10:27:00",
+          "arrival_time": "2026-05-29T11:50:00",
+          "duration": 83,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1578"
+        }
+      ],
+      "price": 517.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1592,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-05-28T07:45:00",
+          "arrival_time": "2026-05-28T09:15:00",
+          "duration": 150,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5408"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-29T08:15:00",
+          "arrival_time": "2026-05-29T09:17:00",
+          "duration": 62,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5460"
+        }
+      ],
+      "price": 533.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 728,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T07:13:00",
+          "arrival_time": "2026-05-28T08:04:00",
+          "duration": 111,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "6327"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T16:39:00",
+          "arrival_time": "2026-05-28T18:21:00",
+          "duration": 102,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "4927"
+        }
+      ],
+      "price": 595.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 946,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-05-28T07:13:00",
+          "arrival_time": "2026-05-28T08:04:00",
+          "duration": 111,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "6327"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T20:27:00",
+          "arrival_time": "2026-05-28T21:59:00",
+          "duration": 92,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1731"
+        }
+      ],
+      "price": 595.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 475,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-05-28T05:00:00",
+          "arrival_time": "2026-05-28T08:48:00",
+          "duration": 168,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1214"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "SBA",
+            "name": "Santa Barbara Municipal Airport"
+          },
+          "departure_time": "2026-05-28T10:30:00",
+          "arrival_time": "2026-05-28T11:55:00",
+          "duration": 205,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2510"
+        }
+      ],
+      "price": 1014.0,
+      "currency": "USD"
+    }
+  ]
+}
