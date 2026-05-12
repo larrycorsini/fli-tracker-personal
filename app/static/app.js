@@ -29,10 +29,22 @@ document.addEventListener('DOMContentLoaded', () => {
   initForms();
   initAdvancedFilters();
   initFlightResultsControls();
+  initCurrencySelect();
+  initHotelSort();
   initTrackerForm();
   restoreFromStorage();
   fetchRates();
 });
+
+function initCurrencySelect() {
+  const el = document.getElementById('currency-select');
+  if (el) el.addEventListener('change', updateCurrency);
+}
+
+function initHotelSort() {
+  const el = document.getElementById('hotels-sort');
+  if (el) el.addEventListener('change', sortHotelResults);
+}
 
 async function fetchRates() {
   try {
@@ -234,9 +246,11 @@ function bindAutocomplete({ inputId, listId, multi, cityFill }) {
 function renderAutocomplete(input, list, items, multi, cityFill) {
   if (!items.length) { list.classList.remove('visible'); return; }
   list.innerHTML = '';
+  list.setAttribute('role', 'listbox');
   items.forEach(item => {
     const li = document.createElement('li');
     li.className = `autocomplete-item${item.type === 'STATE_BULK' ? ' state-bulk' : ''}`;
+    li.setAttribute('role', 'option');
     li.innerHTML = `<div class="autocomplete-title">${item.title}</div>
                     <div class="autocomplete-sub">${item.subtitle || ''}</div>`;
     li.addEventListener('mousedown', e => {
@@ -359,9 +373,9 @@ function handleFlightSearch(e) {
       if (data.success && data.insights) {
         const ins = data.insights;
         insightsBanner.innerHTML = `
-          <div class="insights-icon">📊</div>
-          <div class="insights-content" style="flex:1;">
-            <h4>Best Time to Book</h4>
+          <div class="insights-icon" aria-hidden="true">📊</div>
+          <div class="insights-content insights-content-main">
+            <h4>Best time to book</h4>
             <p>Based on our tracking history for <strong>${origins} &rarr; ${destinations}</strong>. Typical prices are around ${formatPrice(ins.avg)}.</p>
             <div class="insights-price-bar">
               <span class="insights-price-marker great">Great: &lt; ${formatPrice(ins.great)}</span>
@@ -653,14 +667,14 @@ function buildHotelCard(h) {
   card.dataset.name = h.name || '';
   card.innerHTML = `
     <div class="hotel-name" title="${h.name}">${h.name}</div>
-    <div class="hotel-rating">${stars} <span style="color:var(--text-muted);font-size:0.8rem">${h.rating !== 'N/A' ? h.rating + ' stars' : ''}</span></div>
+    <div class="hotel-rating">${stars} <span class="hotel-meta-muted">${h.rating !== 'N/A' ? h.rating + ' stars' : ''}</span></div>
     <div>
-      <div class="hotel-price">${formatPrice(h.total_price)} <span style="font-size:0.8rem;font-weight:400;color:var(--text-muted)">total</span></div>
+      <div class="hotel-price">${formatPrice(h.total_price)} <span class="hotel-price-note">total</span></div>
       <div class="hotel-per-night">${h.price_per_night ? formatPrice(h.price_per_night) + ' / night' : ''}</div>
     </div>
-    <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-      <a href="${h.url}" target="_blank" class="card-link" style="padding: 6px 12px; background: rgba(255,255,255,0.05); border-radius: 4px; text-decoration: none;">View ↗</a>
-      <button class="btn-outline" style="padding: 6px 12px;" onclick='openAddToTripModal("hotel", ${JSON.stringify({...h, price: card.dataset.price}).replace(/"/g, '&quot;')})'>🎒 Add to Trip</button>
+    <div class="hotel-card-actions">
+      <a href="${h.url}" target="_blank" rel="noopener noreferrer" class="hotel-card-link">View hotel</a>
+      <button type="button" class="btn-outline btn-sm" onclick='openAddToTripModal("hotel", ${JSON.stringify({...h, price: card.dataset.price}).replace(/"/g, '&quot;')})'>Add to trip</button>
     </div>`;
   return card;
 }
@@ -719,11 +733,11 @@ function appendTripCard(d) {
   card.innerHTML = `
     <div class="trip-card-header">
       <div>
-        <div style="font-weight:700;font-size:1.1rem">${d.label || ''}</div>
-        <div style="color:var(--text-muted);font-size:0.82rem;margin-top:4px">${d.depart_date} – ${d.return_date}</div>
+        <div class="trip-card-label">${d.label || ''}</div>
+        <div class="trip-card-dates">${d.depart_date} – ${d.return_date}</div>
       </div>
       <div>
-        <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);text-align:right">Total Est.</div>
+        <div class="trip-card-est-label">Total estimate</div>
         <div class="trip-total">${formatPrice(total)}</div>
       </div>
     </div>
@@ -789,8 +803,8 @@ function renderDateGrid(dates, origin, dest) {
   const range = maxP - minP || 1;
 
   const header = document.createElement('div');
-  header.className = 'results-header';
-  header.innerHTML = `<span class="results-count">${dates.length} dates · ${origin} → ${dest}</span><span style="color:var(--success);font-weight:700">Cheapest: ${formatPrice(minP)}</span>`;
+  header.className = 'dates-results-strip';
+  header.innerHTML = `<span class="results-count">${dates.length} dates · ${origin} → ${dest}</span><span class="dates-cheapest">Cheapest: ${formatPrice(minP)}</span>`;
   container.appendChild(header);
 
   // Check if it's 1D (one-way) or 2D (round-trip)
@@ -850,7 +864,7 @@ function renderDateGrid(dates, origin, dest) {
         else if (ratio > 0.75) { bg = 'var(--danger-bg)'; color = 'var(--danger)'; }
         html += `<td style="background:${bg};color:${color};text-align:center;padding:12px;border:1px solid var(--border);border-radius:4px;">${formatPrice(price)}</td>`;
       } else {
-        html += `<td style="background:var(--bg-glass);color:var(--text-muted);text-align:center;padding:12px;border:1px solid var(--border);border-radius:4px;">—</td>`;
+        html += `<td class="heatmap-empty">—</td>`;
       }
     });
     html += '</tr>';
@@ -1253,12 +1267,14 @@ function renderRecentSearches() {
     container.innerHTML = '';
     return;
   }
-  let html = '<div class="recent-searches-title" style="font-size:0.8rem;color:var(--text-muted);margin-bottom:8px;">Recent Searches:</div><div class="recent-searches-chips" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">';
+  let html = '<div class="recent-searches"><div class="recent-searches__title">Recent searches</div><div class="recent-searches__chips">';
   recentSearches.forEach(s => {
     const label = `${s.origins} → ${s.destinations} (${s.startDate})`;
-    html += `<button type="button" class="tag tag-typical" onclick="loadRecentSearch('${s.origins}', '${s.destinations}', '${s.startDate}', '${s.endDate}', '${s.cabin}')" style="cursor:pointer;border:none;background:var(--bg-glass);color:var(--text);">${label}</button>`;
+    const o = String(s.origins).replace(/'/g, "\\'");
+    const d = String(s.destinations).replace(/'/g, "\\'");
+    html += `<button type="button" class="recent-search-chip" onclick="loadRecentSearch('${o}', '${d}', '${s.startDate}', '${s.endDate}', '${s.cabin}')">${label}</button>`;
   });
-  html += '</div>';
+  html += '</div></div>';
   container.innerHTML = html;
 }
 
@@ -1306,68 +1322,67 @@ async function loadTrips() {
 function renderTrips() {
   const container = document.getElementById('trips-container');
   if (!allTrips.length) {
-    container.innerHTML = '<div class="empty-state">No trips planned yet. Click + New Trip to start.</div>';
+    container.innerHTML = '<div class="empty-state"><p>No trips yet. Use <strong>New trip</strong> to start.</p></div>';
     return;
   }
 
   container.innerHTML = allTrips.map(trip => `
-    <div class="card" style="padding: 20px;">
-      <div class="flex-between" style="margin-bottom: 15px;">
-        <h3 style="margin: 0;">${trip.name}</h3>
-        <button class="btn-outline" style="color: #ef4444; border-color: #ef4444;" onclick="deleteTrip(${trip.id})">Delete</button>
+    <div class="glass-panel trip-planner-card">
+      <div class="flex-between trip-planner-row">
+        <h3 class="trip-planner-title">${trip.name}</h3>
+        <button type="button" class="btn-outline btn-sm btn-danger-outline" onclick="deleteTrip(${trip.id})">Delete trip</button>
       </div>
       ${trip.items.length ? `
-        <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div class="trip-items-stack">
           ${trip.items.map(item => {
             const d = item.data;
             if (item.type === 'flight') {
               return `
-                <div class="card flight-card" style="margin: 0; padding: 10px; background: rgba(255,255,255,0.03); cursor: grab;" 
-                     draggable="true" data-trip-id="${trip.id}" data-item-id="${item.id}" 
+                <div class="trip-item-card"
+                     draggable="true" data-trip-id="${trip.id}" data-item-id="${item.id}"
                      ondragstart="handleDragStart(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)"
                      ondrop="handleDrop(event)" ondragend="handleDragEnd(event)">
                   <div class="flex-between">
                     <div>
-                      <div class="card-detail-row" style="margin-bottom: 5px;">
-                        <span>🛫 ${d.origin} → 🛬 ${d.destination}</span>
-                        <span style="color: var(--accent); font-weight: 600;">${formatPrice(d.price)}</span>
+                      <div class="card-detail-row trip-item-line">
+                        <span>Flight · ${d.origin} → ${d.destination}</span>
+                        <span class="trip-price">${formatPrice(d.price)}</span>
                       </div>
-                      <div class="card-detail-row" style="font-size: 0.85em; opacity: 0.8;">
-                        <span>🗓 ${d.depart_date} ${d.return_date ? `— ${d.return_date}` : ''}</span>
-                        <span>${d.airline}</span>
-                      </div>
-                    </div>
-                    <button class="btn-outline" style="padding: 4px 8px; font-size: 0.8em;" onclick="deleteTripItem(${item.id})">Remove</button>
-                  </div>
-                </div>
-              `;
-            } else {
-              return `
-                <div class="card hotel-card" style="margin: 0; padding: 10px; background: rgba(255,255,255,0.03); cursor: grab;"
-                     draggable="true" data-trip-id="${trip.id}" data-item-id="${item.id}" 
-                     ondragstart="handleDragStart(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)"
-                     ondrop="handleDrop(event)" ondragend="handleDragEnd(event)">
-                  <div class="flex-between">
-                    <div>
-                      <div class="card-detail-row" style="margin-bottom: 5px;">
-                        <span>🏨 ${d.name || d.hotel}</span>
-                        <span style="color: var(--accent); font-weight: 600;">${formatPrice(d.price)}</span>
-                      </div>
-                      <div class="card-detail-row" style="font-size: 0.85em; opacity: 0.8;">
-                        <span>⭐ ${d.rating}</span>
+                      <div class="card-detail-row trip-item-muted">
+                        <span>${d.depart_date}${d.return_date ? ` — ${d.return_date}` : ''}</span>
+                        <span>${d.airline || ''}</span>
                       </div>
                     </div>
-                    <button class="btn-outline" style="padding: 4px 8px; font-size: 0.8em;" onclick="deleteTripItem(${item.id})">Remove</button>
+                    <button type="button" class="btn-outline btn-sm" onclick="deleteTripItem(${item.id})">Remove</button>
                   </div>
                 </div>
               `;
             }
+            return `
+                <div class="trip-item-card"
+                     draggable="true" data-trip-id="${trip.id}" data-item-id="${item.id}"
+                     ondragstart="handleDragStart(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)"
+                     ondrop="handleDrop(event)" ondragend="handleDragEnd(event)">
+                  <div class="flex-between">
+                    <div>
+                      <div class="card-detail-row trip-item-line">
+                        <span>Stay · ${d.name || d.hotel}</span>
+                        <span class="trip-price">${formatPrice(d.price)}</span>
+                      </div>
+                      <div class="card-detail-row trip-item-muted">
+                        <span>Rating ${d.rating || '—'}</span>
+                      </div>
+                    </div>
+                    <button type="button" class="btn-outline btn-sm" onclick="deleteTripItem(${item.id})">Remove</button>
+                  </div>
+                </div>
+              `;
           }).join('')}
-          <div style="text-align: right; margin-top: 10px; font-weight: bold; color: var(--accent);">
-            Total: ${formatPrice(trip.items.reduce((sum, item) => sum + (parseFloat(item.data.price) || 0), 0))}
+          <div class="trip-total-row">
+            Total ${formatPrice(trip.items.reduce((sum, item) => sum + (parseFloat(item.data.price) || 0), 0))}
           </div>
         </div>
-      ` : '<div style="opacity:0.6; font-size:0.9em;">No items added to this trip yet.</div>'}
+      ` : '<div class="trip-items-empty">No flights or hotels in this trip yet.</div>'}
     </div>
   `).join('');
 }

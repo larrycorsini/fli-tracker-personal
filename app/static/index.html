@@ -11,13 +11,14 @@
 <body>
     <div class="container">
         <!-- Header -->
-        <div class="header" style="display: flex; justify-content: space-between; align-items: center;">
+        <header class="header">
             <div class="header-left">
                 <h1>Travel Planner Pro</h1>
-                <div class="tagline">Flights · Hotels · Flexible Dates · Price Tracking — Powered by Native Engine</div>
+                <div class="tagline">Flights, hotels, flexible dates, and price tracking</div>
             </div>
             <div class="header-right">
-                <select id="currency-select" onchange="updateCurrency()" style="background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 6px 12px; font-family: inherit;">
+                <label class="visually-hidden" for="currency-select">Currency</label>
+                <select id="currency-select" class="gf-select site-header-currency" aria-label="Display currency">
                     <option value="USD">🇺🇸 USD</option>
                     <option value="EUR">🇪🇺 EUR</option>
                     <option value="GBP">🇬🇧 GBP</option>
@@ -27,7 +28,7 @@
                     <option value="INR">🇮🇳 INR</option>
                 </select>
             </div>
-        </div>
+        </header>
 
         <!-- Status Bar -->
         <div class="status-bar">
@@ -93,7 +94,7 @@
                         </div>
                         <div class="input-group">
                             <label>Max Stops</label>
-                            <select id="f-stops">
+                            <select id="f-stops" class="gf-select">
                                 <option value="ANY" selected>Any Stops</option>
                                 <option value="NON_STOP">Nonstop Only</option>
                                 <option value="ONE_STOP">Up to 1 Stop</option>
@@ -116,7 +117,7 @@
                             </div>
                             <div class="input-group">
                                 <label>Cabin Class</label>
-                                <select id="f-cabin">
+                                <select id="f-cabin" class="gf-select">
                                     <option value="ECONOMY" selected>Economy</option>
                                     <option value="PREMIUM_ECONOMY">Premium Economy</option>
                                     <option value="BUSINESS">Business</option>
@@ -142,7 +143,7 @@
                     </div>
                     <div class="gf-sort-row">
                         <label class="gf-field-label" for="flights-sort">Sort by</label>
-                        <select id="flights-sort" class="gf-select">
+                        <select id="flights-sort" class="gf-select gf-select--sort">
                             <option value="price">Price: lowest first</option>
                             <option value="price-desc">Price: highest first</option>
                             <option value="duration">Duration: shortest</option>
@@ -205,9 +206,10 @@
         <!-- ═══════════════════════════════════════════════════════════════ -->
         <!-- HOTELS TAB -->
         <!-- ═══════════════════════════════════════════════════════════════ -->
-        <div class="tab-panel" id="panel-hotels">
-            <div class="glass-panel">
-                <form id="hotelsForm">
+        <div class="tab-panel" id="panel-hotels" role="tabpanel" aria-labelledby="tab-hotels">
+            <div class="glass-panel gf-search-card">
+                <p class="gf-search-intro">Look up stays by city. Currency follows your header setting.</p>
+                <form id="hotelsForm" aria-label="Hotel search">
                     <div class="form-grid">
                         <div class="input-group">
                             <label>City or Destination</label>
@@ -229,16 +231,18 @@
                 </form>
             </div>
 
-            <div id="hotels-results-header" class="results-header hidden">
-                <span class="results-count" id="hotels-count"></span>
-                <div class="sort-controls">
-                    <label>Sort:</label>
-                    <select id="hotels-sort" onchange="sortHotelResults()">
-                        <option value="price">Price ↑</option>
-                        <option value="price-desc">Price ↓</option>
-                        <option value="rating">Rating ↓</option>
-                        <option value="name">Name</option>
-                    </select>
+            <div id="hotels-results-header" class="gf-results-toolbar hidden">
+                <div class="gf-toolbar-top">
+                    <span class="results-count" id="hotels-count" aria-live="polite"></span>
+                    <div class="gf-sort-row">
+                        <label class="gf-field-label" for="hotels-sort">Sort by</label>
+                        <select id="hotels-sort" class="gf-select gf-select--sort">
+                            <option value="price">Price: lowest first</option>
+                            <option value="price-desc">Price: highest first</option>
+                            <option value="rating">Guest rating</option>
+                            <option value="name">Name A–Z</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div id="hotels-results" class="results-grid"></div>
@@ -247,9 +251,10 @@
         <!-- ═══════════════════════════════════════════════════════════════ -->
         <!-- COMBINED TAB -->
         <!-- ═══════════════════════════════════════════════════════════════ -->
-        <div class="tab-panel" id="panel-combined">
-            <div class="glass-panel">
-                <form id="combinedForm">
+        <div class="tab-panel" id="panel-combined" role="tabpanel" aria-labelledby="tab-combined">
+            <div class="glass-panel gf-search-card">
+                <p class="gf-search-intro">Search flight plus hotel bundles for each trip length. Results appear when each combination finishes.</p>
+                <form id="combinedForm" aria-label="Combined flight and hotel search">
                     <div class="form-grid">
                         <div class="input-group">
                             <label>Origin(s)</label>
@@ -283,7 +288,7 @@
                         </div>
                         <div class="input-group">
                             <label>Max Stops</label>
-                            <select id="c-stops">
+                            <select id="c-stops" class="gf-select">
                                 <option value="ANY" selected>Any Stops</option>
                                 <option value="NON_STOP">Nonstop Only</option>
                                 <option value="ONE_STOP">Up to 1 Stop</option>
@@ -299,9 +304,10 @@
         <!-- ═══════════════════════════════════════════════════════════════ -->
         <!-- CHEAPEST DATES TAB -->
         <!-- ═══════════════════════════════════════════════════════════════ -->
-        <div class="tab-panel" id="panel-dates">
-            <div class="glass-panel">
-                <form id="datesForm">
+        <div class="tab-panel" id="panel-dates" role="tabpanel" aria-labelledby="tab-dates">
+            <div class="glass-panel gf-search-card">
+                <p class="gf-search-intro">See typical fares across your travel window. Round-trip heatmaps compare departure and return dates.</p>
+                <form id="datesForm" aria-label="Cheapest dates search">
                     <div class="form-grid">
                         <div class="input-group">
                             <label>Origin</label>
@@ -331,7 +337,7 @@
                         </div>
                         <div class="input-group">
                             <label>Max Stops</label>
-                            <select id="d-stops">
+                            <select id="d-stops" class="gf-select">
                                 <option value="ANY" selected>Any Stops</option>
                                 <option value="NON_STOP">Nonstop Only</option>
                                 <option value="ONE_STOP">Up to 1 Stop</option>
@@ -346,7 +352,7 @@
         <!-- ═══════════════════════════════════════════════════════════════ -->
         <!-- MY FLIGHTS TRACKER TAB -->
         <!-- ═══════════════════════════════════════════════════════════════ -->
-        <div class="tab-panel" id="panel-tracker">
+        <div class="tab-panel" id="panel-tracker" role="tabpanel" aria-labelledby="tab-tracker">
             <!-- Summary Stats Bar -->
             <div class="tracker-stats" id="trackerStats">
                 <div class="stat-item">
@@ -396,7 +402,7 @@
                         </div>
                         <div class="input-group">
                             <label>Airline</label>
-                            <select id="t-airline" required>
+                            <select id="t-airline" class="gf-select" required>
                                 <option value="">Select Airline</option>
                                 <option value="American Airlines">American Airlines</option>
                                 <option value="Delta Air Lines">Delta Air Lines</option>
@@ -416,7 +422,7 @@
                         </div>
                         <div class="input-group">
                             <label>Fare Class</label>
-                            <select id="t-fare">
+                            <select id="t-fare" class="gf-select">
                                 <option value="main_cabin" selected>Main Cabin / Economy</option>
                                 <option value="basic_economy">Basic Economy</option>
                                 <option value="premium_economy">Premium Economy</option>
@@ -439,16 +445,16 @@
         <!-- ═══════════════════════════════════════════════════════════════ -->
         <!-- TRIPS TAB -->
         <!-- ═══════════════════════════════════════════════════════════════ -->
-        <div class="tab-panel" id="panel-trips">
+        <div class="tab-panel" id="panel-trips" role="tabpanel" aria-labelledby="tab-trips">
             <div class="glass-panel">
-                <div class="flex-between" style="margin-bottom:20px;">
-                    <h2>🎒 My Trips</h2>
-                    <div style="display: flex; gap: 10px;">
-                        <button class="btn-outline" onclick="window.print()">🖨 Export / Print</button>
-                        <button class="btn-primary" onclick="openTripModal()">+ New Trip</button>
+                <div class="flex-between trip-planner-row">
+                    <h2 class="trip-planner-title">My trips</h2>
+                    <div class="trip-toolbar-actions">
+                        <button type="button" class="btn-outline" onclick="window.print()">Print</button>
+                        <button type="button" class="btn-primary" onclick="openTripModal()">New trip</button>
                     </div>
                 </div>
-                <div id="trips-container" style="display: flex; flex-direction: column; gap: 20px;">
+                <div id="trips-container" class="trips-layout">
                     <!-- Trips will be populated here -->
                 </div>
             </div>
@@ -459,48 +465,48 @@
     <!-- Modals -->
     
     <!-- New Trip Modal -->
-    <div id="tripModal" class="modal-overlay" style="display:none;">
+    <div id="tripModal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="trip-modal-title">
         <div class="modal-content">
-            <div class="flex-between" style="margin-bottom: 20px;">
-                <h3>Create New Trip</h3>
-                <span class="modal-close" onclick="closeTripModal()">×</span>
+            <div class="flex-between modal-header-row">
+                <h3 id="trip-modal-title">Create trip</h3>
+                <button type="button" class="modal-close" onclick="closeTripModal()" aria-label="Close dialog">×</button>
             </div>
             <div class="input-group">
-                <label>Trip Name</label>
-                <input type="text" id="new-trip-name" placeholder="e.g. Summer Vacation 2026">
+                <label for="new-trip-name">Trip name</label>
+                <input type="text" id="new-trip-name" placeholder="e.g. Summer 2026" autocomplete="off">
             </div>
-            <button class="btn-primary" style="width: 100%; margin-top: 15px;" onclick="createTrip()">Create Trip</button>
+            <button type="button" class="btn-primary btn-block" onclick="createTrip()">Create trip</button>
         </div>
     </div>
 
     <!-- Add to Trip Modal -->
-    <div id="addToTripModal" class="modal-overlay" style="display:none;">
+    <div id="addToTripModal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="add-trip-modal-title">
         <div class="modal-content">
-            <div class="flex-between" style="margin-bottom: 20px;">
-                <h3>Add to Trip</h3>
-                <span class="modal-close" onclick="closeAddToTripModal()">×</span>
+            <div class="flex-between modal-header-row">
+                <h3 id="add-trip-modal-title">Add to trip</h3>
+                <button type="button" class="modal-close" onclick="closeAddToTripModal()" aria-label="Close dialog">×</button>
             </div>
             <div class="input-group">
-                <label>Select Trip</label>
-                <select id="add-trip-select"></select>
+                <label for="add-trip-select">Trip</label>
+                <select id="add-trip-select" class="gf-select"></select>
             </div>
-            <button class="btn-primary" style="width: 100%; margin-top: 15px;" onclick="saveToTrip()">Add Item</button>
+            <button type="button" class="btn-primary btn-block" onclick="saveToTrip()">Add item</button>
         </div>
     </div>
 
     <!-- Track Price Modal -->
-    <div class="modal-overlay" id="trackModal" style="display:none">
-        <div class="modal-content glass-panel">
-            <h3>📊 Track This Flight</h3>
+    <div class="modal-overlay" id="trackModal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="track-modal-title">
+        <div class="modal-content">
+            <h3 id="track-modal-title">Track this fare</h3>
             <p class="modal-route" id="modalRoute"></p>
             <div class="form-grid">
                 <div class="input-group">
-                    <label>Price You Paid ($)</label>
+                    <label for="modal-price">Price you paid (USD)</label>
                     <input type="number" id="modal-price" step="0.01" min="0" required>
                 </div>
                 <div class="input-group">
-                    <label>Fare Class</label>
-                    <select id="modal-fare">
+                    <label for="modal-fare">Fare class</label>
+                    <select id="modal-fare" class="gf-select">
                         <option value="main_cabin" selected>Main Cabin</option>
                         <option value="basic_economy">Basic Economy</option>
                         <option value="premium_economy">Premium Economy</option>
@@ -509,8 +515,8 @@
                     </select>
                 </div>
                 <div class="input-group">
-                    <label>Confirmation Code (optional)</label>
-                    <input type="text" id="modal-confirmation" placeholder="ABC123">
+                    <label for="modal-confirmation">Confirmation code (optional)</label>
+                    <input type="text" id="modal-confirmation" placeholder="ABC123" autocomplete="off">
                 </div>
             </div>
             <input type="hidden" id="modal-origin">
