@@ -1,0 +1,3328 @@
+{
+  "success": true,
+  "data_source": "google_flights",
+  "search_type": "flights",
+  "trip_type": "ONE_WAY",
+  "query": {
+    "origin": "SLC",
+    "destination": "LGB",
+    "departure_date": "2026-06-04",
+    "return_date": null,
+    "departure_window": "5-11",
+    "airlines": null,
+    "cabin_class": "ECONOMY",
+    "max_stops": "ANY",
+    "sort_by": "CHEAPEST"
+  },
+  "count": 58,
+  "flights": [
+    {
+      "duration": 130,
+      "stops": 0,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T08:20:00",
+          "arrival_time": "2026-06-04T09:30:00",
+          "duration": 130,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "543"
+        }
+      ],
+      "price": 155.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 400,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "departure_time": "2026-06-04T05:45:00",
+          "arrival_time": "2026-06-04T06:25:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4981"
+        },
+        {
+          "departure_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T09:55:00",
+          "arrival_time": "2026-06-04T11:25:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3795"
+        }
+      ],
+      "price": 165.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 220,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T06:25:00",
+          "arrival_time": "2026-06-04T06:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4205"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T07:55:00",
+          "arrival_time": "2026-06-04T09:05:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "276"
+        }
+      ],
+      "price": 165.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 565,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T06:15:00",
+          "arrival_time": "2026-06-04T06:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3751"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "departure_time": "2026-06-04T07:45:00",
+          "arrival_time": "2026-06-04T09:45:00",
+          "duration": 120,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2885"
+        },
+        {
+          "departure_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T13:10:00",
+          "arrival_time": "2026-06-04T14:40:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2414"
+        }
+      ],
+      "price": 170.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 390,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T06:25:00",
+          "arrival_time": "2026-06-04T06:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4205"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "departure_time": "2026-06-04T07:35:00",
+          "arrival_time": "2026-06-04T09:10:00",
+          "duration": 95,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "5052"
+        },
+        {
+          "departure_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T10:30:00",
+          "arrival_time": "2026-06-04T11:55:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1328"
+        }
+      ],
+      "price": 170.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 455,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T11:05:00",
+          "arrival_time": "2026-06-04T11:30:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1242"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "departure_time": "2026-06-04T12:35:00",
+          "arrival_time": "2026-06-04T14:10:00",
+          "duration": 95,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4533"
+        },
+        {
+          "departure_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T16:15:00",
+          "arrival_time": "2026-06-04T17:40:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2485"
+        }
+      ],
+      "price": 170.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 545,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T11:05:00",
+          "arrival_time": "2026-06-04T11:30:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1242"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "RNO",
+            "name": "Reno/Tahoe International Airport"
+          },
+          "departure_time": "2026-06-04T14:00:00",
+          "arrival_time": "2026-06-04T15:30:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2104"
+        },
+        {
+          "departure_airport": {
+            "code": "RNO",
+            "name": "Reno/Tahoe International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T17:40:00",
+          "arrival_time": "2026-06-04T19:10:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2876"
+        }
+      ],
+      "price": 170.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 545,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T11:05:00",
+          "arrival_time": "2026-06-04T11:30:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1242"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "RNO",
+            "name": "Reno/Tahoe International Airport"
+          },
+          "departure_time": "2026-06-04T12:35:00",
+          "arrival_time": "2026-06-04T14:05:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "652"
+        },
+        {
+          "departure_airport": {
+            "code": "RNO",
+            "name": "Reno/Tahoe International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T17:40:00",
+          "arrival_time": "2026-06-04T19:10:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2876"
+        }
+      ],
+      "price": 170.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 440,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T06:25:00",
+          "arrival_time": "2026-06-04T06:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4205"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T11:35:00",
+          "arrival_time": "2026-06-04T12:45:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2260"
+        }
+      ],
+      "price": 170.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 545,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "AUS",
+            "name": "Austin-Bergstrom International Airport"
+          },
+          "departure_time": "2026-06-04T06:05:00",
+          "arrival_time": "2026-06-04T09:45:00",
+          "duration": 160,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4932"
+        },
+        {
+          "departure_airport": {
+            "code": "AUS",
+            "name": "Austin-Bergstrom International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T13:15:00",
+          "arrival_time": "2026-06-04T14:10:00",
+          "duration": 175,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4915"
+        }
+      ],
+      "price": 175.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 745,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T06:15:00",
+          "arrival_time": "2026-06-04T06:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3751"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "departure_time": "2026-06-04T09:35:00",
+          "arrival_time": "2026-06-04T11:30:00",
+          "duration": 115,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "781"
+        },
+        {
+          "departure_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T16:15:00",
+          "arrival_time": "2026-06-04T17:40:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2485"
+        }
+      ],
+      "price": 176.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 630,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T06:25:00",
+          "arrival_time": "2026-06-04T06:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4205"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "departure_time": "2026-06-04T07:35:00",
+          "arrival_time": "2026-06-04T09:10:00",
+          "duration": 95,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "5052"
+        },
+        {
+          "departure_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T14:30:00",
+          "arrival_time": "2026-06-04T15:55:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2951"
+        }
+      ],
+      "price": 176.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 735,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T06:25:00",
+          "arrival_time": "2026-06-04T06:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4205"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "departure_time": "2026-06-04T11:25:00",
+          "arrival_time": "2026-06-04T13:00:00",
+          "duration": 95,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4532"
+        },
+        {
+          "departure_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T16:15:00",
+          "arrival_time": "2026-06-04T17:40:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2485"
+        }
+      ],
+      "price": 176.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 735,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T06:25:00",
+          "arrival_time": "2026-06-04T06:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4205"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "departure_time": "2026-06-04T12:35:00",
+          "arrival_time": "2026-06-04T14:10:00",
+          "duration": 95,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4533"
+        },
+        {
+          "departure_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T16:15:00",
+          "arrival_time": "2026-06-04T17:40:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2485"
+        }
+      ],
+      "price": 176.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 735,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T06:25:00",
+          "arrival_time": "2026-06-04T06:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4205"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "departure_time": "2026-06-04T09:35:00",
+          "arrival_time": "2026-06-04T11:10:00",
+          "duration": 95,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4770"
+        },
+        {
+          "departure_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T16:15:00",
+          "arrival_time": "2026-06-04T17:40:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2485"
+        }
+      ],
+      "price": 176.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 780,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T06:25:00",
+          "arrival_time": "2026-06-04T06:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4205"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SJC",
+            "name": "Norman Y Mineta San Jose International Airport"
+          },
+          "departure_time": "2026-06-04T12:10:00",
+          "arrival_time": "2026-06-04T13:45:00",
+          "duration": 95,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1242"
+        },
+        {
+          "departure_airport": {
+            "code": "SJC",
+            "name": "Norman Y Mineta San Jose International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T17:05:00",
+          "arrival_time": "2026-06-04T18:25:00",
+          "duration": 80,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3684"
+        }
+      ],
+      "price": 176.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 825,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T06:25:00",
+          "arrival_time": "2026-06-04T06:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4205"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "RNO",
+            "name": "Reno/Tahoe International Airport"
+          },
+          "departure_time": "2026-06-04T12:35:00",
+          "arrival_time": "2026-06-04T14:05:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "652"
+        },
+        {
+          "departure_airport": {
+            "code": "RNO",
+            "name": "Reno/Tahoe International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T17:40:00",
+          "arrival_time": "2026-06-04T19:10:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2876"
+        }
+      ],
+      "price": 176.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 650,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T10:40:00",
+          "arrival_time": "2026-06-04T12:05:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3739"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T17:20:00",
+          "arrival_time": "2026-06-04T18:15:00",
+          "duration": 115,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1682"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T19:15:00",
+          "arrival_time": "2026-06-04T20:30:00",
+          "duration": 75,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4352"
+        }
+      ],
+      "price": 176.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 690,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T10:40:00",
+          "arrival_time": "2026-06-04T12:05:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3739"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T17:30:00",
+          "arrival_time": "2026-06-04T18:30:00",
+          "duration": 120,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1564"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T20:00:00",
+          "arrival_time": "2026-06-04T21:10:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2031"
+        }
+      ],
+      "price": 176.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 655,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T11:05:00",
+          "arrival_time": "2026-06-04T11:30:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1242"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "departure_time": "2026-06-04T12:35:00",
+          "arrival_time": "2026-06-04T14:10:00",
+          "duration": 95,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4533"
+        },
+        {
+          "departure_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T19:35:00",
+          "arrival_time": "2026-06-04T21:00:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4934"
+        }
+      ],
+      "price": 176.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 655,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T11:05:00",
+          "arrival_time": "2026-06-04T11:30:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1242"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "departure_time": "2026-06-04T15:50:00",
+          "arrival_time": "2026-06-04T17:25:00",
+          "duration": 95,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1308"
+        },
+        {
+          "departure_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T19:35:00",
+          "arrival_time": "2026-06-04T21:00:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4934"
+        }
+      ],
+      "price": 176.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 118,
+      "stops": 0,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T10:55:00",
+          "arrival_time": "2026-06-04T11:53:00",
+          "duration": 118,
+          "airline": {
+            "code": "DL",
+            "name": "Delta Air Lines"
+          },
+          "flight_number": "1116"
+        }
+      ],
+      "price": 179.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 565,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T06:15:00",
+          "arrival_time": "2026-06-04T06:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3751"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "departure_time": "2026-06-04T09:35:00",
+          "arrival_time": "2026-06-04T11:30:00",
+          "duration": 115,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "781"
+        },
+        {
+          "departure_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T13:10:00",
+          "arrival_time": "2026-06-04T14:40:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2414"
+        }
+      ],
+      "price": 180.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 640,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T06:15:00",
+          "arrival_time": "2026-06-04T06:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3751"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "departure_time": "2026-06-04T09:40:00",
+          "arrival_time": "2026-06-04T11:35:00",
+          "duration": 115,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2680"
+        },
+        {
+          "departure_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T14:30:00",
+          "arrival_time": "2026-06-04T15:55:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2951"
+        }
+      ],
+      "price": 180.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 575,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T10:40:00",
+          "arrival_time": "2026-06-04T12:05:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3739"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T13:30:00",
+          "arrival_time": "2026-06-04T14:25:00",
+          "duration": 115,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1562"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T18:05:00",
+          "arrival_time": "2026-06-04T19:15:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1322"
+        }
+      ],
+      "price": 180.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 545,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T11:05:00",
+          "arrival_time": "2026-06-04T11:30:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1242"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "RNO",
+            "name": "Reno/Tahoe International Airport"
+          },
+          "departure_time": "2026-06-04T13:00:00",
+          "arrival_time": "2026-06-04T14:30:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1221"
+        },
+        {
+          "departure_airport": {
+            "code": "RNO",
+            "name": "Reno/Tahoe International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T17:40:00",
+          "arrival_time": "2026-06-04T19:10:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2876"
+        }
+      ],
+      "price": 180.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 520,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T11:35:00",
+          "arrival_time": "2026-06-04T12:15:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "403"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T16:00:00",
+          "arrival_time": "2026-06-04T17:10:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3283"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T18:05:00",
+          "arrival_time": "2026-06-04T19:15:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1322"
+        }
+      ],
+      "price": 180.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 520,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T11:35:00",
+          "arrival_time": "2026-06-04T12:15:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "403"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T13:15:00",
+          "arrival_time": "2026-06-04T14:25:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1382"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T18:05:00",
+          "arrival_time": "2026-06-04T19:15:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1322"
+        }
+      ],
+      "price": 180.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 540,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T11:35:00",
+          "arrival_time": "2026-06-04T12:15:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "403"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "DAL",
+            "name": "Dallas Love Field"
+          },
+          "departure_time": "2026-06-04T13:25:00",
+          "arrival_time": "2026-06-04T17:50:00",
+          "duration": 145,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3256"
+        },
+        {
+          "departure_airport": {
+            "code": "DAL",
+            "name": "Dallas Love Field"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T18:30:00",
+          "arrival_time": "2026-06-04T19:35:00",
+          "duration": 185,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1336"
+        }
+      ],
+      "price": 180.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 560,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T11:35:00",
+          "arrival_time": "2026-06-04T12:15:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "403"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T13:45:00",
+          "arrival_time": "2026-06-04T16:35:00",
+          "duration": 110,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3264"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T18:15:00",
+          "arrival_time": "2026-06-04T19:55:00",
+          "duration": 160,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1037"
+        }
+      ],
+      "price": 180.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 630,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T11:35:00",
+          "arrival_time": "2026-06-04T12:15:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "403"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "SJC",
+            "name": "Norman Y Mineta San Jose International Airport"
+          },
+          "departure_time": "2026-06-04T14:40:00",
+          "arrival_time": "2026-06-04T16:25:00",
+          "duration": 105,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4102"
+        },
+        {
+          "departure_airport": {
+            "code": "SJC",
+            "name": "Norman Y Mineta San Jose International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T19:50:00",
+          "arrival_time": "2026-06-04T21:05:00",
+          "duration": 75,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4907"
+        }
+      ],
+      "price": 180.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 635,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T11:35:00",
+          "arrival_time": "2026-06-04T12:15:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "403"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T14:50:00",
+          "arrival_time": "2026-06-04T16:00:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "611"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T20:00:00",
+          "arrival_time": "2026-06-04T21:10:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2031"
+        }
+      ],
+      "price": 180.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 635,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T11:35:00",
+          "arrival_time": "2026-06-04T12:15:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "403"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T16:00:00",
+          "arrival_time": "2026-06-04T17:10:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3283"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T20:00:00",
+          "arrival_time": "2026-06-04T21:10:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2031"
+        }
+      ],
+      "price": 180.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 840,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T06:15:00",
+          "arrival_time": "2026-06-04T06:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3751"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T11:05:00",
+          "arrival_time": "2026-06-04T12:15:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2328"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T18:05:00",
+          "arrival_time": "2026-06-04T19:15:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1322"
+        }
+      ],
+      "price": 181.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 880,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T06:15:00",
+          "arrival_time": "2026-06-04T06:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3751"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T11:25:00",
+          "arrival_time": "2026-06-04T14:10:00",
+          "duration": 105,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "681"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T18:15:00",
+          "arrival_time": "2026-06-04T19:55:00",
+          "duration": 160,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1037"
+        }
+      ],
+      "price": 181.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 825,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T06:25:00",
+          "arrival_time": "2026-06-04T06:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4205"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "RNO",
+            "name": "Reno/Tahoe International Airport"
+          },
+          "departure_time": "2026-06-04T11:35:00",
+          "arrival_time": "2026-06-04T13:05:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "5056"
+        },
+        {
+          "departure_airport": {
+            "code": "RNO",
+            "name": "Reno/Tahoe International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T17:40:00",
+          "arrival_time": "2026-06-04T19:10:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2876"
+        }
+      ],
+      "price": 181.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 825,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T06:25:00",
+          "arrival_time": "2026-06-04T06:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4205"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "RNO",
+            "name": "Reno/Tahoe International Airport"
+          },
+          "departure_time": "2026-06-04T10:55:00",
+          "arrival_time": "2026-06-04T12:20:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2115"
+        },
+        {
+          "departure_airport": {
+            "code": "RNO",
+            "name": "Reno/Tahoe International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T17:40:00",
+          "arrival_time": "2026-06-04T19:10:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2876"
+        }
+      ],
+      "price": 181.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 935,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T06:25:00",
+          "arrival_time": "2026-06-04T06:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4205"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "departure_time": "2026-06-04T12:35:00",
+          "arrival_time": "2026-06-04T14:10:00",
+          "duration": 95,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4533"
+        },
+        {
+          "departure_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T19:35:00",
+          "arrival_time": "2026-06-04T21:00:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4934"
+        }
+      ],
+      "price": 181.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 640,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T06:15:00",
+          "arrival_time": "2026-06-04T06:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3751"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "departure_time": "2026-06-04T07:45:00",
+          "arrival_time": "2026-06-04T09:45:00",
+          "duration": 120,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3303"
+        },
+        {
+          "departure_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T14:30:00",
+          "arrival_time": "2026-06-04T15:55:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2951"
+        }
+      ],
+      "price": 186.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 630,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T06:25:00",
+          "arrival_time": "2026-06-04T06:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4205"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "departure_time": "2026-06-04T08:35:00",
+          "arrival_time": "2026-06-04T10:10:00",
+          "duration": 95,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1254"
+        },
+        {
+          "departure_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T14:30:00",
+          "arrival_time": "2026-06-04T15:55:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2951"
+        }
+      ],
+      "price": 186.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 690,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T10:40:00",
+          "arrival_time": "2026-06-04T12:05:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3739"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T16:35:00",
+          "arrival_time": "2026-06-04T17:35:00",
+          "duration": 120,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1563"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T20:00:00",
+          "arrival_time": "2026-06-04T21:10:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2031"
+        }
+      ],
+      "price": 186.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 690,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T10:40:00",
+          "arrival_time": "2026-06-04T12:05:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3739"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T13:30:00",
+          "arrival_time": "2026-06-04T14:25:00",
+          "duration": 115,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1562"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T20:00:00",
+          "arrival_time": "2026-06-04T21:10:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2031"
+        }
+      ],
+      "price": 186.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 625,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T11:05:00",
+          "arrival_time": "2026-06-04T11:30:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1242"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T16:50:00",
+          "arrival_time": "2026-06-04T18:05:00",
+          "duration": 75,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "577"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T19:15:00",
+          "arrival_time": "2026-06-04T20:30:00",
+          "duration": 75,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4352"
+        }
+      ],
+      "price": 186.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 635,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T11:35:00",
+          "arrival_time": "2026-06-04T12:15:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "403"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T13:15:00",
+          "arrival_time": "2026-06-04T14:25:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1382"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T20:00:00",
+          "arrival_time": "2026-06-04T21:10:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2031"
+        }
+      ],
+      "price": 186.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 605,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T05:35:00",
+          "arrival_time": "2026-06-04T07:00:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3737"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "departure_time": "2026-06-04T10:20:00",
+          "arrival_time": "2026-06-04T11:55:00",
+          "duration": 155,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1740"
+        },
+        {
+          "departure_airport": {
+            "code": "SMF",
+            "name": "Sacramento International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T13:10:00",
+          "arrival_time": "2026-06-04T14:40:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2414"
+        }
+      ],
+      "price": 190.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 625,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T06:15:00",
+          "arrival_time": "2026-06-04T06:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3751"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T11:05:00",
+          "arrival_time": "2026-06-04T12:15:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2328"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T14:30:00",
+          "arrival_time": "2026-06-04T15:40:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3061"
+        }
+      ],
+      "price": 196.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 280,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T05:35:00",
+          "arrival_time": "2026-06-04T07:00:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3737"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T07:45:00",
+          "arrival_time": "2026-06-04T09:15:00",
+          "duration": 150,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1580"
+        }
+      ],
+      "price": 203.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 280,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T06:15:00",
+          "arrival_time": "2026-06-04T06:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3751"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T08:35:00",
+          "arrival_time": "2026-06-04T09:55:00",
+          "duration": 80,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "165"
+        }
+      ],
+      "price": 203.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 490,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T05:35:00",
+          "arrival_time": "2026-06-04T07:00:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3737"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T07:40:00",
+          "arrival_time": "2026-06-04T08:35:00",
+          "duration": 115,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1559"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T11:35:00",
+          "arrival_time": "2026-06-04T12:45:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2260"
+        }
+      ],
+      "price": 208.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 335,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T11:05:00",
+          "arrival_time": "2026-06-04T11:30:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1242"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T14:30:00",
+          "arrival_time": "2026-06-04T15:40:00",
+          "duration": 70,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3061"
+        }
+      ],
+      "price": 245.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 440,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T05:35:00",
+          "arrival_time": "2026-06-04T07:00:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3737"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "departure_time": "2026-06-04T07:45:00",
+          "arrival_time": "2026-06-04T09:25:00",
+          "duration": 160,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1240"
+        },
+        {
+          "departure_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T10:30:00",
+          "arrival_time": "2026-06-04T11:55:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1328"
+        }
+      ],
+      "price": 250.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 400,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T06:15:00",
+          "arrival_time": "2026-06-04T06:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3751"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "departure_time": "2026-06-04T07:45:00",
+          "arrival_time": "2026-06-04T09:45:00",
+          "duration": 120,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3303"
+        },
+        {
+          "departure_airport": {
+            "code": "OAK",
+            "name": "Oakland San Francisco Bay Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T10:30:00",
+          "arrival_time": "2026-06-04T11:55:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "1328"
+        }
+      ],
+      "price": 250.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 450,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "departure_time": "2026-06-04T06:25:00",
+          "arrival_time": "2026-06-04T06:50:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4205"
+        },
+        {
+          "departure_airport": {
+            "code": "LAS",
+            "name": "Harry Reid International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T07:55:00",
+          "arrival_time": "2026-06-04T09:15:00",
+          "duration": 80,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "209"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T11:40:00",
+          "arrival_time": "2026-06-04T12:55:00",
+          "duration": 75,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2505"
+        }
+      ],
+      "price": 250.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 460,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T06:15:00",
+          "arrival_time": "2026-06-04T06:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3751"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T11:40:00",
+          "arrival_time": "2026-06-04T12:55:00",
+          "duration": 75,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "2505"
+        }
+      ],
+      "price": 250.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 580,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "MDW",
+            "name": "Chicago Midway International Airport"
+          },
+          "departure_time": "2026-06-04T06:55:00",
+          "arrival_time": "2026-06-04T10:55:00",
+          "duration": 180,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3749"
+        },
+        {
+          "departure_airport": {
+            "code": "MDW",
+            "name": "Chicago Midway International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T13:20:00",
+          "arrival_time": "2026-06-04T15:35:00",
+          "duration": 255,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4413"
+        }
+      ],
+      "price": 256.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 310,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T10:40:00",
+          "arrival_time": "2026-06-04T12:05:00",
+          "duration": 85,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3739"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T13:25:00",
+          "arrival_time": "2026-06-04T14:50:00",
+          "duration": 145,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4259"
+        }
+      ],
+      "price": 256.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 440,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T11:35:00",
+          "arrival_time": "2026-06-04T12:15:00",
+          "duration": 100,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "403"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T16:40:00",
+          "arrival_time": "2026-06-04T17:55:00",
+          "duration": 75,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "149"
+        }
+      ],
+      "price": 261.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 505,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T07:25:00",
+          "arrival_time": "2026-06-04T08:55:00",
+          "duration": 90,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "3738"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LGB",
+            "name": "Long Beach (Daugherty Field) Airport"
+          },
+          "departure_time": "2026-06-04T13:25:00",
+          "arrival_time": "2026-06-04T14:50:00",
+          "duration": 145,
+          "airline": {
+            "code": "WN",
+            "name": "Southwest Airlines"
+          },
+          "flight_number": "4259"
+        }
+      ],
+      "price": 397.0,
+      "currency": "USD"
+    }
+  ]
+}

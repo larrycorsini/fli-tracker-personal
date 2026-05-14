@@ -1,0 +1,3396 @@
+{
+  "success": true,
+  "data_source": "google_flights",
+  "search_type": "flights",
+  "trip_type": "ONE_WAY",
+  "query": {
+    "origin": "SLC",
+    "destination": "MRY",
+    "departure_date": "2026-06-04",
+    "return_date": null,
+    "departure_window": "5-11",
+    "airlines": null,
+    "cabin_class": "ECONOMY",
+    "max_stops": "ANY",
+    "sort_by": "CHEAPEST"
+  },
+  "count": 62,
+  "flights": [
+    {
+      "duration": 359,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T07:13:00",
+          "arrival_time": "2026-06-04T08:04:00",
+          "duration": 111,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "6327"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T10:08:00",
+          "arrival_time": "2026-06-04T12:12:00",
+          "duration": 124,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "3720"
+        }
+      ],
+      "price": 164.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 366,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T09:49:00",
+          "arrival_time": "2026-06-04T11:13:00",
+          "duration": 144,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5970"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T13:50:00",
+          "arrival_time": "2026-06-04T14:55:00",
+          "duration": 65,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5738"
+        }
+      ],
+      "price": 164.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 485,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "departure_time": "2026-06-04T11:09:00",
+          "arrival_time": "2026-06-04T12:28:00",
+          "duration": 139,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "796"
+        },
+        {
+          "departure_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T15:56:00",
+          "arrival_time": "2026-06-04T18:14:00",
+          "duration": 138,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2187"
+        }
+      ],
+      "price": 204.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1034,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-06-04T07:17:00",
+          "arrival_time": "2026-06-04T08:24:00",
+          "duration": 127,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3312"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:05:00",
+          "arrival_time": "2026-06-04T23:31:00",
+          "duration": 86,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2159"
+        }
+      ],
+      "price": 248.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 296,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T07:45:00",
+          "arrival_time": "2026-06-04T09:15:00",
+          "duration": 150,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5408"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T10:20:00",
+          "arrival_time": "2026-06-04T11:41:00",
+          "duration": 81,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5241"
+        }
+      ],
+      "price": 258.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 758,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-06-04T11:53:00",
+          "arrival_time": "2026-06-04T12:57:00",
+          "duration": 124,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3010"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:05:00",
+          "arrival_time": "2026-06-04T23:31:00",
+          "duration": 86,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2159"
+        }
+      ],
+      "price": 309.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 365,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T06:05:00",
+          "arrival_time": "2026-06-04T07:19:00",
+          "duration": 134,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "4763"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T10:05:00",
+          "arrival_time": "2026-06-04T11:10:00",
+          "duration": 65,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5479"
+        }
+      ],
+      "price": 330.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 956,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PDX",
+            "name": "Portland International Airport"
+          },
+          "departure_time": "2026-06-04T08:35:00",
+          "arrival_time": "2026-06-04T09:41:00",
+          "duration": 126,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3497"
+        },
+        {
+          "departure_airport": {
+            "code": "PDX",
+            "name": "Portland International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-06-04T17:40:00",
+          "arrival_time": "2026-06-04T20:20:00",
+          "duration": 160,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "669"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:05:00",
+          "arrival_time": "2026-06-04T23:31:00",
+          "duration": 86,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2159"
+        }
+      ],
+      "price": 332.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 719,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "departure_time": "2026-06-04T07:15:00",
+          "arrival_time": "2026-06-04T08:40:00",
+          "duration": 145,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3295"
+        },
+        {
+          "departure_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T15:56:00",
+          "arrival_time": "2026-06-04T18:14:00",
+          "duration": 138,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2187"
+        }
+      ],
+      "price": 337.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 802,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "departure_time": "2026-06-04T11:09:00",
+          "arrival_time": "2026-06-04T12:28:00",
+          "duration": 139,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "796"
+        },
+        {
+          "departure_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-06-04T13:30:00",
+          "arrival_time": "2026-06-04T16:21:00",
+          "duration": 171,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "765"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:05:00",
+          "arrival_time": "2026-06-04T23:31:00",
+          "duration": 86,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2159"
+        }
+      ],
+      "price": 343.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 802,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "departure_time": "2026-06-04T11:09:00",
+          "arrival_time": "2026-06-04T12:28:00",
+          "duration": 139,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "796"
+        },
+        {
+          "departure_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-06-04T15:02:00",
+          "arrival_time": "2026-06-04T17:53:00",
+          "duration": 171,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "697"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:05:00",
+          "arrival_time": "2026-06-04T23:31:00",
+          "duration": 86,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2159"
+        }
+      ],
+      "price": 343.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 481,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-06-04T07:17:00",
+          "arrival_time": "2026-06-04T08:24:00",
+          "duration": 127,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3312"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T12:50:00",
+          "arrival_time": "2026-06-04T14:18:00",
+          "duration": 88,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2344"
+        }
+      ],
+      "price": 353.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1036,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "departure_time": "2026-06-04T07:15:00",
+          "arrival_time": "2026-06-04T08:40:00",
+          "duration": 145,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3295"
+        },
+        {
+          "departure_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-06-04T16:47:00",
+          "arrival_time": "2026-06-04T19:38:00",
+          "duration": 171,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "623"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:05:00",
+          "arrival_time": "2026-06-04T23:31:00",
+          "duration": 86,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2159"
+        }
+      ],
+      "price": 358.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 802,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "departure_time": "2026-06-04T11:09:00",
+          "arrival_time": "2026-06-04T12:28:00",
+          "duration": 139,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "796"
+        },
+        {
+          "departure_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-06-04T16:47:00",
+          "arrival_time": "2026-06-04T19:38:00",
+          "duration": 171,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "623"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:05:00",
+          "arrival_time": "2026-06-04T23:31:00",
+          "duration": 86,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2159"
+        }
+      ],
+      "price": 358.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1030,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T05:00:00",
+          "arrival_time": "2026-06-04T06:39:00",
+          "duration": 99,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5683"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T19:30:00",
+          "arrival_time": "2026-06-04T21:10:00",
+          "duration": 160,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1371"
+        }
+      ],
+      "price": 367.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 910,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T07:00:00",
+          "arrival_time": "2026-06-04T08:42:00",
+          "duration": 102,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1232"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T19:30:00",
+          "arrival_time": "2026-06-04T21:10:00",
+          "duration": 160,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1371"
+        }
+      ],
+      "price": 367.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1022,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T07:45:00",
+          "arrival_time": "2026-06-04T09:15:00",
+          "duration": 150,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5408"
+        },
+        {
+          "departure_airport": {
+            "code": "ONT",
+            "name": "Ontario International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T18:39:00",
+          "arrival_time": "2026-06-04T20:08:00",
+          "duration": 89,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5624"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:40:00",
+          "arrival_time": "2026-06-04T23:47:00",
+          "duration": 67,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5670"
+        }
+      ],
+      "price": 368.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 969,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T05:00:00",
+          "arrival_time": "2026-06-04T06:39:00",
+          "duration": 99,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5683"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T15:43:00",
+          "arrival_time": "2026-06-04T17:15:00",
+          "duration": 152,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1195"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T18:55:00",
+          "arrival_time": "2026-06-04T20:09:00",
+          "duration": 74,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2128"
+        }
+      ],
+      "price": 373.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 969,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T05:00:00",
+          "arrival_time": "2026-06-04T06:39:00",
+          "duration": 99,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5683"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T13:26:00",
+          "arrival_time": "2026-06-04T14:57:00",
+          "duration": 151,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "774"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T18:55:00",
+          "arrival_time": "2026-06-04T20:09:00",
+          "duration": 74,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2128"
+        }
+      ],
+      "price": 373.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1187,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T05:00:00",
+          "arrival_time": "2026-06-04T06:39:00",
+          "duration": 99,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5683"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T19:24:00",
+          "arrival_time": "2026-06-04T21:10:00",
+          "duration": 166,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1389"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:40:00",
+          "arrival_time": "2026-06-04T23:47:00",
+          "duration": 67,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5670"
+        }
+      ],
+      "price": 373.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1187,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T05:00:00",
+          "arrival_time": "2026-06-04T06:39:00",
+          "duration": 99,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5683"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T17:54:00",
+          "arrival_time": "2026-06-04T19:40:00",
+          "duration": 166,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1007"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:40:00",
+          "arrival_time": "2026-06-04T23:47:00",
+          "duration": 67,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5670"
+        }
+      ],
+      "price": 373.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 849,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T07:00:00",
+          "arrival_time": "2026-06-04T08:42:00",
+          "duration": 102,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1232"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T13:26:00",
+          "arrival_time": "2026-06-04T14:57:00",
+          "duration": 151,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "774"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T18:55:00",
+          "arrival_time": "2026-06-04T20:09:00",
+          "duration": 74,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2128"
+        }
+      ],
+      "price": 373.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 849,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T07:00:00",
+          "arrival_time": "2026-06-04T08:42:00",
+          "duration": 102,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1232"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T15:43:00",
+          "arrival_time": "2026-06-04T17:15:00",
+          "duration": 152,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1195"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T18:55:00",
+          "arrival_time": "2026-06-04T20:09:00",
+          "duration": 74,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2128"
+        }
+      ],
+      "price": 373.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1067,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T07:00:00",
+          "arrival_time": "2026-06-04T08:42:00",
+          "duration": 102,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1232"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T17:54:00",
+          "arrival_time": "2026-06-04T19:40:00",
+          "duration": 166,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1007"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:40:00",
+          "arrival_time": "2026-06-04T23:47:00",
+          "duration": 67,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5670"
+        }
+      ],
+      "price": 373.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1067,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T07:00:00",
+          "arrival_time": "2026-06-04T08:42:00",
+          "duration": 102,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1232"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T19:24:00",
+          "arrival_time": "2026-06-04T21:10:00",
+          "duration": 166,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1389"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:40:00",
+          "arrival_time": "2026-06-04T23:47:00",
+          "duration": 67,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5670"
+        }
+      ],
+      "price": 373.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 590,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T06:05:00",
+          "arrival_time": "2026-06-04T07:19:00",
+          "duration": 134,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "4763"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T13:50:00",
+          "arrival_time": "2026-06-04T14:55:00",
+          "duration": 65,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5738"
+        }
+      ],
+      "price": 373.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1122,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T06:05:00",
+          "arrival_time": "2026-06-04T07:19:00",
+          "duration": 134,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "4763"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:40:00",
+          "arrival_time": "2026-06-04T23:47:00",
+          "duration": 67,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5670"
+        }
+      ],
+      "price": 373.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 898,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T09:49:00",
+          "arrival_time": "2026-06-04T11:13:00",
+          "duration": 144,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5970"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:40:00",
+          "arrival_time": "2026-06-04T23:47:00",
+          "duration": 67,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5670"
+        }
+      ],
+      "price": 373.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 639,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PDX",
+            "name": "Portland International Airport"
+          },
+          "departure_time": "2026-06-04T08:35:00",
+          "arrival_time": "2026-06-04T09:41:00",
+          "duration": 126,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3497"
+        },
+        {
+          "departure_airport": {
+            "code": "PDX",
+            "name": "Portland International Airport"
+          },
+          "arrival_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "departure_time": "2026-06-04T12:13:00",
+          "arrival_time": "2026-06-04T13:14:00",
+          "duration": 61,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3038"
+        },
+        {
+          "departure_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T15:56:00",
+          "arrival_time": "2026-06-04T18:14:00",
+          "duration": 138,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2187"
+        }
+      ],
+      "price": 377.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 804,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T07:45:00",
+          "arrival_time": "2026-06-04T09:15:00",
+          "duration": 150,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5408"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T18:55:00",
+          "arrival_time": "2026-06-04T20:09:00",
+          "duration": 74,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2128"
+        }
+      ],
+      "price": 377.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 904,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T06:05:00",
+          "arrival_time": "2026-06-04T07:19:00",
+          "duration": 134,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "4763"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T13:55:00",
+          "arrival_time": "2026-06-04T15:35:00",
+          "duration": 100,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2610"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T18:55:00",
+          "arrival_time": "2026-06-04T20:09:00",
+          "duration": 74,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2128"
+        }
+      ],
+      "price": 379.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1022,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T07:45:00",
+          "arrival_time": "2026-06-04T09:15:00",
+          "duration": 150,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5408"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T10:55:00",
+          "arrival_time": "2026-06-04T12:30:00",
+          "duration": 95,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1791"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:40:00",
+          "arrival_time": "2026-06-04T23:47:00",
+          "duration": 67,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5670"
+        }
+      ],
+      "price": 379.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 904,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T06:05:00",
+          "arrival_time": "2026-06-04T07:19:00",
+          "duration": 134,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "4763"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T08:50:00",
+          "arrival_time": "2026-06-04T10:34:00",
+          "duration": 104,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1896"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T18:55:00",
+          "arrival_time": "2026-06-04T20:09:00",
+          "duration": 74,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2128"
+        }
+      ],
+      "price": 383.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 904,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T06:05:00",
+          "arrival_time": "2026-06-04T07:19:00",
+          "duration": 134,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "4763"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T10:19:00",
+          "arrival_time": "2026-06-04T11:57:00",
+          "duration": 98,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "457"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T18:55:00",
+          "arrival_time": "2026-06-04T20:09:00",
+          "duration": 74,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2128"
+        }
+      ],
+      "price": 383.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1022,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T07:45:00",
+          "arrival_time": "2026-06-04T09:15:00",
+          "duration": 150,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5408"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T20:22:00",
+          "arrival_time": "2026-06-04T21:50:00",
+          "duration": 88,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1195"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:40:00",
+          "arrival_time": "2026-06-04T23:47:00",
+          "duration": 67,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5670"
+        }
+      ],
+      "price": 383.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1022,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T07:45:00",
+          "arrival_time": "2026-06-04T09:15:00",
+          "duration": 150,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5408"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T18:45:00",
+          "arrival_time": "2026-06-04T20:10:00",
+          "duration": 85,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2681"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:40:00",
+          "arrival_time": "2026-06-04T23:47:00",
+          "duration": 67,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5670"
+        }
+      ],
+      "price": 383.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 680,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T09:49:00",
+          "arrival_time": "2026-06-04T11:13:00",
+          "duration": 144,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5970"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T12:15:00",
+          "arrival_time": "2026-06-04T13:55:00",
+          "duration": 100,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1506"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T18:55:00",
+          "arrival_time": "2026-06-04T20:09:00",
+          "duration": 74,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2128"
+        }
+      ],
+      "price": 383.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 430,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T07:00:00",
+          "arrival_time": "2026-06-04T08:42:00",
+          "duration": 102,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1232"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T11:15:00",
+          "arrival_time": "2026-06-04T13:10:00",
+          "duration": 175,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5438"
+        }
+      ],
+      "price": 384.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 956,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PDX",
+            "name": "Portland International Airport"
+          },
+          "departure_time": "2026-06-04T08:35:00",
+          "arrival_time": "2026-06-04T09:41:00",
+          "duration": 126,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3497"
+        },
+        {
+          "departure_airport": {
+            "code": "PDX",
+            "name": "Portland International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-06-04T14:45:00",
+          "arrival_time": "2026-06-04T17:23:00",
+          "duration": 158,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "1312"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:05:00",
+          "arrival_time": "2026-06-04T23:31:00",
+          "duration": 86,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2159"
+        }
+      ],
+      "price": 386.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 956,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PDX",
+            "name": "Portland International Airport"
+          },
+          "departure_time": "2026-06-04T08:35:00",
+          "arrival_time": "2026-06-04T09:41:00",
+          "duration": 126,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3497"
+        },
+        {
+          "departure_airport": {
+            "code": "PDX",
+            "name": "Portland International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-06-04T10:35:00",
+          "arrival_time": "2026-06-04T13:18:00",
+          "duration": 163,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "1394"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T22:05:00",
+          "arrival_time": "2026-06-04T23:31:00",
+          "duration": 86,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2159"
+        }
+      ],
+      "price": 391.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 820,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T08:30:00",
+          "arrival_time": "2026-06-04T10:27:00",
+          "duration": 117,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5642"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T19:30:00",
+          "arrival_time": "2026-06-04T21:10:00",
+          "duration": 160,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1371"
+        }
+      ],
+      "price": 402.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 691,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T10:39:00",
+          "arrival_time": "2026-06-04T12:24:00",
+          "duration": 105,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2004"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T19:30:00",
+          "arrival_time": "2026-06-04T21:10:00",
+          "duration": 160,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1371"
+        }
+      ],
+      "price": 402.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1651,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T10:39:00",
+          "arrival_time": "2026-06-04T12:24:00",
+          "duration": 105,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2004"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-05T11:15:00",
+          "arrival_time": "2026-06-05T13:10:00",
+          "duration": 175,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5438"
+        }
+      ],
+      "price": 402.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1645,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-06-04T11:53:00",
+          "arrival_time": "2026-06-04T12:57:00",
+          "duration": 124,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3010"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-05T12:50:00",
+          "arrival_time": "2026-06-05T14:18:00",
+          "duration": 88,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2344"
+        }
+      ],
+      "price": 414.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 461,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T05:00:00",
+          "arrival_time": "2026-06-04T06:39:00",
+          "duration": 99,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5683"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T08:00:00",
+          "arrival_time": "2026-06-04T09:32:00",
+          "duration": 152,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1638"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T10:20:00",
+          "arrival_time": "2026-06-04T11:41:00",
+          "duration": 81,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5241"
+        }
+      ],
+      "price": 442.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 490,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T07:45:00",
+          "arrival_time": "2026-06-04T09:15:00",
+          "duration": 150,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5408"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T10:55:00",
+          "arrival_time": "2026-06-04T12:30:00",
+          "duration": 95,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1791"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T13:50:00",
+          "arrival_time": "2026-06-04T14:55:00",
+          "duration": 65,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5738"
+        }
+      ],
+      "price": 442.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 630,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T10:39:00",
+          "arrival_time": "2026-06-04T12:24:00",
+          "duration": 105,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2004"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T15:43:00",
+          "arrival_time": "2026-06-04T17:15:00",
+          "duration": 152,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1195"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T18:55:00",
+          "arrival_time": "2026-06-04T20:09:00",
+          "duration": 74,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2128"
+        }
+      ],
+      "price": 442.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 587,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "departure_time": "2026-06-04T09:27:00",
+          "arrival_time": "2026-06-04T10:54:00",
+          "duration": 147,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3135"
+        },
+        {
+          "departure_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T15:56:00",
+          "arrival_time": "2026-06-04T18:14:00",
+          "duration": 138,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2187"
+        }
+      ],
+      "price": 447.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 550,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T05:00:00",
+          "arrival_time": "2026-06-04T06:39:00",
+          "duration": 99,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5683"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T11:15:00",
+          "arrival_time": "2026-06-04T13:10:00",
+          "duration": 175,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5438"
+        }
+      ],
+      "price": 457.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 655,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T05:00:00",
+          "arrival_time": "2026-06-04T06:39:00",
+          "duration": 99,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5683"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T07:40:00",
+          "arrival_time": "2026-06-04T09:18:00",
+          "duration": 158,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2391"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T13:50:00",
+          "arrival_time": "2026-06-04T14:55:00",
+          "duration": 65,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5738"
+        }
+      ],
+      "price": 458.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 340,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T08:30:00",
+          "arrival_time": "2026-06-04T10:27:00",
+          "duration": 117,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5642"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T11:15:00",
+          "arrival_time": "2026-06-04T13:10:00",
+          "duration": 175,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5438"
+        }
+      ],
+      "price": 474.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 680,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T09:49:00",
+          "arrival_time": "2026-06-04T11:13:00",
+          "duration": 144,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5970"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "departure_time": "2026-06-04T16:11:00",
+          "arrival_time": "2026-06-04T17:51:00",
+          "duration": 100,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1754"
+        },
+        {
+          "departure_airport": {
+            "code": "LAX",
+            "name": "Los Angeles International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T18:55:00",
+          "arrival_time": "2026-06-04T20:09:00",
+          "duration": 74,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2128"
+        }
+      ],
+      "price": 494.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 655,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T05:00:00",
+          "arrival_time": "2026-06-04T06:39:00",
+          "duration": 99,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5683"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T09:43:00",
+          "arrival_time": "2026-06-04T11:25:00",
+          "duration": 162,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "1506"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T13:50:00",
+          "arrival_time": "2026-06-04T14:55:00",
+          "duration": 65,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5738"
+        }
+      ],
+      "price": 502.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 717,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-06-04T07:17:00",
+          "arrival_time": "2026-06-04T08:24:00",
+          "duration": 127,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3312"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "departure_time": "2026-06-04T10:11:00",
+          "arrival_time": "2026-06-04T13:25:00",
+          "duration": 194,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "1368"
+        },
+        {
+          "departure_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T15:56:00",
+          "arrival_time": "2026-06-04T18:14:00",
+          "duration": 138,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2187"
+        }
+      ],
+      "price": 506.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 717,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "departure_time": "2026-06-04T07:17:00",
+          "arrival_time": "2026-06-04T08:24:00",
+          "duration": 127,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3312"
+        },
+        {
+          "departure_airport": {
+            "code": "SAN",
+            "name": "San Diego International Airport"
+          },
+          "arrival_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "departure_time": "2026-06-04T11:18:00",
+          "arrival_time": "2026-06-04T14:30:00",
+          "duration": 192,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "726"
+        },
+        {
+          "departure_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T15:56:00",
+          "arrival_time": "2026-06-04T18:14:00",
+          "duration": 138,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2187"
+        }
+      ],
+      "price": 506.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 639,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PDX",
+            "name": "Portland International Airport"
+          },
+          "departure_time": "2026-06-04T08:35:00",
+          "arrival_time": "2026-06-04T09:41:00",
+          "duration": 126,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "3497"
+        },
+        {
+          "departure_airport": {
+            "code": "PDX",
+            "name": "Portland International Airport"
+          },
+          "arrival_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "departure_time": "2026-06-04T10:45:00",
+          "arrival_time": "2026-06-04T11:59:00",
+          "duration": 74,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2311"
+        },
+        {
+          "departure_airport": {
+            "code": "SEA",
+            "name": "Seattle-Tacoma International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T15:56:00",
+          "arrival_time": "2026-06-04T18:14:00",
+          "duration": 138,
+          "airline": {
+            "code": "AS",
+            "name": "Alaska Airlines"
+          },
+          "flight_number": "2187"
+        }
+      ],
+      "price": 527.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 1046,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "departure_time": "2026-06-04T06:07:00",
+          "arrival_time": "2026-06-04T10:35:00",
+          "duration": 208,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1327"
+        },
+        {
+          "departure_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T15:29:00",
+          "arrival_time": "2026-06-04T17:18:00",
+          "duration": 229,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2624"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T20:37:00",
+          "arrival_time": "2026-06-04T22:33:00",
+          "duration": 116,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "6374"
+        }
+      ],
+      "price": 553.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 430,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "departure_time": "2026-06-04T05:00:00",
+          "arrival_time": "2026-06-04T06:39:00",
+          "duration": 99,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5683"
+        },
+        {
+          "departure_airport": {
+            "code": "DEN",
+            "name": "Denver International Airport"
+          },
+          "arrival_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "departure_time": "2026-06-04T07:40:00",
+          "arrival_time": "2026-06-04T09:18:00",
+          "duration": 158,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "2391"
+        },
+        {
+          "departure_airport": {
+            "code": "SFO",
+            "name": "San Francisco International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T10:05:00",
+          "arrival_time": "2026-06-04T11:10:00",
+          "duration": 65,
+          "airline": {
+            "code": "UA",
+            "name": "United Airlines"
+          },
+          "flight_number": "5479"
+        }
+      ],
+      "price": 567.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 567,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T07:13:00",
+          "arrival_time": "2026-06-04T08:04:00",
+          "duration": 111,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "6327"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T13:44:00",
+          "arrival_time": "2026-06-04T15:40:00",
+          "duration": 116,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "6268"
+        }
+      ],
+      "price": 685.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 730,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T07:13:00",
+          "arrival_time": "2026-06-04T08:04:00",
+          "duration": 111,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "6327"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T16:38:00",
+          "arrival_time": "2026-06-04T18:23:00",
+          "duration": 105,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2884"
+        }
+      ],
+      "price": 685.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 796,
+      "stops": 2,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "departure_time": "2026-06-04T06:07:00",
+          "arrival_time": "2026-06-04T10:35:00",
+          "duration": 208,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1327"
+        },
+        {
+          "departure_airport": {
+            "code": "ORD",
+            "name": "Chicago O'Hare International Airport"
+          },
+          "arrival_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "departure_time": "2026-06-04T14:21:00",
+          "arrival_time": "2026-06-04T16:10:00",
+          "duration": 229,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1384"
+        },
+        {
+          "departure_airport": {
+            "code": "PHX",
+            "name": "Phoenix Sky Harbor International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T16:38:00",
+          "arrival_time": "2026-06-04T18:23:00",
+          "duration": 105,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2884"
+        }
+      ],
+      "price": 719.0,
+      "currency": "USD"
+    },
+    {
+      "duration": 474,
+      "stops": 1,
+      "legs": [
+        {
+          "departure_airport": {
+            "code": "SLC",
+            "name": "Salt Lake City International Airport"
+          },
+          "arrival_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "departure_time": "2026-06-04T05:00:00",
+          "arrival_time": "2026-06-04T08:48:00",
+          "duration": 168,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "1214"
+        },
+        {
+          "departure_airport": {
+            "code": "DFW",
+            "name": "Dallas-Fort Worth International Airport"
+          },
+          "arrival_airport": {
+            "code": "MRY",
+            "name": "Monterey Regional Airport"
+          },
+          "departure_time": "2026-06-04T10:15:00",
+          "arrival_time": "2026-06-04T11:54:00",
+          "duration": 219,
+          "airline": {
+            "code": "AA",
+            "name": "American Airlines"
+          },
+          "flight_number": "2140"
+        }
+      ],
+      "price": 1027.0,
+      "currency": "USD"
+    }
+  ]
+}
