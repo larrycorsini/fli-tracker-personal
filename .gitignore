@@ -164,4 +164,4 @@ cython_debug/
 fli-tracker.zip
 
 # Local SQLite databases (user-generated tracker data)
-*.db
+# *.db
