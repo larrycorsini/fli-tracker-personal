@@ -792,7 +792,7 @@ class FlightRequestHandler(BaseHTTPRequestHandler):
         counter = 0
         def process_flight(t):
             nonlocal counter
-            cmd = ["/Users/larry/.local/bin/uv", "run", "fli", "flights", t["origin"], t["destination"], t["depart"], "-r", t["return"], "--stops", stops_filter, "--format", "json"]
+            cmd = ["uv", "run", "fli", "flights", t["origin"], t["destination"], t["depart"], "-r", t["return"], "--stops", stops_filter, "--format", "json"]
             try:
                 proc = subprocess.run(cmd, capture_output=True, text=True)
                 if proc.returncode == 0:
@@ -871,7 +871,7 @@ class FlightRequestHandler(BaseHTTPRequestHandler):
                 dest_city = AIRPORT_CITY_MAP.get(it["dest"], city)
                 
                 # Flight Search
-                cmd = ["/Users/larry/.local/bin/uv", "run", "fli", "flights", it["origin"], it["dest"], it["depart"], "-r", it["return"], "--stops", stops_filter, "--format", "json"]
+                cmd = ["uv", "run", "fli", "flights", it["origin"], it["dest"], it["depart"], "-r", it["return"], "--stops", stops_filter, "--format", "json"]
                 proc = subprocess.run(cmd, capture_output=True, text=True)
                 if proc.returncode == 0:
                     data = json.loads(proc.stdout)

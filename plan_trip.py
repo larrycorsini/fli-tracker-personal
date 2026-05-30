@@ -9,7 +9,7 @@ def get_best_flight(origin, dest, depart, ret_date):
     """Uses fli to get the single cheapest nonstop flight."""
     try:
         cmd = [
-            "/Users/larry/.local/bin/uv", "run", "fli", "flights",
+            "uv", "run", "fli", "flights",
             origin, dest, depart, "-r", ret_date,
             "--stops", "NON_STOP", "--format", "json"
         ]

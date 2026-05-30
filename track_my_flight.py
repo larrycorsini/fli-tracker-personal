@@ -30,7 +30,7 @@ def check_trip(trip):
     """Uses the fli CLI to check a specific trip with time constraints."""
     try:
         cmd = [
-            "/Users/larry/.local/bin/uv", "run", "fli", "flights", 
+            "uv", "run", "fli", "flights", 
             trip["origin"], trip["destination"], trip["depart"], 
             "-r", trip["return"], 
             "--stops", "NON_STOP", 
