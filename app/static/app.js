@@ -1304,12 +1304,12 @@ const FIFA_DFW_PRESET_ID = 'fifa-dfw-2026-slc-pvu';
 
 const FIFA_DFW_PRESET = {
   id: FIFA_DFW_PRESET_ID,
-  label: 'FIFA DFW · SLC & PVU nonstop',
+  label: 'FIFA DFW · Thu-Sat 3-day trip',
   origins: 'SLC, PVU',
   destinations: 'DFW',
-  startDate: '2026-06-29',
-  endDate: '2026-07-04',
-  durations: '2, 3',
+  startDate: '2026-07-02', // Thursday
+  endDate: '2026-07-02',   // Thursday
+  durations: '2',          // 2 nights = returning Saturday (Thu, Fri, Sat)
   maxStops: 'NON_STOP',
   cabin: 'ECONOMY',
   airline: '',
