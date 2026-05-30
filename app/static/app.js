@@ -347,6 +347,7 @@ function handleFlightSearch(e) {
   const stops = document.getElementById('f-stops').value;
   const cabin = document.getElementById('f-cabin').value;
   const airline = document.getElementById('f-airline').value;
+  const departureDays = document.getElementById('f-dep-days') ? document.getElementById('f-dep-days').value : '';
 
   if (!origins || !destinations) { showToast('Please enter origin and destination', 'error'); return; }
 
@@ -1339,10 +1340,12 @@ const FIFA_DFW_PRESET = {
 function initSavedFlightPresets() {
   const key = 'savedFlightPresets';
   let presets = JSON.parse(localStorage.getItem(key) || '[]');
-  if (!presets.some(p => p.id === FIFA_DFW_PRESET_ID)) {
-    presets.unshift(FIFA_DFW_PRESET);
-    localStorage.setItem(key, JSON.stringify(presets));
-  }
+  
+  // Overwrite existing FIFA_DFW_PRESET to ensure it stays updated
+  presets = presets.filter(p => p.id !== FIFA_DFW_PRESET_ID);
+  presets.unshift(FIFA_DFW_PRESET);
+  
+  localStorage.setItem(key, JSON.stringify(presets));
   renderRecentSearches();
 }
 
