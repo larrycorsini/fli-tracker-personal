@@ -131,8 +131,8 @@ def _search_flights_sync(
                         continue
                 serialized.append(flight_data)
 
-        # Sort by price
-        serialized.sort(key=lambda x: x.get("price", 99999))
+        # Sort by price (skip entries without a numeric price)
+        serialized.sort(key=lambda x: x.get("price") if x.get("price") is not None else float("inf"))
         
         if serialized:
             db = TrackerDB()
@@ -187,6 +187,8 @@ def _serialize_flight(flight, is_round_trip: bool = False) -> dict | None:
             # Round-trip: (outbound, return)
             if len(flight) >= 2 and is_round_trip:
                 outbound, return_flight = flight[0], flight[1]
+                if outbound.price is None:
+                    return None
                 out_leg = outbound.legs[0]
                 ret_leg = return_flight.legs[-1]
                 result = {
@@ -209,6 +211,8 @@ def _serialize_flight(flight, is_round_trip: bool = False) -> dict | None:
             else:
                 # Multi-city or other tuple
                 first = flight[0]
+                if first.price is None and flight[-1].price is None:
+                    return None
                 out_leg = first.legs[0]
                 result = {
                     "price": flight[-1].price,
@@ -226,6 +230,8 @@ def _serialize_flight(flight, is_round_trip: bool = False) -> dict | None:
                 }
         else:
             # One-way
+            if flight.price is None:
+                return None
             leg = flight.legs[0]
             result = {
                 "price": flight.price,
