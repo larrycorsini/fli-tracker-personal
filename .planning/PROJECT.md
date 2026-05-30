@@ -2,86 +2,86 @@
 
 ## What This Is
 
-A personal fork of [punitarani/fli](https://github.com/punitarani/fli) — a Python library for Google Flights via reverse-engineered API — extended with a FastAPI price-tracker web app (`app/`), hotel search integration, and local automation scripts. Used for tracking flight prices, planning trips, and searching flights through CLI, MCP, and browser UI.
+A personal fork of [punitarani/fli](https://github.com/punitarani/fli) — Python library for Google Flights (reverse-engineered API) at **v0.10.0** — extended with a FastAPI price-tracker web app (`app/`), hotel search, and local trip-planning scripts. Search via CLI, MCP, or browser UI; track prices in SQLite.
 
 ## Core Value
 
 The personal tracker app and local workflows keep working while the underlying `fli` library stays current with upstream improvements (booking links, API fixes, CI).
 
-## Current Milestone: v1.0 Upstream Sync
+## Current State (v1.0 shipped 2026-05-30)
 
-**Goal:** Merge latest upstream `punitarani/fli` (31 commits since merge-base) without breaking the tracker app, scripts, or local customizations.
+**Shipped:** Upstream Sync milestone — merged 31 commits from `punitarani/fli` without breaking the tracker app.
 
-**Target features:**
-- Merge `origin/main` into local `main` cleanly
-- Preserve all local-only code: `app/`, `hot_core.py`, root scripts, tracker data patterns
-- Adopt upstream Python improvements (booking deep-links, core refactors, dependency updates)
-- Verify CLI, MCP, and web app still work after merge
-- Document what changed and what stayed local
+| Area | Status |
+|------|--------|
+| Upstream merge | ✅ `78866c5` — clean merge, rollback tag `pre-upstream-v1.0` |
+| Package version | `flights` 0.10.0 |
+| Tracker app (`app/`) | ✅ CLI, MCP, FastAPI, hotels verified |
+| Tests | ✅ 433 passed (`--ignore=tests/search/`), lint clean |
+| Personal remote push | Not done — 47 commits ahead of `personal/main` |
+
+See `.planning/MERGE-SUMMARY.md` and `.planning/milestones/v1.0-ROADMAP.md` for full details.
+
+## Next Milestone Goals
+
+Candidate focus for v1.1 (not yet planned):
+
+- Move `hot_core.py` into `app/hotels.py` (remove sys.path hack)
+- Archive superseded `flight_gui.py`
+- Add test coverage for `app/` module
+- Surface booking deep-links in tracker web UI
+- Push synced `main` to `personal` remote
+
+Run `$gsd-new-milestone` to define scope.
 
 ## Requirements
 
 ### Validated
 
-- ✓ Google Flights search via CLI (`fli flights`, `fli dates`) — existing
-- ✓ MCP server with `search_flights` and `search_dates` — existing
-- ✓ FastAPI web app with flight/date/hotel search and price tracker — existing (`app/`)
-- ✓ SQLite-backed flight price tracking with background checks — existing (`app/tracker.py`)
-- ✓ Shared parsing/builders in `fli/core/` used by CLI and MCP — existing
-- ✓ Rate-limited HTTP client with retries — existing (`fli/search/client.py`)
+- ✓ Google Flights search via CLI — existing + upstream v0.10.0
+- ✓ MCP server (`search_flights`, `search_dates`) — existing + expanded upstream
+- ✓ FastAPI tracker app with flight/date/hotel search — v1.0 verified
+- ✓ SQLite price tracking with background checks — v1.0 verified
+- ✓ Shared `fli/core/` parsing used by CLI and MCP — existing
+- ✓ Rate-limited HTTP client with retries — existing
+- ✓ Merge upstream without losing tracker — v1.0
+- ✓ Upstream booking deep-links in Python library — v1.0
+- ✓ Test suite green (excl. live API) — v1.0
 
 ### Active
 
-- [ ] Merge upstream without losing local tracker functionality
-- [ ] Resolve any merge conflicts preserving local app customizations
-- [ ] Update `app/engine.py` if upstream API/model changes require it
-- [ ] Run full test suite (excluding flaky live API tests) green after merge
-- [ ] Smoke-test web app: search, track flight, price check
-- [ ] Record merge decisions and upstream features adopted
+(None — define in next milestone via `$gsd-new-milestone`)
 
 ### Out of Scope
 
-- Adopting the new TypeScript `fli-js` package into the web frontend — separate effort; merge brings it into repo but no integration required this milestone
-- Deleting root-level personal scripts (`flight_gui.py`, etc.) — deferred to cleanup milestone
-- Adding test coverage for entire `app/` module — deferred
-- Publishing to PyPI or npm — upstream concern only
+- fli-js frontend integration — defer to v1.1+ evaluation
+- Root script cleanup — separate cleanup milestone
+- Full `app/` test suite — deferred from v1.0
+- PyPI/npm publishing — upstream process
+- Deleting local JSON trip snapshots — user data
 
 ## Context
 
 **Git remotes:**
-- `origin` → `https://github.com/punitarani/fli` (upstream)
-- `personal` → `https://github.com/larrycorsini/fli-tracker-personal.git` (personal remote)
+- `origin` → upstream `punitarani/fli`
+- `personal` → `larrycorsini/fli-tracker-personal.git`
 
-**Divergence (as of 2026-05-30):**
-- Local `main` is **14 commits ahead**, **31 commits behind** `origin/main`
-- Merge-base: `1cb0231`
-- Dry-run merge: **clean auto-merge** on `pyproject.toml` and `uv.lock` (no conflicts detected)
-- Local-only additions: `app/` (676+ lines engine, server, tracker, static UI), `hot_core.py`, root scripts, JSON trip snapshots
-
-**Upstream highlights since fork:**
-- TypeScript/JS port (`packages/fli-js/`)
-- Per-flight booking deep-link URLs (`fli/core/links.py`, protobuf encoding)
-- Search module refactor (`_proto`, `_wire`, `_decoders`, `_urls`)
-- CI/release fixes, docs reorganization
-
-**Recent local fixes (already on main):**
-- F-01–F-05 audit fixes: fuzz marker, asyncio deprecation, uv paths, playwright removed, `*.db` gitignored
+**Repo now includes:** `fli/` (Python), `fli-js/` (TypeScript, not integrated in UI), `app/` (tracker), local scripts.
 
 ## Constraints
 
-- **Compatibility:** `app/engine.py` must continue calling `fli` search APIs without regression
-- **Dependencies:** Keep local `pyproject.toml` extras that support the web app (FastAPI, etc.)
-- **Data:** Do not re-commit `app/data/tracker.db`; user SQLite stays local
-- **Testing:** Skip `tests/search/` live API tests in CI verification (rate-limited/flaky per AGENTS.md)
+- **Compatibility:** `app/engine.py` must keep working with `fli` search APIs
+- **Data:** `app/data/tracker.db` stays gitignored (local SQLite)
+- **Testing:** Live `tests/search/` API tests remain flaky in CI
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Merge upstream into local main (not rebase) | Preserves local commit history; easier rollback | — Pending |
-| Keep `app/` as local layer on top of `fli` | Personal tracker is the reason for the fork | — Pending |
-| Skip fli-js integration this milestone | TS port is new upstream surface; Python app unchanged | — Pending |
-| Push to `personal` remote after verification | `origin` is read-only upstream | — Pending |
+| Merge upstream into local main (not rebase) | Preserve history; easy rollback | ✓ Good — tag `pre-upstream-v1.0` |
+| Keep `app/` as local layer | Personal tracker is the fork's purpose | ✓ Good — all smoke tests pass |
+| Skip fli-js integration in v1.0 | TS port new; Python app unchanged | ✓ Good — deferred to v1.1 |
+| Skip push to `personal` in v1.0 | Optional; user-controlled | ⚠️ Revisit — still 47 commits ahead |
 
 ## Evolution
 
@@ -100,5 +100,12 @@ This document evolves at phase transitions and milestone boundaries.
 3. Audit Out of Scope — reasons still valid?
 4. Update Context with current state
 
+<details>
+<summary>v1.0 milestone planning context (archived)</summary>
+
+Initial milestone goal: merge latest upstream without breaking tracker app, scripts, or customizations. Completed 2026-05-30 across 4 phases. Full roadmap: `.planning/milestones/v1.0-ROADMAP.md`.
+
+</details>
+
 ---
-*Last updated: 2026-05-30 after milestone v1.0 initialization*
+*Last updated: 2026-05-30 after v1.0 milestone completion*
