@@ -324,7 +324,10 @@ def test_display_date_results_links_dates_when_route_given():
     buf = StringIO()
     test_console = Console(file=buf, width=120, force_terminal=True)
     dates = [DatePrice(date=(datetime(2026, 7, 15),), price=299.0, currency="USD")]
-    with patch("fli.cli.utils.console", test_console):
+    with patch("fli.cli.utils.console", test_console), patch(
+        "fli.cli.utils.google_flights_url",
+        return_value="https://www.google.com/travel/flights?q=Flights+from+JFK+to+LHR",
+    ) as mock_url:
         display_date_results(
             dates,
             TripType.ONE_WAY,
@@ -332,9 +335,18 @@ def test_display_date_results_links_dates_when_route_given():
             destination="LHR",
             currency="USD",
         )
+        mock_url.assert_called_once_with(
+            "JFK",
+            "LHR",
+            "2026-07-15",
+            None,
+            currency="USD",
+            language=None,
+            country=None,
+        )
     output = buf.getvalue()
-    # Rich emits OSC-8 hyperlink escape sequences carrying the URL on a terminal.
-    assert "travel/flights" in output
+    assert "Departure dates link to Google" in output
+    assert "2026-07-15" in output
 
 
 def test_display_one_way_price_uses_returned_currency():
