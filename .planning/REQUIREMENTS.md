@@ -21,10 +21,10 @@
 
 ### App Verification
 
-- [ ] **APP-01**: FastAPI server starts (`uv run uvicorn app.server:app`)
-- [ ] **APP-02**: Flight search API returns results via `/api/search/flights`
-- [ ] **APP-03**: Tracker CRUD endpoints respond (`/api/tracker/*`)
-- [ ] **APP-04**: Hotel search still works via `hot_core.py` integration in engine
+- [x] **APP-01**: FastAPI server starts (`uv run uvicorn app.server:app`)
+- [x] **APP-02**: Flight search API returns results via `/api/search/flights`
+- [x] **APP-03**: Tracker CRUD endpoints respond (`/api/tracker/*`)
+- [x] **APP-04**: Hotel search still works via `hot_core.py` integration in engine
 
 ### Quality & Documentation
 
@@ -69,10 +69,10 @@ Deferred to later milestones.
 | LIB-02 | Phase 2 | Complete |
 | LIB-03 | Phase 2 | Complete |
 | LIB-04 | Phase 2 | Complete |
-| APP-01 | Phase 3 | Pending |
-| APP-02 | Phase 3 | Pending |
-| APP-03 | Phase 3 | Pending |
-| APP-04 | Phase 3 | Pending |
+| APP-01 | Phase 3 | Complete |
+| APP-02 | Phase 3 | Complete |
+| APP-03 | Phase 3 | Complete |
+| APP-04 | Phase 3 | Complete |
 | QA-01 | Phase 4 | Pending |
 | QA-02 | Phase 4 | Pending |
 | DOC-01 | Phase 4 | Pending |
