@@ -28,9 +28,9 @@
 
 ### Quality & Documentation
 
-- [ ] **QA-01**: `uv run pytest -vv --ignore=tests/search/` passes (239+ tests)
-- [ ] **QA-02**: `make lint` passes with no new errors
-- [ ] **DOC-01**: Merge summary recorded in `.planning/` or commit message documenting adopted upstream changes
+- [x] **QA-01**: `uv run pytest -vv --ignore=tests/search/` passes (239+ tests)
+- [x] **QA-02**: `make lint` passes with no new errors
+- [x] **DOC-01**: Merge summary recorded in `.planning/` or commit message documenting adopted upstream changes
 
 ## Future Requirements
 
@@ -73,9 +73,9 @@ Deferred to later milestones.
 | APP-02 | Phase 3 | Complete |
 | APP-03 | Phase 3 | Complete |
 | APP-04 | Phase 3 | Complete |
-| QA-01 | Phase 4 | Pending |
-| QA-02 | Phase 4 | Pending |
-| DOC-01 | Phase 4 | Pending |
+| QA-01 | Phase 4 | Complete |
+| QA-02 | Phase 4 | Complete |
+| DOC-01 | Phase 4 | Complete |
 
 **Coverage:**
 - Milestone requirements: 15 total

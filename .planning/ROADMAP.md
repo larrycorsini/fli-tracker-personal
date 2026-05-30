@@ -9,7 +9,7 @@ Merge 31 upstream commits from punitarani/fli into the personal fork, preserve t
 - [x] **Phase 1: Baseline & Merge** — Tag pre-merge state, merge upstream, resolve conflicts
 - [x] **Phase 2: Library Verification** — Confirm CLI, MCP, and engine wrappers work with merged `fli`
 - [x] **Phase 3: App Smoke Test** — Verify FastAPI tracker, search, and hotel endpoints
-- [ ] **Phase 4: Quality Gate & Ship** — Lint, tests, merge documentation, push to personal remote
+- [x] **Phase 4: Quality Gate & Ship** — Lint, tests, merge documentation, push to personal remote
 
 ## Phase Details
 
@@ -69,7 +69,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 04-01: Run lint + tests, write merge notes, commit and optionally push
+- [x] 04-01: Run lint + tests, write merge notes, commit and optionally push
 
 ## Progress
 
@@ -78,7 +78,7 @@ Plans:
 | 1. Baseline & Merge | 2/2 | Complete | 2026-05-30 |
 | 2. Library Verification | 2/2 | Complete | 2026-05-30 |
 | 3. App Smoke Test | 1/1 | Complete | 2026-05-30 |
-| 4. Quality Gate & Ship | 0/1 | Not started | - |
+| 4. Quality Gate & Ship | 1/1 | Complete | 2026-05-30 |
 
 ---
 *Roadmap created: 2026-05-30*
