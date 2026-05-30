@@ -3,7 +3,7 @@ import json
 import subprocess
 import sys
 from datetime import datetime, timedelta
-from hot_core import search_hotels_core
+from app.hotels import search_hotels_core
 
 def get_best_flight(origin, dest, depart, ret_date):
     """Uses fli to get the single cheapest nonstop flight."""

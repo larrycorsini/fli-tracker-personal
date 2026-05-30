@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHotelSort();
   initTrackerForm();
   restoreFromStorage();
+  initSavedFlightPresets();
   fetchRates();
 });
 
@@ -294,7 +295,6 @@ function initAdvancedFilters() {
   });
 }
 
-/** Wire sort / filter controls so list stays sorted as SSE results arrive */
 function initFlightResultsControls() {
   const sortEl = document.getElementById('flights-sort');
   if (sortEl) sortEl.addEventListener('change', () => renderFlights());
@@ -307,14 +307,12 @@ function initFlightResultsControls() {
 }
 
 function clearFlightFilters() {
-  const stops = document.getElementById('local-filter-stops');
-  const airline = document.getElementById('local-filter-airline');
-  const cabin = document.getElementById('local-filter-cabin');
-  const dep = document.getElementById('local-filter-departure');
-  if (stops) stops.value = 'any';
-  if (airline) airline.value = 'any';
-  if (cabin) cabin.value = 'any';
-  if (dep) dep.value = 'any';
+  ['local-filter-stops', 'local-filter-airline', 'local-filter-cabin', 'local-filter-departure'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+       el.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+    }
+  });
   renderFlights();
 }
 
@@ -352,13 +350,19 @@ function handleFlightSearch(e) {
 
   if (!origins || !destinations) { showToast('Please enter origin and destination', 'error'); return; }
 
-  // Save to Recent Searches
-  const searchParams = { origins, destinations, startDate, endDate, cabin, timestamp: Date.now() };
-  let recentSearches = JSON.parse(localStorage.getItem('recentSearches') || '[]');
-  recentSearches = recentSearches.filter(s => s.origins !== origins || s.destinations !== destinations || s.startDate !== startDate).slice(0, 4);
-  recentSearches.unshift(searchParams);
-  localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
-  renderRecentSearches();
+  const maxStops = stops;
+  const durationsVal = durations;
+  persistRecentSearch({
+    origins,
+    destinations,
+    startDate,
+    endDate,
+    cabin,
+    maxStops,
+    durations: durationsVal,
+    airline,
+    tripType: state.tripType,
+  });
 
   document.getElementById('flights-results').innerHTML = '';
   document.getElementById('flights-results-header').classList.add('hidden');
@@ -459,19 +463,19 @@ function flushFlightResultsRender() {
 }
 
 function syncAirlineFilterOptions() {
-  const airlineSelect = document.getElementById('local-filter-airline');
-  if (!airlineSelect) return;
+  const airlineGroup = document.getElementById('local-filter-airline');
+  if (!airlineGroup) return;
   const uniqueAirlines = [...new Set(state.flightResults.map(f => f.airline_name || f.airline).filter(Boolean))].sort();
   const key = uniqueAirlines.join('\0');
   if (key === state._lastAirlineOptionsKey) return;
   state._lastAirlineOptionsKey = key;
-  const currentAirline = airlineSelect.value;
-  airlineSelect.innerHTML =
-    '<option value="any">All airlines</option>' +
-    uniqueAirlines.map(a => {
-      const sel = currentAirline === a ? ' selected' : '';
-      return `<option value="${escapeAttr(a)}"${sel}>${escapeAttr(a)}</option>`;
-    }).join('');
+  
+  const currentlyChecked = Array.from(airlineGroup.querySelectorAll('input:checked')).map(cb => cb.value);
+
+  airlineGroup.innerHTML = uniqueAirlines.map(a => {
+      const checked = currentlyChecked.includes(a) ? ' checked' : '';
+      return `<label><input type="checkbox" value="${escapeAttr(a)}"${checked}> ${escapeAttr(a)}</label>`;
+  }).join('');
 }
 
 function sortFlightResultsInPlace(arr, mode) {
@@ -499,25 +503,42 @@ function renderFlights() {
 
   syncAirlineFilterOptions();
 
-  const stopsFilter = document.getElementById('local-filter-stops')?.value ?? 'any';
-  const cabinFilter = document.getElementById('local-filter-cabin')?.value ?? 'any';
-  const airlineSelect = document.getElementById('local-filter-airline');
-  const currentAirline = airlineSelect?.value ?? 'any';
-  const depWindow = document.getElementById('local-filter-departure')?.value ?? 'any';
+  const getCheckedValues = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return [];
+    return Array.from(el.querySelectorAll('input:checked')).map(cb => cb.value);
+  };
+
+  const stopsFilters = getCheckedValues('local-filter-stops');
+  const cabinFilters = getCheckedValues('local-filter-cabin');
+  const airlineFilters = getCheckedValues('local-filter-airline');
+  const depFilters = getCheckedValues('local-filter-departure');
 
   let filtered = state.flightResults.filter(f => {
-    if (stopsFilter !== 'any') {
-      const maxStops = parseInt(stopsFilter, 10);
-      if (Number.isFinite(maxStops) && (f.stops ?? 0) > maxStops) return false;
+    if (stopsFilters.length > 0) {
+      const stops = f.stops ?? 0;
+      let allowed = false;
+      if (stopsFilters.includes('0') && stops === 0) allowed = true;
+      if (stopsFilters.includes('1') && stops === 1) allowed = true;
+      if (stopsFilters.includes('2') && stops >= 2) allowed = true;
+      if (!allowed) return false;
     }
-    if (currentAirline !== 'any' && currentAirline !== '') {
+    if (airlineFilters.length > 0) {
       const name = f.airline_name || f.airline || '';
-      if (name !== currentAirline) return false;
+      if (!airlineFilters.includes(name)) return false;
     }
-    if (cabinFilter !== 'any' && cabinFilter !== '') {
-      if (f.cabin_class !== cabinFilter) return false;
+    if (cabinFilters.length > 0) {
+      if (!cabinFilters.includes(f.cabin_class)) return false;
     }
-    if (!matchesDepartureWindow(f, depWindow)) return false;
+    if (depFilters.length > 0) {
+       let matchedWindow = false;
+       for (const window of depFilters) {
+         if (matchesDepartureWindow(f, window)) {
+           matchedWindow = true; break;
+         }
+       }
+       if (!matchedWindow) return false;
+    }
     return true;
   });
 
@@ -559,8 +580,8 @@ function buildFlightCardHTML(f) {
   const allLayovers = (f.layovers || []).concat(f.return_layovers || []);
   allLayovers.forEach(lay => {
     const ap = escapeAttr(lay.airport || '');
-    if (lay.duration < 60) layoverWarnings += `<div class="card-warning">Short layover: ${lay.duration} min in ${ap}</div>`;
-    else if (lay.duration > 240) layoverWarnings += `<div class="card-warning">Long layover: ${Math.floor(lay.duration / 60)}h ${lay.duration % 60}m in ${ap}</div>`;
+    if (lay.duration < 60) layoverWarnings += `<div class="card-warning">⚠️ Short layover: ${lay.duration} min in ${ap}</div>`;
+    else if (lay.duration > 240) layoverWarnings += `<div class="card-warning">⚠️ Long layover: ${Math.floor(lay.duration / 60)}h ${lay.duration % 60}m in ${ap}</div>`;
   });
 
   // Refund eligibility badge
@@ -599,25 +620,28 @@ function buildFlightCardHTML(f) {
         <div class="card-price-level">${priceBadgeHtml}</div>
       </div>
     </div>
-    <div class="card-actions">
-        ${trackBtn}
-        <button class="btn-outline" onclick='openAddToTripModal("flight", ${trackData})'>🎒 Add to Trip</button>
-        ${f.refund_badge ? `<span class="tag tag-${f.refund_badge}">${escapeAttr(f.refund_badge_label || '')}</span>` : ''}
-    </div>
     <div class="card-details">
       ${layoverWarnings}
       <div class="card-detail-row">
-        <span>🛫 ${f.departure_time || '—'} → ${f.arrival_time || '—'}</span>
+        <span>🛫 ${formatTime(f.departure_time)} → ${formatTime(f.arrival_time)}</span>
         ${stopsLabel}
       </div>
       ${returnRow}
       <div class="card-detail-row">
-        <span class="tag tag-airline">${f.airline || 'Unknown'}</span>
+        <div class="airline-brand">
+          <img src="https://pics.avs.io/60/60/${f.airline}.png" alt="${f.airline}" class="airline-logo" onerror="this.style.display='none'">
+          <span class="tag tag-airline">${f.airline_name || f.airline || 'Unknown'}</span>
+        </div>
         ${f.cabin_class ? `<span class="tag tag-stops">${f.cabin_class.replace('_', ' ')}</span>` : ''}
         <span>${f.duration ? Math.floor(f.duration/60)+'h '+(f.duration%60)+'m' : ''}</span>
       </div>
     </div>
-    <a href="${f.url}" target="_blank" class="card-link">View on Google Flights ↗</a>
+    <div class="card-actions">
+        ${trackBtn}
+        <button class="btn-outline btn-sm" onclick='openAddToTripModal("flight", ${trackData})'>🎒 Add to Trip</button>
+        ${f.refund_badge ? `<span class="tag tag-${f.refund_badge}">${escapeAttr(f.refund_badge_label || '')}</span>` : ''}
+        <a href="${f.url}" target="_blank" class="btn-primary card-link-btn">Book Flight ↗</a>
+    </div>
   </div>`;
 }
 
@@ -745,7 +769,7 @@ function appendTripCard(d) {
       <div class="trip-segment">
         <div class="segment-label flight-label">✈️ Flight</div>
         <div class="segment-price">${formatPrice(d.flight?.price)}</div>
-        <div class="segment-detail">${d.flight?.airline || ''} · ${d.flight?.departure_time || ''} · ${d.flight?.stops === 0 ? 'Nonstop' : (d.flight?.stops || 0) + ' stop(s)'}</div>
+        <div class="segment-detail">${d.flight?.airline_name || d.flight?.airline || ''} · ${formatTime(d.flight?.departure_time)} · ${d.flight?.stops === 0 ? 'Nonstop' : (d.flight?.stops || 0) + ' stop(s)'}</div>
       </div>
       <div class="trip-segment hotel-segment">
         <div class="segment-label hotel-label">🏨 Hotel</div>
@@ -880,6 +904,23 @@ function fmtShortDate(str) {
   const [, m, d] = str.split('-');
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   return `${months[parseInt(m,10)-1]} ${parseInt(d,10)}`;
+}
+
+function formatTime(timeStr) {
+  if (!timeStr || timeStr === '—') return '—';
+  const match = timeStr.match(/^(\d{1,2}):(\d{2})(.*)$/);
+  if (!match) return timeStr;
+  let h = parseInt(match[1], 10);
+  const m = match[2];
+  const suffix = match[3] || '';
+  let ampm = 'AM';
+  if (h >= 12) {
+    if (h > 12) h -= 12;
+    ampm = 'PM';
+  } else if (h === 0) {
+    h = 12;
+  }
+  return `${h}:${m} <span class="time-ampm">${ampm}</span>${suffix}`;
 }
 
 // ── Sort ───────────────────────────────────────────────────────────────────
@@ -1258,36 +1299,185 @@ document.addEventListener('click', e => {
   if (e.target.id === 'trackModal') closeTrackModal();
 });
 
-// ── Recent Searches ────────────────────────────────────────────────────────
+// ── Saved & recent flight searches ─────────────────────────────────────────
+const FIFA_DFW_PRESET_ID = 'fifa-dfw-2026-slc-pvu';
+
+const FIFA_DFW_PRESET = {
+  id: FIFA_DFW_PRESET_ID,
+  label: 'FIFA DFW · SLC & PVU nonstop',
+  origins: 'SLC, PVU',
+  destinations: 'DFW',
+  startDate: '2026-06-29',
+  endDate: '2026-07-04',
+  durations: '2, 3',
+  maxStops: 'NON_STOP',
+  cabin: 'ECONOMY',
+  airline: '',
+  tripType: 'round_trip',
+  referenceDeals: [
+    {
+      label: 'SLC Jul 2–4 · AA/Delta ~$297',
+      book: 'https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA3LTAyIiAKA1NMQxIKMjAyNi0wNy0wMhoDREZXKgJBQTIEMTIxNGoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTA3LTA0IiAKA0RGVxIKMjAyNi0wNy0wNBoDU0xDKgJBQTIEMjA3M2oHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB&curr=USD',
+    },
+    {
+      label: 'PVU Jul 2–4 · American ~$389',
+      book: 'https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA3LTAyIiAKA1BWVRIKMjAyNi0wNy0wMhoDREZXKgJBQTIENDkxN2oHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI2LTA3LTA0IiAKA0RGVxIKMjAyNi0wNy0wNBoDUFZVKgJBQTIENDg4NmoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB&curr=USD',
+    },
+    {
+      label: 'PVU Jun 29–Jul 1 · Breeze ~$501',
+      book: 'https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTA2LTI5Ih8KA1BWVRIKMjAyNi0wNi0yORoDREZXKgJNWDIDMjE1agcIARIDUFZVcgcIARIDREZXGkASCjIwMjYtMDctMDEiIAoDREZXEgoyMDI2LTA3LTAxGgNQVlUqAkFBMgQ0OTgwagcIARIDREZXcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE&curr=USD',
+    },
+    {
+      label: 'SLC Jun 29–Jul 1 · American ~$533',
+      book: 'https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA2LTI5IiAKA1NMQxIKMjAyNi0wNi0yORoDREZXKgJBQTIEMTIxNGoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTA3LTAxIiAKA0RGVxIKMjAyNi0wNy0wMRoDU0xDKgJBQTIEMjYwN2oHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB&curr=USD',
+    },
+  ],
+};
+
+function initSavedFlightPresets() {
+  const key = 'savedFlightPresets';
+  let presets = JSON.parse(localStorage.getItem(key) || '[]');
+  if (!presets.some(p => p.id === FIFA_DFW_PRESET_ID)) {
+    presets.unshift(FIFA_DFW_PRESET);
+    localStorage.setItem(key, JSON.stringify(presets));
+  }
+  renderRecentSearches();
+}
+
+function persistRecentSearch(params) {
+  const entry = { ...params, timestamp: Date.now() };
+  let recentSearches = JSON.parse(localStorage.getItem('recentSearches') || '[]');
+  recentSearches = recentSearches.filter(s =>
+    s.origins !== entry.origins
+    || s.destinations !== entry.destinations
+    || s.startDate !== entry.startDate
+    || s.endDate !== entry.endDate
+  );
+  recentSearches.unshift(entry);
+  localStorage.setItem('recentSearches', JSON.stringify(recentSearches.slice(0, 8)));
+  renderRecentSearches();
+}
+
+function clearElement(el) {
+  while (el.firstChild) el.removeChild(el.firstChild);
+}
+
+function appendSearchChipRow(container, title, chips) {
+  const section = document.createElement('div');
+  section.className = 'recent-searches';
+
+  const heading = document.createElement('div');
+  heading.className = 'recent-searches__title';
+  heading.textContent = title;
+  section.appendChild(heading);
+
+  const row = document.createElement('div');
+  row.className = 'recent-searches__chips';
+  chips.forEach(chip => row.appendChild(chip));
+  section.appendChild(row);
+
+  container.appendChild(section);
+}
+
+function createSearchChip(label, className, onClick) {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = className;
+  btn.textContent = label;
+  btn.addEventListener('click', onClick);
+  return btn;
+}
+
 function renderRecentSearches() {
   const container = document.getElementById('recent-searches-container');
   if (!container) return;
+
+  const presets = JSON.parse(localStorage.getItem('savedFlightPresets') || '[]');
   const recentSearches = JSON.parse(localStorage.getItem('recentSearches') || '[]');
-  if (!recentSearches.length) {
-    container.innerHTML = '';
-    return;
+
+  clearElement(container);
+
+  if (!presets.length && !recentSearches.length) return;
+
+  if (presets.length) {
+    const chips = presets.map(s => createSearchChip(
+      s.label || `${s.origins} → ${s.destinations}`,
+      'recent-search-chip saved-search-chip',
+      () => applyFlightSearch(s),
+    ));
+    appendSearchChipRow(container, 'Saved searches', chips);
   }
-  let html = '<div class="recent-searches"><div class="recent-searches__title">Recent searches</div><div class="recent-searches__chips">';
-  recentSearches.forEach(s => {
-    const label = `${s.origins} → ${s.destinations} (${s.startDate})`;
-    const o = String(s.origins).replace(/'/g, "\\'");
-    const d = String(s.destinations).replace(/'/g, "\\'");
-    html += `<button type="button" class="recent-search-chip" onclick="loadRecentSearch('${o}', '${d}', '${s.startDate}', '${s.endDate}', '${s.cabin}')">${label}</button>`;
+
+  if (recentSearches.length) {
+    const chips = recentSearches.map(s => createSearchChip(
+      `${s.origins} → ${s.destinations} (${s.startDate})`,
+      'recent-search-chip',
+      () => applyFlightSearch(s),
+    ));
+    appendSearchChipRow(container, 'Recent searches', chips);
+  }
+}
+
+function renderReferenceDeals(preset) {
+  const container = document.getElementById('recent-searches-container');
+  if (!container || !preset?.referenceDeals?.length) return;
+
+  const existing = container.querySelector('.reference-deals');
+  if (existing) existing.remove();
+
+  const block = document.createElement('div');
+  block.className = 'reference-deals';
+
+  const heading = document.createElement('div');
+  heading.className = 'recent-searches__title';
+  heading.textContent = 'Reference fares (from last CLI search)';
+  block.appendChild(heading);
+
+  const list = document.createElement('ul');
+  list.className = 'reference-deals__list';
+
+  preset.referenceDeals.forEach(d => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = d.book;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.textContent = d.label;
+    li.appendChild(a);
+    list.appendChild(li);
   });
-  html += '</div></div>';
-  container.innerHTML = html;
+
+  block.appendChild(list);
+  container.appendChild(block);
 }
 
+function applyFlightSearch(s) {
+  document.getElementById('f-origins').value = s.origins || '';
+  document.getElementById('f-destinations').value = s.destinations || '';
+  document.getElementById('f-start').value = s.startDate || '';
+  if (document.getElementById('f-end')) document.getElementById('f-end').value = s.endDate || '';
+  if (document.getElementById('f-cabin')) document.getElementById('f-cabin').value = s.cabin || 'ECONOMY';
+  if (document.getElementById('f-stops') && s.maxStops) document.getElementById('f-stops').value = s.maxStops;
+  if (document.getElementById('f-durations') && s.durations) document.getElementById('f-durations').value = s.durations;
+  if (document.getElementById('f-airline') && s.airline != null) document.getElementById('f-airline').value = s.airline;
+
+  if (s.tripType) {
+    state.tripType = s.tripType;
+    document.querySelectorAll('.trip-type-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.trip === s.tripType);
+    });
+    updateFlightFormForTripType();
+  }
+
+  renderReferenceDeals(s);
+  showToast(s.label ? `Loaded: ${s.label}` : 'Loaded saved search', 'success');
+  document.getElementById('flightsForm').dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+}
+
+/** @deprecated use applyFlightSearch — kept for any inline handlers */
 function loadRecentSearch(origins, destinations, startDate, endDate, cabin) {
-  document.getElementById('f-origins').value = origins;
-  document.getElementById('f-destinations').value = destinations;
-  document.getElementById('f-start').value = startDate;
-  if (document.getElementById('f-end')) document.getElementById('f-end').value = endDate;
-  if (document.getElementById('f-cabin')) document.getElementById('f-cabin').value = cabin;
-  document.getElementById('flightsForm').dispatchEvent(new Event('submit'));
+  applyFlightSearch({ origins, destinations, startDate, endDate, cabin, maxStops: 'ANY', durations: '5, 7', tripType: 'round_trip' });
 }
-
-document.addEventListener('DOMContentLoaded', renderRecentSearches);
 
 
 function fmtRelative(iso) {
@@ -1566,12 +1756,23 @@ async function saveToTrip() {
 }
 
 function trackCurrentSearch() {
-  const origins = document.getElementById('f-origins').value;
-  const destinations = document.getElementById('f-destinations').value;
-  const start = document.getElementById('f-start').value;
-  const end = document.getElementById('f-end').value;
-  const tripType = state.tripType;
-
-  // Simple alert for now, in a real app this would save to a database
-  alert(`Price alert set for ${origins} to ${destinations} (${start} to ${end})! We'll notify you if prices drop.`);
+  if (!state.flightResults || state.flightResults.length === 0) {
+    showToast('No flights to track. Please run a search first.', 'error');
+    return;
+  }
+  
+  // Find cheapest flight
+  let cheapest = state.flightResults.reduce((min, f) => (flightPriceNum(f) < flightPriceNum(min) ? f : min), state.flightResults[0]);
+  
+  const trackData = {
+    origin: cheapest.origin || document.getElementById('f-origins').value,
+    destination: cheapest.destination || document.getElementById('f-destinations').value,
+    depart_date: cheapest.depart_date || document.getElementById('f-start').value,
+    return_date: cheapest.return_date || document.getElementById('f-end').value,
+    airline: cheapest.airline_name || cheapest.airline || '',
+    price: cheapest.price,
+    cabin_class: cheapest.cabin_class || 'ECONOMY'
+  };
+  
+  openTrackModal(trackData);
 }

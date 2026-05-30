@@ -35,3 +35,19 @@ workflows for the full process.
 
 - The MCP HTTP endpoint requires `Accept: application/json, text/event-stream` header.
 - The `fli/server/` module has been removed from the codebase.
+
+## Learned User Preferences
+
+- When recommending flights, always include clickable booking links: per-itinerary `booking_url` from `fli flights --format json` (deep link), plus top-level search `booking_url` when useful. Never list fares without a buy link.
+- Model the tracker web UI after Google Flights: clear layout, readable typography, accessible controls, and familiar search/filter flow.
+- Do not auto-push to the `personal` remote; wait for explicit user approval before publishing fork changes.
+- Use `uv` on PATH in scripts and subprocess calls — avoid hardcoded absolute paths to a local `uv` binary.
+
+## Learned Workspace Facts
+
+- Personal fork of [punitarani/fli](https://github.com/punitarani/fli) extended with a FastAPI price-tracker in `app/`, hotel search, and local trip-planning scripts.
+- Git remotes: `origin` → upstream `punitarani/fli`; `personal` → `larrycorsini/fli-tracker-personal`.
+- `hot_core.py` at the repo root is imported via a `sys.path` hack; planned refactor moves it to `app/hotels.py`.
+- Upstream can return `FlightResult` entries with `price=None`; `app/engine.py` must skip or safely sort unpriced rows.
+- Tracker app entry point: `uv run uvicorn app.server:app --reload`; flight search streams via SSE at `/api/search/flights`.
+- Local SQLite tracker data lives in `app/data/tracker.db` and stays gitignored.

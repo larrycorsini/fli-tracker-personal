@@ -6,33 +6,33 @@
 
 /* ── Design Tokens ───────────────────────────────────────────────────────── */
 :root {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8f9fa;
-    --bg-surface: #ffffff;
-    --bg-surface-hover: #f1f3f4;
-    --bg-input: #ffffff;
-    --border: #dadce0;
-    --border-hover: #bdc1c6;
-    --border-focus: #1a73e8;
+    --bg-primary: #0b0f19;
+    --bg-secondary: #131b2f;
+    --bg-surface: rgba(19, 27, 47, 0.7);
+    --bg-surface-hover: rgba(25, 35, 60, 0.8);
+    --bg-input: rgba(11, 15, 25, 0.6);
+    --border: rgba(255, 255, 255, 0.1);
+    --border-hover: rgba(255, 255, 255, 0.2);
+    --border-focus: #4f46e5;
 
-    --accent: #1a73e8;
-    --accent-soft: rgba(26, 115, 232, 0.15);
-    --accent-hover: #174ea6;
-    --accent-glow: rgba(26, 115, 232, 0.25);
+    --accent: #4f46e5;
+    --accent-soft: rgba(79, 70, 229, 0.15);
+    --accent-hover: #6366f1;
+    --accent-glow: rgba(79, 70, 229, 0.4);
 
-    --success: #188038;
-    --success-soft: rgba(24, 128, 56, 0.15);
-    --warning: #f29900;
-    --warning-soft: rgba(242, 153, 0, 0.15);
-    --error: #d93025;
-    --error-soft: rgba(217, 48, 37, 0.15);
-    --info: #1a73e8;
-    --info-soft: rgba(26, 115, 232, 0.15);
+    --success: #10b981;
+    --success-soft: rgba(16, 185, 129, 0.15);
+    --warning: #f59e0b;
+    --warning-soft: rgba(245, 158, 11, 0.15);
+    --error: #ef4444;
+    --error-soft: rgba(239, 68, 68, 0.15);
+    --info: #3b82f6;
+    --info-soft: rgba(59, 130, 246, 0.15);
 
-    --text-primary: #202124;
-    --text-secondary: #5f6368;
-    --text-muted: #70757a;
-    --bg-glass: #f1f3f4;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --bg-glass: rgba(19, 27, 47, 0.55);
 
     --radius-sm: 4px;
     --radius-md: 8px;
@@ -152,6 +152,34 @@ body {
     padding: 8px 12px;
     border-radius: 999px;
     transition: var(--transition);
+}
+
+.saved-search-chip {
+    border-color: var(--accent);
+    font-weight: 600;
+}
+
+.reference-deals {
+    margin-top: 12px;
+    padding: 12px 14px;
+    border-radius: var(--radius-md, 8px);
+    border: 1px solid var(--border);
+    background: var(--bg-secondary);
+}
+
+.reference-deals__list {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.85rem;
+}
+
+.reference-deals__list a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.reference-deals__list a:hover {
+    text-decoration: underline;
 }
 
 .recent-search-chip:hover {
@@ -844,11 +872,44 @@ select option {
 .card-link:hover { color: var(--accent-hover); }
 
 .card-warning {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 500;
   color: var(--warning);
   background: var(--warning-soft);
+  border: 1px solid rgba(245, 158, 11, 0.3);
   border-radius: var(--radius-sm);
-  padding: 6px 10px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.airline-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.airline-logo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  border-radius: 4px;
+  background: white;
+  padding: 2px;
+}
+
+.time-ampm {
+  font-size: 0.8em;
+  color: var(--text-muted);
+}
+
+.card-link-btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
 }
 
 /* Google Flights–style search & results */
@@ -1640,10 +1701,11 @@ select option {
 .card-actions {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
+    flex-wrap: wrap;
     gap: 8px;
     margin-top: auto;
-    padding-top: 8px;
+    padding-top: 12px;
     border-top: 1px solid var(--border);
 }
 

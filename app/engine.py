@@ -39,13 +39,7 @@ _hotels_core = None
 def _get_hotels_core():
     global _hotels_core
     if _hotels_core is None:
-        import sys
-        import os
-        # Ensure project root is on path for hot_core import
-        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        if root not in sys.path:
-            sys.path.insert(0, root)
-        from hot_core import search_hotels_core
+        from app.hotels import search_hotels_core
         _hotels_core = search_hotels_core
     return _hotels_core
 

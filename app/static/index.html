@@ -159,38 +159,34 @@
                     <p class="gf-filter-hint">Narrow the list by stops, airline, cabin, or departure time of the outbound leg.</p>
                     <div class="gf-filter-grid">
                         <div class="gf-filter-item">
-                            <label class="gf-field-label" for="local-filter-stops">Stops</label>
-                            <select id="local-filter-stops" class="gf-select">
-                                <option value="any">Any</option>
-                                <option value="0">Nonstop only</option>
-                                <option value="1">1 stop or fewer</option>
-                                <option value="2">2 stops or fewer</option>
-                            </select>
+                            <label class="gf-field-label">Stops</label>
+                            <div id="local-filter-stops" class="checkbox-group">
+                                <label><input type="checkbox" value="0"> Nonstop</label>
+                                <label><input type="checkbox" value="1"> 1 stop</label>
+                                <label><input type="checkbox" value="2"> 2+ stops</label>
+                            </div>
                         </div>
                         <div class="gf-filter-item">
-                            <label class="gf-field-label" for="local-filter-airline">Airline</label>
-                            <select id="local-filter-airline" class="gf-select">
-                                <option value="any">All airlines</option>
-                            </select>
+                            <label class="gf-field-label">Airline</label>
+                            <div id="local-filter-airline" class="checkbox-group">
+                            </div>
                         </div>
                         <div class="gf-filter-item">
-                            <label class="gf-field-label" for="local-filter-cabin">Cabin</label>
-                            <select id="local-filter-cabin" class="gf-select">
-                                <option value="any">All cabins</option>
-                                <option value="ECONOMY">Economy</option>
-                                <option value="PREMIUM_ECONOMY">Premium economy</option>
-                                <option value="BUSINESS">Business</option>
-                                <option value="FIRST">First</option>
-                            </select>
+                            <label class="gf-field-label">Cabin</label>
+                            <div id="local-filter-cabin" class="checkbox-group">
+                                <label><input type="checkbox" value="ECONOMY"> Economy</label>
+                                <label><input type="checkbox" value="PREMIUM_ECONOMY"> Premium economy</label>
+                                <label><input type="checkbox" value="BUSINESS"> Business</label>
+                                <label><input type="checkbox" value="FIRST"> First</label>
+                            </div>
                         </div>
                         <div class="gf-filter-item">
-                            <label class="gf-field-label" for="local-filter-departure">Leave time</label>
-                            <select id="local-filter-departure" class="gf-select">
-                                <option value="any">Any time</option>
-                                <option value="morning">Morning (before noon)</option>
-                                <option value="afternoon">Afternoon (noon–5pm)</option>
-                                <option value="evening">Evening (after 5pm)</option>
-                            </select>
+                            <label class="gf-field-label">Leave time</label>
+                            <div id="local-filter-departure" class="checkbox-group">
+                                <label><input type="checkbox" value="morning"> Morning (before noon)</label>
+                                <label><input type="checkbox" value="afternoon"> Afternoon (noon–5pm)</label>
+                                <label><input type="checkbox" value="evening"> Evening (after 5pm)</label>
+                            </div>
                         </div>
                         <div class="gf-filter-actions">
                             <button type="button" class="btn-text" id="btn-clear-flight-filters">Clear filters</button>
@@ -535,6 +531,6 @@
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <script src="/static/app.js"></script>
+    <script src="/static/app.js?v=20260530-saved-search"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 import sys
 import argparse
 from datetime import datetime, timedelta
-from hot_core import search_hotels_core
+from app.hotels import search_hotels_core
 
 def main():
     parser = argparse.ArgumentParser(description="Google Hotels CLI Search (Native)")

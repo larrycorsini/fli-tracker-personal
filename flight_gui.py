@@ -8,7 +8,7 @@ from socketserver import ThreadingMixIn
 from datetime import datetime, timedelta
 import threading
 from concurrent.futures import ThreadPoolExecutor
-from hot_core import search_hotels_core
+from app.hotels import search_hotels_core
 
 # Load airport mapping for destination city searches
 AIRPORT_CITY_MAP = {}

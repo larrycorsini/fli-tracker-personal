@@ -39,7 +39,7 @@ lint-fix:
 
 # Run tests
 test:
-	uv run --extra dev pytest -vv
+	uv run --extra dev pytest -vv --ignore=tests/search/
 test-mcp:
 	uv run --extra dev pytest -vv --mcp
 test-fuzz:

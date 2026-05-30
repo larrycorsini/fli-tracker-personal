@@ -1,5 +1,5 @@
 from fastmcp import FastMCP
-from hot_core import search_hotels_core
+from app.hotels import search_hotels_core
 
 app = FastMCP("Google Hotels Search")
 
