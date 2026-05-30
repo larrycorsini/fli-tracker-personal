@@ -447,6 +447,7 @@ async def stream_flight_search(
     cabin_class: str = "ECONOMY",
     airline_filter: str | None = None,
     trip_type: str = "round_trip",
+    departure_days: list[int] | None = None,
 ) -> AsyncGenerator[dict, None]:
     """Stream flight results as SSE events for multiple origin/dest/date combos.
 
@@ -470,30 +471,32 @@ async def stream_flight_search(
                     # One-way: search each date in range
                     curr = start_dt
                     while curr <= end_dt:
-                        trips.append({
-                            "origin": orig.strip().upper(),
-                            "destination": dest.strip().upper(),
-                            "depart": curr.strftime("%Y-%m-%d"),
-                            "return": None,
-                            "cabin": cabin,
-                            "label": f"{orig}→{dest} ({curr.strftime('%b %d')}) [{cabin}]",
-                        })
+                        if departure_days is None or curr.weekday() in departure_days:
+                            trips.append({
+                                "origin": orig.strip().upper(),
+                                "destination": dest.strip().upper(),
+                                "depart": curr.strftime("%Y-%m-%d"),
+                                "return": None,
+                                "cabin": cabin,
+                                "label": f"{orig}→{dest} ({curr.strftime('%b %d')}) [{cabin}]",
+                            })
                         curr += timedelta(days=1)
                 else:
                     # Round-trip: each date × each duration
                     for dur in durations:
                         curr = start_dt
                         while curr <= end_dt:
-                            ret_dt = curr + timedelta(days=dur)
-                            if ret_dt <= end_dt + timedelta(days=max(durations)):
-                                trips.append({
-                                    "origin": orig.strip().upper(),
-                                    "destination": dest.strip().upper(),
-                                    "depart": curr.strftime("%Y-%m-%d"),
-                                    "return": ret_dt.strftime("%Y-%m-%d"),
-                                    "cabin": cabin,
-                                    "label": f"{orig}→{dest} ({curr.strftime('%b %d')}, {dur}d) [{cabin}]",
-                                })
+                            if departure_days is None or curr.weekday() in departure_days:
+                                ret_dt = curr + timedelta(days=dur)
+                                if ret_dt <= end_dt + timedelta(days=max(durations)):
+                                    trips.append({
+                                        "origin": orig.strip().upper(),
+                                        "destination": dest.strip().upper(),
+                                        "depart": curr.strftime("%Y-%m-%d"),
+                                        "return": ret_dt.strftime("%Y-%m-%d"),
+                                        "cabin": cabin,
+                                        "label": f"{orig}→{dest} ({curr.strftime('%b %d')}, {dur}d) [{cabin}]",
+                                    })
                             curr += timedelta(days=1)
 
     total = len(trips)

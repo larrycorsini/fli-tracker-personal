@@ -362,6 +362,7 @@ function handleFlightSearch(e) {
     durations: durationsVal,
     airline,
     tripType: state.tripType,
+    departureDays
   });
 
   document.getElementById('flights-results').innerHTML = '';
@@ -394,7 +395,7 @@ function handleFlightSearch(e) {
   setSearching(true, 'Starting flight search...');
   setBtn('flightsBtn', true, 'Searching…');
 
-  const params = new URLSearchParams({ origins, destinations, start_date: startDate, end_date: endDate, durations, max_stops: stops, cabin_class: cabin, airline, trip_type: state.tripType });
+  const params = new URLSearchParams({ origins, destinations, start_date: startDate, end_date: endDate, durations: durationsVal, max_stops: stops, cabin_class: cabin, airline, trip_type: state.tripType, departure_days: departureDays });
   const es = new EventSource(`/api/search/flights?${params}`);
   state.eventSource = es;
 
@@ -1304,12 +1305,13 @@ const FIFA_DFW_PRESET_ID = 'fifa-dfw-2026-slc-pvu';
 
 const FIFA_DFW_PRESET = {
   id: FIFA_DFW_PRESET_ID,
-  label: 'FIFA DFW · Thu-Sat 3-day trip',
+  label: 'FIFA DFW · June/July Thu-Sat trips',
   origins: 'SLC, PVU',
   destinations: 'DFW',
-  startDate: '2026-07-02', // Thursday
-  endDate: '2026-07-02',   // Thursday
-  durations: '2',          // 2 nights = returning Saturday (Thu, Fri, Sat)
+  startDate: '2026-06-25', 
+  endDate: '2026-07-04',   
+  durations: '2',          // 2 nights = returning Saturday
+  departureDays: '3',      // 3 = Thursday (0=Mon)
   maxStops: 'NON_STOP',
   cabin: 'ECONOMY',
   airline: '',
@@ -1460,6 +1462,7 @@ function applyFlightSearch(s) {
   if (document.getElementById('f-stops') && s.maxStops) document.getElementById('f-stops').value = s.maxStops;
   if (document.getElementById('f-durations') && s.durations) document.getElementById('f-durations').value = s.durations;
   if (document.getElementById('f-airline') && s.airline != null) document.getElementById('f-airline').value = s.airline;
+  if (document.getElementById('f-dep-days') && s.departureDays != null) document.getElementById('f-dep-days').value = s.departureDays;
 
   if (s.tripType) {
     state.tripType = s.tripType;

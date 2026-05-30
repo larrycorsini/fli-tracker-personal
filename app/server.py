@@ -134,6 +134,7 @@ async def search_flights_sse(request: Request,
     cabin_class: str = Query("ECONOMY"),
     airline: str = Query(""),
     trip_type: str = Query("round_trip"),
+    departure_days: str = Query(""),
 ):
     """Stream flight search results via SSE."""
     origin_list = [o.strip().upper() for o in origins.split(",") if o.strip()]
@@ -146,6 +147,8 @@ async def search_flights_sse(request: Request,
 
     if not dur_list:
         dur_list = [5]
+        
+    dep_days_list = [int(d.strip()) for d in departure_days.split(",") if d.strip()] if departure_days else None
 
     async def event_generator():
         async for event in stream_flight_search(
@@ -158,6 +161,7 @@ async def search_flights_sse(request: Request,
             cabin_class=cabin_class,
             airline_filter=airline if airline else None,
             trip_type=trip_type,
+            departure_days=dep_days_list,
         ):
             if await request.is_disconnected():
                 break
