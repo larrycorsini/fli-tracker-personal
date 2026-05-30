@@ -6,7 +6,7 @@ Merge 31 upstream commits from punitarani/fli into the personal fork, preserve t
 
 ## Phases
 
-- [ ] **Phase 1: Baseline & Merge** — Tag pre-merge state, merge upstream, resolve conflicts
+- [x] **Phase 1: Baseline & Merge** — Tag pre-merge state, merge upstream, resolve conflicts
 - [ ] **Phase 2: Library Verification** — Confirm CLI, MCP, and engine wrappers work with merged `fli`
 - [ ] **Phase 3: App Smoke Test** — Verify FastAPI tracker, search, and hotel endpoints
 - [ ] **Phase 4: Quality Gate & Ship** — Lint, tests, merge documentation, push to personal remote
@@ -25,8 +25,8 @@ Merge 31 upstream commits from punitarani/fli into the personal fork, preserve t
 **Plans**: 2 plans
 
 Plans:
-- [ ] 01-01: Record baseline, fetch upstream, dry-run merge analysis
-- [ ] 01-02: Execute merge, resolve conflicts (expect clean auto-merge on pyproject.toml/uv.lock), sync deps
+- [x] 01-01: Record baseline, fetch upstream, dry-run merge analysis
+- [x] 01-02: Execute merge, resolve conflicts (expect clean auto-merge on pyproject.toml/uv.lock), sync deps
 
 ### Phase 2: Library Verification
 **Goal**: Confirm merged `fli` package works for all entry points
@@ -75,7 +75,7 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Baseline & Merge | 0/2 | Not started | - |
+| 1. Baseline & Merge | 2/2 | Complete | 2026-05-30 |
 | 2. Library Verification | 0/2 | Not started | - |
 | 3. App Smoke Test | 0/1 | Not started | - |
 | 4. Quality Gate & Ship | 0/1 | Not started | - |

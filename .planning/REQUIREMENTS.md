@@ -7,10 +7,10 @@
 
 ### Merge & Integration
 
-- [ ] **MERGE-01**: Upstream `origin/main` is merged into local `main` with a merge commit
-- [ ] **MERGE-02**: All local-only paths remain present after merge (`app/`, `hot_core.py`, root scripts)
-- [ ] **MERGE-03**: `pyproject.toml` and `uv.lock` resolve correctly with both upstream and local dependencies
-- [ ] **MERGE-04**: No unresolved git merge conflicts remain
+- [x] **MERGE-01**: Upstream `origin/main` is merged into local `main` with a merge commit
+- [x] **MERGE-02**: All local-only paths remain present after merge (`app/`, `hot_core.py`, root scripts)
+- [x] **MERGE-03**: `pyproject.toml` and `uv.lock` resolve correctly with both upstream and local dependencies
+- [x] **MERGE-04**: No unresolved git merge conflicts remain
 
 ### Library Compatibility
 
@@ -61,10 +61,10 @@ Deferred to later milestones.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| MERGE-01 | Phase 1 | Pending |
-| MERGE-02 | Phase 1 | Pending |
-| MERGE-03 | Phase 1 | Pending |
-| MERGE-04 | Phase 1 | Pending |
+| MERGE-01 | Phase 1 | Complete |
+| MERGE-02 | Phase 1 | Complete |
+| MERGE-03 | Phase 1 | Complete |
+| MERGE-04 | Phase 1 | Complete |
 | LIB-01 | Phase 2 | Pending |
 | LIB-02 | Phase 2 | Pending |
 | LIB-03 | Phase 2 | Pending |
