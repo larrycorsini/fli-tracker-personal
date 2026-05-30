@@ -58,7 +58,7 @@ async def _background_price_checker():
             await asyncio.sleep(BG_CHECK_INTERVAL)
             logger.info("Background price check starting...")
             db = _get_db()
-            loop = asyncio.get_event_loop()
+            loop = asyncio.get_running_loop()
             result = await loop.run_in_executor(None, check_all_flights, db)
             logger.info(
                 f"Background check complete: {result['checked']} checked, "
@@ -330,7 +330,7 @@ async def tracker_list():
 async def tracker_check_one(flight_id: int):
     """Force re-check price for one tracked flight."""
     db = _get_db()
-    loop = asyncio.get_event_loop()
+    loop = asyncio.get_running_loop()
     result = await loop.run_in_executor(None, check_flight_price, db, flight_id)
     if result:
         return JSONResponse({"success": True, "flight": result})
@@ -341,7 +341,7 @@ async def tracker_check_one(flight_id: int):
 async def tracker_check_all():
     """Re-check prices for all actively tracked flights."""
     db = _get_db()
-    loop = asyncio.get_event_loop()
+    loop = asyncio.get_running_loop()
     result = await loop.run_in_executor(None, check_all_flights, db)
     return JSONResponse({"success": True, **result})
 

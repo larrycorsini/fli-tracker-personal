@@ -396,7 +396,7 @@ async def search_flights_async(
     airline_filter: str | None = None,
 ) -> list[dict]:
     """Async wrapper — runs sync flight search in thread pool."""
-    loop = asyncio.get_event_loop()
+    loop = asyncio.get_running_loop()
     return await loop.run_in_executor(
         _executor,
         _search_flights_sync,
@@ -415,7 +415,7 @@ async def search_dates_async(
     max_stops: str = "ANY",
 ) -> list[dict]:
     """Async wrapper — runs sync date search in thread pool."""
-    loop = asyncio.get_event_loop()
+    loop = asyncio.get_running_loop()
     return await loop.run_in_executor(
         _executor,
         _search_dates_sync,
@@ -426,7 +426,7 @@ async def search_dates_async(
 
 async def search_hotels_async(city: str, checkin: str, checkout: str) -> list[dict]:
     """Async wrapper — runs sync hotel search in thread pool."""
-    loop = asyncio.get_event_loop()
+    loop = asyncio.get_running_loop()
     return await loop.run_in_executor(
         _executor,
         _search_hotels_sync,
