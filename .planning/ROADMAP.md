@@ -7,7 +7,7 @@ Merge 31 upstream commits from punitarani/fli into the personal fork, preserve t
 ## Phases
 
 - [x] **Phase 1: Baseline & Merge** — Tag pre-merge state, merge upstream, resolve conflicts
-- [ ] **Phase 2: Library Verification** — Confirm CLI, MCP, and engine wrappers work with merged `fli`
+- [x] **Phase 2: Library Verification** — Confirm CLI, MCP, and engine wrappers work with merged `fli`
 - [ ] **Phase 3: App Smoke Test** — Verify FastAPI tracker, search, and hotel endpoints
 - [ ] **Phase 4: Quality Gate & Ship** — Lint, tests, merge documentation, push to personal remote
 
@@ -40,8 +40,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: Smoke-test CLI and MCP after merge
-- [ ] 02-02: Fix any `app/engine.py` breakages from upstream API changes
+- [x] 02-01: Smoke-test CLI and MCP after merge
+- [x] 02-02: Fix any `app/engine.py` breakages from upstream API changes
 
 ### Phase 3: App Smoke Test
 **Goal**: Verify the personal tracker web app still works end-to-end
@@ -76,7 +76,7 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Baseline & Merge | 2/2 | Complete | 2026-05-30 |
-| 2. Library Verification | 0/2 | Not started | - |
+| 2. Library Verification | 2/2 | Complete | 2026-05-30 |
 | 3. App Smoke Test | 0/1 | Not started | - |
 | 4. Quality Gate & Ship | 0/1 | Not started | - |
 

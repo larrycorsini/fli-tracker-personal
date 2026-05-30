@@ -14,10 +14,10 @@
 
 ### Library Compatibility
 
-- [ ] **LIB-01**: `fli` CLI commands run successfully (`uv run fli flights JFK LAX 2026-06-15 --format json`)
-- [ ] **LIB-02**: MCP server starts without import errors (`uv run fli-mcp` smoke test)
-- [ ] **LIB-03**: `app/engine.py` flight and date search wrappers work with post-merge `fli/search/` API
-- [ ] **LIB-04**: Upstream booking link support is available in Python library (verify `fli/core/links.py` present)
+- [x] **LIB-01**: `fli` CLI commands run successfully (`uv run fli flights JFK LAX 2026-06-15 --format json`)
+- [x] **LIB-02**: MCP server starts without import errors (`uv run fli-mcp` smoke test)
+- [x] **LIB-03**: `app/engine.py` flight and date search wrappers work with post-merge `fli/search/` API
+- [x] **LIB-04**: Upstream booking link support is available in Python library (verify `fli/core/links.py` present)
 
 ### App Verification
 
@@ -65,10 +65,10 @@ Deferred to later milestones.
 | MERGE-02 | Phase 1 | Complete |
 | MERGE-03 | Phase 1 | Complete |
 | MERGE-04 | Phase 1 | Complete |
-| LIB-01 | Phase 2 | Pending |
-| LIB-02 | Phase 2 | Pending |
-| LIB-03 | Phase 2 | Pending |
-| LIB-04 | Phase 2 | Pending |
+| LIB-01 | Phase 2 | Complete |
+| LIB-02 | Phase 2 | Complete |
+| LIB-03 | Phase 2 | Complete |
+| LIB-04 | Phase 2 | Complete |
 | APP-01 | Phase 3 | Pending |
 | APP-02 | Phase 3 | Pending |
 | APP-03 | Phase 3 | Pending |
