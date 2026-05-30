@@ -42,7 +42,17 @@ fli flights JFK LHR 2026-06-01 \
     --stops NON_STOP          # Non-stop flights only
 ```
 
-4. Find cheapest dates:
+4. Search with alliance / exclusion / locale filters:
+
+```bash
+fli flights JFK LHR 2026-06-01 \
+    --alliance ONEWORLD \           # Limit to Oneworld members
+    --exclude-airlines AA \         # …but skip American
+    --min-layover 90 --max-layover 360 \
+    --currency EUR --language en-GB --country GB
+```
+
+6. Find cheapest dates:
 
 ```bash
 fli dates JFK LHR --from 2026-06-01 --to 2026-06-30
@@ -52,7 +62,7 @@ fli dates JFK LHR --from 2026-06-01 --to 2026-06-30
     `--format json` is experimental.
     The JSON schema is intended for agents and tools such as `jq`, but it may evolve in future releases.
 
-5. Return machine-readable JSON:
+7. Return machine-readable JSON:
 
 ```bash
 fli flights JFK LHR 2026-06-01 --format json
@@ -71,7 +81,7 @@ fli-mcp
 fli-mcp-http
 ```
 
-See the [MCP Guide](mcp.md) for detailed configuration.
+See the [MCP Guide](../guides/mcp.md) for detailed configuration.
 
 ### Python API
 
@@ -193,17 +203,18 @@ for date_price in results:
 
 ### Running Complete Examples
 
-All the above code snippets are available as complete, runnable examples in the `examples/` directory:
+All the above code snippets are available as complete, runnable examples in the
+[`examples/python/`](https://github.com/punitarani/fli/tree/main/examples/python) directory:
 
 ```bash
 # Run examples with uv (recommended)
-uv run python examples/basic_one_way_search.py
-uv run python examples/round_trip_search.py
-uv run python examples/date_range_search.py
+uv run python examples/python/basic_one_way_search.py
+uv run python examples/python/round_trip_search.py
+uv run python examples/python/date_range_search.py
 
 # Or install dependencies first
 pip install pydantic curl_cffi httpx
-python examples/basic_one_way_search.py
+python examples/python/basic_one_way_search.py
 ```
 
 **Available Example Files:**
@@ -220,11 +231,13 @@ python examples/basic_one_way_search.py
 * `error_handling_with_retries.py` - Robust error handling example
 * `result_processing.py` - Data analysis with pandas
 
-> 💡 **Tip**: Examples include automatic dependency checking and will guide you through installation if dependencies are missing.
+> 💡 **Tip**: Each example is self-contained — change the airports, dates, and
+> filters at the top of the script to fit your search.
 
 ## Next Steps
 
-* Check out the [API Reference](../api/models.md) for detailed documentation
-* See [Advanced Examples](../examples/advanced.md) for more complex use cases
-* Read the [MCP Guide](mcp.md) for AI assistant integration
-* Read about [Rate Limiting and Error Handling](../api/search.md#http-client)
+* Check out the [API Reference](api/models.md) for detailed documentation
+* See [Advanced Examples](examples.md) for more complex use cases
+* Read the [MCP Guide](../guides/mcp.md) for AI assistant integration
+* Read about [Rate Limiting and Error Handling](api/search.md#http-client)
+* Using TypeScript? See the [TypeScript Quick Start](../typescript/quickstart.md)

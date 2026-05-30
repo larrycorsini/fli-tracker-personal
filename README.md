@@ -1,5 +1,7 @@
 # 🛫 Fli - Flight Search MCP Server and Library
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/punitarani/fli)
+
 A powerful Python library that provides programmatic access to Google Flights data with an elegant CLI interface. Search
 flights, find the best deals, and filter results with ease.
 
@@ -25,7 +27,7 @@ fli-mcp
 fli-mcp-http  # serves at http://127.0.0.1:8000/mcp/
 ```
 
-![MCP Demo](https://github.com/punitarani/fli/blob/main/data/mcp-demo.gif)
+![MCP Demo](https://raw.githubusercontent.com/punitarani/fli/main/docs/assets/mcp-demo.gif)
 
 ### Connecting to Claude Desktop
 
@@ -53,35 +55,51 @@ The MCP server provides two main tools:
 
 #### `search_flights` Parameters
 
-| Parameter          | Type   | Description                                         |
-|--------------------|--------|-----------------------------------------------------|
-| `origin`           | string | Departure airport IATA code (e.g., 'JFK')           |
-| `destination`      | string | Arrival airport IATA code (e.g., 'LHR')             |
-| `departure_date`   | string | Travel date in YYYY-MM-DD format                    |
-| `return_date`      | string | Return date for round trips (optional)              |
-| `cabin_class`      | string | ECONOMY, PREMIUM_ECONOMY, BUSINESS, or FIRST        |
-| `max_stops`        | string | ANY, NON_STOP, ONE_STOP, or TWO_PLUS_STOPS          |
-| `departure_window` | string | Time window in 'HH-HH' format (e.g., '6-20')        |
-| `airlines`         | list   | Filter by airline codes (e.g., ['BA', 'AA'])        |
-| `sort_by`          | string | CHEAPEST, DURATION, DEPARTURE_TIME, or ARRIVAL_TIME |
-| `passengers`       | int    | Number of adult passengers                          |
+| Parameter           | Type   | Description                                                 |
+|---------------------|--------|-------------------------------------------------------------|
+| `origin`            | string | Departure airport IATA code(s) — comma-separated for multi  |
+| `destination`       | string | Arrival airport IATA code(s) — comma-separated for multi    |
+| `departure_date`    | string | Travel date in YYYY-MM-DD format                            |
+| `return_date`       | string | Return date for round trips (optional)                      |
+| `cabin_class`       | string | ECONOMY, PREMIUM_ECONOMY, BUSINESS, or FIRST                |
+| `max_stops`         | string | ANY, NON_STOP, ONE_STOP, or TWO_PLUS_STOPS                  |
+| `departure_window`  | string | Time window in 'HH-HH' format (e.g., '6-20')                |
+| `airlines`          | list   | Filter by airline codes (e.g., ['BA', 'AA'])                |
+| `exclude_airlines`  | list   | Airline IATA codes to **exclude** (e.g., ['DL', 'B6'])      |
+| `alliance`          | list   | Restrict to alliances: ONEWORLD, SKYTEAM, STAR_ALLIANCE     |
+| `exclude_alliance`  | list   | Alliance names to **exclude** from results                  |
+| `min_layover`       | int    | Minimum layover duration in minutes (multi-stop only)       |
+| `max_layover`       | int    | Maximum layover duration in minutes (multi-stop only)       |
+| `currency`          | string | ISO 4217 code (e.g. 'EUR', 'JPY') — flows to `curr=` param  |
+| `language`          | string | BCP-47 language code (e.g. 'en-GB') — flows to `hl=` param  |
+| `country`           | string | ISO 3166-1 alpha-2 country code (e.g. 'GB') for `gl=` param |
+| `sort_by`           | string | CHEAPEST, DURATION, DEPARTURE_TIME, or ARRIVAL_TIME         |
+| `passengers`        | int    | Number of adult passengers                                  |
 
 #### `search_dates` Parameters
 
-| Parameter          | Type   | Description                                  |
-|--------------------|--------|----------------------------------------------|
-| `origin`           | string | Departure airport IATA code (e.g., 'JFK')    |
-| `destination`      | string | Arrival airport IATA code (e.g., 'LHR')      |
-| `start_date`       | string | Start of date range in YYYY-MM-DD format     |
-| `end_date`         | string | End of date range in YYYY-MM-DD format       |
-| `trip_duration`    | int    | Trip duration in days (for round-trips)      |
-| `is_round_trip`    | bool   | Whether to search for round-trip flights     |
-| `cabin_class`      | string | ECONOMY, PREMIUM_ECONOMY, BUSINESS, or FIRST |
-| `max_stops`        | string | ANY, NON_STOP, ONE_STOP, or TWO_PLUS_STOPS   |
-| `departure_window` | string | Time window in 'HH-HH' format (e.g., '6-20') |
-| `airlines`         | list   | Filter by airline codes (e.g., ['BA', 'AA']) |
-| `sort_by_price`    | bool   | Sort results by price (lowest first)         |
-| `passengers`       | int    | Number of adult passengers                   |
+| Parameter           | Type   | Description                                                 |
+|---------------------|--------|-------------------------------------------------------------|
+| `origin`            | string | Departure airport IATA code(s) — comma-separated for multi  |
+| `destination`       | string | Arrival airport IATA code(s) — comma-separated for multi    |
+| `start_date`        | string | Start of date range in YYYY-MM-DD format                    |
+| `end_date`          | string | End of date range in YYYY-MM-DD format                      |
+| `trip_duration`     | int    | Trip duration in days (for round-trips)                     |
+| `is_round_trip`     | bool   | Whether to search for round-trip flights                    |
+| `cabin_class`       | string | ECONOMY, PREMIUM_ECONOMY, BUSINESS, or FIRST                |
+| `max_stops`         | string | ANY, NON_STOP, ONE_STOP, or TWO_PLUS_STOPS                  |
+| `departure_window`  | string | Time window in 'HH-HH' format (e.g., '6-20')                |
+| `airlines`          | list   | Filter by airline codes (e.g., ['BA', 'AA'])                |
+| `exclude_airlines`  | list   | Airline IATA codes to **exclude**                           |
+| `alliance`          | list   | Restrict to alliances: ONEWORLD, SKYTEAM, STAR_ALLIANCE     |
+| `exclude_alliance`  | list   | Alliance names to **exclude**                               |
+| `min_layover`       | int    | Minimum layover duration in minutes                         |
+| `max_layover`       | int    | Maximum layover duration in minutes                         |
+| `currency`          | string | ISO 4217 currency code (e.g. 'EUR', 'JPY')                  |
+| `language`          | string | BCP-47 language code (e.g. 'en-GB')                         |
+| `country`           | string | ISO 3166-1 alpha-2 country code (e.g. 'GB')                 |
+| `sort_by_price`     | bool   | Sort results by price (lowest first)                        |
+| `passengers`        | int    | Number of adult passengers                                  |
 
 ## Quick Start
 
@@ -97,7 +115,7 @@ pipx install flights
 fli --help
 ```
 
-![CLI Demo](https://github.com/punitarani/fli/blob/main/data/cli-demo.png)
+![CLI Demo](https://raw.githubusercontent.com/punitarani/fli/main/docs/assets/cli-demo.png)
 
 ## Features
 
@@ -143,6 +161,14 @@ fli flights JFK LHR 2026-10-25 \
     --class BUSINESS \        # Cabin class
     --stops NON_STOP \        # Non-stop flights only
     --sort DURATION           # Sort by duration
+
+# Alliance + exclude + locale (May-2026 filter additions)
+fli flights JFK LHR 2026-10-25 \
+    --alliance ONEWORLD \
+    --exclude-airlines AA \
+    --min-layover 90 \
+    --max-layover 360 \
+    --currency EUR --language en-GB --country GB
 ```
 
 > ⚠️ **Experimental**
@@ -193,31 +219,47 @@ fli multi \
 
 #### Flights Command (`fli flights`)
 
-| Option           | Description           | Example                |
-|------------------|-----------------------|------------------------|
-| `--return, -r`   | Return date           | `2026-10-30`           |
-| `--time, -t`     | Departure time window | `6-20`                 |
-| `--airlines, -a` | Airline IATA codes    | `BA,KL`                |
-| `--class, -c`    | Cabin class           | `ECONOMY`, `BUSINESS`  |
-| `--stops, -s`    | Maximum stops         | `NON_STOP`, `ONE_STOP` |
-| `--sort, -o`     | Sort results by       | `CHEAPEST`, `DURATION` |
-| `--format`       | Output format         | `text`, `json`         |
+| Option                  | Description                                | Example                          |
+|-------------------------|--------------------------------------------|----------------------------------|
+| `--return, -r`          | Return date                                | `2026-10-30`                     |
+| `--time, -t`            | Departure time window                      | `6-20`                           |
+| `--airlines, -a`        | Airline IATA codes                         | `BA,KL`                          |
+| `--exclude-airlines, -A` | Airline IATA codes to **exclude**         | `DL,B6`                          |
+| `--alliance`            | Restrict to alliance(s)                    | `ONEWORLD`, `SKYTEAM`            |
+| `--exclude-alliance`    | Alliance(s) to **exclude**                 | `STAR_ALLIANCE`                  |
+| `--min-layover`         | Minimum layover (minutes)                  | `90`                             |
+| `--max-layover`         | Maximum layover (minutes)                  | `360`                            |
+| `--currency`            | ISO 4217 currency code                     | `EUR`, `JPY`                     |
+| `--language`            | BCP-47 language code (Google `hl=`)        | `en-GB`                          |
+| `--country`             | ISO 3166-1 alpha-2 country (`gl=`)         | `GB`                             |
+| `--class, -c`           | Cabin class                                | `ECONOMY`, `BUSINESS`            |
+| `--stops, -s`           | Maximum stops                              | `NON_STOP`, `ONE_STOP`           |
+| `--sort, -o`            | Sort results by                            | `CHEAPEST`, `DURATION`           |
+| `--format`              | Output format                              | `text`, `json`                   |
 
 #### Dates Command (`fli dates`)
 
-| Option             | Description            | Example                |
-|--------------------|------------------------|------------------------|
-| `--from`           | Start date             | `2026-01-01`           |
-| `--to`             | End date               | `2026-02-01`           |
-| `--duration, -d`   | Trip duration in days  | `3`                    |
-| `--round, -R`      | Round-trip search      | (flag)                 |
-| `--airlines, -a`   | Airline IATA codes     | `BA,KL`                |
-| `--class, -c`      | Cabin class            | `ECONOMY`, `BUSINESS`  |
-| `--stops, -s`      | Maximum stops          | `NON_STOP`, `ONE_STOP` |
-| `--time`           | Departure time window  | `6-20`                 |
-| `--sort`           | Sort by price          | (flag)                 |
-| `--[day]`          | Day filters            | `--monday`, `--friday` |
-| `--format`         | Output format          | `text`, `json`         |
+| Option                  | Description                                | Example                  |
+|-------------------------|--------------------------------------------|--------------------------|
+| `--from`                | Start date                                 | `2026-01-01`             |
+| `--to`                  | End date                                   | `2026-02-01`             |
+| `--duration, -d`        | Trip duration in days                      | `3`                      |
+| `--round, -R`           | Round-trip search                          | (flag)                   |
+| `--airlines, -a`        | Airline IATA codes                         | `BA,KL`                  |
+| `--exclude-airlines, -A`| Airline IATA codes to **exclude**          | `DL,B6`                  |
+| `--alliance`            | Restrict to alliance(s)                    | `ONEWORLD`               |
+| `--exclude-alliance`    | Alliance(s) to **exclude**                 | `STAR_ALLIANCE`          |
+| `--min-layover`         | Minimum layover (minutes)                  | `90`                     |
+| `--max-layover`         | Maximum layover (minutes)                  | `360`                    |
+| `--currency`            | ISO 4217 currency code                     | `EUR`, `JPY`             |
+| `--language`            | BCP-47 language code                       | `en-GB`                  |
+| `--country`             | ISO 3166-1 alpha-2 country                 | `GB`                     |
+| `--class, -c`           | Cabin class                                | `ECONOMY`, `BUSINESS`    |
+| `--stops, -s`           | Maximum stops                              | `NON_STOP`, `ONE_STOP`   |
+| `--time`                | Departure time window                      | `6-20`                   |
+| `--sort`                | Sort by price                              | (flag)                   |
+| `--[day]`               | Day filters                                | `--monday`, `--friday`   |
+| `--format`              | Output format                              | `text`, `json`           |
 
 #### Multi Command (`fli multi`)
 
@@ -326,17 +368,17 @@ for flight in flights:
 
 ### Running Examples
 
-We provide 11 comprehensive examples in the `examples/` directory that demonstrate various use cases:
+Runnable examples live in [`examples/python/`](examples/python):
 
 ```bash
 # Run examples with uv (recommended)
-uv run python examples/basic_one_way_search.py
-uv run python examples/round_trip_search.py
-uv run python examples/date_range_search.py
+uv run python examples/python/basic_one_way_search.py
+uv run python examples/python/round_trip_search.py
+uv run python examples/python/date_range_search.py
 
 # Or install dependencies first, then run directly
 pip install pydantic curl_cffi httpx
-python examples/basic_one_way_search.py
+python examples/python/basic_one_way_search.py
 ```
 
 **Available Examples:**
@@ -344,6 +386,8 @@ python examples/basic_one_way_search.py
 * `basic_one_way_search.py` - Simple one-way flight search
 * `round_trip_search.py` - Round-trip flight booking
 * `date_range_search.py` - Find cheapest dates
+* `multi_city_search.py` - Multi-city itinerary across several legs
+* `advanced_filters_search.py` - Alliances, airline exclusions, layovers, locale
 * `complex_flight_search.py` - Advanced filtering and multi-passenger
 * `time_restrictions_search.py` - Time-based filtering
 * `date_search_with_preferences.py` - Weekend filtering
@@ -353,32 +397,65 @@ python examples/basic_one_way_search.py
 * `complex_round_trip_validation.py` - Advanced round-trip with validation
 * `advanced_date_search_validation.py` - Complex date search with filtering
 
-> 💡 **Tip**: Examples include automatic dependency checking and will show helpful installation instructions if
-> dependencies are missing.
-
 ## Examples
 
-For comprehensive examples demonstrating all features, see the [`examples/`](examples/) directory:
+Examples are organized by language, with parallel scripts so you can compare the
+two APIs:
+
+* **Python** — [`examples/python/`](examples/python)
+* **TypeScript** — [`examples/typescript/`](examples/typescript)
 
 ```bash
-# Quick test - run a simple example
-uv run python examples/basic_one_way_search.py
+# Python
+uv run python examples/python/complex_flight_search.py
 
-# Run all examples to explore different features
-uv run python examples/round_trip_search.py
-uv run python examples/complex_flight_search.py
-uv run python examples/price_tracking.py
+# TypeScript (from examples/typescript, after `bun install`)
+bun run multi_city_search.ts
 ```
 
 **Example Categories:**
 
 * **Basic Usage**: One-way, round-trip, date searches
-* **Advanced Filtering**: Time restrictions, airlines, seat classes
+* **Advanced Filtering**: Time restrictions, airlines, alliances, seat classes, locale
 * **Data Analysis**: Price tracking, result processing with pandas
 * **Error Handling**: Retry logic, robust error management
-* **Complex Scenarios**: Multi-passenger, validation, business rules
+* **Complex Scenarios**: Multi-city, multi-passenger, validation, business rules
 
-Each example is self-contained and includes automatic dependency checking with helpful installation instructions.
+Each example is self-contained — change the airports, dates, and filters at the top of the script to fit your search.
+
+## TypeScript / JavaScript
+
+Fli is also available as a 1:1 TypeScript port, published to npm as
+[`fli-js`](https://www.npmjs.com/package/fli-js). Same models, same filter encoding,
+same direct-API approach.
+
+```bash
+bun add fli-js   # or: npm install fli-js
+```
+
+```ts
+import { Airport, FlightSearchFilters, FlightSegment, SearchFlights, SeatType } from "fli-js";
+
+const inDays = (n: number) => new Date(Date.now() + n * 86_400_000).toISOString().slice(0, 10);
+
+const filters = new FlightSearchFilters({
+  passenger_info: { adults: 1, children: 0, infants_in_seat: 0, infants_on_lap: 0 },
+  flight_segments: [
+    new FlightSegment({
+      departure_airport: [[[Airport.JFK, 0]]],
+      arrival_airport: [[[Airport.LAX, 0]]],
+      travel_date: inDays(30),
+    }),
+  ],
+  seat_type: SeatType.ECONOMY,
+});
+
+const results = await new SearchFlights().search(filters, { currency: "USD" });
+```
+
+The TypeScript source lives in [`fli-js/`](fli-js); see the
+[TypeScript Quick Start](https://punitarani.github.io/fli/typescript/quickstart/)
+for the full guide.
 
 ## Development
 
