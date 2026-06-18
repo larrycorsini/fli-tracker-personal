@@ -1,247 +1,254 @@
 # Codebase Concerns
 
-**Analysis Date:** 2026-05-30
-
----
+**Analysis Date:** 2026-06-18
 
 ## Tech Debt
 
-### Root-Level Personal Script Sprawl
+**Hotel module migration (CLEAN-01 partial):**
+- Issue: `hot_core.py` removed and logic lives in `app/hotels.py`, but vestiges remain — `app/engine.py` docstring still says "hot_core", and `AGENTS.md` still references the old `sys.path` hack. Root scratch scripts (`scratch.py`) use hardcoded absolute `sys.path.append(...)`.
+- Files: `app/hotels.py`, `app/engine.py`, `scratch.py`, `AGENTS.md`
+- Impact: Confusing onboarding; scratch scripts break on other machines; import path inconsistency across ad-hoc tooling.
+- Fix approach: Finish CLEAN-01 per `.planning/REQUIREMENTS.md` — update docstrings/docs, remove or relocate scratch scripts under `examples/` or `scripts/` with package-relative imports.
 
-- Issue: Five scripts live at the repo root with no package structure: `track_my_flight.py`, `flight_gui.py`, `plan_trip.py`, `hot_core.py`, `hotels_mcp.py`, `test_hotels.py`. They were authored as one-off personal tools and never integrated into the proper package.
-- Files: `track_my_flight.py`, `flight_gui.py`, `plan_trip.py`, `hot_core.py`, `hotels_mcp.py`, `test_hotels.py`
-- Impact: Creates ambiguity about what the project actually is. Pollutes the package namespace. `hot_core.py` is now imported by `app/engine.py` via a `sys.path` hack because it lives at root.
-- Fix approach: Move `hot_core.py` into `app/` (it's the hotel search core used by the app), archive or delete `flight_gui.py` (superseded by `app/server.py`), delete `test_hotels.py` (one-liner smoke test), move `track_my_flight.py` and `plan_trip.py` into `examples/` or `scripts/`.
-
-### Hardcoded Personal Absolute Paths in Scripts
-
-- Issue: Three root-level scripts hardcode the developer's home directory path as the uv binary location.
-- Files: `track_my_flight.py:33`, `flight_gui.py:795`, `flight_gui.py:874`, `plan_trip.py:12`
-- Impact: Scripts fail immediately on any machine other than the original author's. Breaks CI if these are ever run there.
-- Fix approach: Replace `"/Users/larry/.local/bin/uv"` with `shutil.which("uv")` or just `"uv"` and rely on `PATH`.
-
-### `flight_gui.py` Superseded But Not Removed
-
-- Issue: `flight_gui.py` is an older copy of the web GUI that uses Python's built-in `BaseHTTPRequestHandler`. It spawns `fli` as subprocesses and is functionally replaced by `app/server.py` (FastAPI + direct Python API).
+**Legacy `flight_gui.py` (CLEAN-02 pending):**
+- Issue: 932-line standalone `HTTPServer` + embedded HTML duplicates functionality now in `app/server.py` (FastAPI + SSE). Still imports `app.hotels.search_hotels_core` and loads `airports.json` from repo root (not `app/data/`).
 - Files: `flight_gui.py`
-- Impact: Dual server on port 8000 — running both simultaneously causes a port conflict. Maintains duplicate logic including the hotel search integration.
-- Fix approach: Delete `flight_gui.py`; direct users to `app/server.py` / `fli-tracker` CLI.
+- Impact: Two divergent UIs to maintain; broken airport lookup if `airports.json` missing at cwd; no price-tracker integration.
+- Fix approach: Archive to `examples/archive/flight_gui.py` with README note, or delete after verifying no references (CLEAN-02).
 
-### `hot_core.py` Imported via `sys.path` Hack
+**Generic Google Flights URLs instead of per-itinerary `booking_url` (FEAT-01/02/03 pending):**
+- Issue: `app/engine.py` `_serialize_flight()` never calls `SearchFlights.build_flight_booking_url()`. SSE and combined search use `_build_google_flights_url()` — a route/date search-page link, not the deterministic `tfs` deep link available in `fli/search/flights.py` and used by CLI/MCP.
+- Files: `app/engine.py` (`_serialize_flight`, `_build_google_flights_url`, `stream_flight_search`), `app/static/app.js` (renders `f.url`), `fli/cli/commands/flights.py`, `fli/mcp/server.py` (reference implementation)
+- Impact: "Book Flight" links open generic search results, not the specific itinerary; violates user preference for clickable buy links; v1.1 milestone blocked.
+- Fix approach: After serialization, call `_get_flight_search().build_flight_booking_url(flight, currency=...)` and attach `booking_url` to each result dict; propagate through SSE `flight_found` events and date search responses; update UI to prefer `booking_url` over `url`.
 
-- Issue: `app/engine.py` imports `hot_core` via a `sys.path.insert(0, root)` mutation at runtime to reach the project root.
-- Files: `app/engine.py:39-50`
-- Impact: Fragile import that breaks if working directory changes. Not discoverable by linters, type checkers, or package tools.
-- Fix approach: Move `hot_core.py` to `app/hotels.py` and import it directly as `from app.hotels import search_hotels_core`.
+**Dual frontend directories (`public/` vs `app/static/`):**
+- Issue: FastAPI serves `app/static/index.html` + `app/static/app.js` at `/`. A separate `public/` tree exists (638-line `index.html`, PWA `manifest.json`, `sw.js`, `heatmap.html`, `history.html`) plus `public_backup_20260618_104813/` — neither wired into `app/server.py`.
+- Files: `app/server.py`, `app/static/`, `public/`, `public_backup_20260618_104813/`
+- Impact: UI changes may land in the wrong tree; PWA assets unused by the running app; backup folder adds repo noise.
+- Fix approach: Pick one canonical frontend (`app/static/` for v1.1), merge any `public/` features needed, delete or gitignore backups.
 
-### `airports.json` (9 MB) Committed to Repo Root
+**Root-level script sprawl:**
+- Issue: ~32 Python files at repo root (`find_*.py`, `scratch_*.py`, `update_find_direct.py`, `generate_flight_report.py`, etc.) plus dozens of untracked JSON output files. These are personal trip-planning artifacts, not part of the packaged library or tracker app.
+- Files: `find_direct.py`, `find_cheapest.py`, `scratch_search.py`, `daily_flight_search.sh`, `*.json` at root, etc.
+- Impact: Clutters git status; unclear what is maintained vs ephemeral; risk of accidental commits of search output or local DB paths.
+- Fix approach: Move retained scripts to `scripts/` or `examples/` (CLEAN-04 deferred); add output patterns to `.gitignore`; document in README which entry points matter (`fli`, `fli-tracker`, `fli-mcp`).
 
-- Issue: A 9 MB raw airports JSON dataset lives at the repo root as a versioned file.
-- Files: `airports.json`
-- Impact: Bloats git history on every update. Slows clone times. The `app/` module has its own curated `app/data/airports_lite.json` (158 KB) that's better suited.
-- Fix approach: Add `airports.json` to `.gitignore` and generate/download it via a `scripts/update_airports.py` call.
+**Deployment config targets MCP, not tracker:**
+- Issue: `nixpacks.toml` `[start]` runs `fli-mcp-http`; `docker-compose.yml` only defines `fli-mcp` service. Tracker entry point `fli-tracker = "app.server:main"` in `pyproject.toml` has no container/deploy recipe in-repo.
+- Files: `nixpacks.toml`, `docker-compose.yml`, `pyproject.toml`
+- Impact: Deploying via Nixpacks/Docker runs MCP server, not the price-tracker web app.
+- Fix approach: Add tracker service to `docker-compose.yml` or separate `Dockerfile`/Nixpacks profile for `uv run fli-tracker` / `uvicorn app.server:app`.
 
-### `tracker.db` SQLite File Committed to Version Control
+**Hardcoded demo booking URLs in frontend:**
+- Issue: `app/static/app.js` contains hardcoded `tfs` booking URLs (around lines 1323–1335) for sample/demo routes.
+- Files: `app/static/app.js`
+- Impact: Stale links if shown to users; confuses real API-driven booking flow.
+- Fix approach: Remove demo URLs once FEAT-03 wires API `booking_url`; use empty state or docs examples instead.
 
-- Issue: `app/data/tracker.db` is a binary SQLite database tracked by git.
-- Files: `app/data/tracker.db`
-- Impact: User-generated data (tracked flights, price history) gets committed. The file will corrupt git diffs on every write. Merges across branches will conflict.
-- Fix approach: Add `*.db` to `.gitignore`. The `app/data/.gitkeep` already exists to preserve the directory.
-
-### `asyncio.get_event_loop()` Deprecated Usage
-
-- Issue: Six call sites use `asyncio.get_event_loop()` inside running async functions, which is deprecated since Python 3.10 and raises `DeprecationWarning` in 3.12.
-- Files: `app/server.py:61`, `app/server.py:333`, `app/server.py:344`, `app/engine.py:399`, `app/engine.py:418`, `app/engine.py:429`
-- Impact: Will emit warnings in Python 3.12 and may become a runtime error in future Python versions.
-- Fix approach: Replace `loop = asyncio.get_event_loop(); await loop.run_in_executor(...)` with `await asyncio.get_running_loop().run_in_executor(...)` or simply `await asyncio.to_thread(sync_fn, *args)`.
-
-### `fuzz` Pytest Marker Not Registered
-
-- Issue: `tests/search/test_search_flights_fuzz.py` uses `@pytest.mark.fuzz` but only the `parallel` marker is registered in `pyproject.toml`'s `[tool.pytest.ini_options]`.
-- Files: `pyproject.toml`, `tests/search/test_search_flights_fuzz.py`
-- Impact: Running `pytest` emits `PytestUnknownMarkWarning` for fuzz tests, which is noise and can fail strict CI configurations.
-- Fix approach: Add `"fuzz: marks fuzz tests (deselect with '-m not fuzz')"` to the `markers` list in `pyproject.toml`.
-
-### Hardcoded Static Exchange Rates
-
-- Issue: `app/server.py` exposes `/api/rates` with hardcoded exchange rates (EUR, GBP, CAD, etc.) that are never updated.
-- Files: `app/server.py:444-456`
-- Impact: Currency conversion values drift silently from reality. No indication to the UI that rates are stale.
-- Fix approach: Either fetch rates from a free API (e.g., `open.er-api.com`) with a 24-hour cache, or document the static rates prominently and add a `rates_updated_at` timestamp to the response.
-
-### Playwright Dependency Never Used
-
-- Issue: `playwright>=1.58.0` is listed as a core dependency in `pyproject.toml` but is not imported anywhere in the codebase (`fli/`, `app/`, `tests/`).
-- Files: `pyproject.toml:35`
-- Impact: Adds ~100 MB to installs (including browser binaries). Slows `uv sync` significantly.
-- Fix approach: Remove `playwright` from core dependencies. If browser automation is anticipated, add it as an optional extra.
-
----
+**Engine docstring / comment drift:**
+- Issue: `_search_hotels_sync` docstring references "hot_core"; `_get_hotels_core` lazy-import exists though `app.hotels` is now a proper package module.
+- Files: `app/engine.py`
+- Impact: Minor confusion during v1.1 cleanup.
+- Fix approach: Simplify to direct `from app.hotels import search_hotels_core` and update comments.
 
 ## Known Bugs
 
-### Commented-Out Round-Trip Tests (Live API Timeouts)
+**`tracker.db` not actually gitignored:**
+- Symptoms: `app/data/tracker.db` appears as modified in git status despite docs stating it is gitignored.
+- Files: `.gitignore` (line 167: `# *.db` is commented out), `app/data/tracker.db`, `AGENTS.md`, `.planning/PROJECT.md`
+- Trigger: Any local tracker usage modifies the DB file; git tracks it.
+- Workaround: Manually avoid staging; uncomment `*.db` or add `app/data/tracker.db` to `.gitignore`.
+- Fix approach: Uncomment `*.db` or add explicit `app/data/tracker.db`; ensure empty DB schema is created on first run (already in `TrackerDB._init_db()`).
 
-- Symptoms: Four round-trip search tests are disabled via comment block because they cause frequent CI timeouts.
-- Files: `tests/search/test_search_flights.py:185-193`
-- Trigger: Round-trip search requires multiple sequential API requests (outbound + return per result), hitting the Google Flights rate limit on slow CI runners (HTTP 429).
-- Workaround: Tests are commented out. The `TODO` comment states they should be refactored to mock the HTTP client.
+**Price percentile logic treats missing price as `$0`:**
+- Symptoms: When assigning `price_level` badges, code uses `f.get("price", 0)` — unpriced rows (already filtered in sort) could skew percentiles if any slip through.
+- Files: `app/engine.py` (lines 144–151)
+- Trigger: Upstream returns priced + unpriced mix; edge case in percentile assignment.
+- Workaround: Null-price flights are mostly filtered in `_serialize_flight`.
+- Fix approach: Use explicit `if p is None: continue` in percentile loop (TEST-02 regression target).
 
-### `TrackerDB` Instance Created Per Search Call
+**Airline filter uses substring match on display name:**
+- Symptoms: `airline_filter` checks `airline_filter.lower() not in airline_name` — "AA" won't match "American Airlines"; "spirit" might false-positive.
+- Files: `app/engine.py` (lines 122–125)
+- Trigger: User sets airline filter via API query param `airline=`.
+- Workaround: Filter client-side in UI.
+- Fix approach: Match on IATA code field or use `parse_airlines()` like CLI/MCP.
 
-- Symptoms: Every call to `_search_flights_sync` creates a new `TrackerDB()` instance (and thus a new SQLite connection) to log historical price data.
-- Files: `app/engine.py:138`
-- Trigger: Any flight search via the app server.
-- Impact: Opens and closes SQLite connections on every search; under concurrent load (the thread pool has 8 workers) this multiplies SQLite write contention.
-- Fix approach: Pass the shared `_get_db()` instance from `app/server.py` into the engine functions, or use `app/engine.py`'s own module-level singleton.
+**`stream_combined_search` blocks the async event loop:**
+- Symptoms: Combined flight+hotel SSE handler calls synchronous `_search_flights_sync` and `_search_hotels_sync` directly inside an `async def` generator instead of `run_in_executor`.
+- Files: `app/engine.py` (`stream_combined_search`, lines 606–622)
+- Trigger: `/api/search/combined` with many date permutations.
+- Workaround: Use flight-only SSE endpoint which uses async wrappers.
+- Fix approach: Use `search_flights_async` / `search_hotels_async` or `run_in_executor` consistently.
 
----
+**Circular import between tracker and engine:**
+- Symptoms: `app/tracker.py` imports `_search_flights_sync` from `app.engine` inside `check_flight_price()`; `app/engine.py` imports `TrackerDB` at module level.
+- Files: `app/tracker.py`, `app/engine.py`
+- Trigger: Import order changes or new top-level imports could cause `ImportError`.
+- Workaround: Lazy import in tracker already mitigates runtime cycle.
+- Fix approach: Extract shared search facade or move price-check orchestration to a third module (e.g. `app/services/price_check.py`).
 
 ## Security Considerations
 
-### `osascript` Notification Injection Risk
+**No authentication on tracker API:**
+- Risk: Any client with network access can add/list/delete tracked flights and read confirmation codes via REST (`/api/tracker/*`).
+- Files: `app/server.py` (tracker routes ~306–470)
+- Current mitigation: None — intended as local/personal tool.
+- Recommendations: Bind to `127.0.0.1` in dev; add optional API key or basic auth for LAN deployment; never expose confirmation codes in list responses if not needed by UI.
 
-- Risk: `app/tracker.py` constructs a macOS `osascript` command using an f-string that embeds flight data directly — including user-supplied origin/destination codes and airline names.
-- Files: `app/tracker.py:688-690`
-- Current mitigation: None. The string is passed directly as `-e` to `osascript`.
-- Recommendations: Sanitize the `msg` string to escape double quotes and backslashes before embedding in the AppleScript string. Alternatively use `osascript -e 'display notification (system attribute "MSG") with title "..."'` with environment variable injection to avoid string interpolation in the shell command entirely.
+**Unrestricted search proxy:**
+- Risk: `/api/search/flights`, `/api/search/combined`, `/api/search/hotels` proxy to Google with no auth, enabling abuse as an open relay (rate limits apply via `fli` client but are per-process).
+- Files: `app/server.py`, `app/engine.py`, `fli/search/client.py`
+- Current mitigation: Built-in 10 req/s rate limit in `fli/search/client.py`.
+- Recommendations: Add request throttling middleware on FastAPI; cap concurrent SSE connections; require auth if deployed publicly.
 
-### No CORS Policy on FastAPI Server
+**Confirmation codes stored in SQLite plaintext:**
+- Risk: `tracked_flights.confirmation_code` stored unencrypted; DB file readable on disk.
+- Files: `app/tracker.py` (schema), `app/server.py` (`AddFlightRequest`)
+- Current mitigation: Local-only deployment assumption.
+- Recommendations: Treat DB as sensitive; ensure gitignore; optional field-level encryption if syncing.
 
-- Risk: `app/server.py` does not configure `fastapi.middleware.cors.CORSMiddleware`, meaning any origin can make requests to the API.
-- Files: `app/server.py`
-- Current mitigation: Server binds to `0.0.0.0:8000` which is already local-only in typical home setups.
-- Recommendations: If the server is intended for local use only, add `CORSMiddleware` allowing only `http://localhost:8000`. If it may be exposed externally, this is a higher-priority issue.
-
-### No Authentication on Tracker API
-
-- Risk: All `/api/tracker/*` endpoints (add flight, view booked prices, delete flights) are publicly accessible with no authentication layer.
-- Files: `app/server.py:302-364`
-- Current mitigation: Local-only deployment makes external access unlikely.
-- Recommendations: For any non-local deployment, add a simple API key check or session-based authentication middleware.
-
----
+**Hotel search hits Google internal RPC without browser impersonation hardening:**
+- Risk: `app/hotels.py` uses raw `httpx` POST to `/_/TravelFrontendUi/data/batchexecute` — may break or trigger blocking; no retry/rate-limit parity with flight client.
+- Files: `app/hotels.py`
+- Current mitigation: Personal-use volume only.
+- Recommendations: Align with `curl-cffi` impersonation pattern from `fli/search/client.py`; mock in tests (TEST-03).
 
 ## Performance Bottlenecks
 
-### `hot_core.py` Full-Response String Parsing
+**SSE flight scan combinatorial explosion:**
+- Problem: `stream_flight_search()` generates every origin × destination × date × duration × cabin permutation; large ranges produce hundreds/thousands of API calls batched at 8.
+- Files: `app/engine.py` (`stream_flight_search`, `BATCH_SIZE = 8`)
+- Cause: Exhaustive grid search with no early termination or caching.
+- Improvement path: Date-range caps, user-configurable max combos, result caching in SQLite, or calendar pre-filter via `SearchDates`.
 
-- Problem: The hotel search function splits the entire Google Hotels API response on `"\n"` and calls `json.loads()` on every line, including length-prefix lines it then skips. The `traverse_and_extract` function recursively walks the entire nested JSON tree.
-- Files: `hot_core.py:59-73`
-- Cause: Defensive parsing of an undocumented API format; the recursive traversal has no depth limit and visits every node.
-- Improvement path: Add a maximum recursion depth guard. Pre-filter chunks before attempting `json.loads` using a fast startswith check for `"["` or `"{"`.
+**New `TrackerDB()` per flight search for logging:**
+- Problem: `_search_flights_sync()` instantiates `TrackerDB()` on every successful search to log cheapest price and compute percentiles — opens new SQLite connection each time under thread pool load.
+- Files: `app/engine.py` (line 132), `app/tracker.py` (`_get_conn`)
+- Cause: No shared DB handle in engine layer.
+- Improvement path: Inject shared `TrackerDB` from server singleton or pass optional db param; reuse connection with thread-local or WAL-safe pooling.
 
-### Thread Pool + Rate-Limited Singleton Client
+**Background price checker runs sequentially:**
+- Problem: `check_all_flights()` loops tracked flights one-by-one with live Google searches every 6 hours.
+- Files: `app/server.py` (`_background_price_checker`), `app/tracker.py` (`check_all_flights`)
+- Cause: No batching or parallelism for tracker re-checks.
+- Improvement path: Batch with `asyncio.gather` + executor; respect rate limits; skip unchanged routes.
 
-- Problem: `app/engine.py` runs up to 8 concurrent flight searches in a `ThreadPoolExecutor`, but `fli/search/client.py`'s `get_client()` returns a module-level singleton. The `@limits(calls=10, period=1)` decorator from `ratelimit` uses a shared counter across threads; concurrent calls will block each other waiting for the rate limiter, reducing effective parallelism.
-- Files: `app/engine.py:58`, `fli/search/client.py:86-96`
-- Cause: Singleton HTTP client shared across threaded workers plus a global rate limiter.
-- Improvement path: The 10 req/sec limit is per the client instance; with 8 workers this is effectively ~1.25 req/s per worker. Consider per-worker client instances or tuning the pool size to match the rate limit.
-
----
+**Hotel parsing scans entire JSON tree:**
+- Problem: `traverse_and_extract()` recursively walks all nested structures with magic index heuristics (`v[5]`, `v[8]`, etc.).
+- Files: `app/hotels.py`
+- Cause: Reverse-engineered response format without schema.
+- Improvement path: Target known response paths; cache city/date results briefly.
 
 ## Fragile Areas
 
-### `hot_core.py` Positional Index Parsing
+**Google Hotels response parsing:**
+- Files: `app/hotels.py` (`traverse_and_extract`, `search_hotels_core`)
+- Why fragile: Depends on undocumented array indices in Google TravelFrontendUi batchexecute responses; silent `except Exception: continue` swallows parse failures; empty list indistinguishable from error.
+- Safe modification: Capture fixture responses in `tests/fixtures/`; add structural validation before index access; log parse failures at WARNING.
+- Test coverage: No tests under `tests/` — only ad-hoc `test_hotels.py` at repo root calling live API.
 
-- Files: `hot_core.py:10-14`
-- Why fragile: Hotel data is extracted by accessing array indices directly (`v[5]`, `v[7][0][0]`, `v[8][0]`, `v[13][0]`) from an undocumented reverse-engineered Google Hotels API response. Any change to the API response structure silently returns wrong data (wrong names, missing prices, wrong ratings) with no error raised.
-- Safe modification: Add length and type assertions before each index access. Add an integration smoke test that checks returned hotel objects have non-empty `name`, numeric `price_val`, and a valid `rating`.
-- Test coverage: Zero — `hot_core.py` has no tests at all.
+**Flight serialization for tuple/multi-city results:**
+- Files: `app/engine.py` (`_serialize_flight`)
+- Why fragile: Branches for round-trip tuple, multi-city tuple, and one-way; price taken from `flight[-1].price` for multi-city; broad try/except returns `None`.
+- Safe modification: Add unit tests per trip type (TEST-02); mirror MCP `serialize_flight_result` logic from `fli/mcp/server.py`.
+- Test coverage: None in `tests/app/`; library tests don't cover app serialization.
 
-### `fli/search/flights.py` Response Parsing
+**Live Google Flights API tests:**
+- Files: `tests/search/test_search_flights.py`, `tests/search/test_search_dates.py`, `tests/search/test_search_flights_new_filters_live.py`, `tests/mcp/test_mcp_server.py`
+- Why fragile: Hit real API; frequent HTTP 429/timeouts on CI; round-trip tests commented out with TODO (lines 185–193 in `test_search_flights.py`).
+- Safe modification: Run with `--ignore=tests/search/` locally/CI; refactor commented tests to use wire fixtures like `tests/search/test_booking_url.py`.
+- Test coverage: Stubbed tests exist for wire/decoders; live tests remain for integration signal only.
 
-- Files: `fli/search/flights.py`
-- Why fragile: Flight data is parsed from a reverse-engineered undocumented Google Flights API. Field positions (legs, price, duration, stops) are accessed by magic indices derived from observed API responses. The `except (IndexError, TypeError)` clauses silently skip malformed data.
-- Safe modification: When adding new parsed fields, always guard with `try/except (IndexError, TypeError, KeyError)` matching existing patterns. Any Google-side API change will cause silent empty results rather than errors.
-- Test coverage: Price parsing is unit-tested (`TestParsePriceInfo`), but the full response parsing path relies on live API calls.
-
-### `app/tracker.py` SQLite Migrations
-
-- Files: `app/tracker.py:252-316`
-- Why fragile: Schema migrations are implemented as `try/except` blocks around `ALTER TABLE` statements. Adding `trip_items` table and `order_index` column at lines 308-312 is done at startup without versioning.
-- Safe modification: Any new column additions must use `ALTER TABLE ... ADD COLUMN` in the same `try/except` pattern. Destructive changes (renaming or removing columns) are not safe with this migration approach.
-- Test coverage: No tests for `TrackerDB` class at all.
-
----
+**macOS-only price-drop notifications:**
+- Files: `app/tracker.py` (`check_flight_price`, `osascript` subprocess)
+- Why fragile: `display notification` fails on Linux/CI/Docker; caught and logged only.
+- Safe modification: Gate on `sys.platform == "darwin"` or use optional push notification abstraction.
+- Test coverage: None.
 
 ## Scaling Limits
 
-### Google Flights API Rate Limit (HTTP 429)
+**SQLite single-file storage:**
+- Current capacity: One writer at a time (WAL mode enabled); fine for personal tracker (dozens of flights, thousands of price_history rows).
+- Limit: Concurrent SSE searches + background checker + manual CRUD may see `database is locked` under heavy parallel load.
+- Scaling path: Move to PostgreSQL if multi-user; or serialize DB writes through a queue.
 
-- Current capacity: 10 requests/second per client instance (enforced client-side).
-- Limit: Google will return HTTP 429 when too many requests are made from a single IP/session. The existing `@retry` with 3 attempts handles transient 429s but not sustained rate limiting.
-- Scaling path: The rate limit is per-IP. Running multiple concurrent app instances behind a load balancer would require per-instance clients or a distributed rate limiter. The current design assumes a single server process.
+**ThreadPoolExecutor (8 workers) + at most one process:**
+- Current capacity: 8 parallel flight searches per tracker process; aligns with ~10 req/s fli client limit.
+- Limit: Multiple uvicorn workers would duplicate executors and multiply API pressure.
+- Scaling path: Single worker for tracker deployment; external job queue for batch scans.
 
-### SQLite as Price History Store
-
-- Current capacity: Adequate for single-user / small household use (hundreds of tracked flights).
-- Limit: SQLite WAL mode supports concurrent reads but serializes writes. Under the async server with background price checks + concurrent manual checks, write contention will increase.
-- Scaling path: For multi-user or hosted deployment, migrate `TrackerDB` to PostgreSQL via SQLAlchemy.
-
----
+**In-memory exchange rates:**
+- Files: `app/server.py` (`EXCHANGE_RATES`, `/api/rates`)
+- Limit: Static rates drift from market; no refresh mechanism.
+- Scaling path: Optional external rates API or remove if unused.
 
 ## Dependencies at Risk
 
-### `curl-cffi` Browser Impersonation
+**Reverse-engineered Google APIs (flights + hotels):**
+- Risk: Undocumented endpoints; response shape changes break parsers silently.
+- Impact: Empty search results, wrong prices, or HTTP blocks.
+- Migration plan: Monitor upstream `fli` fixes; add fixture-based regression tests; hotels module should follow flight client's impersonation/retry patterns.
 
-- Risk: The `curl-cffi` library impersonates specific Chrome browser versions to avoid bot detection. Google Flights periodically updates fingerprint detection. A Google-side update could break all searches.
-- Impact: Complete failure of `SearchFlights` and `SearchDates`.
-- Migration plan: Monitor `curl-cffi` release notes for TLS fingerprint updates. The version constraint `>=0.7.4` is loose enough to auto-update.
-
-### Reverse-Engineered API Stability
-
-- Risk: Both the Google Flights integration (`fli/search/`) and the Google Hotels integration (`hot_core.py`) rely on undocumented internal APIs. Neither has any official support contract.
-- Impact: Any silent API structure change returns empty or incorrect results with no user-visible error.
-- Migration plan: Add integration smoke tests that run on a schedule (e.g., daily CI) and alert on empty results or parsing failures. Consider caching the last known-good response format.
-
----
+**`curl-cffi` browser impersonation:**
+- Risk: Google may block impersonated fingerprints; tied to flight search reliability.
+- Impact: All flight/date search paths fail.
+- Migration plan: Upstream `fli` maintenance; tracker inherits fixes via dependency bump.
 
 ## Missing Critical Features
 
-### No Tests for `app/` Module
+**App test suite (TEST-01 through TEST-04):**
+- Problem: No `tests/app/` directory; FastAPI routes, engine serialization, and hotel wrapper untested in CI.
+- Blocks: Safe v1.1 ship; regression detection for null-price filtering, booking URLs, tracker CRUD.
+- Files: Missing `tests/app/`; `.planning/REQUIREMENTS.md` defines scope.
 
-- Problem: `app/server.py`, `app/engine.py`, `app/tracker.py`, `app/airport_data.py`, and `app/models.py` have zero test coverage. This is the majority of the application logic.
-- Blocks: Confident refactoring of engine, tracker, or server code.
+**Per-itinerary booking links in API/UI (FEAT-01/02/03):**
+- Problem: Documented v1.1 requirement; CLI and MCP already expose `booking_url`.
+- Blocks: User workflow for one-click booking from tracker UI.
 
-### No Input Validation on Date Parameters
-
-- Problem: Date string parameters (`departure_date`, `start_date`, `end_date`, `return_date`) are accepted as raw strings throughout `app/server.py` routes and passed directly to `fli`'s search functions. Malformed dates are only caught at the point of parsing inside `_search_flights_sync` or `_search_dates_sync`, returning empty results with no error message to the caller.
-- Files: `app/server.py:126-168`, `app/server.py:172-220`
-- Blocks: Meaningful error messages to the UI when users enter invalid dates.
-
----
+**Booking options in tracker (FEAT-05 deferred):**
+- Problem: No `get_booking_options` integration in `app/server.py` or UI.
+- Blocks: Vendor fare comparison from tracker.
 
 ## Test Coverage Gaps
 
-### `app/` Module — Zero Coverage
+**FastAPI endpoints — untested:**
+- What's not tested: `/`, `/api/airports`, `/api/search/*` SSE, `/api/tracker/*` CRUD, background lifespan, `/api/rates`.
+- Files: `app/server.py`
+- Risk: Route regressions, SSE disconnect handling, validation errors ship unnoticed.
+- Priority: High (TEST-01)
 
-- What's not tested: `app/engine.py` (flight/date/hotel search orchestration, streaming, serialization), `app/tracker.py` (TrackerDB CRUD, price check logic, airline policies), `app/server.py` (all API routes), `app/airport_data.py`
-- Files: Entire `app/` directory
-- Risk: Regressions in the price tracker, search engine, or API routes are undetected until manual use.
-- Priority: High
+**Engine serialization — untested:**
+- What's not tested: `_serialize_flight` null-price filtering, round-trip tuple shape, `price_level` badges, `_build_google_flights_url`, future `booking_url` attachment.
+- Files: `app/engine.py`
+- Risk: v1.0 merge regression (null prices crashing sort) could recur.
+- Priority: High (TEST-02)
 
-### `hot_core.py` — Zero Coverage
+**Hotel search wrapper — untested with mocks:**
+- What's not tested: `search_hotels_core`, engine hotel URL builder, deduplication/sort.
+- Files: `app/hotels.py`, `app/engine.py` (`_search_hotels_sync`)
+- Risk: Google response format change returns empty hotels silently.
+- Priority: Medium (TEST-03)
 
-- What's not tested: `search_hotels_core()`, `traverse_and_extract()`
-- Files: `hot_core.py`
-- Risk: Silent failures on Google Hotels API structure changes go unnoticed.
-- Priority: High
-
-### Round-Trip Search — Disabled
-
-- What's not tested: Round-trip search with outbound + return selection, round-trip result structure validation
-- Files: `tests/search/test_search_flights.py:185-193` (commented out)
-- Risk: Round-trip search regressions are not caught by automated tests.
+**Tracker DB operations — untested:**
+- What's not tested: `TrackerDB` CRUD, `expire_departed_flights`, percentile math, `check_flight_price` integration.
+- Files: `app/tracker.py`
+- Risk: Price drop detection or savings calculation bugs.
 - Priority: Medium
 
-### `fli/core/currency.py` — Minimal Coverage
+**Live API tests in default CI:**
+- What's not tested reliably: `tests/search/*` live tests, `tests/mcp/test_mcp_server.py` (`test_search_dates_round_trip` noted flaky in `AGENTS.md`).
+- Files: `tests/search/`, `tests/mcp/test_mcp_server.py`
+- Risk: CI noise masks real failures; developers skip full test runs.
+- Priority: Medium — document `uv run pytest -vv --ignore=tests/search/`; convert to fixtures.
 
-- What's not tested: Currency extraction from live token format, edge cases in currency parsing
-- Files: `fli/core/currency.py`
-- Risk: Currency display bugs in non-USD results.
+**Ad-hoc root test scripts — not in pytest:**
+- What's not tested: `test_hotels.py`, `test_heatmap.py` live at repo root, not discovered as part of standard `make test`.
+- Files: `test_hotels.py`, `test_hotels.py` imports `hotels_mcp`
+- Risk: False confidence if run manually only.
 - Priority: Low
 
 ---
 
-*Concerns audit: 2026-05-30*
+*Concerns audit: 2026-06-18*

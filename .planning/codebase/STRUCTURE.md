@@ -1,269 +1,255 @@
 # Codebase Structure
 
-**Analysis Date:** 2026-05-30
+**Analysis Date:** 2026-06-18
 
 ## Directory Layout
 
 ```
-Fli-tracker/                       # Project root
-├── fli/                           # Core Python library (published to PyPI as "flights")
-│   ├── cli/                       # Typer CLI interface
-│   │   ├── commands/              # One file per sub-command
-│   │   │   ├── airports.py        # `fli airports` command
-│   │   │   ├── dates.py           # `fli dates` command
-│   │   │   ├── flights.py         # `fli flights` command
-│   │   │   └── multi.py           # `fli multi` command (multi-city)
-│   │   ├── console.py             # Rich console instance
-│   │   ├── enums.py               # CLI-local enums (OutputFormat)
-│   │   ├── main.py                # CLI entry point; Typer app + smart routing
-│   │   └── utils.py               # Display helpers, JSON serializers, date normalizers
-│   ├── core/                      # Shared utilities (parsers + builders)
-│   │   ├── airports.py            # Fuzzy airport search (name/city/IATA)
-│   │   ├── builders.py            # FlightSegment / TimeRestrictions factory functions
-│   │   ├── currency.py            # Price token extraction and formatting
-│   │   └── parsers.py             # String → enum conversion; ParseError
-│   ├── mcp/                       # MCP server
-│   │   ├── _entry.py              # Optional-dep guard wrappers (STDIO + HTTP)
-│   │   └── server.py              # FastMCP tools, prompts, resources; config
-│   ├── models/                    # Pydantic data models
-│   │   ├── airline.py             # Airline enum (IATA codes)
-│   │   ├── airport.py             # Airport enum (IATA codes)
-│   │   └── google_flights/        # Google Flights specific models
-│   │       ├── base.py            # Core models: FlightResult, FlightLeg, FlightSegment,
-│   │       │                      #   TimeRestrictions, PassengerInfo, etc.
-│   │       ├── dates.py           # DateSearchFilters model
-│   │       └── flights.py         # FlightSearchFilters model with encode() / format()
-│   └── search/                    # Search engine (API calls)
-│       ├── client.py              # Singleton rate-limited curl-cffi HTTP client
-│       ├── dates.py               # SearchDates class
-│       └── flights.py             # SearchFlights class (recursive multi-leg)
-├── app/                           # Web application ("Travel Planner Pro")
-│   ├── airport_data.py            # Lightweight airport autocomplete + IATA→city mapping
-│   ├── engine.py                  # Async wrappers over fli search; ThreadPoolExecutor; SSE
-│   ├── models.py                  # Pydantic request/response models for web API
-│   ├── server.py                  # FastAPI app; all REST + SSE routes; lifespan
-│   ├── tracker.py                 # SQLite price-drop tracker; airline refund policy DB
-│   ├── data/                      # Runtime data files
-│   │   ├── airports_lite.json     # Trimmed airport list for web autocomplete
-│   │   └── tracker.db             # SQLite database (price tracking history)
-│   └── static/                    # Single-page application assets
-│       ├── index.html             # SPA entry point
-│       ├── app.js                 # Frontend JS (vanilla)
-│       └── styles.css             # Stylesheet
-├── tests/                         # Test suite (mirrors fli/ structure)
-│   ├── cli/                       # CLI command tests
-│   ├── core/                      # Core utility tests
-│   ├── mcp/                       # MCP server tests
-│   ├── models/                    # Model validation tests
-│   ├── search/                    # Live API integration tests (may fail due to rate limits)
-│   └── conftest.py                # Shared fixtures
-├── examples/                      # Standalone usage examples
-│   ├── README.md
-│   ├── basic_one_way_search.py
-│   ├── round_trip_search.py
-│   ├── date_range_search.py
-│   ├── price_tracking.py
-│   └── *.py                       # Additional scenario scripts
-├── docs/                          # MkDocs documentation source
-│   ├── api/                       # API reference pages
-│   ├── guides/                    # How-to guides
-│   ├── examples/                  # Example documentation
-│   └── index.md
-├── scripts/                       # Developer utility scripts
-│   ├── generate_enums.py          # Regenerate Airport/Airline enum from CSV data
-│   └── update_airports.py         # Update airports.csv from IATA source
-├── data/                          # Raw reference data
-│   ├── airlines.csv               # Airline IATA data (source for Airline enum)
-│   ├── airports.csv               # Airport IATA data (source for Airport enum)
-│   └── *.png / *.gif / *.mp4      # Demo assets for README/docs
-├── skills/                        # Project-local GSD skills
-│   └── fli/
-├── pyproject.toml                 # Package config; scripts; ruff; pytest markers
-├── pytest.ini                     # Pytest configuration
-├── mkdocs.yml                     # MkDocs documentation config
-├── docker-compose.yml             # Docker compose for local dev
-├── nixpacks.toml                  # Nixpacks deploy config (Railway)
-├── railway.toml                   # Railway deployment config
-├── hot_core.py                    # Hotel search core (project root — not a package)
-├── hotels_mcp.py                  # Hotels MCP server (project root — not a package)
-├── flight_gui.py                  # Legacy Tkinter GUI (project root — not a package)
-├── plan_trip.py                   # Standalone trip planning script (project root)
-├── airports.json                  # Airport data JSON (root-level, redundant with data/)
-└── *.json                         # Cached search result snapshots (slc_lgb.json, etc.)
+Fli-tracker/
+├── fli/                    # Core Python library (PyPI package "flights")
+│   ├── cli/                # Typer CLI: flights, dates, airports, multi
+│   ├── core/               # Shared parsers, builders, links, currency
+│   ├── mcp/                # FastMCP server + STDIO/HTTP entry
+│   ├── models/             # Airport/Airline enums, Google Flights Pydantic models
+│   └── search/             # SearchFlights, SearchDates, HTTP client, decoders
+├── app/                    # Personal fork — FastAPI price tracker + SPA
+│   ├── static/             # Tracker UI (index.html, app.js, styles.css)
+│   ├── data/               # SQLite DB + airports_lite.json (gitignored: tracker.db)
+│   ├── server.py           # FastAPI entry, routes, SSE, lifespan
+│   ├── engine.py           # fli wrappers, streaming, serialization
+│   ├── tracker.py          # SQLite tracker + refund policies
+│   ├── hotels.py           # Google Hotels search (formerly hot_core.py)
+│   ├── airport_data.py     # Airport autocomplete for tracker
+│   └── models.py           # Pydantic enums (mostly documentation; routes use inline models)
+├── fli-js/                 # TypeScript port (npm package "fli-js")
+│   ├── src/                # core/, models/, search/ — mirrors fli/ layout
+│   ├── tests/              # Bun tests
+│   └── scripts/            # generate-enums.ts
+├── tests/                  # pytest — mirrors fli/ structure + app-adjacent scripts
+├── scripts/                # Release/maintenance: bump_version, update_airports, capture_fixtures
+├── examples/               # python/ and typescript/ usage samples
+├── docs/                   # MkDocs site (upstream)
+├── data/                   # airports.csv, airlines.csv — enum source data for fli
+├── public/                 # Legacy static PWA (Netlify); separate from app/static
+├── public_backup_*/        # Timestamped backup of public/ (local)
+├── find_*.py, plan_trip.py # Ad-hoc trip-planning scripts (local, untracked)
+├── scratch_*.py            # One-off experiments (local)
+├── pyproject.toml          # Package config; scripts: fli, fli-mcp, fli-tracker
+├── uv.lock                 # Python lockfile
+├── Makefile                # test, lint, format, mcp, docs
+└── .planning/              # GSD planning artifacts
 ```
 
 ## Directory Purposes
 
-**`fli/` (library package):**
-- Purpose: The publishable Python library providing flight search capability
-- Key files: `fli/cli/main.py` (CLI), `fli/mcp/server.py` (MCP), `fli/search/flights.py` (core search)
-- Installed via: `pip install flights` (PyPI package name is `flights`, import name is `fli`)
+**`fli/`:**
+- Purpose: Publishable Google Flights library
+- Contains: CLI, MCP, search engine, models, core utilities
+- Key files: `fli/search/flights.py`, `fli/search/client.py`, `fli/cli/main.py`, `fli/mcp/server.py`, `fli/core/parsers.py`, `fli/core/builders.py`
 
-**`fli/cli/` (CLI layer):**
-- Purpose: Typer-based terminal interface
-- Contains: One file per command in `commands/`; shared console, utils, and enums
-- Key files: `main.py` (entry + smart routing), `utils.py` (output formatting)
+**`app/`:**
+- Purpose: Personal price-tracker web app layered on `fli`
+- Contains: FastAPI server, search wrappers, SQLite persistence, static SPA
+- Key files: `app/server.py`, `app/engine.py`, `app/tracker.py`, `app/static/app.js`
 
-**`fli/core/` (shared utilities):**
-- Purpose: All parameter parsing and filter building shared between CLI and MCP
-- Contains: Stateless pure functions only; no I/O
-- Key files: `parsers.py`, `builders.py`
+**`fli-js/`:**
+- Purpose: Independent TypeScript/npm distribution
+- Contains: Parallel module structure to Python `fli/`
+- Key files: `fli-js/src/search/flights.ts`, `fli-js/src/index.ts`, `fli-js/package.json`
 
-**`fli/mcp/` (MCP server):**
-- Purpose: FastMCP-based AI assistant integration
-- Contains: `server.py` with tools + prompts + config; `_entry.py` guard wrapper
-- Transport: STDIO (Claude Desktop) or HTTP (`/mcp/` path, for Railway/Docker)
+**`tests/`:**
+- Purpose: pytest suite; `tests/search/` hits live Google API (flaky in CI)
+- Contains: `tests/cli/`, `tests/core/`, `tests/models/`, `tests/mcp/`, `tests/search/`, `tests/scripts/`
+- Key files: `tests/conftest.py`, `tests/search/fixtures/*.bin`
 
-**`fli/models/` (data models):**
-- Purpose: All Pydantic models and enums used across the library
-- Contains: `Airport`/`Airline` enums; Google Flights request/response models
-- Key files: `google_flights/base.py` (shared base models), `google_flights/flights.py` (filter + encode)
+**`scripts/`:**
+- Purpose: Repo maintenance, not runtime
+- Contains: `scripts/bump_version.py`, `scripts/update_airports.py`, `scripts/generate_enums.py`, `scripts/capture_fixtures.py`
 
-**`fli/search/` (search engine):**
-- Purpose: HTTP communication with Google Flights API
-- Contains: `SearchFlights` (specific date search), `SearchDates` (date range), `Client` (transport)
-- Key files: `client.py` (singleton with rate limiting + retry), `flights.py` (recursive multi-leg)
+**`examples/`:**
+- Purpose: Documented API usage for Python and TypeScript consumers
+- Contains: `examples/python/*.py`, `examples/typescript/*.ts`
 
-**`app/` (web application):**
-- Purpose: "Travel Planner Pro" browser SPA with flight search, hotel search, and price tracking
-- Contains: FastAPI server, async engine, SQLite tracker, static SPA
-- Key files: `server.py` (all routes), `engine.py` (async bridge), `tracker.py` (price monitoring)
+**`public/`:**
+- Purpose: Standalone static flight-curation PWA (Alpine.js + Tailwind CDN)
+- Contains: `public/index.html`, `public/heatmap.html`, `public/history.html`, `public/sw.js`, `public/manifest.json`
+- Note: Not mounted by `app/server.py`; deployed separately
 
-**`tests/` (test suite):**
-- Purpose: pytest test suite mirroring `fli/` directory structure
-- Contains: Unit tests for CLI, core utilities, models, MCP; integration tests for search (live API)
-- Note: `tests/search/` hits live Google Flights API; skip with `--ignore=tests/search/` in CI
-
-**`examples/` (usage examples):**
-- Purpose: Standalone runnable scripts demonstrating library usage patterns
-- Contains: Named scenario files; all ruff-lint checked but docstring rules relaxed
-
-**`scripts/` (developer tools):**
-- Purpose: Maintenance scripts for regenerating enum code from CSV source data
-- Contains: `generate_enums.py` (Airport/Airline enum codegen), `update_airports.py`
-
-**`data/` (reference data):**
-- Purpose: Source CSV data for airport and airline enums; demo media assets
-- Contains: `airports.csv`, `airlines.csv` (used by `scripts/` to regenerate enums)
+**Root `*.py` scripts:**
+- Purpose: Local trip research, reporting, alerts — developer utilities
+- Contains: `find_direct.py`, `find_cheapest.py`, `plan_trip.py`, `generate_flight_report.py`, `flight_gui.py`, `hotels_mcp.py`, etc.
+- Note: Not included in hatch wheel; keep out of upstream PRs unless intentionally contributing
 
 ## Key File Locations
 
 **Entry Points:**
-- `fli/cli/main.py`: CLI entry point (`cli()` function); registered as `fli` console script
-- `fli/mcp/_entry.py`: MCP entry guard; delegates to `fli/mcp/server.py`
-- `fli/mcp/server.py`: FastMCP tools, prompts, config, STDIO/HTTP `run()` functions
-- `app/server.py`: FastAPI web app; `main()` registered as `fli-tracker` console script
-
-**Core Search Logic:**
-- `fli/search/flights.py`: `SearchFlights.search()` — Google Flights API POST + recursive multi-leg
-- `fli/search/dates.py`: `SearchDates.search()` — date range price discovery
-- `fli/search/client.py`: `Client` + `get_client()` — singleton HTTP transport
-
-**Filter Construction:**
-- `fli/models/google_flights/flights.py`: `FlightSearchFilters.format()` + `encode()` — Google API payload serializer
-- `fli/models/google_flights/base.py`: `FlightSegment`, `FlightResult`, `FlightLeg`, `TimeRestrictions`
-- `fli/core/builders.py`: `build_flight_segments()`, `build_date_search_segments()`, `build_time_restrictions()`
-
-**Parameter Parsing:**
-- `fli/core/parsers.py`: `resolve_airport()`, `parse_cabin_class()`, `parse_max_stops()`, `parse_airlines()`, `ParseError`
-
-**Web App:**
-- `app/engine.py`: `stream_flight_search()`, `search_flights_async()`, `search_dates_async()` — async bridge
-- `app/tracker.py`: `TrackerDB` (SQLite), `check_all_flights()`, `get_refund_eligibility()`
+- `app/server.py`: FastAPI app + `main()` for `fli-tracker` CLI script
+- `fli/cli/main.py`: `fli` Typer CLI (`fli/cli/__init__.py` exports `cli`)
+- `fli/mcp/_entry.py`: `fli-mcp` / `fli-mcp-http` thin wrappers
+- `fli/search/flights.py`: `SearchFlights` class — primary search API
+- `fli-js/src/index.ts`: npm package public export
 
 **Configuration:**
-- `pyproject.toml`: Package metadata, dependencies, ruff config, pytest markers, console scripts
-- `pytest.ini`: Pytest base configuration
+- `pyproject.toml`: Dependencies, scripts, hatch packages (`fli`, `app`), pytest/ruff config
+- `Makefile`: `make test`, `make lint`, `make mcp-http`
+- `uv.lock`: Locked Python deps
+- `fli-js/biome.json`, `fli-js/tsconfig.json`: JS lint/build
+- `railway.toml`, `nixpacks.toml`, `Dockerfile`: Deployment configs
+- `.github/workflows/`: PyPI/npm release, docs, CI
 
-**Reference Data (runtime):**
-- `app/data/airports_lite.json`: Used by `app/airport_data.py` for web autocomplete
-- `app/data/tracker.db`: SQLite price history (created on first run)
+**Core Logic:**
+- `fli/search/flights.py`: Flight search orchestration
+- `fli/search/dates.py`: Cheapest-date search
+- `fli/search/client.py`: Rate-limited HTTP client
+- `fli/search/_decoders.py`, `_wire.py`, `_urls.py`, `_proto.py`: Response parsing internals
+- `fli/core/parsers.py`, `fli/core/builders.py`: Shared filter construction
+- `app/engine.py`: Tracker-specific search orchestration + JSON serialization
+- `app/tracker.py`: SQLite + price-check integration
+- `app/hotels.py`: Hotel search (successor to removed root `hot_core.py`)
+
+**Frontend (active tracker):**
+- `app/static/index.html`: SPA shell, form markup, tab structure
+- `app/static/app.js`: All client logic — SSE, tracker, trips, presets
+- `app/static/styles.css`: Tracker styling
+
+**Data files:**
+- `app/data/tracker.db`: SQLite (gitignored) — tracker state
+- `app/data/airports_lite.json`: Trimmed airport list for autocomplete
+- `data/airports.csv`, `data/airlines.csv`: Source for `fli.models` enums
+
+**Testing:**
+- `tests/search/`: Live API tests + binary fixtures
+- `tests/mcp/`: MCP tool unit/integration tests
+- `tests/cli/`: CLI output and parsing tests
+- `fli-js/tests/`: Bun unit/integration tests
 
 ## Naming Conventions
 
 **Files:**
-- `snake_case.py` for all Python source files
-- Test files prefixed `test_` (e.g., `test_flights.py`)
-- One command per file in `fli/cli/commands/` matching the command name
-- Model files named after the domain object (e.g., `flights.py`, `dates.py`)
+- Python modules: `snake_case.py` (`search_flights.py` pattern in commands, not files)
+- Private search internals: leading underscore (`_decoders.py`, `_wire.py`, `_helpers.py`)
+- CLI commands: verb nouns in `fli/cli/commands/` (`flights.py`, `dates.py`)
+- Root scripts: `find_<goal>.py`, `scratch_<topic>.py` for local experiments
+- Test files: `test_<module>.py` under mirrored `tests/` tree
 
 **Directories:**
-- `snake_case` for all directories
-- `__pycache__` auto-generated, not committed
-- Test directories mirror source directories (e.g., `tests/cli/` ↔ `fli/cli/`)
-
-**Classes:**
-- `PascalCase` (e.g., `SearchFlights`, `FlightSearchFilters`, `TrackerDB`)
+- Package code under `fli/`, `app/`, `fli-js/src/`
+- Google Flights models grouped in `*/models/google-flights/` (Python: `google_flights/`)
 
 **Functions:**
-- `snake_case` (e.g., `build_flight_segments`, `resolve_airport`, `parse_cabin_class`)
+- Sync search: `_search_flights_sync`, `_search_dates_sync` in `app/engine.py`
+- Async wrappers: `search_flights_async`, `stream_flight_search`
+- JS handlers: `handleFlightSearch`, `handleTrackerAdd` (camelCase)
+- JS init: `initSavedFlightPresets`, `initTabs`
 
-**Constants / Enums:**
-- `UPPER_SNAKE_CASE` for constants (e.g., `BASE_URL`, `BG_CHECK_INTERVAL`)
-- Enum members in `UPPER_SNAKE_CASE` (e.g., `SeatType.PREMIUM_ECONOMY`, `TripType.ONE_WAY`)
-- Airline/airport codes starting with a digit are prefixed with `_` in the enum (e.g., `Airline._3F`)
+**API routes:**
+- REST prefix `/api/`
+- SSE: `GET /api/search/flights`, `GET /api/search/combined`
+- Tracker: `/api/tracker/*`, trips: `/api/trips/*`
 
 ## Where to Add New Code
 
-**New CLI sub-command:**
-- Create `fli/cli/commands/<command_name>.py` with a function named `<command_name>`
-- Register in `fli/cli/main.py` with `app.command(name="<command_name>")(<command_name>)`
-- Add corresponding tests in `tests/cli/test_<command_name>.py`
-- Use `fli.core` parsers for all parameter parsing; do not duplicate enum resolution logic
+**New tracker API endpoint:**
+- Route handler: `app/server.py` (group under existing section comments)
+- Business logic: `app/engine.py` if search-related; `app/tracker.py` if persistence-related
+- Tests: No dedicated `tests/app/` yet — add `tests/app/test_server.py` following `tests/mcp/` patterns
+
+**New flight search filter exposed in tracker UI:**
+- Parser/builder (if shared): `fli/core/parsers.py` or `fli/core/builders.py`
+- Library search support: `fli/search/flights.py`, `fli/models/google_flights/flights.py`
+- Tracker wiring: `app/engine.py::_search_flights_sync` + query param in `app/server.py::search_flights_sse`
+- Frontend control: `app/static/index.html` + handler in `app/static/app.js`
+
+**New saved search preset:**
+- Hardcoded preset object: `app/static/app.js` near `FIFA_DFW_PRESET` (~1305)
+- Register in `initSavedFlightPresets()` — use unique `id`, merge via `localStorage` key `savedFlightPresets`
+- Optional `referenceDeals` array for static booking links
+
+**New CLI command:**
+- Implementation: `fli/cli/commands/<name>.py`
+- Registration: `fli/cli/main.py` (`app.command(...)`)
+- Tests: `tests/cli/test_<name>.py`
 
 **New MCP tool:**
-- Add `@mcp.tool()` decorated function in `fli/mcp/server.py`
-- Use `Annotated[type, Field(description="...")]` for all parameters
-- Follow the existing `_execute_*` helper pattern to separate parameter validation from execution
-- Add tests in `tests/mcp/test_mcp_server.py`
+- Tool function + params model: `fli/mcp/server.py`
+- Tests: `tests/mcp/test_<feature>.py`
 
-**New search filter or model:**
-- Add Pydantic model or enum to `fli/models/google_flights/base.py`
-- Export from `fli/models/google_flights/__init__.py` and `fli/models/__init__.py`
-- Update `FlightSearchFilters.format()` in `fli/models/google_flights/flights.py` to include the new field in the API payload
-- Add corresponding parser in `fli/core/parsers.py` if the filter needs string → enum conversion
+**New library search feature (upstream-worthy):**
+- Models: `fli/models/google_flights/`
+- Search logic: `fli/search/`
+- Shared parsing: `fli/core/`
+- Mirror in TS: corresponding file under `fli-js/src/`
+- Tests: `tests/search/` or `tests/models/`
 
-**New core utility:**
-- Add pure function to `fli/core/parsers.py` (string → model) or `fli/core/builders.py` (model factory)
-- Export from `fli/core/__init__.py`
-- Add tests in `tests/core/`
+**New hotel feature:**
+- API client changes: `app/hotels.py`
+- Engine integration: `app/engine.py::_search_hotels_sync`, `stream_combined_search`
+- Route: `app/server.py::search_hotels_endpoint`
 
-**New web app endpoint:**
-- Add route handler in `app/server.py`
-- Add async business logic in `app/engine.py` (keep `server.py` thin)
-- Add request/response Pydantic models to `app/models.py`
+**New root trip-planning script:**
+- Place at repo root as `find_<purpose>.py` or `plan_<purpose>.py`
+- Import `fli` directly: `from fli.search import SearchFlights`
+- Do not add to `pyproject.toml` `[project.scripts]` unless promoting to supported tool
 
-**New example script:**
-- Add to `examples/` with a descriptive filename (e.g., `multi_city_search.py`)
-- Follow the existing pattern: import from `fli` directly, no CLI subprocess calls
-
-**New enum data (airports/airlines):**
-- Update source CSV in `data/airports.csv` or `data/airlines.csv`
-- Run `uv run python scripts/generate_enums.py` to regenerate enum files
-- Do not edit `fli/models/airport.py` or `fli/models/airline.py` by hand
+**Utilities:**
+- Release/version: `scripts/bump_version.py`
+- Airport data refresh: `scripts/update_airports.py` → updates `data/airports.csv` and regeneration via `scripts/generate_enums.py`
 
 ## Special Directories
 
-**`.planning/`:**
-- Purpose: GSD planning artifacts (roadmap, phase plans, codebase maps)
-- Generated: No (managed by GSD workflow tools)
-- Committed: Yes
-
-**`.venv/`:**
-- Purpose: Virtual environment managed by `uv`
-- Generated: Yes
-- Committed: No (in `.gitignore`)
-
 **`app/data/`:**
-- Purpose: Runtime SQLite database and airport reference JSON
-- Generated: `tracker.db` created on first run
-- Committed: `airports_lite.json` is committed; `tracker.db` should be gitignored (contains user data)
+- Purpose: Runtime local data
+- Generated: `tracker.db` created on first `TrackerDB()` init
+- Committed: `airports_lite.json`, `.gitkeep`; `tracker.db` gitignored
 
-**`data/` (root):**
-- Purpose: Source reference data for enum codegen + demo assets
-- Generated: No (maintained manually)
+**`tests/search/fixtures/`:**
+- Purpose: Binary snapshots of Google API responses for offline decoder tests
+- Generated: Via `scripts/capture_fixtures.py`
+- Committed: Yes (`.bin` files)
+
+**`public/` and `public_backup_*`:**
+- Purpose: Legacy/alternate frontend
+- Generated: `public_backup_*` is manual snapshot
+- Committed: Present in working tree; separate deploy target from `app/static/`
+
+**`.planning/`:**
+- Purpose: GSD milestone/phase docs and codebase maps
+- Generated: By GSD commands
 - Committed: Yes
+
+**`__pycache__/`, `.venv/`, `.ruff_cache/`, `.pytest_cache/`:**
+- Purpose: Local tooling artifacts
+- Committed: No
+
+## Module Dependency Rules
+
+Use this order when adding imports to avoid circular dependencies:
+
+```text
+fli/models  →  fli/core  →  fli/search  →  fli/cli | fli/mcp
+                                    ↓
+                              app/engine  →  app/server
+                                    ↓
+                              app/tracker
+```
+
+- `app/tracker.py` may import `app.engine` lazily inside `check_flight_price` to break cycles.
+- `app/hotels.py` has no `fli` dependency — keep hotel logic isolated.
+- Do not import `app/` from `fli/` (preserves upstream publishability).
+
+## SSE Contract Reference
+
+When extending flight search streaming, match existing events consumed by `app/static/app.js`:
+
+| Event | Source | Client handler |
+|-------|--------|----------------|
+| `status` | `app/engine.py::stream_flight_search` | `setStatus(message)` |
+| `progress` | same | `setStatus(current/total, trip)` |
+| `flight_found` | same | Push to `state.flightResults` |
+| `complete` | same | Close EventSource, re-enable UI |
+
+Combined search uses `trip_found` instead of `flight_found` (`app/static/app.js` ~728).
 
 ---
 
-*Structure analysis: 2026-05-30*
+*Structure analysis: 2026-06-18*
