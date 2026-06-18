@@ -7,10 +7,10 @@ Two-phase pipeline:
 
 from __future__ import annotations
 
+import argparse
 import json
 import logging
 import os
-import sys
 import time
 from datetime import datetime, timedelta
 from threading import Lock
@@ -27,7 +27,6 @@ from fli.core import (
 from fli.models import DateSearchFilters, FlightSearchFilters, PassengerInfo
 from fli.search import SearchDates, SearchFlights
 from fli.search.dates import DatePrice
-
 from tracker_config import (
     DOMESTIC_TRIP_DURATIONS,
     EXCLUDED_AIRLINES,
@@ -45,7 +44,14 @@ log = logging.getLogger("find_direct")
 _flight_searcher: SearchFlights | None = None
 _dates_searcher: SearchDates | None = None
 _searcher_lock = Lock()
-_stats = {"dates_ok": 0, "dates_empty": 0, "flights_ok": 0, "flights_empty": 0, "errors": 0}
+_stats = {
+    "dates_ok": 0,
+    "dates_empty": 0,
+    "flights_ok": 0,
+    "flights_empty": 0,
+    "flights_filtered": 0,
+    "errors": 0,
+}
 _stats_lock = Lock()
 MAX_RETRIES = 3
 RETRY_BACKOFF_SEC = 2.0
@@ -68,6 +74,7 @@ def _get_dates_searcher() -> SearchDates:
 
 
 def atomic_write_json(path: str, data: object) -> None:
+    """Write JSON atomically via temp file + rename."""
     tmp_path = f"{path}.tmp"
     with open(tmp_path, "w", encoding="utf-8") as handle:
         json.dump(data, handle, indent=2)
@@ -102,6 +109,58 @@ def _flight_matches(flight: dict, r_type: str) -> bool:
     if r_type == "domestic":
         return _domestic_time_valid(out_dep, ret_arr)
     return True
+
+
+def _load_checkpoint(*, force: bool) -> dict[str, list[dict]]:
+    """Load prior results for resume; validate each region payload is a list of dicts."""
+    all_results = {region: [] for region in REGIONS}
+    if force or not os.path.exists(OUTPUT_JSON):
+        return all_results
+
+    try:
+        with open(OUTPUT_JSON, encoding="utf-8") as handle:
+            existing = json.load(handle)
+    except (json.JSONDecodeError, OSError) as exc:
+        log.warning("Could not load existing results for resume: %s", exc)
+        return all_results
+
+    if not isinstance(existing, dict):
+        log.warning("Ignoring checkpoint: root JSON value is not an object")
+        return all_results
+
+    for region_name in REGIONS:
+        region_data = existing.get(region_name)
+        if not isinstance(region_data, list):
+            if region_data is not None:
+                log.warning("Ignoring invalid checkpoint for %s (expected list)", region_name)
+            continue
+        valid_rows = [row for row in region_data if isinstance(row, dict)]
+        if len(valid_rows) != len(region_data):
+            log.warning(
+                "Dropped %d invalid flight entries in %s checkpoint",
+                len(region_data) - len(valid_rows),
+                region_name,
+            )
+        all_results[region_name] = valid_rows
+
+    return all_results
+
+
+def _compute_exit_code(all_results: dict[str, list[dict]]) -> int:
+    """Return 0 when the run produced usable output; 1 only on total failure."""
+    has_results = any(len(flights) > 0 for flights in all_results.values())
+    if has_results:
+        if _stats["errors"] > 0:
+            log.warning(
+                "Search completed with %d errors; partial results saved to %s",
+                _stats["errors"],
+                OUTPUT_JSON,
+            )
+        return 0
+    if _stats["errors"] > 0:
+        log.error("Search failed with %d errors and no flights collected", _stats["errors"])
+        return 1
+    return 0
 
 
 def _search_dates_route(
@@ -139,13 +198,24 @@ def _search_dates_route(
         )
 
         searcher = _get_dates_searcher()
-        results = None
+        results: list[DatePrice] | None = None
         for attempt in range(MAX_RETRIES):
-            results = searcher.search(filters)
-            if results:
+            try:
+                results = searcher.search(filters)
                 break
-            if attempt < MAX_RETRIES - 1:
-                time.sleep(RETRY_BACKOFF_SEC * (attempt + 1))
+            except Exception as exc:
+                if attempt < MAX_RETRIES - 1:
+                    log.debug(
+                        "Date search retry %d/%d %s→%s: %s",
+                        attempt + 1,
+                        MAX_RETRIES,
+                        origin,
+                        dest,
+                        exc,
+                    )
+                    time.sleep(RETRY_BACKOFF_SEC * (attempt + 1))
+                else:
+                    raise exc
 
         if not results:
             with _stats_lock:
@@ -213,7 +283,6 @@ def _phase1_shortlist(
     durations = DOMESTIC_TRIP_DURATIONS if r_type == "domestic" else INTERNATIONAL_TRIP_DURATIONS
 
     if is_test:
-        # Narrow window for smoke tests.
         start_dt = datetime.strptime(start_date, "%Y-%m-%d")
         end_date = (start_dt + timedelta(days=7)).strftime("%Y-%m-%d")
 
@@ -229,7 +298,6 @@ def _phase1_shortlist(
                 dates_calls += 1
                 candidates.extend(_date_pairs_from_results(results, origin, dest, r_type))
 
-    # Deduplicate by route+dates, keep lowest price per pair.
     best: dict[tuple[str, str, str, str], float] = {}
     for origin, dest, out_d, ret_d, price in candidates:
         key = (origin, dest, out_d, ret_d)
@@ -237,7 +305,10 @@ def _phase1_shortlist(
             best[key] = price
 
     ranked = sorted(
-        [(origin, dest, out_d, ret_d, best[(origin, dest, out_d, ret_d)]) for origin, dest, out_d, ret_d in best],
+        [
+            (origin, dest, out_d, ret_d, best[(origin, dest, out_d, ret_d)])
+            for origin, dest, out_d, ret_d in best
+        ],
         key=lambda row: row[4],
     )
     limit = SHORTLIST_SIZE_TEST if is_test else SHORTLIST_SIZE
@@ -288,11 +359,24 @@ def _search_pair(
         searcher = _get_flight_searcher()
         results = None
         for attempt in range(MAX_RETRIES):
-            results = searcher.search(filters)
-            if results:
+            try:
+                results = searcher.search(filters)
                 break
-            if attempt < MAX_RETRIES - 1:
-                time.sleep(RETRY_BACKOFF_SEC * (attempt + 1))
+            except Exception as exc:
+                if attempt < MAX_RETRIES - 1:
+                    log.debug(
+                        "Flight search retry %d/%d %s→%s %s/%s: %s",
+                        attempt + 1,
+                        MAX_RETRIES,
+                        origin,
+                        dest,
+                        out_date_str,
+                        ret_date_str,
+                        exc,
+                    )
+                    time.sleep(RETRY_BACKOFF_SEC * (attempt + 1))
+                else:
+                    raise exc
 
         if not results:
             with _stats_lock:
@@ -303,6 +387,8 @@ def _search_pair(
             booking_url = searcher.build_flight_booking_url(result)
             flight = serialize_flight_result(result, booking_url=booking_url)
             if not _flight_matches(flight, r_type):
+                with _stats_lock:
+                    _stats["flights_filtered"] += 1
                 continue
             airline_name = flight["outbound"]["legs"][0]["airline"]["name"]
             matches.append(
@@ -319,8 +405,9 @@ def _search_pair(
                 }
             )
 
-        with _stats_lock:
-            _stats["flights_ok"] += 1
+        if matches:
+            with _stats_lock:
+                _stats["flights_ok"] += 1
     except Exception as exc:
         with _stats_lock:
             _stats["errors"] += 1
@@ -341,27 +428,34 @@ def _sort_region(flights: list[dict]) -> list[dict]:
     return priced
 
 
-def main() -> int:
-    is_test = "--test" in sys.argv
-    force = "--force" in sys.argv
+def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Two-phase multi-region flight search (SearchDates → SearchFlights).",
+    )
+    parser.add_argument(
+        "--test",
+        action="store_true",
+        help=f"Smoke test: narrow date window, shortlist={SHORTLIST_SIZE_TEST} pairs per region.",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Re-search all regions instead of resuming from best_direct.json checkpoint.",
+    )
+    return parser.parse_args(argv)
 
-    all_results = {region: [] for region in REGIONS}
-    if os.path.exists(OUTPUT_JSON) and not force:
-        try:
-            with open(OUTPUT_JSON, encoding="utf-8") as handle:
-                existing = json.load(handle)
-            if isinstance(existing, dict):
-                for region_name in REGIONS:
-                    if existing.get(region_name):
-                        all_results[region_name] = existing[region_name]
-        except (json.JSONDecodeError, OSError) as exc:
-            log.warning("Could not load existing results for resume: %s", exc)
+
+def main(argv: list[str] | None = None) -> int:
+    """Run the two-phase search across all configured regions."""
+    args = _parse_args(argv)
+
+    all_results = _load_checkpoint(force=args.force)
 
     log.info(
         "Starting two-phase search (test=%s, resume=%s, shortlist=%d)",
-        is_test,
-        not force,
-        SHORTLIST_SIZE_TEST if is_test else SHORTLIST_SIZE,
+        args.test,
+        not args.force,
+        SHORTLIST_SIZE_TEST if args.test else SHORTLIST_SIZE,
     )
 
     today = datetime.now()
@@ -371,7 +465,7 @@ def main() -> int:
     int_end = (today + timedelta(days=42)).strftime("%Y-%m-%d")
 
     for region_name, config in REGIONS.items():
-        if all_results[region_name] and not force:
+        if all_results[region_name] and not args.force:
             log.info(
                 "Skipping %s — already have %d flights (use --force to re-search)",
                 region_name,
@@ -389,7 +483,7 @@ def main() -> int:
             dom_end=dom_end,
             int_start=int_start,
             int_end=int_end,
-            is_test=is_test,
+            is_test=args.test,
         )
 
         if not shortlist:
@@ -415,16 +509,19 @@ def main() -> int:
         log.info("Checkpoint %s: %d flights", region_name, len(all_results[region_name]))
 
     log.info(
-        "Search complete — dates_ok=%d dates_empty=%d flights_ok=%d flights_empty=%d errors=%d",
+        "Search complete — dates_ok=%d dates_empty=%d flights_ok=%d flights_empty=%d "
+        "flights_filtered=%d errors=%d",
         _stats["dates_ok"],
         _stats["dates_empty"],
         _stats["flights_ok"],
         _stats["flights_empty"],
+        _stats["flights_filtered"],
         _stats["errors"],
     )
     for region_name in REGIONS:
         log.info("%s: %d matching flights", region_name, len(all_results[region_name]))
-    return 0 if _stats["errors"] == 0 else 1
+
+    return _compute_exit_code(all_results)
 
 
 if __name__ == "__main__":
