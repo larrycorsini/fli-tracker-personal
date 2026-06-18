@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Fli-Tracker | Price History</title>
+    <meta name='description' content='14-day price trends for flights from SLC/PVU by destination region.'>
+    <link rel='manifest' href='manifest.json'>
+    <meta name='apple-mobile-web-app-capable' content='yes'>
+    <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'>
+    <link rel='apple-touch-icon' href='apple-touch-icon.png'>
+    <script src='https://cdn.tailwindcss.com'></script>
+    <script defer src='https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.14.9/dist/cdn.min.js'></script>
+    <script defer src='https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js'></script>
+    <link rel='preconnect' href='https://fonts.googleapis.com'>
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+    <link href='https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;900&display=swap' rel='stylesheet'>
+    <style>
+        :root {
+            --primary: #1F2A37;
+            --primary-hover: #2D3A4A;
+            --accent: #14B8A6;
+            --accent-hover: #0D9488;
+            --accent-strong: #0F766E;
+            --accent-light: #F0FDFA;
+            --accent-border: #99F6E4;
+            --success: #059669;
+            --success-light: #D1FAE5;
+            --success-border: #6EE7B7;
+            --text-color: #374151;
+            --text-muted: #6B7280;
+            --surface: #FFFFFF;
+            --background: #F9FAFB;
+            --font-family-sans-serif: 'Raleway', sans-serif;
+            --button--primary-background-color: var(--primary);
+            --button--primary-border: 2px solid var(--primary);
+            --button--primary-color: #ffffff;
+            --button--primary--hover-background-color: var(--primary-hover);
+            --button--primary--hover-border: 2px solid var(--primary-hover);
+            --button--primary--hover-box-shadow: 0px 4px 12px rgba(31, 42, 55, 0.25);
+        }
+        body { font-family: var(--font-family-sans-serif); -webkit-font-smoothing: antialiased; letter-spacing: -.31px; background: var(--background); color: var(--text-color); }
+        .hero-section {
+            background-image: linear-gradient(to right, rgba(249,250,251,0.97) 20%, rgba(249,250,251,0.55) 100%),
+                url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-position: center;
+        }
+        h1, .page-header { font-weight: 900; font-size: 52px; line-height: 1.1; color: var(--primary); margin-bottom: 20px; }
+        @media (max-width: 640px) { h1, .page-header { font-size: 36px; } }
+        p.hero-text { font-size: 20px; line-height: 1.6; color: var(--text-color); margin-bottom: 24px; }
+        .dt-btn-primary {
+            background: var(--button--primary-background-color); border: var(--button--primary-border);
+            color: var(--button--primary-color); border-radius: 40px; font-weight: 700;
+            padding: 12px 32px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
+            text-decoration: none; text-transform: uppercase; letter-spacing: 1px; font-size: 14px; transition: all .3s ease;
+        }
+        .dt-btn-primary:hover {
+            background: var(--button--primary--hover-background-color);
+            box-shadow: var(--button--primary--hover-box-shadow); transform: translateY(-2px); color: #fff;
+        }
+        .btn-accent {
+            background: var(--accent); color: #fff; font-weight: 700; border-radius: 8px;
+            padding: 12px 24px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
+            transition: background .2s ease;
+        }
+        .btn-accent:hover { background: var(--accent-hover); color: #fff; }
+        .price-text { font-weight: 500; font-size: 32px; color: var(--success); display: flex; justify-content: flex-end; }
+        .price-points { font-weight: 600; font-size: 14px; color: var(--primary); margin-top: 4px; text-align: right; }
+        .card-container { border-radius: 12px; box-shadow: 0 10px 40px -10px rgba(31, 42, 55, 0.08); }
+        .nav-logo { font-size: 24px; font-weight: 900; color: var(--primary); letter-spacing: 2px; text-transform: uppercase; }
+        .nav-link-accent { color: var(--accent-strong); font-weight: 700; }
+        .nav-link-accent:hover { color: var(--accent-hover); }
+        .tab-scroll { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+        .tab-fade { mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent); }
+        .tab-active { border-bottom-color: var(--accent) !important; color: var(--accent-strong) !important; font-weight: 700; }
+        .tab-inactive { border-color: transparent; color: var(--text-muted); font-weight: 500; }
+        .tab-inactive:hover { color: var(--text-color); }
+        .tab-btn { min-height: 44px; padding: 12px 16px; }
+        .deal-chip {
+            font-size: 14px; padding: 10px 16px; min-height: 44px; border-radius: 9999px;
+            border: 1px solid var(--accent-border); background: var(--accent-light); color: var(--accent-strong);
+            transition: background .2s ease;
+        }
+        .deal-chip:hover { background: #CCFBF1; }
+        .callout-accent {
+            background: var(--accent-light); border: 1px solid var(--accent-border);
+            border-left: 4px solid var(--accent); border-radius: 8px;
+        }
+        .callout-accent-title { color: var(--accent-strong); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-size: 13px; }
+        .accent-text { color: var(--accent-strong); }
+        .scroll-top-btn {
+            background: var(--primary); color: #fff; width: 50px; height: 50px; border-radius: 9999px;
+            box-shadow: 0 4px 14px rgba(31, 42, 55, 0.25); transition: background .2s ease;
+        }
+        .scroll-top-btn:hover { background: var(--primary-hover); }
+        .filter-toggle { min-height: 44px; }
+        [x-cloak] { display: none !important; }
+    </style>
+    <script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
+</head>
+<body class='antialiased bg-gray-50 text-gray-800'>
+    <nav class='bg-white shadow-sm border-b sticky top-0 z-50'>
+        <div class='max-w-7xl mx-auto px-4 py-3 flex justify-between items-center'>
+            <div class='nav-logo'>Fli-Tracker</div>
+            <div class='flex gap-4'>
+                <a href='heatmap.html' class='text-sm font-bold uppercase text-gray-500'>Heatmap</a>
+                <a href='index.html' class='text-sm font-bold uppercase nav-link-accent'>&larr; Flights</a>
+            </div>
+        </div>
+    </nav>
+    <section class='py-12 px-6 max-w-5xl mx-auto' x-data='historyPage()' x-init='init()'>
+        <div class='mb-8 text-center'>
+            <h3 class='text-3xl font-bold text-gray-800 mb-2'>14-Day Price Trends</h3>
+            <p class='text-gray-500'>Lowest fare for <span x-text='activeRegion'></span></p>
+        </div>
+        <div class='mb-6 overflow-x-auto tab-scroll'>
+            <nav class='flex gap-4 min-w-max border-b border-gray-200 pb-1'>
+                <button type='button' @click="activeRegion = 'DFW'" :class="activeRegion === 'DFW' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn whitespace-nowrap'>DFW</button>
+                <button type='button' @click="activeRegion = 'California Coast'" :class="activeRegion === 'California Coast' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn whitespace-nowrap'>California Coast</button>
+                <button type='button' @click="activeRegion = 'Georgia'" :class="activeRegion === 'Georgia' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn whitespace-nowrap'>Georgia</button>
+                <button type='button' @click="activeRegion = 'Cancun'" :class="activeRegion === 'Cancun' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn whitespace-nowrap'>Cancun</button>
+                <button type='button' @click="activeRegion = 'El Salvador'" :class="activeRegion === 'El Salvador' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn whitespace-nowrap'>El Salvador</button>
+                <button type='button' @click="activeRegion = 'Europe'" :class="activeRegion === 'Europe' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn whitespace-nowrap'>Europe</button>
+                <button type='button' @click="activeRegion = 'Japan'" :class="activeRegion === 'Japan' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn whitespace-nowrap'>Japan</button>
+                <button type='button' @click="activeRegion = 'South Korea'" :class="activeRegion === 'South Korea' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn whitespace-nowrap'>South Korea</button>
+            </nav>
+        </div>
+        <div class='card-container bg-white border border-gray-200 p-4 md:p-8' style='position:relative;height:50vh;min-height:300px'>
+            <canvas id='priceChart'></canvas>
+            <p class='absolute inset-0 flex items-center justify-center text-gray-500' x-show='!hasData' x-cloak>No history yet for this region.</p>
+        </div>
+    </section>
+    <script>window.HISTORY_DATA = {"DFW": {"labels": ["Sat May 09", "Fri May 29", "Sat May 30", "Sun May 31", "Thu Jun 04", "Fri Jun 05", "Thu Jun 18"], "prices": [143.0, 208.0, 208.0, 208.0, 198.0, 238.0, 250.0]}, "California Coast": {"labels": ["Thu Jun 18"], "prices": [198.0]}, "Georgia": {"labels": ["Thu Jun 18"], "prices": [245.0]}, "Cancun": {"labels": ["Thu Jun 18"], "prices": [389.0]}, "El Salvador": {"labels": ["Thu Jun 18"], "prices": [770.0]}, "Europe": {"labels": ["Thu Jun 18"], "prices": [1002.0]}, "Japan": {"labels": ["Thu Jun 18"], "prices": [1096.0]}, "South Korea": {"labels": ["Thu Jun 18"], "prices": [1526.0]}}; window.HISTORY_DEFAULT = "DFW";</script>
+    <script>
+        function historyPage() {
+            return {
+                activeRegion: window.HISTORY_DEFAULT,
+                chart: null,
+                get hasData() {
+                    const d = window.HISTORY_DATA[this.activeRegion] || { labels: [], prices: [] };
+                    return d.labels && d.labels.length > 0;
+                },
+                init() { this.renderChart(); this.$watch('activeRegion', () => this.renderChart()); },
+                renderChart() {
+                    const canvas = document.getElementById('priceChart');
+                    if (!canvas) return;
+                    const d = window.HISTORY_DATA[this.activeRegion] || { labels: [], prices: [] };
+                    if (this.chart) this.chart.destroy();
+                    if (!d.labels.length) { this.chart = null; return; }
+                    this.chart = new Chart(canvas.getContext('2d'), {
+                        type: 'line',
+                        data: {
+                            labels: d.labels,
+                            datasets: [{ data: d.prices, borderColor: '#14B8A6', backgroundColor: 'rgba(20,184,166,0.12)', fill: true, tension: 0.4, borderWidth: 3 }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: { y: { ticks: { callback: (v) => '$' + v } } }
+                        }
+                    });
+                }
+            };
+        }
+    </script>
+    <footer class='bg-gray-900 text-white py-12 mt-12'>
+        <div class='max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left'>
+            <div>
+                <div class='nav-logo text-white mb-2'>Fli-Tracker</div>
+                <p class='text-gray-400 text-sm'>Generated automatically. Updated every morning at 6 AM.</p>
+            </div>
+            <div class='text-sm flex flex-wrap justify-center gap-4'></div>
+            <div class='text-sm text-gray-600'>&copy; 2026 Fli-Tracker</div>
+        </div>
+    </footer>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(err => console.error('SW registration failed:', err));
+            });
+        }
+    </script>
+</body>
+</html>

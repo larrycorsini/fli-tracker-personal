@@ -164,4 +164,41 @@ cython_debug/
 fli-tracker.zip
 
 # Local SQLite databases (user-generated tracker data)
-# *.db
+app/data/*.db
+
+# Fli-Tracker pipeline runtime output
+best_direct.json
+last_alert.json
+logs/
+out_*.json
+ret_*.json
+pvu_*.json
+scratch*.json
+engine_results.json
+freeze_results.json
+final_test.json
+mx_test.json
+test_flights.json
+d_s.json
+
+# Scratch / backup artifacts
+public_backup_*/
+scratch*.py
+find_afternoon.py
+find_breeze.py
+find_cheapest*.py
+find_options.py
+find_roundtrip.py
+find_top.py
+find_valid.py
+dummy_flights.py
+generate_all_dummies.py
+patch.py
+revert.py
+rewrite_gen.py
+temp_view.py
+update_find_direct*.py
+flight_options_report.*
+
+# Local Netlify folder
+.netlify

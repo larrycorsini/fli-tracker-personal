@@ -1,0 +1,26 @@
+# Fli-Tracker static dashboard — https://flights.larrycorsini.com
+# Generated HTML lives in public/ (see generate_flight_report.py + daily_flight_search.sh)
+
+[build]
+  publish = "public"
+
+# Security headers for the public flight dashboard
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Service worker must revalidate so daily deploys reach installed PWAs
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Manifest can be cached briefly; HTML pages revalidate on deploy by default
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"

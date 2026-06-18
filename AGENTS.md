@@ -42,6 +42,7 @@ workflows for the full process.
 - Model the tracker web UI after Google Flights: clear layout, readable typography, accessible controls, and familiar search/filter flow.
 - Do not auto-push to the `personal` remote; wait for explicit user approval before publishing fork changes.
 - Use `uv` on PATH in scripts and subprocess calls — avoid hardcoded absolute paths to a local `uv` binary.
+- Exclude budget/low-cost carriers (Frontier F9, Breeze MX, Spirit NK, Allegiant G4, Sun Country SY, Avelo XP) from flight searches and recommendations.
 
 ## Learned Workspace Facts
 
@@ -51,3 +52,6 @@ workflows for the full process.
 - Upstream can return `FlightResult` entries with `price=None`; `app/engine.py` must skip or safely sort unpriced rows.
 - Tracker app entry point: `uv run uvicorn app.server:app --reload`; flight search streams via SSE at `/api/search/flights`.
 - Local SQLite tracker data lives in `app/data/tracker.db` and stays gitignored.
+- Home airports for trip searches and the automated tracker are SLC and PVU.
+- Daily automated flight search: `find_direct.py` → `best_direct.json` → `generate_flight_report.py` → static HTML in `public/`, deployed to Netlify via `daily_flight_search.sh` (launchd ~6 AM).
+- Automated tracker optimizes for Chase Sapphire Preferred points (1.25¢ redemption); multi-region destinations are configured in `REGIONS` inside `find_direct.py`.
