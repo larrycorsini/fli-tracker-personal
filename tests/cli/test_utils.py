@@ -324,10 +324,13 @@ def test_display_date_results_links_dates_when_route_given():
     buf = StringIO()
     test_console = Console(file=buf, width=120, force_terminal=True)
     dates = [DatePrice(date=(datetime(2026, 7, 15),), price=299.0, currency="USD")]
-    with patch("fli.cli.utils.console", test_console), patch(
-        "fli.cli.utils.google_flights_url",
-        return_value="https://www.google.com/travel/flights?q=Flights+from+JFK+to+LHR",
-    ) as mock_url:
+    with (
+        patch("fli.cli.utils.console", test_console),
+        patch(
+            "fli.cli.utils.google_flights_url",
+            return_value="https://www.google.com/travel/flights?q=Flights+from+JFK+to+LHR",
+        ) as mock_url,
+    ):
         display_date_results(
             dates,
             TripType.ONE_WAY,
