@@ -9,7 +9,15 @@ import sqlite3
 from collections import defaultdict
 from datetime import datetime
 
-from tracker_config import INTERNATIONAL_REGIONS, OUTPUT_JSON, REGIONS, SITE_URL
+from tracker_config import (
+    FLIGHTS_JSON,
+    INTERNATIONAL_REGIONS,
+    MAX_FARE_GROUPS_PER_REGION,
+    MAX_TIMES_PER_GROUP,
+    OUTPUT_JSON,
+    REGIONS,
+    SITE_URL,
+)
 from tracker_io import atomic_write_json, atomic_write_text
 
 ALPINE_CORE = "https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"
@@ -122,6 +130,7 @@ def get_base_html_head(title: str, description: str, *, extra_scripts: list[str]
         "        .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 100; }",
         "        .skip-link:focus { position: fixed; top: 12px; left: 12px; width: auto; height: auto; padding: 12px 20px; background: var(--accent-interactive); color: #fff; font-weight: 700; font-size: 14px; border-radius: 8px; box-shadow: 0 4px 12px rgba(26,115,232,0.35); text-decoration: none; }",
         "        .hero-section {",
+        "            position: relative; overflow: hidden;",
         "            background-image: linear-gradient(to right, rgba(249,250,251,0.97) 20%, rgba(249,250,251,0.55) 100%),",
         "                url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80');",
         "            background-size: cover; background-position: center;",
@@ -223,7 +232,18 @@ def get_base_html_head(title: str, description: str, *, extra_scripts: list[str]
         "            .chevron-rotate { transition: none !important; }",
         "            html { scroll-behavior: auto; }",
         "            .nav-shell, .nav-links { transition: none !important; }",
+        "            .hero-airplane { animation: none !important; opacity: 0 !important; }",
         "        }",
+        "        .hero-airplane {",
+        "            position: absolute; top: 18%; right: -80px; width: 72px; height: 72px;",
+        "            opacity: 0.35; pointer-events: none; z-index: 1;",
+        "            animation: hero-fly 28s linear infinite;",
+        "        }",
+        "        @keyframes hero-fly {",
+        "            0% { transform: translateX(110vw) translateY(0) rotate(-8deg); }",
+        "            100% { transform: translateX(-120px) translateY(-24px) rotate(-8deg); }",
+        "        }",
+        "        @media (max-width: 640px) { .hero-airplane { width: 48px; height: 48px; top: 12%; } }",
         "        [x-cloak] { display: none !important; }",
         "    </style>",
     ]
@@ -427,26 +447,147 @@ def build_deal_board(all_results: dict[str, list[dict]]) -> list[tuple[str, dict
     return deals
 
 
-def render_index(all_results: dict[str, list[dict]], last_updated: str, hist_avg: dict[str, float | None]) -> None:
-    all_results = normalized_results(all_results)
-    regions = list(REGIONS.keys())
-    intl_tabs = INTERNATIONAL_REGIONS
-    intl_json = json.dumps(intl_tabs)
-    max_price_init = compute_max_price(all_results)
-    deals = build_deal_board(all_results)
+def cap_region_flights(flights: list[dict]) -> list[dict]:
+    """Cap fare groups and time options per group for display and JSON export."""
+    priced = priced_flights(flights)
+    if not priced:
+        return []
 
+    groups: dict[tuple, list[dict]] = defaultdict(list)
+    for flight in priced:
+        key = (
+            flight["origin"],
+            flight.get("destination", ""),
+            flight["airline"],
+            flight["price"],
+            flight["out_date"],
+            flight["ret_date"],
+        )
+        groups[key].append(flight)
+
+    sorted_groups = sorted(groups.items(), key=lambda item: item[0][3])[:MAX_FARE_GROUPS_PER_REGION]
+    capped: list[dict] = []
+    for _key, group_flights in sorted_groups:
+        capped.extend(group_flights[:MAX_TIMES_PER_GROUP])
+    return capped
+
+
+def build_region_groups(
+    flights: list[dict], region_name: str, hist_avg: dict[str, float | None]
+) -> dict:
+    """Serialize capped fare groups for client-side rendering."""
+    capped = cap_region_flights(flights)
+    priced = priced_flights(capped)
+    if not priced:
+        return {"groups": [], "best": None, "groupCount": 0}
+
+    groups_map: dict[tuple, list[dict]] = defaultdict(list)
+    for flight in priced:
+        key = (
+            flight["origin"],
+            flight.get("destination", region_name),
+            flight["airline"],
+            flight["price"],
+            flight["out_date"],
+            flight["ret_date"],
+        )
+        groups_map[key].append(flight)
+
+    groups_out: list[dict] = []
+    for key, group_flights in sorted(groups_map.items(), key=lambda item: item[0][3]):
+        origin, dest, airline, price, out_date, ret_date = key
+        avg = hist_avg.get(region_name)
+        drop_pct = 0
+        if avg and price < avg:
+            drop_pct = int(round((avg - price) / avg * 100))
+
+        groups_out.append(
+            {
+                "origin": origin,
+                "destination": dest,
+                "airline": airline,
+                "price": int(price),
+                "points": int((int(price) * 100) / 1.25),
+                "earn": int(price) * 5,
+                "outDate": out_date,
+                "retDate": ret_date,
+                "outDateFmt": format_date(out_date),
+                "retDateFmt": format_date(ret_date),
+                "dropPct": drop_pct,
+                "times": [
+                    {
+                        "outDepFmt": format_datetime(f["out_dep"]),
+                        "retArrFmt": format_datetime(f["ret_arr"]),
+                        "url": f.get("url") or "",
+                    }
+                    for f in group_flights
+                ],
+            }
+        )
+
+    best = min(priced, key=lambda row: row["price"])
+    return {
+        "groups": groups_out,
+        "groupCount": len(groups_out),
+        "best": {
+            "airline": best["airline"],
+            "destination": best.get("destination", region_name),
+            "price": int(best["price"]),
+            "outDateFmt": format_date(best["out_date"]),
+            "retDateFmt": format_date(best["ret_date"]),
+        },
+    }
+
+
+def build_flights_payload(
+    all_results: dict[str, list[dict]],
+    last_updated: str,
+    hist_avg: dict[str, float | None],
+) -> dict:
+    """Build external JSON payload for lazy-loaded index page."""
+    all_results = normalized_results(all_results)
     global_airlines: set[str] = set()
-    for flights in all_results.values():
+    regions_payload: dict[str, dict] = {}
+
+    for region_name, flights in all_results.items():
         for flight in flights:
             if flight.get("airline"):
                 global_airlines.add(flight["airline"])
+        regions_payload[region_name] = build_region_groups(flights, region_name, hist_avg)
 
-    first_tab = regions[0] if regions else "DFW"
-    alpine_init = (
-        f"{{ activeTab: {json.dumps(first_tab)}, maxPrice: {max_price_init}, "
-        f"airlineFilter: {json.dumps('All')}, "
-        f"showFilters: false, intlTabs: {intl_json}, showScrollTop: false }}"
-    )
+    deals = []
+    for region_name, best in build_deal_board(all_results):
+        if best:
+            deals.append({"region": region_name, "price": int(best["price"])})
+        else:
+            deals.append({"region": region_name, "price": None})
+
+    max_price = compute_max_price(all_results)
+    return {
+        "lastUpdated": last_updated,
+        "siteUrl": SITE_URL,
+        "intlTabs": INTERNATIONAL_REGIONS,
+        "regions": list(REGIONS.keys()),
+        "maxPriceDefault": max_price,
+        "airlines": sorted(global_airlines),
+        "deals": deals,
+        "regionData": regions_payload,
+    }
+
+
+def write_flights_json(payload: dict) -> None:
+    os.makedirs(os.path.dirname(FLIGHTS_JSON), exist_ok=True)
+    atomic_write_json(FLIGHTS_JSON, payload)
+    print(f"Flights JSON written: {FLIGHTS_JSON}")
+
+
+def render_index(all_results: dict[str, list[dict]], last_updated: str, hist_avg: dict[str, float | None]) -> None:
+    all_results = normalized_results(all_results)
+    payload = build_flights_payload(all_results, last_updated, hist_avg)
+    write_flights_json(payload)
+
+    regions_json = json.dumps(payload["regions"])
+    max_price_init = payload["maxPriceDefault"]
 
     lines = get_base_html_head(
         "Fli-Tracker | Multi-Destination Flight Search",
@@ -465,43 +606,41 @@ def render_index(all_results: dict[str, list[dict]], last_updated: str, hist_avg
     lines.extend(
         [
             "    <section class='hero-section py-16 md:py-28 px-6'>",
-            "        <div class='max-w-2xl mx-auto'>",
+            "        <div class='hero-airplane' aria-hidden='true'>",
+            "            <svg viewBox='0 0 64 32' fill='none' xmlns='http://www.w3.org/2000/svg'>",
+            "                <path d='M2 16 L14 14 L18 8 L26 8 L30 14 L62 16 L30 18 L26 24 L18 24 L14 18 Z' fill='#1A73E8'/>",
+            "                <path d='M18 15 L46 16 L18 17 Z' fill='#1F2A37' opacity='0.35'/>",
+            "            </svg>",
+            "        </div>",
+            "        <div class='max-w-2xl mx-auto relative z-10'>",
             "            <p class='text-sm font-bold tracking-[3px] text-gray-500 uppercase mb-4'>Weekend Escapes &amp; Global Travel</p>",
             "            <h1 class='page-header text-left'>Track your next adventure.</h1>",
             "            <p class='hero-text'>Daily curated fares from SLC and PVU across every tracked region. Points values optimized for Chase Sapphire Preferred.</p>",
-            f"            <p class='text-sm text-gray-500 mb-6'>Last updated: {html.escape(last_updated)}</p>",
+            f"            <p class='text-sm text-gray-500 mb-6' x-data x-text=\"window.__FLI_META?.lastUpdated ? 'Last updated: ' + window.__FLI_META.lastUpdated : 'Last updated: {html.escape(last_updated)}'\"></p>",
             "            <a href='#flights' class='dt-btn-primary focus-ring'>View flight options</a>",
             "        </div>",
             "    </section>",
-            f"    <section id='flights' class='py-12 md:py-20 px-6 max-w-5xl mx-auto scroll-mt-24' x-data='{alpine_init}' @scroll.window='showScrollTop = window.scrollY > 400'>",
+            "    <section id='flights' class='py-12 md:py-20 px-6 max-w-5xl mx-auto scroll-mt-24'",
+            "             x-data='flightTracker()' x-init='init()' @scroll.window='showScrollTop = window.scrollY > 400'>",
+            "        <div x-show='loading' class='text-center py-16 text-gray-500'>Loading flight data…</div>",
+            "        <div x-show='error' x-cloak class='text-center py-16 text-red-600' x-text='error'></div>",
+            "        <template x-if='!loading && !error'>",
+            "        <div>",
             "        <div class='mb-8 text-center'>",
             "            <h3 class='text-3xl font-bold text-gray-800 mb-2'>Flight Options for <span x-text='activeTab'></span></h3>",
             "            <p class='text-gray-500' x-text=\"intlTabs.includes(activeTab) ? 'Departure: Any Day | Return: 7–10 Days later' : 'Departure: Wed / Thu / Fri | Return: Sat or Sun before 4 PM'\"></p>",
             "        </div>",
-        ]
-    )
-
-    lines.append("        <div class='mb-8 p-5 bg-white border border-gray-200 rounded-xl shadow-sm'>")
-    lines.append("            <h4 class='text-xs font-bold uppercase tracking-wider text-gray-500 mb-3'>Best deals right now</h4>")
-    lines.append("            <div class='flex flex-wrap gap-2'>")
-    for region_name, best in deals:
-        region_esc = html.escape(region_name)
-        if best:
-            price = int(best["price"])
-            lines.append(
-                f"                <button type='button' @click=\"activeTab = '{region_esc}'\" "
-                f"class='deal-chip focus-ring'>{region_esc} <strong>${price}</strong></button>"
-            )
-        else:
-            lines.append(
-                f"                <span class='deal-chip deal-chip-disabled' aria-disabled='true' "
-                f"title='No fares yet — check back after the morning update'>{region_esc} —</span>"
-            )
-    lines.append("            </div>")
-    lines.append("        </div>")
-
-    lines.extend(
-        [
+            "        <div class='mb-8 p-5 bg-white border border-gray-200 rounded-xl shadow-sm'>",
+            "            <h4 class='text-xs font-bold uppercase tracking-wider text-gray-500 mb-3'>Best deals right now</h4>",
+            "            <div class='flex flex-wrap gap-2'>",
+            "                <template x-for='deal in deals' :key='deal.region'>",
+            "                    <button type='button' x-show='deal.price !== null' @click='setTab(deal.region)'",
+            "                        class='deal-chip focus-ring' x-text=\"deal.region + ' $' + deal.price\"></button>",
+            "                    <span x-show='deal.price === null' class='deal-chip deal-chip-disabled' aria-disabled='true'",
+            "                        :title=\"'No fares yet — check back after the morning update'\" x-text=\"deal.region + ' —'\"></span>",
+            "                </template>",
+            "            </div>",
+            "        </div>",
             "        <div class='p-6 mb-8 callout-accent flex flex-col sm:flex-row justify-between gap-4'>",
             "            <div>",
             "                <h4 class='callout-accent-title mb-1'>Chase Sapphire Preferred</h4>",
@@ -511,22 +650,13 @@ def render_index(all_results: dict[str, list[dict]], last_updated: str, hist_avg
             "        </div>",
             "        <div class='mb-6 overflow-x-auto tab-scroll tab-fade border-b border-gray-200'>",
             "            <nav class='flex space-x-6 min-w-max px-1' role='tablist' aria-label='Destination regions'>",
-        ]
-    )
-
-    for region in regions:
-        region_esc = html.escape(region)
-        lines.append(
-            f"                <button type='button' role='tab' :aria-selected=\"activeTab === '{region_esc}'\" "
-            f"@click=\"activeTab = '{region_esc}'\" "
-            f":class=\"activeTab === '{region_esc}' ? 'tab-active' : 'tab-inactive'\" "
-            f"class='tab-btn focus-ring whitespace-nowrap border-b-2 transition-colors'>{region_esc}</button>"
-        )
-    lines.append("            </nav>")
-    lines.append("        </div>")
-
-    lines.extend(
-        [
+            "                <template x-for='region in regions' :key='region'>",
+            "                    <button type='button' role='tab' :aria-selected=\"activeTab === region\" @click='setTab(region)'",
+            "                        :class=\"activeTab === region ? 'tab-active' : 'tab-inactive'\"",
+            "                        class='tab-btn focus-ring whitespace-nowrap border-b-2 transition-colors' x-text='region'></button>",
+            "                </template>",
+            "            </nav>",
+            "        </div>",
             "        <div class='flex justify-end mb-4'>",
             "            <button type='button' @click='showFilters = !showFilters' class='filter-toggle focus-ring text-sm font-semibold text-gray-500 hover:text-gray-800 flex items-center gap-1 bg-white border border-gray-200 px-4 py-2 rounded-full shadow-sm'>",
             "                <span x-text=\"showFilters ? 'Hide filters' : 'Show filters'\"></span>",
@@ -535,182 +665,190 @@ def render_index(all_results: dict[str, list[dict]], last_updated: str, hist_avg
             "        <div x-show='showFilters' x-collapse x-cloak class='flex flex-col md:flex-row gap-6 mb-8 p-6 card-container bg-white border border-gray-200'>",
             "            <div class='flex-1'>",
             "                <label class='block text-sm font-semibold text-gray-700 mb-2'>Max Price: $<span x-text='maxPrice'></span></label>",
-            f"                <input type='range' min='100' max='{max_price_init}' step='10' x-model.number='maxPrice' class='w-full'>",
+            f"                <input type='range' min='100' max='{max_price_init}' step='10' :value='maxPrice' @input='setMaxPrice($event.target.value)' class='w-full'>",
             "            </div>",
             "            <div class='flex-1'>",
             "                <label class='block text-sm font-semibold text-gray-700 mb-2'>Filter Airline</label>",
-            "                <select x-model='airlineFilter' class='w-full border border-gray-300 rounded-md p-2 bg-white'>",
+            "                <select :value='airlineFilter' @change='setAirlineFilter($event.target.value)' class='w-full border border-gray-300 rounded-md p-2 bg-white'>",
             "                    <option value='All'>All Airlines</option>",
-        ]
-    )
-    for airline in sorted(global_airlines):
-        lines.append(f"                    <option value={json.dumps(airline)}>{html.escape(airline)}</option>")
-    lines.append("                </select>")
-    lines.append("            </div>")
-    lines.append("        </div>")
-
-    lines.append("        <div class='card-container bg-white border border-gray-200 overflow-hidden'>")
-    lines.append("            <div class='divide-y divide-gray-100'>")
-
-    fare_panel_counter = 0
-
-    for region_name, flights_list in all_results.items():
-        region_esc = html.escape(region_name)
-        lines.append(f"                <div x-show=\"activeTab === '{region_esc}'\" x-cloak role='tabpanel'>")
-
-        priced = priced_flights(flights_list)
-        if not priced:
-            lines.append(
-                f"                    <div class='p-8 text-center text-gray-500'>"
-                f"No flights found for {region_esc}. Check back after the next daily search (~6 AM).</div>"
-            )
-            lines.append("                </div>")
-            continue
-
-        groups: dict[tuple, list[dict]] = defaultdict(list)
-        for flight in priced:
-            key = (
-                flight["origin"],
-                flight.get("destination", "DFW"),
-                flight["airline"],
-                flight["price"],
-                flight["out_date"],
-                flight["ret_date"],
-            )
-            groups[key].append(flight)
-
-        sorted_groups = sorted(groups.items(), key=lambda item: item[0][3])
-        visible_count = len(sorted_groups)
-        filter_pairs = {(key[2], int(key[3])) for key, _ in sorted_groups}
-        filter_meta = [{"airline": airline, "price": price} for airline, price in sorted(filter_pairs, key=lambda p: p[1])]
-        filter_meta_json = json.dumps(filter_meta)
-
-        for key, group_flights in sorted_groups:
-            origin, dest, airline, price, out_date, ret_date = key
-            airline_json = json.dumps(airline)
-            price_int = int(price)
-            pts = int((price_int * 100) / 1.25)
-            earn = price_int * 5
-            fare_panel_counter += 1
-            panel_id = f"fare-panel-{fare_panel_counter}"
-
-            lines.append(
-                f"                    <div x-show='(airlineFilter === \"All\" || airlineFilter === {airline_json}) && {price_int} <= maxPrice' x-cloak>"
-            )
-            lines.append("                    <div x-data='{ expanded: false }' class='hover:bg-gray-50 transition-colors'>")
-            lines.append(
-                f"                        <button type='button' @click='expanded = !expanded' "
-                f":aria-expanded='expanded' aria-controls='{panel_id}' "
-                f"@keydown.enter.prevent='expanded = !expanded' @keydown.space.prevent='expanded = !expanded' "
-                f"class='focus-ring w-full text-left cursor-pointer p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between'>"
-            )
-            lines.append("                            <div class='flex-1 mb-4 md:mb-0'>")
-            lines.append("                                <div class='flex items-center flex-wrap gap-2 mb-2'>")
-            lines.append(f"                                    <span class='text-[22px] font-bold text-gray-800'>{html.escape(airline)}</span>")
-            lines.append(
-                f"                                    <span class='text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-600 border'>{html.escape(origin)} &rarr; {html.escape(dest)}</span>"
-            )
-            avg = hist_avg.get(region_name)
-            if avg and price < avg:
-                drop_pct = int(round((avg - price) / avg * 100))
-                if drop_pct > 0:
-                    lines.append(
-                        f"                                    <span class='deal-badge text-xs font-bold px-2 py-1 rounded-full'>&darr;{drop_pct}% vs avg</span>"
-                    )
-            lines.append("                                </div>")
-            lines.append(
-                f"                                <div class='text-[15px] text-gray-500'><span class='font-semibold text-gray-800'>Dates:</span> "
-                f"{format_date(out_date)} &mdash; {format_date(ret_date)} &nbsp;|&nbsp; "
-                f"<span class='font-semibold accent-text'>{len(group_flights)} time option{'s' if len(group_flights) != 1 else ''}</span></div>"
-            )
-            lines.append("                            </div>")
-            lines.append("                            <div class='flex items-center gap-6'>")
-            lines.append("                                <div class='text-right'>")
-            lines.append(f"                                    <div class='price-text'><span class='mr-1'>$</span>{price_int}</div>")
-            lines.append(f"                                    <div class='price-points'>{pts:,} pts</div>")
-            lines.append(f"                                    <div class='text-xs earn-badge font-semibold'>+{earn:,} pts</div>")
-            lines.append("                                </div>")
-            lines.append(
-                "                                <div class='accent-text chevron-rotate' :class=\"expanded ? 'rotate-180' : ''\" style='transition: transform .3s' aria-hidden='true'>"
-            )
-            lines.append(
-                "                                    <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/></svg>"
-            )
-            lines.append("                                </div>")
-            lines.append("                            </div>")
-            lines.append("                        </button>")
-            lines.append(
-                f"                        <div id='{panel_id}' x-show='expanded' x-collapse x-cloak class='p-6 md:p-8 bg-gray-50 border-t border-gray-100'>"
-            )
-            lines.append("                            <h3 class='text-[13px] font-bold text-gray-500 uppercase tracking-wider mb-4'>Available Times</h3>")
-            lines.append("                            <div class='grid grid-cols-1 lg:grid-cols-2 gap-3'>")
-
-            for flight in group_flights:
-                url = html.escape(flight.get("url") or "#", quote=True)
-                out_time = html.escape(format_datetime(flight["out_dep"]))
-                ret_time = html.escape(format_datetime(flight["ret_arr"]))
-                book_label = f"Book outbound {out_time}, return {ret_time}"
-                lines.append("                                <div class='time-option-card'>")
-                lines.append("                                    <div class='time-option-times'>")
-                lines.append("                                        <div class='time-option-row'>")
-                lines.append("                                            <span class='time-option-label'>Outbound:</span>")
-                lines.append(f"                                            <span class='time-option-value'>{out_time}</span>")
-                lines.append("                                        </div>")
-                lines.append("                                        <div class='time-option-row'>")
-                lines.append("                                            <span class='time-option-label'>Return:</span>")
-                lines.append(f"                                            <span class='time-option-value'>{ret_time}</span>")
-                lines.append("                                        </div>")
-                lines.append("                                    </div>")
-                lines.append(
-                    f"                                    <a href='{url}' target='_blank' rel='noopener noreferrer' "
-                    f"class='time-option-cta focus-ring' aria-label='{html.escape(book_label)}'>Book</a>"
-                )
-                lines.append("                                </div>")
-
-            lines.append("                            </div>")
-            lines.append("                        </div>")
-            lines.append("                    </div>")
-            lines.append("                    </div>")
-
-        lines.append(
-            f"                    <div class='p-8 text-center text-gray-500' "
-            f"x-show='activeTab === \"{region_esc}\" && "
-            f"!{filter_meta_json}.some(f => (airlineFilter === \"All\" || airlineFilter === f.airline) && f.price <= maxPrice)' "
-            f"x-cloak>No fares match your filters. Widen max price or choose All Airlines.</div>"
-        )
-
-        region_best = min(priced, key=lambda row: row["price"])
-        lines.append("                    <div class='px-6 py-8'>")
-        lines.append("                        <div class='flex items-start gap-4 p-6 best-value-box'>")
-        lines.append("                            <div class='text-2xl' aria-hidden='true'>&#127775;</div>")
-        lines.append("                            <div>")
-        lines.append(f"                                <div class='best-value-title mb-1'>Best value to {region_esc}</div>")
-        lines.append(
-            f"                                <div class='text-gray-800 font-semibold text-lg'>{format_date(region_best['out_date'])} &mdash; "
-            f"{format_date(region_best['ret_date'])} &middot; {html.escape(region_best['airline'])} to {html.escape(region_best.get('destination', region_name))} "
-            f"&middot; <span class='best-value-price'>${int(region_best['price'])}</span></div>"
-        )
-        lines.append(f"                                <div class='text-sm text-gray-500 mt-1'>{visible_count} fare group{'s' if visible_count != 1 else ''} for this region</div>")
-        lines.append("                            </div>")
-        lines.append("                        </div>")
-        lines.append("                    </div>")
-
-        lines.append(
-            "                    <p class='px-6 pb-6 text-center text-sm text-gray-500'>"
-            "Use filters above to narrow results by price or airline.</p>"
-        )
-        lines.append("                </div>")
-
-    lines.extend(
-        [
+            "                    <template x-for='airline in airlines' :key='airline'>",
+            "                        <option :value='airline' x-text='airline'></option>",
+            "                    </template>",
+            "                </select>",
             "            </div>",
             "        </div>",
+            "        <div class='card-container bg-white border border-gray-200 overflow-hidden'>",
+            "            <div class='divide-y divide-gray-100'>",
+            "                <template x-for='region in regions' :key=\"'panel-' + region\">",
+            "                    <div x-show=\"activeTab === region\" x-cloak role='tabpanel'>",
+            "                        <div x-show='!(regionData[region]?.groups?.length)' class='p-8 text-center text-gray-500'>",
+            "                            No flights found for <span x-text='region'></span>. Check back after the next daily search (~6 AM).",
+            "                        </div>",
+            "                        <template x-for='(group, gi) in (regionData[region]?.groups || [])' :key=\"region + '-' + gi\">",
+            "                            <div x-show=\"(airlineFilter === 'All' || airlineFilter === group.airline) && group.price <= maxPrice\" x-cloak>",
+            "                                <div x-data='{ expanded: false }' class='hover:bg-gray-50 transition-colors'>",
+            "                                    <button type='button' @click='expanded = !expanded' :aria-expanded='expanded'",
+            "                                        class='focus-ring w-full text-left cursor-pointer p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between'>",
+            "                                        <div class='flex-1 mb-4 md:mb-0'>",
+            "                                            <div class='flex items-center flex-wrap gap-2 mb-2'>",
+            "                                                <span class='text-[22px] font-bold text-gray-800' x-text='group.airline'></span>",
+            "                                                <span class='text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-600 border'",
+            "                                                    x-text=\"group.origin + ' → ' + group.destination\"></span>",
+            "                                                <span x-show='group.dropPct > 0' class='deal-badge text-xs font-bold px-2 py-1 rounded-full'",
+            "                                                    x-text=\"'↓' + group.dropPct + '% vs avg'\"></span>",
+            "                                            </div>",
+            "                                            <div class='text-[15px] text-gray-500'>",
+            "                                                <span class='font-semibold text-gray-800'>Dates:</span>",
+            "                                                <span x-text=\"group.outDateFmt + ' — ' + group.retDateFmt\"></span>",
+            "                                                &nbsp;|&nbsp;",
+            "                                                <span class='font-semibold accent-text' x-text=\"group.times.length + ' time option' + (group.times.length !== 1 ? 's' : '')\"></span>",
+            "                                            </div>",
+            "                                        </div>",
+            "                                        <div class='flex items-center gap-6'>",
+            "                                            <div class='text-right'>",
+            "                                                <div class='price-text'><span class='mr-1'>$</span><span x-text='group.price'></span></div>",
+            "                                                <div class='price-points' x-text=\"group.points.toLocaleString() + ' pts'\"></div>",
+            "                                                <div class='text-xs earn-badge font-semibold' x-text=\"'+' + group.earn.toLocaleString() + ' pts'\"></div>",
+            "                                            </div>",
+            "                                            <div class='accent-text chevron-rotate' :class=\"expanded ? 'rotate-180' : ''\" style='transition: transform .3s' aria-hidden='true'>",
+            "                                                <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/></svg>",
+            "                                            </div>",
+            "                                        </div>",
+            "                                    </button>",
+            "                                    <div x-show='expanded' x-collapse x-cloak class='p-6 md:p-8 bg-gray-50 border-t border-gray-100'>",
+            "                                        <h3 class='text-[13px] font-bold text-gray-500 uppercase tracking-wider mb-4'>Available Times</h3>",
+            "                                        <div class='grid grid-cols-1 lg:grid-cols-2 gap-3'>",
+            "                                            <template x-for='(time, ti) in group.times' :key=\"gi + '-' + ti\">",
+            "                                                <div class='time-option-card'>",
+            "                                                    <div class='time-option-times'>",
+            "                                                        <div class='time-option-row'>",
+            "                                                            <span class='time-option-label'>Outbound:</span>",
+            "                                                            <span class='time-option-value' x-text='time.outDepFmt'></span>",
+            "                                                        </div>",
+            "                                                        <div class='time-option-row'>",
+            "                                                            <span class='time-option-label'>Return:</span>",
+            "                                                            <span class='time-option-value' x-text='time.retArrFmt'></span>",
+            "                                                        </div>",
+            "                                                    </div>",
+            "                                                    <a :href='time.url || \"#\"' target='_blank' rel='noopener noreferrer' class='time-option-cta focus-ring'>Book</a>",
+            "                                                </div>",
+            "                                            </template>",
+            "                                        </div>",
+            "                                    </div>",
+            "                                </div>",
+            "                            </div>",
+            "                        </template>",
+            "                        <div class='p-8 text-center text-gray-500' x-show=\"regionData[region]?.groups?.length && !(regionData[region]?.groups || []).some(g => (airlineFilter === 'All' || airlineFilter === g.airline) && g.price <= maxPrice)\" x-cloak>",
+            "                            No fares match your filters. Widen max price or choose All Airlines.",
+            "                        </div>",
+            "                        <div class='px-6 py-8' x-show='regionData[region]?.best'>",
+            "                            <div class='flex items-start gap-4 p-6 best-value-box'>",
+            "                                <div class='text-2xl' aria-hidden='true'>&#127775;</div>",
+            "                                <div>",
+            "                                    <div class='best-value-title mb-1' x-text=\"'Best value to ' + region\"></div>",
+            "                                    <div class='text-gray-800 font-semibold text-lg'>",
+            "                                        <span x-text=\"regionData[region].best.outDateFmt + ' — ' + regionData[region].best.retDateFmt\"></span>",
+            "                                        &middot; <span x-text='regionData[region].best.airline'></span>",
+            "                                        to <span x-text='regionData[region].best.destination'></span>",
+            "                                        &middot; <span class='best-value-price' x-text=\"'$' + regionData[region].best.price\"></span>",
+            "                                    </div>",
+            "                                    <div class='text-sm text-gray-500 mt-1' x-text=\"regionData[region].groupCount + ' fare group' + (regionData[region].groupCount !== 1 ? 's' : '') + ' for this region'\"></div>",
+            "                                </div>",
+            "                            </div>",
+            "                        </div>",
+            "                        <p class='px-6 pb-6 text-center text-sm text-gray-500'>Use filters above to narrow results by price or airline.</p>",
+            "                    </div>",
+            "                </template>",
+            "            </div>",
+            "        </div>",
+            "        </div>",
+            "        </template>",
             "        <button type='button' x-show='showScrollTop' x-cloak @click='window.scrollTo({top: 0, behavior: \"smooth\"})' ",
             "            class='fixed bottom-6 right-6 scroll-top-btn focus-ring p-3 z-50' ",
             "            aria-label='Scroll to top'>",
             "            <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6 mx-auto' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M5 10l7-7m0 0l7 7m-7-7v18'/></svg>",
             "        </button>",
             "    </section>",
+            f"    <script>window.__FLI_REGIONS = {regions_json};</script>",
+            "    <script>",
+            "        function flightTracker() {",
+            "            return {",
+            "                loading: true,",
+            "                error: null,",
+            "                activeTab: window.__FLI_REGIONS[0] || 'DFW',",
+            "                regions: [],",
+            "                deals: [],",
+            "                regionData: {},",
+            "                intlTabs: [],",
+            "                airlines: [],",
+            "                globalMaxPrice: 1500,",
+            "                tabFilters: {},",
+            "                showFilters: false,",
+            "                showScrollTop: false,",
+            "                get maxPrice() {",
+            "                    const f = this.tabFilters[this.activeTab];",
+            "                    return f ? f.maxPrice : this.globalMaxPrice;",
+            "                },",
+            "                get airlineFilter() {",
+            "                    const f = this.tabFilters[this.activeTab];",
+            "                    return f ? f.airlineFilter : 'All';",
+            "                },",
+            "                ensureTabFilters(tab) {",
+            "                    if (!this.tabFilters[tab]) {",
+            "                        this.tabFilters[tab] = { maxPrice: this.globalMaxPrice, airlineFilter: 'All' };",
+            "                    }",
+            "                },",
+            "                setMaxPrice(val) {",
+            "                    this.ensureTabFilters(this.activeTab);",
+            "                    this.tabFilters[this.activeTab].maxPrice = Number(val);",
+            "                },",
+            "                setAirlineFilter(val) {",
+            "                    this.ensureTabFilters(this.activeTab);",
+            "                    this.tabFilters[this.activeTab].airlineFilter = val;",
+            "                },",
+            "                resolveInitialTab(regions) {",
+            "                    const params = new URLSearchParams(window.location.search);",
+            "                    const tabParam = params.get('tab');",
+            "                    if (tabParam && regions.includes(tabParam)) return tabParam;",
+            "                    const hash = decodeURIComponent(window.location.hash.slice(1));",
+            "                    if (hash && regions.includes(hash)) return hash;",
+            "                    return regions[0] || 'DFW';",
+            "                },",
+            "                updateUrl(tab) {",
+            "                    const url = new URL(window.location.href);",
+            "                    url.searchParams.set('tab', tab);",
+            "                    url.hash = '';",
+            "                    history.replaceState(null, '', url.pathname + url.search);",
+            "                },",
+            "                setTab(tab) {",
+            "                    this.activeTab = tab;",
+            "                    this.ensureTabFilters(tab);",
+            "                    this.updateUrl(tab);",
+            "                },",
+            "                async init() {",
+            "                    try {",
+            "                        const resp = await fetch('data/flights.json');",
+            "                        if (!resp.ok) throw new Error('Could not load flight data (' + resp.status + ')');",
+            "                        const data = await resp.json();",
+            "                        window.__FLI_META = { lastUpdated: data.lastUpdated };",
+            "                        this.regions = data.regions || window.__FLI_REGIONS;",
+            "                        this.deals = data.deals || [];",
+            "                        this.regionData = data.regionData || {};",
+            "                        this.intlTabs = data.intlTabs || [];",
+            "                        this.airlines = data.airlines || [];",
+            "                        this.globalMaxPrice = data.maxPriceDefault || 1500;",
+            "                        this.activeTab = this.resolveInitialTab(this.regions);",
+            "                        this.ensureTabFilters(this.activeTab);",
+            "                        this.updateUrl(this.activeTab);",
+            "                        this.loading = false;",
+            "                    } catch (err) {",
+            "                        this.error = err.message || 'Failed to load flights';",
+            "                        this.loading = false;",
+            "                    }",
+            "                },",
+            "            };",
+            "        }",
+            "    </script>",
         ]
     )
     lines.extend(

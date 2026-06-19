@@ -58,6 +58,7 @@
         .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 100; }
         .skip-link:focus { position: fixed; top: 12px; left: 12px; width: auto; height: auto; padding: 12px 20px; background: var(--accent-interactive); color: #fff; font-weight: 700; font-size: 14px; border-radius: 8px; box-shadow: 0 4px 12px rgba(26,115,232,0.35); text-decoration: none; }
         .hero-section {
+            position: relative; overflow: hidden;
             background-image: linear-gradient(to right, rgba(249,250,251,0.97) 20%, rgba(249,250,251,0.55) 100%),
                 url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80');
             background-size: cover; background-position: center;
@@ -159,7 +160,18 @@
             .chevron-rotate { transition: none !important; }
             html { scroll-behavior: auto; }
             .nav-shell, .nav-links { transition: none !important; }
+            .hero-airplane { animation: none !important; opacity: 0 !important; }
         }
+        .hero-airplane {
+            position: absolute; top: 18%; right: -80px; width: 72px; height: 72px;
+            opacity: 0.35; pointer-events: none; z-index: 1;
+            animation: hero-fly 28s linear infinite;
+        }
+        @keyframes hero-fly {
+            0% { transform: translateX(110vw) translateY(0) rotate(-8deg); }
+            100% { transform: translateX(-120px) translateY(-24px) rotate(-8deg); }
+        }
+        @media (max-width: 640px) { .hero-airplane { width: 48px; height: 48px; top: 12%; } }
         [x-cloak] { display: none !important; }
     </style>
     <script src='https://cdn.jsdelivr.net/npm/chart.js'></script>

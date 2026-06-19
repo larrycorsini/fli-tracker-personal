@@ -31,6 +31,8 @@ from tracker_config import (
     DOMESTIC_TRIP_DURATIONS,
     EXCLUDED_AIRLINES,
     INTERNATIONAL_TRIP_DURATIONS,
+    MAX_FARE_GROUPS_PER_REGION,
+    MAX_TIMES_PER_GROUP,
     ORIGINS,
     OUTPUT_JSON,
     REGIONS,
@@ -421,6 +423,31 @@ def _sort_region(flights: list[dict]) -> list[dict]:
     return priced
 
 
+def cap_region_results(flights: list[dict]) -> list[dict]:
+    """Keep top fare groups and time options per group to limit JSON payload size."""
+    priced = [f for f in flights if f.get("price") is not None]
+    if not priced:
+        return []
+
+    groups: dict[tuple, list[dict]] = {}
+    for flight in priced:
+        key = (
+            flight["origin"],
+            flight.get("destination", ""),
+            flight["airline"],
+            flight["price"],
+            flight["out_date"],
+            flight["ret_date"],
+        )
+        groups.setdefault(key, []).append(flight)
+
+    sorted_keys = sorted(groups.keys(), key=lambda k: k[3])[:MAX_FARE_GROUPS_PER_REGION]
+    capped: list[dict] = []
+    for key in sorted_keys:
+        capped.extend(groups[key][:MAX_TIMES_PER_GROUP])
+    return capped
+
+
 def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Two-phase multi-region flight search (SearchDates → SearchFlights).",
@@ -497,7 +524,8 @@ def main(argv: list[str] | None = None) -> int:
                     len(all_results[region_name]),
                 )
 
-        all_results[region_name] = _sort_region(all_results[region_name])
+        sorted_flights = _sort_region(all_results[region_name])
+        all_results[region_name] = cap_region_results(sorted_flights)
         atomic_write_json(OUTPUT_JSON, all_results)
         log.info("Checkpoint %s: %d flights", region_name, len(all_results[region_name]))
 

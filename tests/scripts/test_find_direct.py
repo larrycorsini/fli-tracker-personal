@@ -98,3 +98,31 @@ class TestExitCode:
         all_results = {name: [] for name in find_direct.REGIONS}
         find_direct._stats["errors"] = 0
         assert find_direct._compute_exit_code(all_results) == 0
+
+
+class TestCapRegionResults:
+    def test_caps_fare_groups_and_times(self, monkeypatch):
+        monkeypatch.setattr(find_direct, "MAX_FARE_GROUPS_PER_REGION", 2)
+        monkeypatch.setattr(find_direct, "MAX_TIMES_PER_GROUP", 1)
+
+        def _row(price: int, out: str, ret: str, dep: str, arr: str) -> dict:
+            return {
+                "origin": "SLC",
+                "destination": "DFW",
+                "airline": "A",
+                "price": price,
+                "out_date": out,
+                "ret_date": ret,
+                "out_dep": dep,
+                "ret_arr": arr,
+                "url": "",
+            }
+
+        flights = [
+            _row(100, "2026-07-01", "2026-07-04", "t1", "t2"),
+            _row(100, "2026-07-01", "2026-07-04", "t3", "t4"),
+            _row(150, "2026-07-08", "2026-07-11", "t5", "t6"),
+            _row(200, "2026-07-15", "2026-07-18", "t7", "t8"),
+        ]
+        capped = find_direct.cap_region_results(flights)
+        assert len(capped) == 2

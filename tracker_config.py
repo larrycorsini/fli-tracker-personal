@@ -57,6 +57,11 @@ REGIONS = {
 
 OUTPUT_JSON = "best_direct.json"
 SITE_URL = "https://flights.larrycorsini.com"
+FLIGHTS_JSON = "public/data/flights.json"
+
+# Display caps — keep HTML/JSON payloads small for faster page loads.
+MAX_FARE_GROUPS_PER_REGION = 15
+MAX_TIMES_PER_GROUP = 3
 
 # Two-phase search: SearchDates shortlist size per region, then SearchFlights on those pairs.
 SHORTLIST_SIZE = 20
