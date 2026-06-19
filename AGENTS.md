@@ -41,6 +41,7 @@ workflows for the full process.
 - When recommending flights, always include clickable booking links: per-itinerary `booking_url` from `fli flights --format json` (deep link), plus top-level search `booking_url` when useful. Never list fares without a buy link.
 - Model the tracker web UI after Google Flights: clear layout, readable typography, accessible controls, and familiar search/filter flow; brand primary `#1F2A37`, accent Google blue `#1A73E8` (see UI-SPEC).
 - Keep the static dashboard hero as aviation photo plus gradient overlay (not gradient-only).
+- Keep dashboard hero/subtitle copy generic site-wide, not tied to the active destination tab.
 - Show disabled pills for empty deal-board regions (e.g. Cancun with no fares); do not hide the region.
 - Include weekday abbreviations beside dates in flight reports (e.g. Wed, Thu, Fri).
 - Do not auto-push to the `personal` remote; wait for explicit user approval before publishing fork changes (user typically approves when closing milestones).
@@ -58,6 +59,7 @@ workflows for the full process.
 - Local SQLite tracker data lives in `app/data/tracker.db` (gitignored); history/trends pages query `search_history` by region name plus legacy destination airport codes.
 - Home airports for trip searches and the automated tracker are SLC and PVU.
 - `tracker_config.py` holds shared pipeline config: `REGIONS`, alert thresholds, `EXCLUDED_AIRLINES`, `SITE_URL`, and two-phase search constants.
-- Daily automated flight search runs `daily_flight_search.sh` (launchd ~6 AM) with `find_direct.py --force` using two-phase SearchDates shortlist → SearchFlights → `best_direct.json` → `alert.py` → `generate_flight_report.py` → `public/` → Netlify deploy.
+- Daily automated flight search runs relocatable `daily_flight_search.sh` (launchd ~6 AM) with `find_direct.py --force` (`--test` for smoke runs) using two-phase SearchDates shortlist → SearchFlights → `best_direct.json` → `alert.py` → `generate_flight_report.py` → `public/` → Netlify deploy.
+- `tracker_io.py` provides shared atomic JSON/text writes for pipeline artifacts (`find_direct.py`, `generate_flight_report.py`, `alert.py`).
 - `alert.py` requires `FLI_ALERT_PHONE` env var and skips alerts when unset (no hardcoded phone fallback).
 - Automated tracker optimizes for Chase Sapphire Preferred points (1.25¢ redemption).

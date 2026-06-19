@@ -595,7 +595,7 @@ def render_index(all_results: dict[str, list[dict]], last_updated: str, hist_avg
             panel_id = f"fare-panel-{fare_panel_counter}"
 
             lines.append(
-                f"                    <div x-show=\"(airlineFilter === 'All' || airlineFilter === {airline_json}) && {price_int} <= maxPrice\" x-cloak>"
+                f"                    <div x-show='(airlineFilter === \"All\" || airlineFilter === {airline_json}) && {price_int} <= maxPrice' x-cloak>"
             )
             lines.append("                    <div x-data='{ expanded: false }' class='hover:bg-gray-50 transition-colors'>")
             lines.append(
@@ -673,8 +673,9 @@ def render_index(all_results: dict[str, list[dict]], last_updated: str, hist_avg
             lines.append("                    </div>")
 
         lines.append(
-            f"                    <div class='p-8 text-center text-gray-500' x-show=\"activeTab === '{region_esc}' && "
-            f"!{filter_meta_json}.some(f => (airlineFilter === 'All' || airlineFilter === f.airline) && f.price <= maxPrice)\" "
+            f"                    <div class='p-8 text-center text-gray-500' "
+            f"x-show='activeTab === \"{region_esc}\" && "
+            f"!{filter_meta_json}.some(f => (airlineFilter === \"All\" || airlineFilter === f.airline) && f.price <= maxPrice)' "
             f"x-cloak>No fares match your filters. Widen max price or choose All Airlines.</div>"
         )
 
