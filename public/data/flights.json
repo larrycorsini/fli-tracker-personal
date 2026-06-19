@@ -5,6 +5,7 @@
     "Cancun",
     "El Salvador",
     "Europe",
+    "Greece",
     "Japan",
     "South Korea"
   ],
@@ -15,6 +16,7 @@
     "Cancun",
     "El Salvador",
     "Europe",
+    "Greece",
     "Japan",
     "South Korea"
   ],
@@ -58,6 +60,10 @@
     },
     {
       "region": "Cancun",
+      "price": null
+    },
+    {
+      "region": "Greece",
       "price": null
     }
   ],
@@ -2161,6 +2167,11 @@
         "outDateFmt": "Wed, Jul 29",
         "retDateFmt": "Wed, Aug 05"
       }
+    },
+    "Greece": {
+      "groups": [],
+      "best": null,
+      "groupCount": 0
     },
     "Japan": {
       "groups": [

@@ -41,6 +41,12 @@ REGIONS = {
         "type": "international",
         "alert_threshold": 900,
     },
+    "Greece": {
+        "destinations": ["ATH", "SKG"],
+        "max_stops": "1",
+        "type": "international",
+        "alert_threshold": 900,
+    },
     "Japan": {
         "destinations": ["HND", "NRT"],
         "max_stops": "1",
