@@ -37,6 +37,7 @@ from tracker_config import (
     SHORTLIST_SIZE,
     SHORTLIST_SIZE_TEST,
 )
+from tracker_io import atomic_write_json
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger("find_direct")
@@ -71,14 +72,6 @@ def _get_dates_searcher() -> SearchDates:
         if _dates_searcher is None:
             _dates_searcher = SearchDates()
         return _dates_searcher
-
-
-def atomic_write_json(path: str, data: object) -> None:
-    """Write JSON atomically via temp file + rename."""
-    tmp_path = f"{path}.tmp"
-    with open(tmp_path, "w", encoding="utf-8") as handle:
-        json.dump(data, handle, indent=2)
-    os.replace(tmp_path, path)
 
 
 def _domestic_time_valid(out_dep: datetime, ret_arr: datetime) -> bool:

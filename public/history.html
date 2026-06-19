@@ -14,40 +14,57 @@
     <script defer src='https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js'></script>
     <link rel='preconnect' href='https://fonts.googleapis.com'>
     <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
-    <link href='https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;900&display=swap' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap' rel='stylesheet'>
     <style>
         :root {
-            --primary: #1F2A37;
-            --primary-hover: #2D3A4A;
-            --accent: #14B8A6;
-            --accent-hover: #0D9488;
-            --accent-strong: #0F766E;
-            --accent-light: #F0FDFA;
-            --accent-border: #99F6E4;
-            --success: #059669;
-            --success-light: #D1FAE5;
-            --success-border: #6EE7B7;
-            --text-color: #374151;
-            --text-muted: #6B7280;
-            --surface: #FFFFFF;
-            --background: #F9FAFB;
-            --font-family-sans-serif: 'Raleway', sans-serif;
-            --button--primary-background-color: var(--primary);
-            --button--primary-border: 2px solid var(--primary);
+            --brand-primary: #1F2A37;
+            --brand-primary-hover: #374151;
+            --accent-interactive: #1A73E8;
+            --accent-interactive-hover: #1557B0;
+            --accent-interactive-muted: #E8F0FE;
+            --accent-interactive-border: #AECBFA;
+            --price-positive: #188038;
+            --earn-badge: #137333;
+            --deal-badge-bg: #D1FAE5;
+            --deal-badge-text: #065F46;
+            --best-value-bg: #ECFDF5;
+            --best-value-border: #A7F3D0;
+            --best-value-text: #047857;
+            --heatmap-low: #188038;
+            --heatmap-mid: #F9AB00;
+            --heatmap-high: #D93025;
+            --text-primary: #111827;
+            --text-secondary: #6B7280;
+            --text-muted: #9CA3AF;
+            --text-color: var(--text-primary);
+            --surface-page: #F9FAFB;
+            --surface-card: #FFFFFF;
+            --surface-muted: #F3F4F6;
+            --border-default: #E5E7EB;
+            --surface: var(--surface-card);
+            --background: var(--surface-page);
+            --success: #188038;
+            --warning: #F9AB00;
+            --warning-text: #111827;
+            --font-family-sans-serif: 'Roboto', system-ui, sans-serif;
+            --button--primary-background-color: var(--accent-interactive);
+            --button--primary-border: 2px solid var(--accent-interactive);
             --button--primary-color: #ffffff;
-            --button--primary--hover-background-color: var(--primary-hover);
-            --button--primary--hover-border: 2px solid var(--primary-hover);
-            --button--primary--hover-box-shadow: 0px 4px 12px rgba(31, 42, 55, 0.25);
+            --button--primary--hover-background-color: var(--accent-interactive-hover);
+            --button--primary--hover-border: 2px solid var(--accent-interactive-hover);
+            --button--primary--hover-box-shadow: 0px 4px 12px rgba(26, 115, 232, 0.25);
         }
-        body { font-family: var(--font-family-sans-serif); -webkit-font-smoothing: antialiased; letter-spacing: -.31px; background: var(--background); color: var(--text-color); }
+        body { font-family: var(--font-family-sans-serif); -webkit-font-smoothing: antialiased; letter-spacing: -.01em; background: var(--background); color: var(--text-color); overflow-x: hidden; }
+        .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 100; }
+        .skip-link:focus { position: fixed; top: 12px; left: 12px; width: auto; height: auto; padding: 12px 20px; background: var(--accent-interactive); color: #fff; font-weight: 700; font-size: 14px; border-radius: 8px; box-shadow: 0 4px 12px rgba(26,115,232,0.35); text-decoration: none; }
         .hero-section {
             background-image: linear-gradient(to right, rgba(249,250,251,0.97) 20%, rgba(249,250,251,0.55) 100%),
                 url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80');
             background-size: cover; background-position: center;
         }
-        h1, .page-header { font-weight: 900; font-size: 52px; line-height: 1.1; color: var(--primary); margin-bottom: 20px; }
-        @media (max-width: 640px) { h1, .page-header { font-size: 36px; } }
-        p.hero-text { font-size: 20px; line-height: 1.6; color: var(--text-color); margin-bottom: 24px; }
+        h1, .page-header { font-weight: 700; font-size: 48px; line-height: 1.2; color: var(--brand-primary); margin-bottom: 20px; letter-spacing: -0.02em; }
+        @media (max-width: 640px) { h1, .page-header { font-size: 40px; } }
+        p.hero-text { font-size: 20px; line-height: 1.6; color: var(--text-color); opacity: 0.85; margin-bottom: 24px; }
         .dt-btn-primary {
             background: var(--button--primary-background-color); border: var(--button--primary-border);
             color: var(--button--primary-color); border-radius: 40px; font-weight: 700;
@@ -59,78 +76,131 @@
             box-shadow: var(--button--primary--hover-box-shadow); transform: translateY(-2px); color: #fff;
         }
         .btn-accent {
-            background: var(--accent); color: #fff; font-weight: 700; border-radius: 8px;
+            background: var(--accent-interactive); color: #fff; font-weight: 700; border-radius: 8px;
             padding: 12px 24px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
             transition: background .2s ease;
         }
-        .btn-accent:hover { background: var(--accent-hover); color: #fff; }
-        .price-text { font-weight: 500; font-size: 32px; color: var(--success); display: flex; justify-content: flex-end; }
-        .price-points { font-weight: 600; font-size: 14px; color: var(--primary); margin-top: 4px; text-align: right; }
+        .btn-accent:hover { background: var(--accent-interactive-hover); color: #fff; }
+        .price-text { font-weight: 500; font-size: 32px; color: var(--price-positive); display: flex; justify-content: flex-end; }
+        .price-points { font-weight: 500; font-size: 14px; color: var(--brand-primary); margin-top: 4px; text-align: right; }
+        .earn-badge { color: var(--earn-badge); }
         .card-container { border-radius: 12px; box-shadow: 0 10px 40px -10px rgba(31, 42, 55, 0.08); }
-        .nav-logo { font-size: 24px; font-weight: 900; color: var(--primary); letter-spacing: 2px; text-transform: uppercase; }
-        .nav-link-accent { color: var(--accent-strong); font-weight: 700; }
-        .nav-link-accent:hover { color: var(--accent-hover); }
+        .nav-logo { font-size: 24px; font-weight: 700; color: var(--brand-primary); letter-spacing: 2px; text-transform: uppercase; }
+        .nav-link-accent { color: var(--accent-interactive); font-weight: 700; }
+        .nav-link-accent:hover { color: var(--accent-interactive-hover); }
         .tab-scroll { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
         .tab-fade { mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent); }
-        .tab-active { border-bottom-color: var(--accent) !important; color: var(--accent-strong) !important; font-weight: 700; }
+        .tab-active { border-bottom-color: var(--accent-interactive) !important; color: var(--accent-interactive) !important; font-weight: 700; }
         .tab-inactive { border-color: transparent; color: var(--text-muted); font-weight: 500; }
         .tab-inactive:hover { color: var(--text-color); }
         .tab-btn { min-height: 44px; padding: 12px 16px; }
         .deal-chip {
             font-size: 14px; padding: 10px 16px; min-height: 44px; border-radius: 9999px;
-            border: 1px solid var(--accent-border); background: var(--accent-light); color: var(--accent-strong);
-            transition: background .2s ease;
+            border: 1px solid var(--accent-interactive-border); background: var(--accent-interactive-muted); color: var(--brand-primary);
+            transition: background .2s ease; cursor: pointer;
         }
-        .deal-chip:hover { background: #CCFBF1; }
+        .deal-chip:hover { background: #DCE8FC; }
+        .deal-chip-disabled {
+            opacity: 0.6; cursor: not-allowed; border-color: #E5E7EB; background: #F3F4F6; color: var(--text-muted);
+        }
+        .deal-chip-disabled:hover { background: #F3F4F6; }
+        .deal-badge { background: var(--deal-badge-bg); color: var(--deal-badge-text); }
+        .best-value-box { background: var(--best-value-bg); border: 1px solid var(--best-value-border); border-radius: 16px; }
+        .best-value-title { color: var(--best-value-text); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; }
+        .best-value-price { color: var(--best-value-text); font-weight: 700; }
         .callout-accent {
-            background: var(--accent-light); border: 1px solid var(--accent-border);
-            border-left: 4px solid var(--accent); border-radius: 8px;
+            background: var(--accent-interactive-muted); border: 1px solid var(--accent-interactive-border);
+            border-left: 4px solid var(--accent-interactive); border-radius: 16px;
         }
-        .callout-accent-title { color: var(--accent-strong); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-size: 13px; }
-        .accent-text { color: var(--accent-strong); }
+        .callout-accent-title { color: var(--accent-interactive); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; }
+        .accent-text { color: var(--accent-interactive); }
         .scroll-top-btn {
-            background: var(--primary); color: #fff; width: 50px; height: 50px; border-radius: 9999px;
-            box-shadow: 0 4px 14px rgba(31, 42, 55, 0.25); transition: background .2s ease;
+            background: var(--accent-interactive); color: #fff; width: 50px; height: 50px; border-radius: 9999px;
+            box-shadow: 0 4px 14px rgba(31, 42, 55, 0.2); transition: background .2s ease;
         }
-        .scroll-top-btn:hover { background: var(--primary-hover); }
+        .scroll-top-btn:hover { background: var(--accent-interactive-hover); }
         .filter-toggle { min-height: 44px; }
+        .heatmap-cell { display: block; padding: 12px; border-radius: 8px; text-align: center; text-decoration: none; border: 1px solid transparent; transition: opacity .15s ease; }
+        .heatmap-cell:hover { opacity: 0.92; }
+        .heatmap-low { background: var(--heatmap-low); color: #fff; }
+        .heatmap-mid { background: var(--heatmap-mid); color: #111827; }
+        .heatmap-high { background: var(--heatmap-high); color: #fff; }
+        .focus-ring:focus-visible { outline: none; box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--accent-interactive); }
+        .time-option-card {
+            display: flex; flex-direction: column; gap: 10px; padding: 12px 16px;
+            background: var(--surface-card); border: 1px solid var(--border-default); border-radius: 8px;
+        }
+        @media (min-width: 640px) {
+            .time-option-card { flex-direction: row; align-items: center; justify-content: space-between; gap: 16px; }
+        }
+        .time-option-times { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+        .time-option-row {
+            display: grid; grid-template-columns: 5.5rem 1fr; gap: 0 0.5rem; align-items: baseline;
+            font-size: 14px; line-height: 1.4; color: var(--text-primary);
+        }
+        .time-option-label { font-weight: 500; color: var(--text-secondary); white-space: nowrap; }
+        .time-option-value { white-space: nowrap; font-variant-numeric: tabular-nums; }
+        .time-option-cta {
+            flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;
+            background: var(--accent-interactive); color: #fff; font-weight: 600; font-size: 13px;
+            padding: 6px 14px; border-radius: 6px; text-decoration: none; transition: background .2s ease;
+            width: 100%; min-height: 32px;
+        }
+        @media (min-width: 640px) { .time-option-cta { width: auto; } }
+        .time-option-cta:hover { background: var(--accent-interactive-hover); color: #fff; }
+        .nav-shell { transition: padding 200ms ease; }
+        .nav-links { transition: opacity 200ms ease, max-height 200ms ease; }
+        @media (max-width: 767px) {
+            .nav-links { max-height: 44px; opacity: 1; }
+            .nav-shell-compact .nav-links { opacity: 0; max-height: 0; overflow: hidden; pointer-events: none; }
+            .nav-shell-compact.nav-shell { padding-top: 8px; padding-bottom: 8px; gap: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .chevron-rotate { transition: none !important; }
+            html { scroll-behavior: auto; }
+            .nav-shell, .nav-links { transition: none !important; }
+        }
         [x-cloak] { display: none !important; }
     </style>
     <script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
 </head>
-<body class='antialiased bg-gray-50 text-gray-800'>
-    <nav class='bg-white shadow-sm border-b sticky top-0 z-50'>
-        <div class='max-w-7xl mx-auto px-4 py-3 flex justify-between items-center'>
-            <div class='nav-logo'>Fli-Tracker</div>
-            <div class='flex gap-4'>
-                <a href='heatmap.html' class='text-sm font-bold uppercase text-gray-500'>Heatmap</a>
-                <a href='index.html' class='text-sm font-bold uppercase nav-link-accent'>&larr; Flights</a>
+<body class='antialiased bg-gray-50 text-gray-800 overflow-x-hidden'>
+    <a href='#main-content' class='skip-link focus-ring'>Skip to chart</a>
+    <nav class='bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50'
+         x-data='{ navCompact: false }'
+         @scroll.window='navCompact = window.innerWidth < 768 && window.scrollY > 40'
+         @resize.window='if (window.innerWidth >= 768) navCompact = false'>
+        <div class='max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row justify-between items-center gap-3 min-h-[60px] sm:min-h-[72px] nav-shell' :class="{ 'nav-shell-compact': navCompact }">
+            <a href='index.html' class='nav-logo no-underline'>Fli-Tracker</a>
+            <div class='nav-links flex items-center gap-4 sm:gap-6' :inert='navCompact' :aria-hidden='navCompact'>
+                <a href='heatmap.html' class='text-xs sm:text-sm font-bold uppercase tracking-wider focus-ring rounded px-1 py-2 min-h-[44px] inline-flex items-center text-gray-500 hover:opacity-80'>Heatmap</a>
+                <a href='index.html' class='text-xs sm:text-sm font-bold uppercase tracking-wider focus-ring rounded px-1 py-2 min-h-[44px] inline-flex items-center nav-link-accent'>&larr; Flights</a>
             </div>
         </div>
     </nav>
-    <section class='py-12 px-6 max-w-5xl mx-auto' x-data='historyPage()' x-init='init()'>
+    <section id='main-content' class='py-12 px-6 max-w-5xl mx-auto scroll-mt-24' x-data='historyPage()' x-init='init()'>
         <div class='mb-8 text-center'>
             <h3 class='text-3xl font-bold text-gray-800 mb-2'>14-Day Price Trends</h3>
             <p class='text-gray-500'>Lowest fare for <span x-text='activeRegion'></span></p>
         </div>
-        <div class='mb-6 overflow-x-auto tab-scroll'>
-            <nav class='flex gap-4 min-w-max border-b border-gray-200 pb-1'>
-                <button type='button' @click="activeRegion = 'DFW'" :class="activeRegion === 'DFW' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn whitespace-nowrap'>DFW</button>
-                <button type='button' @click="activeRegion = 'California Coast'" :class="activeRegion === 'California Coast' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn whitespace-nowrap'>California Coast</button>
-                <button type='button' @click="activeRegion = 'Georgia'" :class="activeRegion === 'Georgia' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn whitespace-nowrap'>Georgia</button>
-                <button type='button' @click="activeRegion = 'Cancun'" :class="activeRegion === 'Cancun' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn whitespace-nowrap'>Cancun</button>
-                <button type='button' @click="activeRegion = 'El Salvador'" :class="activeRegion === 'El Salvador' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn whitespace-nowrap'>El Salvador</button>
-                <button type='button' @click="activeRegion = 'Europe'" :class="activeRegion === 'Europe' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn whitespace-nowrap'>Europe</button>
-                <button type='button' @click="activeRegion = 'Japan'" :class="activeRegion === 'Japan' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn whitespace-nowrap'>Japan</button>
-                <button type='button' @click="activeRegion = 'South Korea'" :class="activeRegion === 'South Korea' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn whitespace-nowrap'>South Korea</button>
+        <div class='mb-6 overflow-x-auto tab-scroll tab-fade'>
+            <nav class='flex gap-4 min-w-max border-b border-gray-200 pb-1' role='tablist' aria-label='Destination regions'>
+                <button type='button' role='tab' :aria-selected="activeRegion === 'DFW'" @click="activeRegion = 'DFW'" :class="activeRegion === 'DFW' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn focus-ring whitespace-nowrap'>DFW</button>
+                <button type='button' role='tab' :aria-selected="activeRegion === 'California Coast'" @click="activeRegion = 'California Coast'" :class="activeRegion === 'California Coast' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn focus-ring whitespace-nowrap'>California Coast</button>
+                <button type='button' role='tab' :aria-selected="activeRegion === 'Georgia'" @click="activeRegion = 'Georgia'" :class="activeRegion === 'Georgia' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn focus-ring whitespace-nowrap'>Georgia</button>
+                <button type='button' role='tab' :aria-selected="activeRegion === 'Cancun'" @click="activeRegion = 'Cancun'" :class="activeRegion === 'Cancun' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn focus-ring whitespace-nowrap'>Cancun</button>
+                <button type='button' role='tab' :aria-selected="activeRegion === 'El Salvador'" @click="activeRegion = 'El Salvador'" :class="activeRegion === 'El Salvador' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn focus-ring whitespace-nowrap'>El Salvador</button>
+                <button type='button' role='tab' :aria-selected="activeRegion === 'Europe'" @click="activeRegion = 'Europe'" :class="activeRegion === 'Europe' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn focus-ring whitespace-nowrap'>Europe</button>
+                <button type='button' role='tab' :aria-selected="activeRegion === 'Japan'" @click="activeRegion = 'Japan'" :class="activeRegion === 'Japan' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn focus-ring whitespace-nowrap'>Japan</button>
+                <button type='button' role='tab' :aria-selected="activeRegion === 'South Korea'" @click="activeRegion = 'South Korea'" :class="activeRegion === 'South Korea' ? 'tab-active border-b-2' : 'tab-inactive'" class='tab-btn focus-ring whitespace-nowrap'>South Korea</button>
             </nav>
         </div>
-        <div class='card-container bg-white border border-gray-200 p-4 md:p-8' style='position:relative;height:50vh;min-height:300px'>
-            <canvas id='priceChart'></canvas>
+        <div role='tabpanel' class='card-container bg-white border border-gray-200 p-4 md:p-8' style='position:relative;height:50vh;min-height:300px'>
+            <canvas id='priceChart' x-show='hasData' x-cloak></canvas>
             <p class='absolute inset-0 flex items-center justify-center text-gray-500' x-show='!hasData' x-cloak>No history yet for this region.</p>
         </div>
     </section>
-    <script>window.HISTORY_DATA = {"DFW": {"labels": ["Sat May 09", "Fri May 29", "Sat May 30", "Sun May 31", "Thu Jun 04", "Fri Jun 05", "Thu Jun 18"], "prices": [143.0, 208.0, 208.0, 208.0, 198.0, 238.0, 250.0]}, "California Coast": {"labels": ["Thu Jun 18"], "prices": [198.0]}, "Georgia": {"labels": ["Thu Jun 18"], "prices": [245.0]}, "Cancun": {"labels": ["Thu Jun 18"], "prices": [389.0]}, "El Salvador": {"labels": ["Thu Jun 18"], "prices": [770.0]}, "Europe": {"labels": ["Thu Jun 18"], "prices": [1002.0]}, "Japan": {"labels": ["Thu Jun 18"], "prices": [1096.0]}, "South Korea": {"labels": ["Thu Jun 18"], "prices": [1526.0]}}; window.HISTORY_DEFAULT = "DFW";</script>
+    <script>window.HISTORY_DATA = {"DFW": {"labels": ["Sat May 09", "Fri May 29", "Sat May 30", "Sun May 31", "Thu Jun 04", "Fri Jun 05", "Thu Jun 18"], "prices": [143.0, 208.0, 208.0, 208.0, 198.0, 238.0, 250.0]}, "California Coast": {"labels": ["Mon May 11", "Fri May 29", "Thu Jun 18"], "prices": [131.0, 169.0, 198.0]}, "Georgia": {"labels": ["Thu Jun 18"], "prices": [245.0]}, "Cancun": {"labels": ["Thu Jun 18"], "prices": [389.0]}, "El Salvador": {"labels": ["Thu Jun 18"], "prices": [770.0]}, "Europe": {"labels": ["Thu Jun 18"], "prices": [1002.0]}, "Japan": {"labels": ["Thu Jun 18"], "prices": [1096.0]}, "South Korea": {"labels": ["Thu Jun 18"], "prices": [1526.0]}}; window.HISTORY_DEFAULT = "DFW";</script>
     <script>
         function historyPage() {
             return {
@@ -147,11 +217,12 @@
                     const d = window.HISTORY_DATA[this.activeRegion] || { labels: [], prices: [] };
                     if (this.chart) this.chart.destroy();
                     if (!d.labels.length) { this.chart = null; return; }
+                    const pointRadius = d.labels.length <= 2 ? 6 : 3;
                     this.chart = new Chart(canvas.getContext('2d'), {
                         type: 'line',
                         data: {
                             labels: d.labels,
-                            datasets: [{ data: d.prices, borderColor: '#14B8A6', backgroundColor: 'rgba(20,184,166,0.12)', fill: true, tension: 0.4, borderWidth: 3 }]
+                            datasets: [{ data: d.prices, borderColor: '#1A73E8', backgroundColor: 'rgba(26,115,232,0.12)', fill: true, tension: 0.4, borderWidth: 3, pointRadius, pointHoverRadius: pointRadius + 2 }]
                         },
                         options: {
                             responsive: true,
@@ -164,7 +235,7 @@
             };
         }
     </script>
-    <footer class='bg-gray-900 text-white py-12 mt-12'>
+    <footer class='text-white py-12 mt-12' style='background: var(--brand-primary);'>
         <div class='max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left'>
             <div>
                 <div class='nav-logo text-white mb-2'>Fli-Tracker</div>

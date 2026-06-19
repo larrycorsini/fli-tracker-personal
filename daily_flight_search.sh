@@ -1,10 +1,22 @@
 #!/bin/bash
 # Fli-Tracker daily flight search
 # Runs at 6:00 AM via launchd (com.larry.fli-tracker.daily-search)
+#
+# iMessage alerts: set FLI_ALERT_PHONE in the launchd plist EnvironmentVariables
+# (~/Library/LaunchAgents/com.larry.fli-tracker.daily-search.plist). Do not commit
+# the phone number to the repo. Without it, alert.py skips alerts (non-fatal).
+#
+# Example plist keys (replace paths and phone with your values):
+#   ProgramArguments: /bin/bash, /path/to/daily_flight_search.sh
+#   EnvironmentVariables: FLI_ALERT_PHONE → +1XXXXXXXXXX
+#   StartCalendarInterval: Hour=6, Minute=0
+# Reload: launchctl unload ~/Library/LaunchAgents/com.larry.fli-tracker.daily-search.plist
+#         launchctl load   ~/Library/LaunchAgents/com.larry.fli-tracker.daily-search.plist
 
 set -euo pipefail
 
-PROJECT="/Users/larry/Documents/Projects/Fli-tracker"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT="$SCRIPT_DIR"
 LOG_DIR="$PROJECT/logs"
 LOG_FILE="$LOG_DIR/daily_flight_search.log"
 UV="${UV:-$(command -v uv)}"
@@ -23,7 +35,7 @@ if [[ -z "$UV" ]]; then
 fi
 
 SEARCH_OK=0
-"$UV" run python find_direct.py && SEARCH_OK=1 || echo "ERROR: find_direct.py failed"
+"$UV" run python find_direct.py --force && SEARCH_OK=1 || echo "ERROR: find_direct.py failed"
 
 if [[ "$SEARCH_OK" -eq 1 ]]; then
   "$UV" run python alert.py || echo "WARN: alert.py failed (non-fatal)"

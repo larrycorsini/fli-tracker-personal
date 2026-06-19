@@ -39,19 +39,25 @@ workflows for the full process.
 ## Learned User Preferences
 
 - When recommending flights, always include clickable booking links: per-itinerary `booking_url` from `fli flights --format json` (deep link), plus top-level search `booking_url` when useful. Never list fares without a buy link.
-- Model the tracker web UI after Google Flights: clear layout, readable typography, accessible controls, and familiar search/filter flow.
-- Do not auto-push to the `personal` remote; wait for explicit user approval before publishing fork changes.
+- Model the tracker web UI after Google Flights: clear layout, readable typography, accessible controls, and familiar search/filter flow; brand primary `#1F2A37`, accent Google blue `#1A73E8` (see UI-SPEC).
+- Keep the static dashboard hero as aviation photo plus gradient overlay (not gradient-only).
+- Show disabled pills for empty deal-board regions (e.g. Cancun with no fares); do not hide the region.
+- Include weekday abbreviations beside dates in flight reports (e.g. Wed, Thu, Fri).
+- Do not auto-push to the `personal` remote; wait for explicit user approval before publishing fork changes (user typically approves when closing milestones).
 - Use `uv` on PATH in scripts and subprocess calls — avoid hardcoded absolute paths to a local `uv` binary.
 - Exclude budget/low-cost carriers (Frontier F9, Breeze MX, Spirit NK, Allegiant G4, Sun Country SY, Avelo XP) from flight searches and recommendations.
+- On mobile viewports, compact nav after scroll hides Heatmap and Trends links to preserve header space.
 
 ## Learned Workspace Facts
 
-- Personal fork of [punitarani/fli](https://github.com/punitarani/fli) extended with a FastAPI price-tracker in `app/`, hotel search, and local trip-planning scripts.
-- Git remotes: `origin` → upstream `punitarani/fli`; `personal` → `larrycorsini/fli-tracker-personal`.
-- `hot_core.py` at the repo root is imported via a `sys.path` hack; planned refactor moves it to `app/hotels.py`.
+- Personal fork of [punitarani/fli](https://github.com/punitarani/fli) extended with a FastAPI price-tracker in `app/`, hotel search, multi-destination pipeline, and public static dashboard at https://flights.larrycorsini.com.
+- Git remotes: `origin` → upstream `punitarani/fli`; `personal` → `larrycorsini/fli-tracker-personal`; v1.1 milestone tagged on `personal`.
+- Hotel search lives in `app/hotels.py` (successor to removed root `hot_core.py`).
 - Upstream can return `FlightResult` entries with `price=None`; `app/engine.py` must skip or safely sort unpriced rows.
 - Tracker app entry point: `uv run uvicorn app.server:app --reload`; flight search streams via SSE at `/api/search/flights`.
-- Local SQLite tracker data lives in `app/data/tracker.db` and stays gitignored.
+- Local SQLite tracker data lives in `app/data/tracker.db` (gitignored); history/trends pages query `search_history` by region name plus legacy destination airport codes.
 - Home airports for trip searches and the automated tracker are SLC and PVU.
-- Daily automated flight search: `find_direct.py` → `best_direct.json` → `generate_flight_report.py` → static HTML in `public/`, deployed to Netlify via `daily_flight_search.sh` (launchd ~6 AM).
-- Automated tracker optimizes for Chase Sapphire Preferred points (1.25¢ redemption); multi-region destinations are configured in `REGIONS` inside `find_direct.py`.
+- `tracker_config.py` holds shared pipeline config: `REGIONS`, alert thresholds, `EXCLUDED_AIRLINES`, `SITE_URL`, and two-phase search constants.
+- Daily automated flight search runs `daily_flight_search.sh` (launchd ~6 AM) with `find_direct.py --force` using two-phase SearchDates shortlist → SearchFlights → `best_direct.json` → `alert.py` → `generate_flight_report.py` → `public/` → Netlify deploy.
+- `alert.py` requires `FLI_ALERT_PHONE` env var and skips alerts when unset (no hardcoded phone fallback).
+- Automated tracker optimizes for Chase Sapphire Preferred points (1.25¢ redemption).

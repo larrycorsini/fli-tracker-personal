@@ -8,21 +8,25 @@ import subprocess
 from datetime import datetime
 
 from tracker_config import OUTPUT_JSON, REGIONS, SITE_URL
+from tracker_io import atomic_write_json
 
-PHONE_NUMBER = os.environ.get("FLI_ALERT_PHONE", "2108527746")
+PHONE_NUMBER = os.environ.get("FLI_ALERT_PHONE")
 ALERT_LOG = "last_alert.json"
 
 
 def send_imessage(phone_number: str, message: str) -> None:
-    escaped = message.replace("\\", "\\\\").replace('"', '\\"')
-    apple_script = f'''
-    tell application "Messages"
-        set targetService to 1st service whose service type = iMessage
-        set targetBuddy to buddy "{phone_number}" of targetService
-        send "{escaped}" to targetBuddy
-    end tell
-    '''
-    subprocess.run(["osascript", "-e", apple_script], check=True)
+    script = """
+    on run argv
+        set msg to item 1 of argv
+        set phone to item 2 of argv
+        tell application "Messages"
+            set targetService to 1st service whose service type = iMessage
+            set targetBuddy to buddy phone of targetService
+            send msg to targetBuddy
+        end tell
+    end run
+    """
+    subprocess.run(["osascript", "-e", script, message, phone_number], check=True)
 
 
 def load_last_alerts() -> dict:
@@ -33,8 +37,7 @@ def load_last_alerts() -> dict:
 
 
 def save_last_alerts(data: dict) -> None:
-    with open(ALERT_LOG, "w", encoding="utf-8") as handle:
-        json.dump(data, handle, indent=2)
+    atomic_write_json(ALERT_LOG, data)
 
 
 def _priced_flights(flights: list[dict]) -> list[dict]:
@@ -42,6 +45,10 @@ def _priced_flights(flights: list[dict]) -> list[dict]:
 
 
 def main() -> None:
+    if not PHONE_NUMBER:
+        print("FLI_ALERT_PHONE not set — skipping alerts.")
+        return
+
     if not os.path.exists(OUTPUT_JSON):
         print("No flights data found.")
         return
@@ -75,7 +82,6 @@ def main() -> None:
             print(f"{region_name}: ${lowest_price:.0f} above threshold ${threshold:.0f}")
             continue
 
-        region_key = f"{region_name}:{lowest_price:.0f}"
         prior = last_alerts.get(region_name, {})
         if prior.get("date") == today_str and prior.get("price") == lowest_price:
             print(f"{region_name}: alert already sent today for ${lowest_price:.0f}")
@@ -89,7 +95,7 @@ def main() -> None:
         print(f"{region_name}: ${lowest_price:.0f} — sending alert...")
         try:
             send_imessage(PHONE_NUMBER, msg)
-            last_alerts[region_name] = {"price": lowest_price, "date": today_str, "key": region_key}
+            last_alerts[region_name] = {"price": lowest_price, "date": today_str}
             sent_any = True
         except Exception as exc:
             print(f"Failed to send alert for {region_name}: {exc}")
