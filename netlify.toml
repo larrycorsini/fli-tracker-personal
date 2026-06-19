@@ -2,6 +2,7 @@
 # Generated HTML lives in public/ (see generate_flight_report.py + daily_flight_search.sh)
 
 [build]
+  command = "echo 'Publishing committed public/'; test -f public/index.html"
   publish = "public"
 
 # Security headers for the public flight dashboard
