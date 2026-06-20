@@ -337,6 +337,23 @@ def normalized_results(all_results: dict[str, list[dict]]) -> dict[str, list[dic
     return {name: all_results.get(name, []) for name in REGIONS}
 
 
+def _existing_flights_json_has_data() -> bool:
+    if not os.path.exists(FLIGHTS_JSON):
+        return False
+    try:
+        with open(FLIGHTS_JSON, encoding="utf-8") as handle:
+            payload = json.load(handle)
+    except (json.JSONDecodeError, OSError):
+        return False
+    region_data = payload.get("regionData", {})
+    if not isinstance(region_data, dict):
+        return False
+    return any(
+        isinstance(region_payload, dict) and region_payload.get("groupCount", 0) > 0
+        for region_payload in region_data.values()
+    )
+
+
 def load_results() -> dict[str, list[dict]]:
     if not os.path.exists(OUTPUT_JSON):
         return {}
@@ -1042,6 +1059,14 @@ def render_history(all_results: dict[str, list[dict]]) -> None:
 def main() -> None:
     all_results = load_results()
     if not all_results:
+        print("No flight data found.")
+        return
+
+    has_priced = any(priced_flights(flights) for flights in all_results.values())
+    if not has_priced:
+        if _existing_flights_json_has_data():
+            print("No flight data in best_direct.json — keeping existing reports.")
+            return
         print("No flight data found.")
         return
 

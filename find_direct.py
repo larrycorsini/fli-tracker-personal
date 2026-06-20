@@ -106,6 +106,10 @@ def _flight_matches(flight: dict, r_type: str) -> bool:
     return True
 
 
+def _count_flights(all_results: dict[str, list[dict]]) -> int:
+    return sum(len(flights) for flights in all_results.values())
+
+
 def _load_checkpoint(*, force: bool) -> dict[str, list[dict]]:
     """Load prior results for resume; validate each region payload is a list of dicts."""
     all_results = {region: [] for region in REGIONS}
@@ -469,6 +473,12 @@ def main(argv: list[str] | None = None) -> int:
     """Run the two-phase search across all configured regions."""
     args = _parse_args(argv)
 
+    prior_results: dict[str, list[dict]] | None = None
+    if args.force and os.path.exists(OUTPUT_JSON):
+        prior_results = _load_checkpoint(force=False)
+        if _count_flights(prior_results) == 0:
+            prior_results = None
+
     all_results = _load_checkpoint(force=args.force)
 
     log.info(
@@ -541,6 +551,15 @@ def main(argv: list[str] | None = None) -> int:
     )
     for region_name in REGIONS:
         log.info("%s: %d matching flights", region_name, len(all_results[region_name]))
+
+    if _count_flights(all_results) == 0 and prior_results is not None:
+        log.warning(
+            "Search returned zero flights — preserving prior %s (%d flights)",
+            OUTPUT_JSON,
+            _count_flights(prior_results),
+        )
+        atomic_write_json(OUTPUT_JSON, prior_results)
+        return 0
 
     return _compute_exit_code(all_results)
 
