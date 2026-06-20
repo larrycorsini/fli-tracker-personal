@@ -16,7 +16,9 @@
 # the phone number to the repo. Without it, alert.py skips alerts (non-fatal).
 #
 # Example plist keys (replace paths and phone with your values):
-#   ProgramArguments: /bin/bash, /path/to/daily_flight_search.sh
+#   ProgramArguments: /Users/larry/.local/bin/fli-tracker-daily-search.sh
+#   WorkingDirectory: /Users/larry/Projects/Fli-tracker
+#   (launcher outside ~/Documents — macOS blocks launchd from exec'ing scripts in Documents)
 #   EnvironmentVariables: FLI_ALERT_PHONE → +1XXXXXXXXXX
 #   StartCalendarInterval: Hour=6, Minute=0
 # Reload: launchctl unload ~/Library/LaunchAgents/com.larry.fli-tracker.daily-search.plist
@@ -47,7 +49,7 @@ deploy_public_via_git() {
   report_date="$(date +%Y-%m-%d)"
   remote_url="$(git remote get-url personal 2>/dev/null || echo "personal (unknown)")"
 
-  git add public/index.html public/heatmap.html public/history.html public/manifest.json
+  git add public/index.html public/heatmap.html public/history.html public/manifest.json public/data/flights.json
 
   if git diff --staged --quiet; then
     echo "INFO: No public/ changes to commit — skipping git push"
