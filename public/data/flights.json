@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Mon, Jun 22, 2026 at 06:19 AM",
+  "lastUpdated": "Tue, Jun 23, 2026 at 06:00 AM",
   "siteUrl": "https://flights.larrycorsini.com",
   "intlTabs": [
     "Cancun",
@@ -1405,7 +1405,7 @@
           "retDate": "2026-07-21",
           "outDateFmt": "Tue, Jul 14",
           "retDateFmt": "Tue, Jul 21",
-          "dropPct": 4,
+          "dropPct": 3,
           "times": [
             {
               "outDepFmt": "Tue, Jul 14, 09:00 AM",
@@ -1430,7 +1430,7 @@
           "retDate": "2026-07-23",
           "outDateFmt": "Thu, Jul 16",
           "retDateFmt": "Thu, Jul 23",
-          "dropPct": 4,
+          "dropPct": 3,
           "times": [
             {
               "outDepFmt": "Thu, Jul 16, 09:00 AM",
@@ -1455,7 +1455,7 @@
           "retDate": "2026-07-13",
           "outDateFmt": "Mon, Jul 06",
           "retDateFmt": "Mon, Jul 13",
-          "dropPct": 1,
+          "dropPct": 0,
           "times": [
             {
               "outDepFmt": "Mon, Jul 06, 09:00 AM",
