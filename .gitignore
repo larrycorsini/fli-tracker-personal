@@ -165,6 +165,7 @@ fli-tracker.zip
 
 # Local SQLite databases (user-generated tracker data)
 app/data/*.db
+app/data/seats_aero_usage.json
 
 # Fli-Tracker pipeline runtime output
 best_direct.json

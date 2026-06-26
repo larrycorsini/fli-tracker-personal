@@ -28,11 +28,13 @@ from fli.models import DateSearchFilters, FlightSearchFilters, PassengerInfo
 from fli.search import SearchDates, SearchFlights
 from fli.search.dates import DatePrice
 from tracker_config import (
+    CHASE_POINTS_CENT_VALUE,
     EXCLUDED_AIRLINES,
     PREMIUM_CABIN_CLASSES,
     PREMIUM_DATE_OFFSET_END,
     PREMIUM_DATE_OFFSET_START,
     PREMIUM_DEAL_DESTINATIONS,
+    PREMIUM_DEAL_MAX_POINTS,
     PREMIUM_DEAL_MAX_PRICE,
     PREMIUM_DEAL_ORIGINS,
     PREMIUM_DEAL_OUTPUT_JSON,
@@ -43,9 +45,21 @@ from tracker_config import (
     PREMIUM_MAX_STOPS,
     PREMIUM_SHORTLIST_SIZE,
     PREMIUM_SHORTLIST_SIZE_TEST,
-    PREMIUM_TRIP_DURATION,
+    PREMIUM_TRIP_DURATIONS,
+    PREMIUM_TRIP_DURATIONS_PER_RUN,
+    PREMIUM_TRIP_DURATIONS_PER_RUN_TEST,
 )
 from tracker_io import atomic_write_json
+
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv()
+except ImportError:
+    pass
+
+import seats_aero_client
+from seats_aero_client import AwardAvailability, lookup_award
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger("find_deals")
@@ -86,11 +100,81 @@ def price_threshold(dest_type: str, cabin: str) -> float:
     return float(thresholds.get(cabin, thresholds.get("BUSINESS", 2000)))
 
 
+def points_threshold(dest_type: str, cabin: str) -> int:
+    """Return max round-trip award points for a destination type and cabin."""
+    thresholds = PREMIUM_DEAL_MAX_POINTS.get(
+        dest_type, PREMIUM_DEAL_MAX_POINTS["international"]
+    )
+    return int(thresholds.get(cabin, thresholds.get("BUSINESS", 200_000)))
+
+
+def estimate_chase_points(cash_price: float | int | None) -> int | None:
+    """Estimate Chase Travel Portal points for a cash fare (Sapphire Preferred 1.25¢)."""
+    if cash_price is None:
+        return None
+    return int((float(cash_price) * 100) / CHASE_POINTS_CENT_VALUE)
+
+
 def passes_threshold(price: float | None, dest_type: str, cabin: str) -> bool:
     """Return True when price is at or below the configured cabin threshold."""
     if price is None:
         return False
     return float(price) <= price_threshold(dest_type, cabin)
+
+
+def passes_points_threshold(points: int | None, dest_type: str, cabin: str) -> bool:
+    """Return True when award points are at or below the configured cabin threshold."""
+    if points is None:
+        return False
+    return int(points) <= points_threshold(dest_type, cabin)
+
+
+def passes_deal_threshold(
+    price: float | None,
+    points: int | None,
+    dest_type: str,
+    cabin: str,
+) -> bool:
+    """Deal qualifies when cash OR award points meet cabin thresholds."""
+    return passes_threshold(price, dest_type, cabin) or passes_points_threshold(
+        points, dest_type, cabin
+    )
+
+
+def payment_type_for_deal(
+    price: float | None,
+    points: int | None,
+    *,
+    points_from_award: bool,
+) -> str:
+    """Classify how the fare can be booked: cash, points, or both."""
+    has_cash = price is not None
+    has_award = points is not None and points_from_award
+    has_estimate = points is not None and not points_from_award
+    if has_cash and has_award:
+        return "both"
+    if has_award:
+        return "points"
+    if has_cash and has_estimate:
+        return "both"
+    if has_estimate:
+        return "points"
+    return "cash"
+
+
+def durations_for_run(*, is_test: bool) -> list[int]:
+    """Rotate trip durations daily so the full set is covered over multiple runs."""
+    all_durations = list(PREMIUM_TRIP_DURATIONS)
+    per_run = (
+        PREMIUM_TRIP_DURATIONS_PER_RUN_TEST if is_test else PREMIUM_TRIP_DURATIONS_PER_RUN
+    )
+    if len(all_durations) <= per_run:
+        return all_durations
+
+    batches = math.ceil(len(all_durations) / per_run)
+    batch_idx = datetime.now().timetuple().tm_yday % batches
+    start = batch_idx * per_run
+    return all_durations[start : start + per_run]
 
 
 def destinations_for_run(*, is_test: bool) -> list[dict[str, str]]:
@@ -157,10 +241,21 @@ def merge_rotated_results(
     return rank_deals(merged)
 
 
+def _deal_sort_value(deal: dict) -> float:
+    """Lower is better; cash price preferred, else points converted to cash equiv."""
+    price = deal.get("price")
+    if price is not None:
+        return float(price)
+    points = deal.get("points")
+    if points is not None:
+        return float(points) * CHASE_POINTS_CENT_VALUE / 100.0
+    return float("inf")
+
+
 def rank_deals(deals: list[dict]) -> list[dict]:
-    """Sort by price; cap per destination and global top N."""
-    priced = [d for d in deals if d.get("price") is not None]
-    priced.sort(key=lambda row: float(row["price"]))
+    """Sort by best value; cap per destination and global top N."""
+    priced = [d for d in deals if d.get("price") is not None or d.get("points") is not None]
+    priced.sort(key=_deal_sort_value)
 
     per_dest: dict[tuple[str, str], int] = {}
     capped: list[dict] = []
@@ -249,12 +344,14 @@ def _date_pairs_from_results(
     dest: str,
     dest_type: str,
     cabin: str,
-) -> list[tuple[str, str, str, str, float]]:
-    pairs: list[tuple[str, str, str, str, float]] = []
+    trip_duration: int,
+) -> list[tuple[str, str, str, str, float, int]]:
+    pairs: list[tuple[str, str, str, str, float, int]] = []
     for item in results:
         if item.price is None:
             continue
-        if not passes_threshold(item.price, dest_type, cabin):
+        chase_pts = estimate_chase_points(item.price)
+        if not passes_deal_threshold(item.price, chase_pts, dest_type, cabin):
             continue
         if len(item.date) < 2:
             continue
@@ -266,9 +363,123 @@ def _date_pairs_from_results(
                 out_dt.strftime("%Y-%m-%d"),
                 ret_dt.strftime("%Y-%m-%d"),
                 float(item.price),
+                trip_duration,
             )
         )
     return pairs
+
+
+def _fetch_seats_aero_award(
+    origin: str,
+    dest: str,
+    out_date: str,
+    ret_date: str,
+    cabin: str,
+    *,
+    award_cache: list[AwardAvailability] | None,
+) -> tuple[int | None, str | None]:
+    """Award points from pre-fetched seats.aero cache (round-trip estimate).
+
+    Cached search is per departure date one-way; we use lowest outbound cost × 2.
+    ``ret_date`` is unused today — return-leg pricing may differ (known limitation).
+    """
+    if not award_cache:
+        return None, None
+    row = lookup_award(
+        award_cache,
+        origin=origin,
+        dest=dest,
+        out_date=out_date,
+        cabin=cabin,
+    )
+    if row is None:
+        return None, None
+    return row.points_round_trip_estimate, row.mileage_program
+
+
+def _prefetch_seats_aero_for_dest(
+    dest_airport: str,
+    start_date: str,
+    end_date: str,
+) -> list[AwardAvailability]:
+    """One cached search per destination (all origins + premium cabins)."""
+    if not seats_aero_client.is_enabled():
+        return []
+    rows = seats_aero_client.cached_search_destination(
+        list(PREMIUM_DEAL_ORIGINS),
+        dest_airport,
+        start_date,
+        end_date,
+    )
+    if rows:
+        log.info(
+            "%s seats.aero: %d award rows (usage %s)",
+            dest_airport,
+            len(rows),
+            seats_aero_client.get_usage_summary(),
+        )
+    return rows
+
+
+def _award_only_deals_from_cache(
+    dest_info: dict[str, str],
+    award_cache: list[AwardAvailability],
+    trip_durations: list[int],
+    *,
+    existing_keys: set[tuple],
+) -> list[dict]:
+    """Create points-only deals when seats.aero has awards under threshold."""
+    dest_type = dest_info.get("type", "international")
+    dest_airport = dest_info["airport"]
+    deals: list[dict] = []
+
+    by_key: dict[tuple[str, str, str], AwardAvailability] = {}
+    for row in award_cache:
+        if row.destination != dest_airport:
+            continue
+        key = (row.origin, row.out_date, row.cabin)
+        if key not in by_key or row.points_one_way < by_key[key].points_one_way:
+            by_key[key] = row
+
+    for (origin, out_date, cabin), row in by_key.items():
+        points = row.points_round_trip_estimate
+        if not passes_points_threshold(points, dest_type, cabin):
+            continue
+        out_dt = datetime.strptime(out_date, "%Y-%m-%d")
+        for duration in trip_durations:
+            ret_dt = out_dt + timedelta(days=duration)
+            ret_date = ret_dt.strftime("%Y-%m-%d")
+            deal_key = (origin, dest_airport, cabin, out_date, ret_date, "")
+            if deal_key in existing_keys:
+                continue
+            cabin_label = cabin.replace("_", " ").title()
+            airline = row.airlines.split(",")[0].strip() if row.airlines else row.mileage_program
+            deals.append(
+                {
+                    "origin": origin,
+                    "destination": dest_info["label"],
+                    "airport": dest_airport,
+                    "region_label": dest_info.get("region_label", ""),
+                    "type": dest_type,
+                    "is_domestic": dest_type == "domestic",
+                    "cabin": cabin_label,
+                    "price": None,
+                    "points": points,
+                    "points_source": "seats_aero",
+                    "mileage_program": row.mileage_program,
+                    "paymentType": "points",
+                    "trip_duration": duration,
+                    "out_date": out_date,
+                    "ret_date": ret_date,
+                    "airline": airline,
+                    "duration": None,
+                    "stops": None,
+                    "booking_url": "",
+                    "out_dep": None,
+                    "ret_arr": None,
+                }
+            )
+    return deals
 
 
 def _phase1_shortlist(
@@ -277,50 +488,53 @@ def _phase1_shortlist(
     start_date: str,
     end_date: str,
     is_test: bool,
-) -> list[tuple[str, str, str, str, str]]:
-    """Return (origin, dest, out_date, ret_date, cabin) pairs for phase 2."""
+) -> list[tuple[str, str, str, str, str, int]]:
+    """Return (origin, dest, out_date, ret_date, cabin, trip_duration) pairs for phase 2."""
     dest = dest_info["airport"]
     dest_type = dest_info.get("type", "international")
     shortlist_limit = PREMIUM_SHORTLIST_SIZE_TEST if is_test else PREMIUM_SHORTLIST_SIZE
+    trip_durations = durations_for_run(is_test=is_test)
 
-    candidates: list[tuple[str, str, str, str, str, float]] = []
+    candidates: list[tuple[str, str, str, str, str, float, int]] = []
     dates_calls = 0
 
     for cabin in PREMIUM_CABIN_CLASSES:
-        # Phase 1 uses SLC only to cap API volume; phase 2 tries all origins.
-        results = _search_dates_route(
-            "SLC",
-            dest,
-            start_date,
-            end_date,
-            PREMIUM_TRIP_DURATION,
-            cabin,
-        )
-        dates_calls += 1
-        for origin, _dest, out_d, ret_d, price in _date_pairs_from_results(
-            results, "SLC", dest, dest_type, cabin
-        ):
-            candidates.append((origin, dest, out_d, ret_d, cabin, price))
+        for trip_duration in trip_durations:
+            # Phase 1 uses SLC only to cap API volume; phase 2 tries all origins.
+            results = _search_dates_route(
+                "SLC",
+                dest,
+                start_date,
+                end_date,
+                trip_duration,
+                cabin,
+            )
+            dates_calls += 1
+            for origin, _dest, out_d, ret_d, price, duration in _date_pairs_from_results(
+                results, "SLC", dest, dest_type, cabin, trip_duration
+            ):
+                candidates.append((origin, dest, out_d, ret_d, cabin, price, duration))
 
-    best: dict[tuple[str, str, str, str, str], float] = {}
-    for origin, d, out_d, ret_d, cabin, price in candidates:
-        key = (origin, d, out_d, ret_d, cabin)
+    best: dict[tuple[str, str, str, str, str, int], float] = {}
+    for origin, d, out_d, ret_d, cabin, price, duration in candidates:
+        key = (origin, d, out_d, ret_d, cabin, duration)
         if key not in best or price < best[key]:
             best[key] = price
 
     ranked = sorted(
-        [(k[0], k[1], k[2], k[3], k[4], best[k]) for k in best],
-        key=lambda row: row[5],
+        [(k[0], k[1], k[2], k[3], k[4], k[5], best[k]) for k in best],
+        key=lambda row: row[6],
     )
     shortlist = [
-        (o, d, out_d, ret_d, cabin)
-        for o, d, out_d, ret_d, cabin, _ in ranked[:shortlist_limit]
+        (o, d, out_d, ret_d, cabin, duration)
+        for o, d, out_d, ret_d, cabin, duration, _ in ranked[:shortlist_limit]
     ]
 
     log.info(
-        "%s phase 1: %d date API calls → %d candidates → shortlist %d",
+        "%s phase 1: %d date API calls (%d durations) → %d candidates → shortlist %d",
         dest,
         dates_calls,
+        len(trip_durations),
         len(best),
         len(shortlist),
     )
@@ -335,10 +549,25 @@ def _deal_from_flight(
     cabin: str,
     out_date: str,
     ret_date: str,
+    trip_duration: int,
+    award_cache: list[AwardAvailability] | None = None,
 ) -> dict | None:
     price = flight.get("price")
     dest_type = dest_info.get("type", "international")
-    if not passes_threshold(price, dest_type, cabin):
+
+    award_points, mileage_program = _fetch_seats_aero_award(
+        origin,
+        dest_info["airport"],
+        out_date,
+        ret_date,
+        cabin,
+        award_cache=award_cache,
+    )
+    chase_points = estimate_chase_points(price)
+    points = award_points if award_points is not None else chase_points
+    points_from_award = award_points is not None
+
+    if not passes_deal_threshold(price, points, dest_type, cabin):
         return None
 
     try:
@@ -349,7 +578,11 @@ def _deal_from_flight(
         return None
 
     cabin_label = cabin.replace("_", " ").title()
-    return {
+    deal_price = int(float(price)) if price is not None else None
+    points_source = (
+        "seats_aero" if points_from_award else ("chase_estimate" if points else None)
+    )
+    deal: dict = {
         "origin": origin,
         "destination": dest_info["label"],
         "airport": dest_info["airport"],
@@ -357,7 +590,15 @@ def _deal_from_flight(
         "type": dest_type,
         "is_domestic": dest_type == "domestic",
         "cabin": cabin_label,
-        "price": int(float(price)),
+        "price": deal_price,
+        "points": points,
+        "points_source": points_source,
+        "paymentType": payment_type_for_deal(
+            float(price) if price is not None else None,
+            points,
+            points_from_award=points_from_award,
+        ),
+        "trip_duration": trip_duration,
         "out_date": out_date,
         "ret_date": ret_date,
         "airline": airline_name,
@@ -367,6 +608,9 @@ def _deal_from_flight(
         "out_dep": out_dep,
         "ret_arr": ret_arr,
     }
+    if mileage_program:
+        deal["mileage_program"] = mileage_program
+    return deal
 
 
 def _search_pair(
@@ -375,6 +619,9 @@ def _search_pair(
     out_date_str: str,
     ret_date_str: str,
     cabin: str,
+    trip_duration: int,
+    *,
+    award_cache: list[AwardAvailability] | None = None,
 ) -> list[dict]:
     dest = dest_info["airport"]
     matches: list[dict] = []
@@ -428,6 +675,8 @@ def _search_pair(
                 cabin=cabin,
                 out_date=out_date_str,
                 ret_date=ret_date_str,
+                trip_duration=trip_duration,
+                award_cache=award_cache,
             )
             if deal is None:
                 with _stats_lock:
@@ -456,9 +705,12 @@ def _search_pair(
 def estimate_api_calls(dest_count: int, *, is_test: bool) -> int:
     """Rough API call budget for a run."""
     cabins = len(PREMIUM_CABIN_CLASSES)
+    durations = (
+        PREMIUM_TRIP_DURATIONS_PER_RUN_TEST if is_test else PREMIUM_TRIP_DURATIONS_PER_RUN
+    )
     shortlist = PREMIUM_SHORTLIST_SIZE_TEST if is_test else PREMIUM_SHORTLIST_SIZE
     origins = len(PREMIUM_DEAL_ORIGINS)
-    phase1 = dest_count * cabins
+    phase1 = dest_count * cabins * durations
     phase2 = dest_count * shortlist * origins
     return phase1 + phase2
 
@@ -486,6 +738,12 @@ def main(argv: list[str] | None = None) -> int:
     prior = _load_prior()
     prior_deals = prior["deals"]
 
+    if seats_aero_client.is_enabled():
+        seats_aero_client.begin_run()
+        log.info("seats.aero enabled (budget %s)", seats_aero_client.get_usage_summary())
+    else:
+        log.info("seats.aero disabled — award points use Chase estimate when cash fares exist")
+
     if args.force and _count_deals(prior_deals) == 0:
         prior_deals = []
 
@@ -499,6 +757,7 @@ def main(argv: list[str] | None = None) -> int:
         end_dt = datetime.strptime(start_date, "%Y-%m-%d") + timedelta(days=14)
         end_date = end_dt.strftime("%Y-%m-%d")
 
+    trip_durations = durations_for_run(is_test=args.test)
     est_calls = estimate_api_calls(len(today_dests), is_test=args.test)
     log.info(
         "Starting premium deal search (test=%s, destinations=%d, est_api_calls=%d)",
@@ -507,10 +766,10 @@ def main(argv: list[str] | None = None) -> int:
         est_calls,
     )
     log.info(
-        "Date window %s → %s, trip %d nights, cabins=%s",
+        "Date window %s → %s, trip durations=%s nights, cabins=%s",
         start_date,
         end_date,
-        PREMIUM_TRIP_DURATION,
+        trip_durations,
         ", ".join(PREMIUM_CABIN_CLASSES),
     )
 
@@ -518,6 +777,8 @@ def main(argv: list[str] | None = None) -> int:
     for dest_info in today_dests:
         airport = dest_info["airport"]
         log.info("=== Destination: %s (%s) ===", dest_info["label"], airport)
+
+        award_cache = _prefetch_seats_aero_for_dest(airport, start_date, end_date)
 
         shortlist = _phase1_shortlist(
             dest_info,
@@ -527,15 +788,45 @@ def main(argv: list[str] | None = None) -> int:
         )
         if not shortlist:
             log.warning("%s: empty shortlist, skipping phase 2", airport)
+            if award_cache:
+                award_only = _award_only_deals_from_cache(
+                    dest_info,
+                    award_cache,
+                    trip_durations,
+                    existing_keys=set(),
+                )
+                if award_only:
+                    new_deals.extend(rank_deals(award_only))
+                    log.info("%s: %d award-only deals from seats.aero", airport, len(award_only))
             continue
 
         dest_deals: list[dict] = []
         flight_calls = 0
-        for _slc_origin, _dest, out_date, ret_date, cabin in shortlist:
+        for _slc_origin, _dest, out_date, ret_date, cabin, trip_duration in shortlist:
             for origin in PREMIUM_DEAL_ORIGINS:
-                flights = _search_pair(origin, dest_info, out_date, ret_date, cabin)
+                flights = _search_pair(
+                    origin,
+                    dest_info,
+                    out_date,
+                    ret_date,
+                    cabin,
+                    trip_duration,
+                    award_cache=award_cache,
+                )
                 flight_calls += 1
                 dest_deals.extend(flights)
+
+        existing_keys = {_deal_key(d) for d in dest_deals}
+        if award_cache and not dest_deals:
+            award_only = _award_only_deals_from_cache(
+                dest_info,
+                award_cache,
+                trip_durations,
+                existing_keys=existing_keys,
+            )
+            dest_deals.extend(award_only)
+            if award_only:
+                log.info("%s: %d award-only deals from seats.aero", airport, len(award_only))
 
         dest_deals = rank_deals(dest_deals)
         new_deals.extend(dest_deals)

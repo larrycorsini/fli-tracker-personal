@@ -1,5 +1,7 @@
 """Shared configuration for the Fli-Tracker daily search pipeline."""
 
+import os
+
 ORIGINS = ["SLC", "PVU"]
 
 EXCLUDED_AIRLINES = ["F9", "MX", "NK", "G4", "SY", "XP"]
@@ -83,30 +85,56 @@ INTERNATIONAL_REGIONS = [
 # Premium-cabin deal discovery (find_deals.py) — separate from economy region monitor.
 PREMIUM_DEAL_ORIGINS = ["SLC", "PVU"]
 PREMIUM_CABIN_CLASSES = ["BUSINESS", "PREMIUM_ECONOMY"]
-PREMIUM_DATE_OFFSET_START = 14
-PREMIUM_DATE_OFFSET_END = 45
-PREMIUM_TRIP_DURATION = 7
+# Wider departure window: day+7 through day+90 (test mode narrows in find_deals.py).
+PREMIUM_DATE_OFFSET_START = 7
+PREMIUM_DATE_OFFSET_END = 90
+# Flexible trip lengths; two durations rotate daily to cap API volume (see durations_for_run).
+PREMIUM_TRIP_DURATIONS = [3, 4, 5, 7, 10, 14]
+PREMIUM_TRIP_DURATIONS_PER_RUN = 2
+PREMIUM_TRIP_DURATIONS_PER_RUN_TEST = 1
 PREMIUM_MAX_STOPS = "1"
 PREMIUM_DEAL_OUTPUT_JSON = "premium_deals.json"
 PREMIUM_DEALS_JSON = "public/data/premium-deals.json"
 
-# Per-run destination cap keeps API volume ~50–80 calls (rotates daily).
-PREMIUM_DESTINATIONS_PER_RUN = 12
+# Per-run caps keep API volume ~72–96 calls/day (destinations + durations rotate daily).
+PREMIUM_DESTINATIONS_PER_RUN = 10
 PREMIUM_DESTINATIONS_PER_RUN_TEST = 3
 PREMIUM_SHORTLIST_SIZE = 2
 PREMIUM_SHORTLIST_SIZE_TEST = 1
 PREMIUM_MAX_DEALS_PER_DEST = 3
-PREMIUM_GLOBAL_TOP_N = 25
+PREMIUM_GLOBAL_TOP_N = 30
+
+# Chase Sapphire Preferred portal redemption (¢/point) for estimated points on cash fares.
+CHASE_POINTS_CENT_VALUE = 1.25
 
 # Global cash thresholds (USD round-trip); tune per cabin and market type.
 PREMIUM_DEAL_MAX_PRICE = {
     "domestic": {
-        "BUSINESS": 800,
-        "PREMIUM_ECONOMY": 500,
+        "BUSINESS": 1400,
+        "PREMIUM_ECONOMY": 800,
     },
     "international": {
-        "BUSINESS": 2000,
-        "PREMIUM_ECONOMY": 1200,
+        "BUSINESS": 3800,
+        "PREMIUM_ECONOMY": 2000,
+    },
+}
+
+# seats.aero Partner API (cached search only — Pro: 1000 calls/day, resets UTC midnight).
+SEATS_AERO_DAILY_LIMIT = 1000
+SEATS_AERO_DAILY_RESERVE = 50  # headroom for manual/ad-hoc queries
+SEATS_AERO_MAX_CALLS_PER_RUN = 10  # matches PREMIUM_DESTINATIONS_PER_RUN rotation
+SEATS_AERO_ENABLED = bool(os.environ.get("SEATS_AERO_API_KEY", "").strip())
+
+# Award/miles thresholds (round-trip). Google Flights does not return award prices;
+# find_deals.py applies these when seats.aero award data is available (SEATS_AERO_API_KEY).
+PREMIUM_DEAL_MAX_POINTS = {
+    "domestic": {
+        "BUSINESS": 100_000,
+        "PREMIUM_ECONOMY": 60_000,
+    },
+    "international": {
+        "BUSINESS": 200_000,
+        "PREMIUM_ECONOMY": 120_000,
     },
 }
 

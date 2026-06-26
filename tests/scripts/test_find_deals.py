@@ -35,17 +35,55 @@ class TestDestinationsForRun:
         assert 1 <= len(dests) <= find_deals.PREMIUM_DESTINATIONS_PER_RUN
 
 
+class TestDurationsForRun:
+    def test_test_mode_limits_durations(self):
+        durations = find_deals.durations_for_run(is_test=True)
+        assert len(durations) <= find_deals.PREMIUM_TRIP_DURATIONS_PER_RUN_TEST
+        assert all(isinstance(d, int) for d in durations)
+
+    def test_full_run_returns_rotated_batch(self):
+        durations = find_deals.durations_for_run(is_test=False)
+        assert 1 <= len(durations) <= find_deals.PREMIUM_TRIP_DURATIONS_PER_RUN
+
+
 class TestPriceThreshold:
     def test_domestic_business_threshold(self):
-        assert find_deals.price_threshold("domestic", "BUSINESS") == 800
+        assert find_deals.price_threshold("domestic", "BUSINESS") == 1400
 
     def test_international_premium_economy_threshold(self):
-        assert find_deals.price_threshold("international", "PREMIUM_ECONOMY") == 1200
+        assert find_deals.price_threshold("international", "PREMIUM_ECONOMY") == 2000
 
     def test_passes_threshold(self):
-        assert find_deals.passes_threshold(750, "domestic", "BUSINESS") is True
-        assert find_deals.passes_threshold(850, "domestic", "BUSINESS") is False
+        assert find_deals.passes_threshold(1300, "domestic", "BUSINESS") is True
+        assert find_deals.passes_threshold(1500, "domestic", "BUSINESS") is False
         assert find_deals.passes_threshold(None, "domestic", "BUSINESS") is False
+
+
+class TestPointsThreshold:
+    def test_domestic_business_points_threshold(self):
+        assert find_deals.points_threshold("domestic", "BUSINESS") == 100_000
+
+    def test_estimate_chase_points(self):
+        assert find_deals.estimate_chase_points(1250) == 100_000
+        assert find_deals.estimate_chase_points(None) is None
+
+    def test_passes_deal_threshold_cash_or_points(self):
+        assert find_deals.passes_deal_threshold(1300, 104_000, "domestic", "BUSINESS") is True
+        assert find_deals.passes_deal_threshold(None, 90_000, "domestic", "BUSINESS") is True
+        assert find_deals.passes_deal_threshold(1500, 130_000, "domestic", "BUSINESS") is False
+
+
+class TestPaymentType:
+    def test_cash_with_chase_estimate(self):
+        assert (
+            find_deals.payment_type_for_deal(800.0, 64_000, points_from_award=False) == "both"
+        )
+
+    def test_award_only(self):
+        assert find_deals.payment_type_for_deal(None, 80_000, points_from_award=True) == "points"
+
+    def test_both_award_and_cash(self):
+        assert find_deals.payment_type_for_deal(900.0, 70_000, points_from_award=True) == "both"
 
 
 class TestRankDeals:
@@ -99,8 +137,8 @@ class TestLoadPrior:
 
 class TestEstimateApiCalls:
     def test_estimate_within_budget(self):
-        calls = find_deals.estimate_api_calls(12, is_test=False)
-        assert 50 <= calls <= 80
+        calls = find_deals.estimate_api_calls(10, is_test=False)
+        assert 70 <= calls <= 100
 
     def test_test_mode_fewer_calls(self):
         test_calls = find_deals.estimate_api_calls(3, is_test=True)
@@ -116,11 +154,70 @@ class TestDatePairsFromResults:
                 self.price = price
 
         results = [
-            FakeDatePrice(datetime(2026, 7, 1), datetime(2026, 7, 8), 750.0),
-            FakeDatePrice(datetime(2026, 7, 2), datetime(2026, 7, 9), 950.0),
+            FakeDatePrice(datetime(2026, 7, 1), datetime(2026, 7, 8), 1300.0),
+            FakeDatePrice(datetime(2026, 7, 2), datetime(2026, 7, 9), 1500.0),
         ]
         pairs = find_deals._date_pairs_from_results(
-            results, "SLC", "JFK", "domestic", "BUSINESS"
+            results, "SLC", "JFK", "domestic", "BUSINESS", 7
         )
         assert len(pairs) == 1
         assert pairs[0][2] == "2026-07-01"
+        assert pairs[0][5] == 7
+
+
+class TestSeatsAeroAwardLookup:
+    def test_fetch_award_from_cache_doubles_one_way(self):
+        row = find_deals.AwardAvailability(
+            origin="SLC",
+            destination="LHR",
+            out_date="2026-08-15",
+            cabin="BUSINESS",
+            points_one_way=32500,
+            mileage_program="alaska",
+            airlines="BA",
+        )
+        points, program = find_deals._fetch_seats_aero_award(
+            "SLC",
+            "LHR",
+            "2026-08-15",
+            "2026-08-22",
+            "BUSINESS",
+            award_cache=[row],
+        )
+        assert points == 65000
+        assert program == "alaska"
+
+    def test_fetch_award_returns_none_without_cache(self):
+        points, program = find_deals._fetch_seats_aero_award(
+            "SLC", "LHR", "2026-08-15", "2026-08-22", "BUSINESS", award_cache=None
+        )
+        assert points is None
+        assert program is None
+
+
+class TestAwardOnlyDeals:
+    def test_creates_points_only_deal_under_threshold(self):
+        row = find_deals.AwardAvailability(
+            origin="SLC",
+            destination="LHR",
+            out_date="2026-08-15",
+            cabin="BUSINESS",
+            points_one_way=40000,
+            mileage_program="united",
+            airlines="UA",
+        )
+        dest_info = {
+            "airport": "LHR",
+            "label": "London",
+            "region_label": "Europe",
+            "type": "international",
+        }
+        deals = find_deals._award_only_deals_from_cache(
+            dest_info, [row], [7], existing_keys=set()
+        )
+        assert len(deals) == 1
+        assert deals[0]["price"] is None
+        assert deals[0]["points"] == 80000
+        assert deals[0]["points_source"] == "seats_aero"
+        assert deals[0]["mileage_program"] == "united"
+        assert deals[0]["paymentType"] == "points"
