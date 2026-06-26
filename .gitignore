@@ -168,6 +168,7 @@ app/data/*.db
 
 # Fli-Tracker pipeline runtime output
 best_direct.json
+premium_deals.json
 last_alert.json
 logs/
 out_*.json

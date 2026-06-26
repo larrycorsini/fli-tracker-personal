@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import sys
 from pathlib import Path
 
@@ -71,6 +72,26 @@ class TestCapRegionFlights:
         for key in groups:
             count = sum(1 for f in capped if (f["out_date"], f["ret_date"], f["price"]) == key)
             assert count <= 1
+
+
+class TestExistingFlightsJson:
+    def test_detects_nonempty_region_data(self, tmp_path, monkeypatch):
+        path = tmp_path / "flights.json"
+        path.write_text(
+            json.dumps({"regionData": {"DFW": {"groupCount": 2, "groups": []}}}),
+            encoding="utf-8",
+        )
+        monkeypatch.setattr(report, "FLIGHTS_JSON", str(path))
+        assert report._existing_flights_json_has_data() is True
+
+    def test_empty_region_data_returns_false(self, tmp_path, monkeypatch):
+        path = tmp_path / "flights.json"
+        path.write_text(
+            json.dumps({"regionData": {"DFW": {"groupCount": 0, "groups": []}}}),
+            encoding="utf-8",
+        )
+        monkeypatch.setattr(report, "FLIGHTS_JSON", str(path))
+        assert report._existing_flights_json_has_data() is False
 
 
 class TestBuildRegionGroups:

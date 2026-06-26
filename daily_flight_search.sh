@@ -49,7 +49,7 @@ deploy_public_via_git() {
   report_date="$(date +%Y-%m-%d)"
   remote_url="$(git remote get-url personal 2>/dev/null || echo "personal (unknown)")"
 
-  git add public/index.html public/heatmap.html public/history.html public/manifest.json public/data/flights.json
+  git add public/index.html public/heatmap.html public/history.html public/manifest.json public/data/flights.json public/data/premium-deals.json
 
   if git diff --staged --quiet; then
     echo "INFO: No public/ changes to commit — skipping git push"
@@ -75,6 +75,10 @@ SEARCH_OK=0
 "$UV" run python find_direct.py --force && SEARCH_OK=1 || echo "ERROR: find_direct.py failed"
 
 if [[ "$SEARCH_OK" -eq 1 ]]; then
+  DEALS_START=$(date +%s)
+  "$UV" run python find_deals.py || echo "WARN: find_deals.py failed (non-fatal)"
+  DEALS_ELAPSED=$(( $(date +%s) - DEALS_START ))
+  echo "INFO: find_deals.py finished in ${DEALS_ELAPSED}s"
   "$UV" run python alert.py || echo "WARN: alert.py failed (non-fatal)"
   "$UV" run python generate_flight_report.py || {
     echo "ERROR: generate_flight_report.py failed"

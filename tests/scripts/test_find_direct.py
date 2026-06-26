@@ -83,6 +83,12 @@ class TestLoadCheckpoint:
         assert loaded["Georgia"] == []
 
 
+class TestCountFlights:
+    def test_count_flights_sums_regions(self):
+        all_results = {"DFW": [{"price": 1}, {"price": 2}], "California Coast": []}
+        assert find_direct._count_flights(all_results) == 2
+
+
 class TestExitCode:
     def test_exit_success_with_partial_results_despite_errors(self):
         all_results = {"DFW": [{"price": 200}], "California Coast": []}

@@ -201,9 +201,78 @@
             <h1 class='page-header text-left'>Track your next adventure.</h1>
             <p class='hero-text'>Daily curated fares from SLC and PVU across every tracked region. Points values optimized for Chase Sapphire Preferred.</p>
             <p class='text-sm text-gray-500 mb-6' x-data x-text="window.__FLI_META?.lastUpdated ? 'Last updated: ' + window.__FLI_META.lastUpdated : 'Last updated: Fri, Jun 26, 2026 at 06:00 AM'"></p>
-            <a href='#flights' class='dt-btn-primary focus-ring'>View flight options</a>
+            <a href='#premium-deals' class='dt-btn-primary focus-ring mr-3'>Premium deals</a>
+            <a href='#flights' class='dt-btn-primary focus-ring' style='background:transparent;color:var(--accent-interactive);border-color:var(--accent-interactive)'>Economy regions</a>
         </div>
     </section>
+    <section id='premium-deals' class='py-12 md:py-16 px-6 max-w-5xl mx-auto scroll-mt-24'
+             x-data='premiumDeals()' x-init='init()'>
+        <div class='mb-8 text-center'>
+            <h2 class='text-3xl font-bold text-gray-800 mb-2'>Premium deals from SLC</h2>
+            <p class='text-gray-500'>Business &amp; premium economy outlier fares · 7-night trips · day+14 to day+45</p>
+            <p class='text-sm text-gray-500 mt-2' x-show='lastUpdated' x-text="'Updated: ' + lastUpdated"></p>
+        </div>
+        <div x-show='loading' class='text-center py-12 text-gray-500'>Loading premium deals…</div>
+        <div x-show='error' x-cloak class='text-center py-12 text-red-600' x-text='error'></div>
+        <div x-show='!loading && !error && deals.length === 0' x-cloak 
+             class='card-container bg-white border border-gray-200 p-8 text-center text-gray-500'>
+            No premium deals meet today's thresholds. Check back after the morning search (~6 AM).
+        </div>
+        <div x-show='!loading && !error && deals.length > 0' x-cloak 
+             class='card-container bg-white border border-gray-200 overflow-hidden divide-y divide-gray-100'>
+            <template x-for='(deal, i) in deals' :key="'premium-' + i">
+                <article class='p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-gray-50 transition-colors'>
+                    <div class='flex-1 min-w-0'>
+                        <div class='flex flex-wrap items-center gap-2 mb-2'>
+                            <h3 class='text-xl font-bold text-gray-800' x-text='deal.destination'></h3>
+                            <span class='text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-600 border' x-text='deal.airport'></span>
+                            <span class='text-xs font-semibold px-3 py-1 rounded-full' style='background:var(--accent-interactive-muted);color:var(--accent-interactive);border:1px solid var(--accent-interactive-border)' x-text='deal.cabin'></span>
+                        </div>
+                        <p class='text-sm text-gray-500 mb-1'>
+                            <span x-text='deal.origin'></span> → <span x-text='deal.airport'></span>
+                            <span x-show='deal.regionLabel'> · </span>
+                            <span x-text='deal.regionLabel'></span>
+                        </p>
+                        <p class='text-[15px] text-gray-600'>
+                            <span class='font-semibold text-gray-800' x-text='deal.airline'></span>
+                            · <span x-text="deal.outDateFmt + ' — ' + deal.retDateFmt"></span>
+                            <span x-show='deal.stops !== null && deal.stops !== undefined'> · 
+                                <span x-text="deal.stops === 0 ? 'Nonstop' : (deal.stops + ' stop' + (deal.stops !== 1 ? 's' : ''))"></span>
+                            </span>
+                        </p>
+                    </div>
+                    <div class='flex items-center gap-4 shrink-0'>
+                        <div class='price-text'><span class='mr-1'>$</span><span x-text='deal.price'></span></div>
+                        <a :href='deal.booking_url || "#"' target='_blank' rel='noopener noreferrer' 
+                           class='btn-accent focus-ring text-sm' :aria-label="'Book ' + deal.destination + ' on Google Flights'">Book</a>
+                    </div>
+                </article>
+            </template>
+        </div>
+    </section>
+    <script>
+        function premiumDeals() {
+            return {
+                loading: true,
+                error: null,
+                deals: [],
+                lastUpdated: null,
+                async init() {
+                    try {
+                        const resp = await fetch('data/premium-deals.json');
+                        if (!resp.ok) throw new Error('Could not load premium deals (' + resp.status + ')');
+                        const data = await resp.json();
+                        this.deals = data.deals || [];
+                        this.lastUpdated = data.lastUpdated || null;
+                        this.loading = false;
+                    } catch (err) {
+                        this.error = err.message || 'Failed to load premium deals';
+                        this.loading = false;
+                    }
+                },
+            };
+        }
+    </script>
     <section id='flights' class='py-12 md:py-20 px-6 max-w-5xl mx-auto scroll-mt-24'
              x-data='flightTracker()' x-init='init()' @scroll.window='showScrollTop = window.scrollY > 400'>
         <div x-show='loading' class='text-center py-16 text-gray-500'>Loading flight data…</div>

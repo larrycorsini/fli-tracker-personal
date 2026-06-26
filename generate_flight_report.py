@@ -15,6 +15,9 @@ from tracker_config import (
     MAX_FARE_GROUPS_PER_REGION,
     MAX_TIMES_PER_GROUP,
     OUTPUT_JSON,
+    PREMIUM_DEAL_ORIGINS,
+    PREMIUM_DEAL_OUTPUT_JSON,
+    PREMIUM_DEALS_JSON,
     REGIONS,
     SITE_URL,
 )
@@ -598,6 +601,75 @@ def write_flights_json(payload: dict) -> None:
     print(f"Flights JSON written: {FLIGHTS_JSON}")
 
 
+def load_premium_deals() -> dict:
+    """Load premium_deals.json produced by find_deals.py."""
+    if not os.path.exists(PREMIUM_DEAL_OUTPUT_JSON):
+        return {"deals": [], "origins": PREMIUM_DEAL_ORIGINS}
+    try:
+        with open(PREMIUM_DEAL_OUTPUT_JSON, encoding="utf-8") as handle:
+            data = json.load(handle)
+    except (json.JSONDecodeError, OSError):
+        return {"deals": [], "origins": PREMIUM_DEAL_ORIGINS}
+    if not isinstance(data, dict):
+        return {"deals": [], "origins": PREMIUM_DEAL_ORIGINS}
+    deals = data.get("deals", [])
+    if not isinstance(deals, list):
+        deals = []
+    valid = [row for row in deals if isinstance(row, dict) and row.get("price") is not None]
+    valid.sort(key=lambda row: float(row["price"]))
+    origins = data.get("origins", PREMIUM_DEAL_ORIGINS)
+    return {"deals": valid, "origins": origins, "last_run": data.get("last_run")}
+
+
+def build_premium_deals_payload(raw: dict, last_updated: str) -> dict:
+    """Serialize premium deals for the public dashboard JSON."""
+    deals_out: list[dict] = []
+    for deal in raw.get("deals", []):
+        out_date = deal.get("out_date", "")
+        ret_date = deal.get("ret_date", "")
+        deals_out.append(
+            {
+                "destination": deal.get("destination", deal.get("airport", "")),
+                "airport": deal.get("airport", ""),
+                "regionLabel": deal.get("region_label", ""),
+                "origin": deal.get("origin", "SLC"),
+                "cabin": deal.get("cabin", ""),
+                "price": int(deal["price"]),
+                "outDate": out_date,
+                "retDate": ret_date,
+                "outDateFmt": format_date(out_date),
+                "retDateFmt": format_date(ret_date),
+                "airline": deal.get("airline", ""),
+                "duration": deal.get("duration"),
+                "stops": deal.get("stops"),
+                "booking_url": deal.get("booking_url") or deal.get("url") or "",
+            }
+        )
+    return {
+        "lastUpdated": last_updated,
+        "origins": raw.get("origins", PREMIUM_DEAL_ORIGINS),
+        "deals": deals_out,
+    }
+
+
+def write_premium_deals_json(payload: dict) -> None:
+    os.makedirs(os.path.dirname(PREMIUM_DEALS_JSON), exist_ok=True)
+    atomic_write_json(PREMIUM_DEALS_JSON, payload)
+    print(f"Premium deals JSON written: {PREMIUM_DEALS_JSON}")
+
+
+def render_premium_deals_report(last_updated: str) -> None:
+    """Write public/data/premium-deals.json from find_deals.py output."""
+    raw = load_premium_deals()
+    if os.path.exists(PREMIUM_DEAL_OUTPUT_JSON):
+        mtime = datetime.fromtimestamp(os.path.getmtime(PREMIUM_DEAL_OUTPUT_JSON))
+        premium_updated = mtime.strftime("%a, %b %d, %Y at %I:%M %p")
+    else:
+        premium_updated = last_updated
+    payload = build_premium_deals_payload(raw, premium_updated)
+    write_premium_deals_json(payload)
+
+
 def render_index(all_results: dict[str, list[dict]], last_updated: str, hist_avg: dict[str, float | None]) -> None:
     all_results = normalized_results(all_results)
     payload = build_flights_payload(all_results, last_updated, hist_avg)
@@ -634,9 +706,78 @@ def render_index(all_results: dict[str, list[dict]], last_updated: str, hist_avg
             "            <h1 class='page-header text-left'>Track your next adventure.</h1>",
             "            <p class='hero-text'>Daily curated fares from SLC and PVU across every tracked region. Points values optimized for Chase Sapphire Preferred.</p>",
             f"            <p class='text-sm text-gray-500 mb-6' x-data x-text=\"window.__FLI_META?.lastUpdated ? 'Last updated: ' + window.__FLI_META.lastUpdated : 'Last updated: {html.escape(last_updated)}'\"></p>",
-            "            <a href='#flights' class='dt-btn-primary focus-ring'>View flight options</a>",
+            "            <a href='#premium-deals' class='dt-btn-primary focus-ring mr-3'>Premium deals</a>",
+            "            <a href='#flights' class='dt-btn-primary focus-ring' style='background:transparent;color:var(--accent-interactive);border-color:var(--accent-interactive)'>Economy regions</a>",
             "        </div>",
             "    </section>",
+            "    <section id='premium-deals' class='py-12 md:py-16 px-6 max-w-5xl mx-auto scroll-mt-24'",
+            "             x-data='premiumDeals()' x-init='init()'>",
+            "        <div class='mb-8 text-center'>",
+            "            <h2 class='text-3xl font-bold text-gray-800 mb-2'>Premium deals from SLC</h2>",
+            "            <p class='text-gray-500'>Business &amp; premium economy outlier fares · 7-night trips · day+14 to day+45</p>",
+            "            <p class='text-sm text-gray-500 mt-2' x-show='lastUpdated' x-text=\"'Updated: ' + lastUpdated\"></p>",
+            "        </div>",
+            "        <div x-show='loading' class='text-center py-12 text-gray-500'>Loading premium deals…</div>",
+            "        <div x-show='error' x-cloak class='text-center py-12 text-red-600' x-text='error'></div>",
+            "        <div x-show='!loading && !error && deals.length === 0' x-cloak ",
+            "             class='card-container bg-white border border-gray-200 p-8 text-center text-gray-500'>",
+            "            No premium deals meet today's thresholds. Check back after the morning search (~6 AM).",
+            "        </div>",
+            "        <div x-show='!loading && !error && deals.length > 0' x-cloak ",
+            "             class='card-container bg-white border border-gray-200 overflow-hidden divide-y divide-gray-100'>",
+            "            <template x-for='(deal, i) in deals' :key=\"'premium-' + i\">",
+            "                <article class='p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-gray-50 transition-colors'>",
+            "                    <div class='flex-1 min-w-0'>",
+            "                        <div class='flex flex-wrap items-center gap-2 mb-2'>",
+            "                            <h3 class='text-xl font-bold text-gray-800' x-text='deal.destination'></h3>",
+            "                            <span class='text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-600 border' x-text='deal.airport'></span>",
+            "                            <span class='text-xs font-semibold px-3 py-1 rounded-full' style='background:var(--accent-interactive-muted);color:var(--accent-interactive);border:1px solid var(--accent-interactive-border)' x-text='deal.cabin'></span>",
+            "                        </div>",
+            "                        <p class='text-sm text-gray-500 mb-1'>",
+            "                            <span x-text='deal.origin'></span> → <span x-text='deal.airport'></span>",
+            "                            <span x-show='deal.regionLabel'> · </span>",
+            "                            <span x-text='deal.regionLabel'></span>",
+            "                        </p>",
+            "                        <p class='text-[15px] text-gray-600'>",
+            "                            <span class='font-semibold text-gray-800' x-text='deal.airline'></span>",
+            "                            · <span x-text=\"deal.outDateFmt + ' — ' + deal.retDateFmt\"></span>",
+            "                            <span x-show='deal.stops !== null && deal.stops !== undefined'> · ",
+            "                                <span x-text=\"deal.stops === 0 ? 'Nonstop' : (deal.stops + ' stop' + (deal.stops !== 1 ? 's' : ''))\"></span>",
+            "                            </span>",
+            "                        </p>",
+            "                    </div>",
+            "                    <div class='flex items-center gap-4 shrink-0'>",
+            "                        <div class='price-text'><span class='mr-1'>$</span><span x-text='deal.price'></span></div>",
+            "                        <a :href='deal.booking_url || \"#\"' target='_blank' rel='noopener noreferrer' ",
+            "                           class='btn-accent focus-ring text-sm' :aria-label=\"'Book ' + deal.destination + ' on Google Flights'\">Book</a>",
+            "                    </div>",
+            "                </article>",
+            "            </template>",
+            "        </div>",
+            "    </section>",
+            "    <script>",
+            "        function premiumDeals() {",
+            "            return {",
+            "                loading: true,",
+            "                error: null,",
+            "                deals: [],",
+            "                lastUpdated: null,",
+            "                async init() {",
+            "                    try {",
+            "                        const resp = await fetch('data/premium-deals.json');",
+            "                        if (!resp.ok) throw new Error('Could not load premium deals (' + resp.status + ')');",
+            "                        const data = await resp.json();",
+            "                        this.deals = data.deals || [];",
+            "                        this.lastUpdated = data.lastUpdated || null;",
+            "                        this.loading = false;",
+            "                    } catch (err) {",
+            "                        this.error = err.message || 'Failed to load premium deals';",
+            "                        this.loading = false;",
+            "                    }",
+            "                },",
+            "            };",
+            "        }",
+            "    </script>",
             "    <section id='flights' class='py-12 md:py-20 px-6 max-w-5xl mx-auto scroll-mt-24'",
             "             x-data='flightTracker()' x-init='init()' @scroll.window='showScrollTop = window.scrollY > 400'>",
             "        <div x-show='loading' class='text-center py-16 text-gray-500'>Loading flight data…</div>",
@@ -1058,26 +1199,28 @@ def render_history(all_results: dict[str, list[dict]]) -> None:
 
 def main() -> None:
     all_results = load_results()
+    last_updated = datetime.now().strftime("%a, %b %d, %Y at %I:%M %p")
+    if os.path.exists(OUTPUT_JSON):
+        mtime = datetime.fromtimestamp(os.path.getmtime(OUTPUT_JSON))
+        last_updated = mtime.strftime("%a, %b %d, %Y at %I:%M %p")
+
     if not all_results:
         print("No flight data found.")
+        render_premium_deals_report(last_updated)
         return
 
     has_priced = any(priced_flights(flights) for flights in all_results.values())
     if not has_priced:
+        render_premium_deals_report(last_updated)
         if _existing_flights_json_has_data():
             print("No flight data in best_direct.json — keeping existing reports.")
             return
         print("No flight data found.")
         return
 
-    if os.path.exists(OUTPUT_JSON):
-        mtime = datetime.fromtimestamp(os.path.getmtime(OUTPUT_JSON))
-        last_updated = mtime.strftime("%a, %b %d, %Y at %I:%M %p")
-    else:
-        last_updated = datetime.now().strftime("%a, %b %d, %Y at %I:%M %p")
-
     hist_avg = update_history(all_results)
     render_index(all_results, last_updated, hist_avg)
+    render_premium_deals_report(last_updated)
     render_heatmap(all_results)
     render_history(all_results)
 
