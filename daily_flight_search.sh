@@ -15,9 +15,10 @@
 # (~/Library/LaunchAgents/com.larry.fli-tracker.daily-search.plist). Do not commit
 # the phone number to the repo. Without it, alert.py skips alerts (non-fatal).
 #
-# seats.aero awards: set SEATS_AERO_API_KEY in the same plist EnvironmentVariables
-# block, or export it / add to gitignored .env (see .env.example). find_deals.py
-# loads .env via python-dotenv when run manually from the project root.
+# seats.aero awards (find_deals.py): launchd does NOT read .env — copy
+# SEATS_AERO_API_KEY into the plist EnvironmentVariables (same block as FLI_ALERT_PHONE).
+# For manual Terminal runs, use gitignored .env (see .env.example); python-dotenv loads it
+# from the project root. After editing the plist: launchctl bootout/bootstrap (see below).
 #
 # Example plist keys (replace paths and phone with your values):
 #   ProgramArguments: /Users/larry/.local/bin/fli-tracker-daily-search.sh
@@ -26,8 +27,8 @@
 #   EnvironmentVariables: FLI_ALERT_PHONE → +1XXXXXXXXXX
 #                        SEATS_AERO_API_KEY → (your Pro API key)
 #   StartCalendarInterval: Hour=6, Minute=0
-# Reload: launchctl unload ~/Library/LaunchAgents/com.larry.fli-tracker.daily-search.plist
-#         launchctl load   ~/Library/LaunchAgents/com.larry.fli-tracker.daily-search.plist
+# Reload: launchctl bootout gui/501/com.larry.fli-tracker.daily-search
+#         launchctl bootstrap gui/501 ~/Library/LaunchAgents/com.larry.fli-tracker.daily-search.plist
 
 set -euo pipefail
 

@@ -146,6 +146,27 @@ class TestBuildPremiumDealsPayload:
         assert payload["deals"][1]["isDomestic"] is False
         assert payload["deals"][1]["stops"] == 1
 
+    def test_includes_points_and_payment_type(self):
+        raw = {
+            "deals": [
+                {
+                    "destination": "Dallas",
+                    "airport": "DFW",
+                    "price": 650,
+                    "points": 52000,
+                    "paymentType": "both",
+                    "trip_duration": 5,
+                    "out_date": "2026-08-06",
+                    "ret_date": "2026-08-11",
+                }
+            ]
+        }
+        payload = report.build_premium_deals_payload(raw, "now")
+        deal = payload["deals"][0]
+        assert deal["points"] == 52000
+        assert deal["paymentType"] == "both"
+        assert deal["tripDuration"] == 5
+
     def test_infers_domestic_from_airport(self):
         raw = {
             "deals": [

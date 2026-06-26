@@ -48,18 +48,20 @@ workflows for the full process.
 - Use `uv` on PATH in scripts and subprocess calls — avoid hardcoded absolute paths to a local `uv` binary.
 - Exclude budget/low-cost carriers (Frontier F9, Breeze MX, Spirit NK, Allegiant G4, Sun Country SY, Avelo XP) from flight searches and recommendations.
 - On mobile viewports, compact nav after scroll hides Heatmap and Trends links to preserve header space.
+- Show multiple flight time/price options per region on the dashboard (not a single fare per destination).
+- When the user asks about "the site" or Fli-Tracker dashboard, they mean https://flights.larrycorsini.com (static Netlify: Heatmap, Trends, Weekend Escapes), not Travel Planner Pro or the local FastAPI UI (`uvicorn app.server`).
 
 ## Learned Workspace Facts
 
-- Personal fork of [punitarani/fli](https://github.com/punitarani/fli) extended with a FastAPI price-tracker in `app/`, hotel search, multi-destination pipeline, and public static dashboard at https://flights.larrycorsini.com.
+- Personal fork of [punitarani/fli](https://github.com/punitarani/fli) extended with a FastAPI price-tracker in `app/`, hotel search, multi-destination pipeline, and Netlify site `flights-larrycorsini` (https://flights.larrycorsini.com) that auto-deploys committed `public/` from GitHub `larrycorsini/fli-tracker-personal` `main`; `best_direct.json` is gitignored and generated locally. Custom domain DNS is manual in Cloudflare (`flights` CNAME → `flights-larrycorsini.netlify.app`); Netlify does not auto-update external DNS.
 - Git remotes: `origin` → upstream `punitarani/fli`; `personal` → `larrycorsini/fli-tracker-personal`; v1.1 milestone tagged on `personal`.
 - Hotel search lives in `app/hotels.py` (successor to removed root `hot_core.py`).
 - Upstream can return `FlightResult` entries with `price=None`; `app/engine.py` must skip or safely sort unpriced rows.
 - Tracker app entry point: `uv run uvicorn app.server:app --reload`; flight search streams via SSE at `/api/search/flights`.
 - Local SQLite tracker data lives in `app/data/tracker.db` (gitignored); history/trends pages query `search_history` by region name plus legacy destination airport codes.
 - Home airports for trip searches and the automated tracker are SLC and PVU.
-- `tracker_config.py` holds shared pipeline config: `REGIONS`, alert thresholds, `EXCLUDED_AIRLINES`, `SITE_URL`, and two-phase search constants.
-- Daily automated flight search runs relocatable `daily_flight_search.sh` (launchd ~6 AM) with `find_direct.py --force` (`--test` for smoke runs) using two-phase SearchDates shortlist → SearchFlights → `best_direct.json` → `alert.py` → `generate_flight_report.py` → `public/` → git commit + push to `personal` main (Netlify Git auto-deploy).
+- `tracker_config.py` holds shared pipeline config: `REGIONS`, alert thresholds, `EXCLUDED_AIRLINES`, `SITE_URL`, and two-phase search constants. Automated `find_direct.py` outbound windows: domestic departs day+14…+74 (3/4-night trips), international day+14…+42 (7/10-night trips); nothing inside 14 days.
+- Daily automated flight search: launchd job `com.larry.fli-tracker.daily-search` (~6 AM, plist in `~/Library/LaunchAgents/`) runs via `~/.local/bin/fli-tracker-daily-search.sh` → `daily_flight_search.sh` in `~/Projects/Fli-tracker` (relocated from `~/Documents/Projects/Fli-tracker` because macOS TCC blocks launchd cwd/script exec under `~/Documents`—exit 126 “Operation not permitted”; a `~/.local/bin` wrapper still fails if it execs scripts in Documents) → two-phase `find_direct.py --force` (`--test` for smoke runs) → `best_direct.json` → `alert.py` → `generate_flight_report.py` → `public/` (must `git add public/data/flights.json`—dashboard reads `/data/flights.json`) → git push `personal`/`main`; logs in `logs/daily_flight_search.log`. `find_direct.py` and `generate_flight_report.py` preserve prior fare data when a run returns zero flights (empty Google Flights API days). Manual catch-up: run `./daily_flight_search.sh` in Terminal.app if launchd fails.
 - `tracker_io.py` provides shared atomic JSON/text writes for pipeline artifacts (`find_direct.py`, `generate_flight_report.py`, `alert.py`).
-- `alert.py` requires `FLI_ALERT_PHONE` env var and skips alerts when unset (no hardcoded phone fallback).
+- `alert.py` requires `FLI_ALERT_PHONE` env var and skips alerts when unset (no hardcoded phone fallback). Scheduled runs get it from the launchd plist `EnvironmentVariables`; manual Terminal runs must `export FLI_ALERT_PHONE` first.
 - Automated tracker optimizes for Chase Sapphire Preferred points (1.25¢ redemption).

@@ -624,8 +624,16 @@ def load_premium_deals() -> dict:
     deals = data.get("deals", [])
     if not isinstance(deals, list):
         deals = []
-    valid = [row for row in deals if isinstance(row, dict) and row.get("price") is not None]
-    valid.sort(key=lambda row: float(row["price"]))
+    valid = [
+        row
+        for row in deals
+        if isinstance(row, dict) and (row.get("price") is not None or row.get("points") is not None)
+    ]
+    valid.sort(
+        key=lambda row: float(row["price"])
+        if row.get("price") is not None
+        else float(row.get("points", 0)) * 0.0125
+    )
     origins = data.get("origins", PREMIUM_DEAL_ORIGINS)
     return {"deals": valid, "origins": origins, "last_run": data.get("last_run")}
 
@@ -652,6 +660,8 @@ def build_premium_deals_payload(raw: dict, last_updated: str) -> dict:
                 stops = int(stops)
             except (TypeError, ValueError):
                 stops = None
+        price = deal.get("price")
+        points = deal.get("points")
         deals_out.append(
             {
                 "destination": deal.get("destination", deal.get("airport", "")),
@@ -659,7 +669,10 @@ def build_premium_deals_payload(raw: dict, last_updated: str) -> dict:
                 "regionLabel": deal.get("region_label", ""),
                 "origin": deal.get("origin", "SLC"),
                 "cabin": deal.get("cabin", ""),
-                "price": int(deal["price"]),
+                "price": int(price) if price is not None else None,
+                "points": int(points) if points is not None else None,
+                "paymentType": deal.get("paymentType", "cash"),
+                "tripDuration": deal.get("trip_duration"),
                 "outDate": out_date,
                 "retDate": ret_date,
                 "outDateFmt": format_date(out_date),
@@ -703,7 +716,7 @@ def render_premium_deals_section() -> list[str]:
         "             x-data='premiumDeals()' x-init='init()'>",
         "        <div class='mb-8 text-center'>",
         "            <h2 class='text-3xl font-bold text-gray-800 mb-2'>Premium deals from SLC</h2>",
-        "            <p class='text-gray-500'>Business &amp; premium economy outlier fares · 7-night trips · day+14 to day+45</p>",
+        "            <p class='text-gray-500'>Business &amp; premium economy · flexible trip lengths · day+7 to day+90 · cash &amp; points</p>",
         "            <p class='text-sm text-gray-500 mt-2' x-show='lastUpdated' x-text=\"'Updated: ' + lastUpdated\"></p>",
         "        </div>",
         "        <div x-show='!loading && !error && allDeals.length > 0' x-cloak",
@@ -730,6 +743,17 @@ def render_premium_deals_section() -> list[str]:
         "                    <button type='button' x-show='filtersActive' x-cloak @click='clearFilters()'",
         "                            class='text-sm font-semibold accent-text focus-ring min-h-[44px] px-2'",
         "                            aria-label='Clear all premium deal filters'>Clear filters</button>",
+        "                </div>",
+        "                <div role='group' aria-label='Payment type filter'>",
+        "                    <p class='text-sm font-semibold text-gray-700 mb-2'>Payment</p>",
+        "                    <div class='flex flex-wrap gap-2'>",
+        "                        <template x-for='opt in paymentOptions' :key='opt.value'>",
+        "                            <button type='button' @click='paymentFilter = opt.value'",
+        "                                    :class=\"paymentFilter === opt.value ? 'deal-chip deal-chip-active focus-ring' : 'deal-chip focus-ring'\"",
+        "                                    :aria-pressed=\"paymentFilter === opt.value\"",
+        "                                    x-text='opt.label'></button>",
+        "                        </template>",
+        "                    </div>",
         "                </div>",
         "                <div role='group' aria-label='Maximum price filter'>",
         "                    <p class='text-sm font-semibold text-gray-700 mb-2'>Max price</p>",
@@ -775,13 +799,22 @@ def render_premium_deals_section() -> list[str]:
         "                        <p class='text-[15px] text-gray-600'>",
         "                            <span class='font-semibold text-gray-800' x-text='deal.airline'></span>",
         "                            · <span x-text=\"deal.outDateFmt + ' — ' + deal.retDateFmt\"></span>",
+        "                            <span x-show='deal.tripDuration'> · ",
+        "                                <span x-text=\"deal.tripDuration + ' night' + (deal.tripDuration !== 1 ? 's' : '')\"></span>",
+        "                            </span>",
         "                            <span x-show='deal.stops !== null && deal.stops !== undefined'> · ",
         "                                <span x-text=\"deal.stops === 0 ? 'Nonstop' : (deal.stops + ' stop' + (deal.stops !== 1 ? 's' : ''))\"></span>",
         "                            </span>",
         "                        </p>",
         "                    </div>",
         "                    <div class='flex items-center gap-4 shrink-0'>",
-        "                        <div class='price-text'><span class='mr-1'>$</span><span x-text='deal.price'></span></div>",
+        "                        <div class='text-right'>",
+        "                            <div class='price-text' x-show='deal.price !== null && deal.price !== undefined'>",
+        "                                <span class='mr-1'>$</span><span x-text='deal.price'></span>",
+        "                            </div>",
+        "                            <div class='price-points' x-show='deal.points'",
+        "                                 x-text=\"deal.points.toLocaleString() + ' pts'\"></div>",
+        "                        </div>",
         "                        <a :href='deal.booking_url || \"#\"' target='_blank' rel='noopener noreferrer'",
         "                           class='btn-accent focus-ring text-sm' :aria-label=\"'Book ' + deal.destination + ' on Google Flights'\">Book</a>",
         "                    </div>",
@@ -799,11 +832,17 @@ def render_premium_deals_section() -> list[str]:
         "                domesticOnly: false,",
         "                maxOneStop: false,",
         "                maxPrice: null,",
+        "                paymentFilter: 'any',",
+        "                paymentOptions: [",
+        "                    { label: 'Any', value: 'any' },",
+        "                    { label: 'Cash', value: 'cash' },",
+        "                    { label: 'Points', value: 'points' },",
+        "                ],",
         "                pricePresets: [",
-        "                    { label: '$500', value: 500 },",
-        "                    { label: '$1000', value: 1000 },",
+        "                    { label: '$800', value: 800 },",
         "                    { label: '$1500', value: 1500 },",
-        "                    { label: '$2000', value: 2000 },",
+        "                    { label: '$2500', value: 2500 },",
+        "                    { label: '$4000', value: 4000 },",
         "                    { label: 'Any', value: null },",
         "                ],",
         "                get filteredDeals() {",
@@ -812,12 +851,16 @@ def render_premium_deals_section() -> list[str]:
         "                        if (this.maxOneStop && deal.stops !== null && deal.stops !== undefined && deal.stops > 1) {",
         "                            return false;",
         "                        }",
-        "                        if (this.maxPrice !== null && deal.price > this.maxPrice) return false;",
+        "                        if (this.maxPrice !== null && deal.price !== null && deal.price > this.maxPrice) {",
+        "                            return false;",
+        "                        }",
+        "                        if (this.paymentFilter === 'cash' && deal.paymentType === 'points') return false;",
+        "                        if (this.paymentFilter === 'points' && deal.paymentType === 'cash') return false;",
         "                        return true;",
         "                    });",
         "                },",
         "                get filtersActive() {",
-        "                    return this.domesticOnly || this.maxOneStop || this.maxPrice !== null;",
+        "                    return this.domesticOnly || this.maxOneStop || this.maxPrice !== null || this.paymentFilter !== 'any';",
         "                },",
         "                setMaxPrice(value) {",
         "                    this.maxPrice = value;",
@@ -826,6 +869,7 @@ def render_premium_deals_section() -> list[str]:
         "                    this.domesticOnly = false;",
         "                    this.maxOneStop = false;",
         "                    this.maxPrice = null;",
+        "                    this.paymentFilter = 'any';",
         "                },",
         "                async init() {",
         "                    try {",
