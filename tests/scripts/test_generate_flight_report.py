@@ -102,3 +102,61 @@ class TestBuildRegionGroups:
         assert group["outDateFmt"].startswith("Wed,")
         assert group["retDateFmt"].startswith("Sat,")
         assert group["times"][0]["outDepFmt"].startswith("Wed,")
+
+
+class TestBuildPremiumDealsPayload:
+    def test_includes_is_domestic_and_stops(self):
+        raw = {
+            "origins": ["SLC"],
+            "deals": [
+                {
+                    "destination": "Dallas",
+                    "airport": "DFW",
+                    "region_label": "US South",
+                    "origin": "SLC",
+                    "cabin": "Business",
+                    "price": 650,
+                    "out_date": "2026-08-06",
+                    "ret_date": "2026-08-13",
+                    "airline": "Delta",
+                    "stops": 0,
+                    "is_domestic": True,
+                    "booking_url": "https://example.com/dfw",
+                },
+                {
+                    "destination": "London",
+                    "airport": "LHR",
+                    "region_label": "Europe",
+                    "origin": "SLC",
+                    "cabin": "Premium Economy",
+                    "price": 1100,
+                    "out_date": "2026-09-10",
+                    "ret_date": "2026-09-17",
+                    "airline": "British Airways",
+                    "stops": 1,
+                    "type": "international",
+                    "booking_url": "https://example.com/lhr",
+                },
+            ],
+        }
+        payload = report.build_premium_deals_payload(raw, "Fri, Jun 26, 2026 at 09:00 AM")
+        assert payload["deals"][0]["isDomestic"] is True
+        assert payload["deals"][0]["stops"] == 0
+        assert payload["deals"][0]["outDateFmt"] == "Thu, Aug 06"
+        assert payload["deals"][1]["isDomestic"] is False
+        assert payload["deals"][1]["stops"] == 1
+
+    def test_infers_domestic_from_airport(self):
+        raw = {
+            "deals": [
+                {
+                    "destination": "Chicago",
+                    "airport": "ORD",
+                    "price": 700,
+                    "out_date": "2026-08-01",
+                    "ret_date": "2026-08-08",
+                }
+            ]
+        }
+        payload = report.build_premium_deals_payload(raw, "now")
+        assert payload["deals"][0]["isDomestic"] is True

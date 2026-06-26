@@ -101,6 +101,10 @@
             transition: background .2s ease; cursor: pointer;
         }
         .deal-chip:hover { background: #DCE8FC; }
+        .deal-chip-active {
+            background: var(--accent-interactive); color: #fff; border-color: var(--accent-interactive);
+        }
+        .deal-chip-active:hover { background: var(--accent-interactive-hover); }
         .deal-chip-disabled {
             opacity: 0.6; cursor: not-allowed; border-color: #E5E7EB; background: #F3F4F6; color: var(--text-muted);
         }
@@ -212,16 +216,61 @@
             <p class='text-gray-500'>Business &amp; premium economy outlier fares · 7-night trips · day+14 to day+45</p>
             <p class='text-sm text-gray-500 mt-2' x-show='lastUpdated' x-text="'Updated: ' + lastUpdated"></p>
         </div>
+        <div x-show='!loading && !error && allDeals.length > 0' x-cloak
+             class='mb-6 p-5 bg-white border border-gray-200 rounded-xl shadow-sm'>
+            <div class='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4'>
+                <h3 class='text-xs font-bold uppercase tracking-wider text-gray-500'>Filter deals</h3>
+                <p class='text-sm text-gray-500' x-show='filtersActive'
+                   x-text="'Showing ' + filteredDeals.length + ' of ' + allDeals.length + ' deals'"></p>
+            </div>
+            <div class='flex flex-col gap-5'>
+                <div class='flex flex-wrap items-center gap-x-6 gap-y-3'>
+                    <label class='inline-flex items-center gap-2 min-h-[44px] cursor-pointer select-none'>
+                        <input type='checkbox' class='w-5 h-5 rounded border-gray-300'
+                               style='accent-color: var(--accent-interactive)'
+                               x-model='domesticOnly' aria-label='Show domestic destinations only'>
+                        <span class='text-sm font-medium text-gray-700'>Domestic only</span>
+                    </label>
+                    <label class='inline-flex items-center gap-2 min-h-[44px] cursor-pointer select-none'>
+                        <input type='checkbox' class='w-5 h-5 rounded border-gray-300'
+                               style='accent-color: var(--accent-interactive)'
+                               x-model='maxOneStop' aria-label='Show flights with at most one stop'>
+                        <span class='text-sm font-medium text-gray-700'>Max 1 stop</span>
+                    </label>
+                    <button type='button' x-show='filtersActive' x-cloak @click='clearFilters()'
+                            class='text-sm font-semibold accent-text focus-ring min-h-[44px] px-2'
+                            aria-label='Clear all premium deal filters'>Clear filters</button>
+                </div>
+                <div role='group' aria-label='Maximum price filter'>
+                    <p class='text-sm font-semibold text-gray-700 mb-2'>Max price</p>
+                    <div class='flex flex-wrap gap-2'>
+                        <template x-for='preset in pricePresets' :key='preset.label'>
+                            <button type='button' @click='setMaxPrice(preset.value)'
+                                    :class="maxPrice === preset.value ? 'deal-chip deal-chip-active focus-ring' : 'deal-chip focus-ring'"
+                                    :aria-pressed="maxPrice === preset.value"
+                                    x-text='preset.label'></button>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div x-show='loading' class='text-center py-12 text-gray-500'>Loading premium deals…</div>
         <div x-show='error' x-cloak class='text-center py-12 text-red-600' x-text='error'></div>
-        <div x-show='!loading && !error && deals.length === 0' x-cloak 
+        <div x-show='!loading && !error && allDeals.length === 0' x-cloak
              class='card-container bg-white border border-gray-200 p-8 text-center text-gray-500'>
             No premium deals meet today's thresholds. Check back after the morning search (~6 AM).
         </div>
-        <div x-show='!loading && !error && deals.length > 0' x-cloak 
-             class='card-container bg-white border border-gray-200 overflow-hidden divide-y divide-gray-100'>
-            <template x-for='(deal, i) in deals' :key="'premium-' + i">
-                <article class='p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-gray-50 transition-colors'>
+        <div x-show='!loading && !error && allDeals.length > 0 && filteredDeals.length === 0' x-cloak
+             class='card-container bg-white border border-gray-200 p-8 text-center text-gray-500'>
+            <p class='mb-4'>No deals match your filters.</p>
+            <button type='button' @click='clearFilters()' class='btn-accent focus-ring text-sm'>Clear filters</button>
+        </div>
+        <div x-show='!loading && !error && filteredDeals.length > 0' x-cloak
+             class='card-container bg-white border border-gray-200 overflow-hidden divide-y divide-gray-100'
+             role='list' aria-label='Premium flight deals'>
+            <template x-for='(deal, i) in filteredDeals' :key="'premium-' + i">
+                <article class='p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-gray-50 transition-colors'
+                         role='listitem'>
                     <div class='flex-1 min-w-0'>
                         <div class='flex flex-wrap items-center gap-2 mb-2'>
                             <h3 class='text-xl font-bold text-gray-800' x-text='deal.destination'></h3>
@@ -243,7 +292,7 @@
                     </div>
                     <div class='flex items-center gap-4 shrink-0'>
                         <div class='price-text'><span class='mr-1'>$</span><span x-text='deal.price'></span></div>
-                        <a :href='deal.booking_url || "#"' target='_blank' rel='noopener noreferrer' 
+                        <a :href='deal.booking_url || "#"' target='_blank' rel='noopener noreferrer'
                            class='btn-accent focus-ring text-sm' :aria-label="'Book ' + deal.destination + ' on Google Flights'">Book</a>
                     </div>
                 </article>
@@ -255,14 +304,45 @@
             return {
                 loading: true,
                 error: null,
-                deals: [],
+                allDeals: [],
                 lastUpdated: null,
+                domesticOnly: false,
+                maxOneStop: false,
+                maxPrice: null,
+                pricePresets: [
+                    { label: '$500', value: 500 },
+                    { label: '$1000', value: 1000 },
+                    { label: '$1500', value: 1500 },
+                    { label: '$2000', value: 2000 },
+                    { label: 'Any', value: null },
+                ],
+                get filteredDeals() {
+                    return this.allDeals.filter((deal) => {
+                        if (this.domesticOnly && !deal.isDomestic) return false;
+                        if (this.maxOneStop && deal.stops !== null && deal.stops !== undefined && deal.stops > 1) {
+                            return false;
+                        }
+                        if (this.maxPrice !== null && deal.price > this.maxPrice) return false;
+                        return true;
+                    });
+                },
+                get filtersActive() {
+                    return this.domesticOnly || this.maxOneStop || this.maxPrice !== null;
+                },
+                setMaxPrice(value) {
+                    this.maxPrice = value;
+                },
+                clearFilters() {
+                    this.domesticOnly = false;
+                    this.maxOneStop = false;
+                    this.maxPrice = null;
+                },
                 async init() {
                     try {
                         const resp = await fetch('data/premium-deals.json');
                         if (!resp.ok) throw new Error('Could not load premium deals (' + resp.status + ')');
                         const data = await resp.json();
-                        this.deals = data.deals || [];
+                        this.allDeals = data.deals || [];
                         this.lastUpdated = data.lastUpdated || null;
                         this.loading = false;
                     } catch (err) {

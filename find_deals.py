@@ -354,6 +354,8 @@ def _deal_from_flight(
         "destination": dest_info["label"],
         "airport": dest_info["airport"],
         "region_label": dest_info.get("region_label", ""),
+        "type": dest_type,
+        "is_domestic": dest_type == "domestic",
         "cabin": cabin_label,
         "price": int(float(price)),
         "out_date": out_date,
