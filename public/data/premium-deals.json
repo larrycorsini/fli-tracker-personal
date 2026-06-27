@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Fri, Jun 26, 2026 at 09:55 AM",
+  "lastUpdated": "Fri, Jun 26, 2026 at 08:12 PM",
   "origins": [
     "SLC",
     "PVU"
@@ -80,10 +80,10 @@
       "outDateFmt": "Fri, Jul 17",
       "retDateFmt": "Fri, Jul 24",
       "airline": "American Airlines",
-      "duration": 1278,
+      "duration": 1873,
       "stops": 2,
       "isDomestic": false,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA3LTE3IiAKA1NMQxIKMjAyNi0wNy0xNxoDTUlBKgJBQTIEMzA3MCIgCgNNSUESCjIwMjYtMDctMTgaA0JPRyoCQUEyBDExMjNqBwgBEgNTTENyBwgBEgNCT0caYhIKMjAyNi0wNy0yNCIgCgNCT0cSCjIwMjYtMDctMjQaA0RGVyoCQUEyBDExMjIiIAoDREZXEgoyMDI2LTA3LTI0GgNTTEMqAkFBMgQyNjA3agcIARIDQk9HcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE"
+      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA3LTE3Ih8KA1NMQxIKMjAyNi0wNy0xNxoDTUlBKgJBQTIDNDgzIiAKA01JQRIKMjAyNi0wNy0xOBoDQk9HKgJBQTIEMTEyM2oHCAESA1NMQ3IHCAESA0JPRxpiEgoyMDI2LTA3LTI0IiAKA0JPRxIKMjAyNi0wNy0yNBoDREZXKgJBQTIEMTEyMiIgCgNERlcSCjIwMjYtMDctMjQaA1NMQyoCQUEyBDI2MDdqBwgBEgNCT0dyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ"
     },
     {
       "destination": "Bogota",
@@ -100,10 +100,10 @@
       "outDateFmt": "Fri, Jul 17",
       "retDateFmt": "Fri, Jul 24",
       "airline": "American Airlines",
-      "duration": 1708,
+      "duration": 2041,
       "stops": 2,
       "isDomestic": false,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA3LTE3IiAKA1NMQxIKMjAyNi0wNy0xNxoDTUlBKgJBQTIEMzA3MCIgCgNNSUESCjIwMjYtMDctMTgaA0JPRyoCQUEyBDExMjNqBwgBEgNTTENyBwgBEgNCT0caYhIKMjAyNi0wNy0yNCIgCgNCT0cSCjIwMjYtMDctMjQaA01JQSoCQUEyBDExMzAiIAoDTUlBEgoyMDI2LTA3LTI0GgNTTEMqAkFBMgQxMTM0agcIARIDQk9HcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE"
+      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA3LTE3Ih8KA1NMQxIKMjAyNi0wNy0xNxoDTUlBKgJBQTIDNDgzIiAKA01JQRIKMjAyNi0wNy0xOBoDQk9HKgJBQTIEMTEyM2oHCAESA1NMQ3IHCAESA0JPRxpiEgoyMDI2LTA3LTI0IiAKA0JPRxIKMjAyNi0wNy0yNBoDREZXKgJBQTIEMTEyMiIgCgNERlcSCjIwMjYtMDctMjQaA1NMQyoCQUEyBDI2MTNqBwgBEgNCT0dyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ"
     },
     {
       "destination": "Bogota",
@@ -120,10 +120,10 @@
       "outDateFmt": "Fri, Jul 17",
       "retDateFmt": "Fri, Jul 24",
       "airline": "American Airlines",
-      "duration": 1358,
+      "duration": 2203,
       "stops": 2,
       "isDomestic": false,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA3LTE3IiAKA1NMQxIKMjAyNi0wNy0xNxoDTUlBKgJBQTIEMzA3MCIgCgNNSUESCjIwMjYtMDctMTgaA0JPRyoCQUEyBDExMjNqBwgBEgNTTENyBwgBEgNCT0caYhIKMjAyNi0wNy0yNCIgCgNCT0cSCjIwMjYtMDctMjQaA01JQSoCQUEyBDExMjYiIAoDTUlBEgoyMDI2LTA3LTI0GgNTTEMqAkFBMgQxMTM0agcIARIDQk9HcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE"
+      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA3LTE3Ih8KA1NMQxIKMjAyNi0wNy0xNxoDTUlBKgJBQTIDNDgzIiAKA01JQRIKMjAyNi0wNy0xOBoDQk9HKgJBQTIEMTEyM2oHCAESA1NMQ3IHCAESA0JPRxpiEgoyMDI2LTA3LTI0IiAKA0JPRxIKMjAyNi0wNy0yNBoDREZXKgJBQTIEMTEyMiIgCgNERlcSCjIwMjYtMDctMjQaA1NMQyoCQUEyBDI1OTRqBwgBEgNCT0dyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ"
     },
     {
       "destination": "San Jose CR",
@@ -140,10 +140,10 @@
       "outDateFmt": "Tue, Jul 14",
       "retDateFmt": "Tue, Jul 21",
       "airline": "United Airlines",
-      "duration": 1643,
+      "duration": 1356,
       "stops": 2,
       "isDomestic": false,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA3LTE0IiAKA1NMQxIKMjAyNi0wNy0xNBoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMDctMTQaA1NKTyoCVUEyBDEwNTVqBwgBEgNTTENyBwgBEgNTSk8aYhIKMjAyNi0wNy0yMSIgCgNTSk8SCjIwMjYtMDctMjEaA0lBSCoCVUEyBDEwOTciIAoDSUFIEgoyMDI2LTA3LTIxGgNTTEMqAlVBMgQyMjgxagcIARIDU0pPcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE"
+      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA3LTE0IiAKA1NMQxIKMjAyNi0wNy0xNBoDU0ZPKgJVQTIEMjA5NyIgCgNTRk8SCjIwMjYtMDctMTQaA1NKTyoCVUEyBDIzMTJqBwgBEgNTTENyBwgBEgNTSk8aYhIKMjAyNi0wNy0yMSIgCgNTSk8SCjIwMjYtMDctMjEaA0lBSCoCVUEyBDEwOTciIAoDSUFIEgoyMDI2LTA3LTIxGgNTTEMqAlVBMgQyMjgxagcIARIDU0pPcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE"
     },
     {
       "destination": "San Jose CR",
@@ -160,10 +160,10 @@
       "outDateFmt": "Tue, Jul 14",
       "retDateFmt": "Tue, Jul 21",
       "airline": "United Airlines",
-      "duration": 1924,
+      "duration": 1637,
       "stops": 2,
       "isDomestic": false,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA3LTE0IiAKA1NMQxIKMjAyNi0wNy0xNBoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMDctMTQaA1NKTyoCVUEyBDEwNTVqBwgBEgNTTENyBwgBEgNTSk8aYhIKMjAyNi0wNy0yMSIgCgNTSk8SCjIwMjYtMDctMjEaA0lBSCoCVUEyBDEwOTciIAoDSUFIEgoyMDI2LTA3LTIxGgNTTEMqAlVBMgQ2MjA3agcIARIDU0pPcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE"
+      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA3LTE0IiAKA1NMQxIKMjAyNi0wNy0xNBoDU0ZPKgJVQTIEMjA5NyIgCgNTRk8SCjIwMjYtMDctMTQaA1NKTyoCVUEyBDIzMTJqBwgBEgNTTENyBwgBEgNTSk8aYhIKMjAyNi0wNy0yMSIgCgNTSk8SCjIwMjYtMDctMjEaA0lBSCoCVUEyBDEwOTciIAoDSUFIEgoyMDI2LTA3LTIxGgNTTEMqAlVBMgQ2MjA3agcIARIDU0pPcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE"
     },
     {
       "destination": "San Jose CR",
@@ -180,10 +180,10 @@
       "outDateFmt": "Tue, Jul 14",
       "retDateFmt": "Tue, Jul 21",
       "airline": "United Airlines",
-      "duration": 1842,
+      "duration": 1555,
       "stops": 2,
       "isDomestic": false,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA3LTE0IiAKA1NMQxIKMjAyNi0wNy0xNBoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMDctMTQaA1NKTyoCVUEyBDEwNTVqBwgBEgNTTENyBwgBEgNTSk8aYhIKMjAyNi0wNy0yMSIgCgNTSk8SCjIwMjYtMDctMjEaA0lBSCoCVUEyBDE0NDciIAoDSUFIEgoyMDI2LTA3LTIxGgNTTEMqAlVBMgQyMTU3agcIARIDU0pPcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE"
+      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA3LTE0IiAKA1NMQxIKMjAyNi0wNy0xNBoDU0ZPKgJVQTIEMjA5NyIgCgNTRk8SCjIwMjYtMDctMTQaA1NKTyoCVUEyBDIzMTJqBwgBEgNTTENyBwgBEgNTSk8aYhIKMjAyNi0wNy0yMSIgCgNTSk8SCjIwMjYtMDctMjEaA0lBSCoCVUEyBDE0NDciIAoDSUFIEgoyMDI2LTA3LTIxGgNTTEMqAlVBMgQyMTU3agcIARIDU0pPcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE"
     }
   ]
 }
