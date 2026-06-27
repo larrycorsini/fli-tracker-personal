@@ -169,9 +169,7 @@ class TestLookupAward:
     def test_finds_matching_origin_date_cabin(self, api_env, usage_file, monkeypatch):
         monkeypatch.setattr(client.httpx, "Client", lambda *a, **k: _MockHttpxClient())
         client.begin_run()
-        rows = client.cached_search_destination(
-            ["SLC", "PVU"], "LHR", "2026-08-01", "2026-08-31"
-        )
+        rows = client.cached_search_destination(["SLC", "PVU"], "LHR", "2026-08-01", "2026-08-31")
         match = client.lookup_award(
             rows, origin="SLC", dest="LHR", out_date="2026-08-15", cabin="BUSINESS"
         )

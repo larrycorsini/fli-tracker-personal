@@ -75,9 +75,7 @@ class TestPointsThreshold:
 
 class TestPaymentType:
     def test_cash_with_chase_estimate(self):
-        assert (
-            find_deals.payment_type_for_deal(800.0, 64_000, points_from_award=False) == "both"
-        )
+        assert find_deals.payment_type_for_deal(800.0, 64_000, points_from_award=False) == "both"
 
     def test_award_only(self):
         assert find_deals.payment_type_for_deal(None, 80_000, points_from_award=True) == "points"
@@ -212,9 +210,7 @@ class TestAwardOnlyDeals:
             "region_label": "Europe",
             "type": "international",
         }
-        deals = find_deals._award_only_deals_from_cache(
-            dest_info, [row], [7], existing_keys=set()
-        )
+        deals = find_deals._award_only_deals_from_cache(dest_info, [row], [7], existing_keys=set())
         assert len(deals) == 1
         assert deals[0]["price"] is None
         assert deals[0]["points"] == 80000
