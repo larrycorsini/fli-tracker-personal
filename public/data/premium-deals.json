@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Sat, Jun 27, 2026 at 06:52 AM",
+  "lastUpdated": "Sun, Jun 28, 2026 at 06:01 AM",
   "origins": [
     "SLC",
     "PVU"
@@ -244,6 +244,66 @@
       "stops": 2,
       "isDomestic": false,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTI1IiAKA1NMQxIKMjAyNi0wOS0yNRoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMDktMjUaA1NKTyoCVUEyBDEyODBqBwgBEgNTTENyBwgBEgNTSk8aYRIKMjAyNi0wOS0zMCIgCgNTSk8SCjIwMjYtMDktMzAaA0VXUioCVUEyBDE1NjAiHwoDRVdSEgoyMDI2LTEwLTAxGgNTTEMqAlVBMgM2NDZqBwgBEgNTSk9yBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ"
+    },
+    {
+      "destination": "Lima",
+      "airport": "LIM",
+      "regionLabel": "South America",
+      "origin": "SLC",
+      "cabin": "Business",
+      "price": null,
+      "points": 150000,
+      "paymentType": "points",
+      "tripDuration": 10,
+      "outDate": "2026-09-16",
+      "retDate": "2026-09-26",
+      "outDateFmt": "Wed, Sep 16",
+      "retDateFmt": "Sat, Sep 26",
+      "airline": "CM",
+      "duration": null,
+      "stops": null,
+      "isDomestic": false,
+      "booking_url": ""
+    },
+    {
+      "destination": "Lima",
+      "airport": "LIM",
+      "regionLabel": "South America",
+      "origin": "SLC",
+      "cabin": "Business",
+      "price": null,
+      "points": 150000,
+      "paymentType": "points",
+      "tripDuration": 14,
+      "outDate": "2026-09-16",
+      "retDate": "2026-09-30",
+      "outDateFmt": "Wed, Sep 16",
+      "retDateFmt": "Wed, Sep 30",
+      "airline": "CM",
+      "duration": null,
+      "stops": null,
+      "isDomestic": false,
+      "booking_url": ""
+    },
+    {
+      "destination": "Lima",
+      "airport": "LIM",
+      "regionLabel": "South America",
+      "origin": "SLC",
+      "cabin": "Business",
+      "price": null,
+      "points": 156000,
+      "paymentType": "points",
+      "tripDuration": 10,
+      "outDate": "2026-08-25",
+      "retDate": "2026-09-04",
+      "outDateFmt": "Tue, Aug 25",
+      "retDateFmt": "Fri, Sep 04",
+      "airline": "CM",
+      "duration": null,
+      "stops": null,
+      "isDomestic": false,
+      "booking_url": ""
     }
   ]
 }
