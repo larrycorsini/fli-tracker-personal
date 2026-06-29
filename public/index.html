@@ -312,8 +312,11 @@
                             <div class='price-points' x-show='deal.points'
                                  x-text="deal.points.toLocaleString() + ' pts'"></div>
                         </div>
-                        <a :href='deal.booking_url || "#"' target='_blank' rel='noopener noreferrer'
+                        <a x-show='deal.booking_url' :href='deal.booking_url' target='_blank' rel='noopener noreferrer'
                            class='btn-accent focus-ring text-sm' :aria-label="'Book ' + deal.destination + ' on Google Flights'">Book</a>
+                        <span x-show='!deal.booking_url' x-cloak
+                              class='btn-accent text-sm opacity-40 cursor-not-allowed select-none'
+                              aria-disabled='true' title='Booking link unavailable'>Book</span>
                     </div>
                 </article>
             </template>

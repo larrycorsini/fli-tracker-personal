@@ -217,3 +217,6 @@ class TestAwardOnlyDeals:
         assert deals[0]["points_source"] == "seats_aero"
         assert deals[0]["mileage_program"] == "united"
         assert deals[0]["paymentType"] == "points"
+        assert deals[0]["booking_url"].startswith("https://www.google.com/travel/flights")
+        assert "SLC" in deals[0]["booking_url"]
+        assert "LHR" in deals[0]["booking_url"]

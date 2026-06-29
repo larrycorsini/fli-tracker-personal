@@ -9,6 +9,8 @@ import sqlite3
 from collections import defaultdict
 from datetime import datetime
 
+from fli.core import google_flights_url
+
 from tracker_config import (
     FLIGHTS_JSON,
     INTERNATIONAL_REGIONS,
@@ -26,6 +28,7 @@ from tracker_config import (
 _DOMESTIC_AIRPORTS = {
     dest["airport"] for dest in PREMIUM_DEAL_DESTINATIONS if dest.get("type") == "domestic"
 }
+
 from tracker_io import atomic_write_json, atomic_write_text
 
 ALPINE_CORE = "https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"
@@ -648,6 +651,20 @@ def infer_premium_deal_is_domestic(deal: dict) -> bool:
     return airport in _DOMESTIC_AIRPORTS
 
 
+def premium_deal_booking_url(deal: dict) -> str:
+    """Resolve a Google Flights link for a premium deal row."""
+    url = deal.get("booking_url") or deal.get("url") or ""
+    if url:
+        return url
+    origin = deal.get("origin", "SLC")
+    airport = deal.get("airport", "")
+    out_date = deal.get("out_date") or deal.get("outDate", "")
+    ret_date = deal.get("ret_date") or deal.get("retDate", "")
+    if origin and airport and out_date:
+        return google_flights_url(origin, airport, out_date, ret_date or None)
+    return ""
+
+
 def build_premium_deals_payload(raw: dict, last_updated: str) -> dict:
     """Serialize premium deals for the public dashboard JSON."""
     deals_out: list[dict] = []
@@ -681,7 +698,7 @@ def build_premium_deals_payload(raw: dict, last_updated: str) -> dict:
                 "duration": deal.get("duration"),
                 "stops": stops,
                 "isDomestic": infer_premium_deal_is_domestic(deal),
-                "booking_url": deal.get("booking_url") or deal.get("url") or "",
+                "booking_url": premium_deal_booking_url(deal),
             }
         )
     return {
@@ -815,8 +832,11 @@ def render_premium_deals_section() -> list[str]:
         "                            <div class='price-points' x-show='deal.points'",
         "                                 x-text=\"deal.points.toLocaleString() + ' pts'\"></div>",
         "                        </div>",
-        "                        <a :href='deal.booking_url || \"#\"' target='_blank' rel='noopener noreferrer'",
+        "                        <a x-show='deal.booking_url' :href='deal.booking_url' target='_blank' rel='noopener noreferrer'",
         "                           class='btn-accent focus-ring text-sm' :aria-label=\"'Book ' + deal.destination + ' on Google Flights'\">Book</a>",
+        "                        <span x-show='!deal.booking_url' x-cloak",
+        "                              class='btn-accent text-sm opacity-40 cursor-not-allowed select-none'",
+        "                              aria-disabled='true' title='Booking link unavailable'>Book</span>",
         "                    </div>",
         "                </article>",
         "            </template>",

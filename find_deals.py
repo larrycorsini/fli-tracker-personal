@@ -19,6 +19,7 @@ from fli.cli.utils import serialize_flight_result
 from fli.core import (
     build_date_search_segments,
     build_flight_segments,
+    google_flights_url,
     parse_airlines,
     parse_cabin_class,
     parse_max_stops,
@@ -474,7 +475,7 @@ def _award_only_deals_from_cache(
                     "airline": airline,
                     "duration": None,
                     "stops": None,
-                    "booking_url": "",
+                    "booking_url": google_flights_url(origin, dest_airport, out_date, ret_date),
                     "out_dep": None,
                     "ret_arr": None,
                 }

@@ -181,3 +181,29 @@ class TestBuildPremiumDealsPayload:
         }
         payload = report.build_premium_deals_payload(raw, "now")
         assert payload["deals"][0]["isDomestic"] is True
+
+    def test_builds_booking_url_when_missing(self):
+        raw = {
+            "deals": [
+                {
+                    "destination": "Chicago",
+                    "airport": "ORD",
+                    "origin": "SLC",
+                    "out_date": "2026-08-14",
+                    "ret_date": "2026-08-17",
+                    "price": None,
+                    "points": 30000,
+                }
+            ]
+        }
+        payload = report.build_premium_deals_payload(raw, "now")
+        url = payload["deals"][0]["booking_url"]
+        assert url.startswith("https://www.google.com/travel/flights")
+        assert "SLC" in url
+        assert "ORD" in url
+
+    def test_premium_section_never_uses_hash_fallback(self):
+        section = "\n".join(report.render_premium_deals_section())
+        assert 'deal.booking_url || "#"' not in section
+        assert "x-show='deal.booking_url'" in section
+        assert "x-show='!deal.booking_url'" in section
