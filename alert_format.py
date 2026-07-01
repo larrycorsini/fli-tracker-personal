@@ -89,7 +89,7 @@ def premium_digest_subject(deals: list[dict]) -> str:
     return f"Fli-Tracker: {count} premium {noun}"
 
 
-def _format_economy_deal_plain(deal: dict, index: int) -> list[str]:
+def _format_economy_deal_plain(deal: dict, index: int, *, include_booking_url: bool) -> list[str]:
     region = deal["region"]
     price = int(deal["price"])
     origin = deal["origin"]
@@ -104,13 +104,29 @@ def _format_economy_deal_plain(deal: dict, index: int) -> list[str]:
         f"   {origin}→{dest} · {dates} · {airline}",
         f"   ↗ {site_link_display(board)}",
     ]
-    if book != board:
+    if include_booking_url and book != board:
         lines.append(f"   🔗 {book}")
     return lines
 
 
+def _format_economy_deal_imessage(deal: dict) -> str:
+    """Compact deal block with one short dashboard URL (no long Google tfs links)."""
+    region = deal["region"]
+    price = int(deal["price"])
+    origin = deal["origin"]
+    dest = deal["destination"]
+    dates = format_short_date_range(deal["out_date"], deal["ret_date"])
+    airline = deal.get("airline") or "—"
+    board = region_deep_link(region)
+    return (
+        f"{region} · ${price}\n"
+        f"{origin}→{dest} · {dates} · {airline}\n"
+        f"{board}"
+    )
+
+
 def format_morning_digest_plain(deals: list[dict]) -> str:
-    """Skimmable plain-text morning digest for iMessage."""
+    """Plain-text digest for email fallback (may include booking URLs)."""
     if not deals:
         return ""
 
@@ -120,14 +136,34 @@ def format_morning_digest_plain(deals: list[dict]) -> str:
         "",
     ]
     for index, deal in enumerate(deals, start=1):
-        lines.extend(_format_economy_deal_plain(deal, index))
+        lines.extend(_format_economy_deal_plain(deal, index, include_booking_url=True))
         lines.append("")
 
     lines.extend([_DIVIDER, site_link_display(SITE_URL)])
     return "\n".join(lines).rstrip()
 
 
-def _format_premium_deal_plain(deal: dict, index: int) -> list[str]:
+def format_morning_digest_imessage(deals: list[dict]) -> str:
+    """iMessage digest — short tappable site links only (no tfs walls).
+
+    iMessage cannot render custom hyperlink text via AppleScript; URLs must
+  appear as plain text. Google Flights booking links are omitted here because
+    they wrap across dozens of lines on iPhone. Tap the region link to open
+    the dashboard and book from there. Direct book links are in HTML email.
+    """
+    if not deals:
+        return ""
+
+    lowest = min(int(d["price"]) for d in deals)
+    header = (
+        f"✈️ FLI-TRACKER · {len(deals)} morning deal"
+        f"{'' if len(deals) == 1 else 's'} from ${lowest}"
+    )
+    blocks = [_format_economy_deal_imessage(deal) for deal in deals]
+    return header + "\n\n" + "\n\n".join(blocks) + f"\n\n{SITE_URL}"
+
+
+def _format_premium_deal_plain(deal: dict, index: int, *, include_booking_url: bool) -> list[str]:
     dest = deal.get("destination") or deal.get("airport", "")
     cabin = deal.get("cabin_class", "BUSINESS").replace("_", " ").title()
     origin = deal.get("origin", "SLC")
@@ -143,13 +179,25 @@ def _format_premium_deal_plain(deal: dict, index: int) -> list[str]:
         f"   {origin} · {dates}",
         f"   ↗ {site_link_display(board)}",
     ]
-    if book != board:
+    if include_booking_url and book != board:
         lines.append(f"   🔗 {book}")
     return lines
 
 
+def _format_premium_deal_imessage(deal: dict) -> str:
+    dest = deal.get("destination") or deal.get("airport", "")
+    cabin = deal.get("cabin_class", "BUSINESS").replace("_", " ").title()
+    origin = deal.get("origin", "SLC")
+    dates = format_short_date_range(deal.get("out_date", ""), deal.get("ret_date", ""))
+    price_part = format_money(deal["price"]) if deal.get("price") is not None else ""
+    points_part = format_points(deal["points"]) if deal.get("points") is not None else ""
+    fare = " · ".join(part for part in (price_part, points_part) if part) or "—"
+    board = premium_deals_deep_link()
+    return f"{dest} · {cabin} · {fare}\n{origin} · {dates}\n{board}"
+
+
 def format_premium_digest_plain(deals: list[dict]) -> str:
-    """Skimmable plain-text premium digest for iMessage."""
+    """Plain-text premium digest for email fallback."""
     if not deals:
         return ""
 
@@ -159,11 +207,21 @@ def format_premium_digest_plain(deals: list[dict]) -> str:
         "",
     ]
     for index, deal in enumerate(deals, start=1):
-        lines.extend(_format_premium_deal_plain(deal, index))
+        lines.extend(_format_premium_deal_plain(deal, index, include_booking_url=True))
         lines.append("")
 
     lines.extend([_DIVIDER, site_link_display(SITE_URL)])
     return "\n".join(lines).rstrip()
+
+
+def format_premium_digest_imessage(deals: list[dict]) -> str:
+    """iMessage premium digest with short dashboard links only."""
+    if not deals:
+        return ""
+
+    header = f"✨ FLI-TRACKER · {len(deals)} premium deal{'' if len(deals) == 1 else 's'}"
+    blocks = [_format_premium_deal_imessage(deal) for deal in deals]
+    return header + "\n\n" + "\n\n".join(blocks) + f"\n\n{premium_deals_deep_link()}"
 
 
 def _html_page(title: str, body: str) -> str:
@@ -293,14 +351,15 @@ def format_premium_digest_html(deals: list[dict]) -> str:
 
 
 def combine_alert_content(
-    sections: list[tuple[str, str, str, str]],
-) -> tuple[str, str, str]:
-    """Merge alert sections; tuple is (subject_hint, section_title, plain, cards_html)."""
+    sections: list[tuple[str, str, str, str, str]],
+) -> tuple[str, str, str, str]:
+    """Merge alert sections; tuple is (subject, title, email_plain, imessage_plain, cards_html)."""
     subject_hints = [section[0] for section in sections if section[0]]
-    plain_parts = [section[2] for section in sections if section[2]]
+    email_parts = [section[2] for section in sections if section[2]]
+    imessage_parts = [section[3] for section in sections if section[3]]
 
     html_chunks: list[str] = []
-    for _hint, title, _plain, cards in sections:
+    for _hint, title, _email, _imessage, cards in sections:
         if cards:
             html_chunks.append(
                 f'<div style="font-size:13px;font-weight:700;letter-spacing:0.08em;'
@@ -315,6 +374,7 @@ def combine_alert_content(
     else:
         subject = "Fli-Tracker deal alert"
 
-    plain = "\n\n".join(plain_parts)
+    email_plain = "\n\n".join(email_parts)
+    imessage_plain = "\n\n".join(imessage_parts)
     html_doc = _html_page("Deal Alerts", "".join(html_chunks)) if html_chunks else ""
-    return subject, plain, html_doc
+    return subject, email_plain, imessage_plain, html_doc

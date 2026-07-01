@@ -5,8 +5,10 @@ from __future__ import annotations
 from alert_format import (
     combine_alert_content,
     format_morning_digest_html,
+    format_morning_digest_imessage,
     format_morning_digest_plain,
     format_premium_digest_html,
+    format_premium_digest_imessage,
     format_premium_digest_plain,
     format_short_date_range,
     morning_digest_subject,
@@ -92,16 +94,32 @@ class TestPremiumDigestHtml:
         assert "https://example.com/book" in html
 
 
+class TestMorningDigestImessage:
+    def test_omits_long_booking_urls(self):
+        msg = format_morning_digest_imessage(SAMPLE_ECONOMY)
+        assert "tfs=" not in msg
+        assert "Book:" not in msg
+        assert "flights.larrycorsini.com/?tab=California%20Coast" in msg
+        assert "2 morning deals from $198" in msg
+
+    def test_compact_deal_blocks(self):
+        msg = format_morning_digest_imessage(SAMPLE_ECONOMY)
+        assert "California Coast · $198" in msg
+        assert "SLC→SAN · Aug 19–22 · Alaska Airlines" in msg
+        assert "flights.larrycorsini.com/?tab=DFW" in msg
+
+
 class TestCombineAlertContent:
     def test_merges_sections(self):
-        subject, plain, html = combine_alert_content(
+        subject, email_plain, imessage_plain, html = combine_alert_content(
             [
-                ("Morning subject", "Morning Deals", "plain-a", "<card-a />"),
-                ("Premium subject", "Premium Deals", "plain-b", "<card-b />"),
+                ("Morning subject", "Morning Deals", "email-a", "imessage-a", "<card-a />"),
+                ("Premium subject", "Premium Deals", "email-b", "imessage-b", "<card-b />"),
             ]
         )
         assert subject == "Fli-Tracker: deal alerts"
-        assert "plain-a" in plain and "plain-b" in plain
+        assert "email-a" in email_plain and "email-b" in email_plain
+        assert "imessage-a" in imessage_plain and "imessage-b" in imessage_plain
         assert "Morning Deals" in html and "Premium Deals" in html
 
 

@@ -12,7 +12,14 @@ from typing import Protocol
 class AlertNotifier(Protocol):
     """Send a plain-text alert message."""
 
-    def send(self, message: str, *, html: str | None = None, subject: str | None = None) -> None: ...
+    def send(
+        self,
+        message: str,
+        *,
+        html: str | None = None,
+        imessage: str | None = None,
+        subject: str | None = None,
+    ) -> None: ...
 
 
 class IMessageNotifier:
@@ -21,8 +28,16 @@ class IMessageNotifier:
     def __init__(self, phone_number: str) -> None:
         self.phone_number = phone_number
 
-    def send(self, message: str, *, html: str | None = None, subject: str | None = None) -> None:
+    def send(
+        self,
+        message: str,
+        *,
+        html: str | None = None,
+        imessage: str | None = None,
+        subject: str | None = None,
+    ) -> None:
         _ = html, subject
+        payload = imessage if imessage is not None else message
         script = """
         on run argv
             set msg to item 1 of argv
@@ -35,7 +50,7 @@ class IMessageNotifier:
         end run
         """
         subprocess.run(
-            ["osascript", "-e", script, message, self.phone_number],
+            ["osascript", "-e", script, payload, self.phone_number],
             check=True,
         )
 
@@ -60,7 +75,15 @@ class EmailNotifier:
         self.smtp_password = smtp_password or os.environ.get("FLI_SMTP_PASSWORD", "")
         self.from_address = from_address or os.environ.get("FLI_ALERT_FROM", self.smtp_user or to_address)
 
-    def send(self, message: str, *, html: str | None = None, subject: str | None = None) -> None:
+    def send(
+        self,
+        message: str,
+        *,
+        html: str | None = None,
+        imessage: str | None = None,
+        subject: str | None = None,
+    ) -> None:
+        _ = imessage
         msg = EmailMessage()
         msg["Subject"] = subject or "Fli-Tracker deal alert"
         msg["From"] = self.from_address
@@ -91,6 +114,7 @@ def dispatch_alert(
     message: str,
     *,
     html: str | None = None,
+    imessage: str | None = None,
     subject: str | None = None,
 ) -> list[str]:
     """Send message through all configured notifiers; return channels used."""
@@ -99,7 +123,7 @@ def dispatch_alert(
         return []
     channels: list[str] = []
     for notifier in notifiers:
-        notifier.send(message, html=html, subject=subject)
+        notifier.send(message, html=html, imessage=imessage, subject=subject)
         if isinstance(notifier, IMessageNotifier):
             channels.append("imessage")
         elif isinstance(notifier, EmailNotifier):

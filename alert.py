@@ -11,7 +11,9 @@ from alert_format import (
     _premium_digest_cards,
     combine_alert_content,
     format_morning_digest_plain,
+    format_morning_digest_imessage,
     format_premium_digest_plain,
+    format_premium_digest_imessage,
     morning_digest_subject,
     premium_digest_subject,
     premium_deals_deep_link,
@@ -162,7 +164,7 @@ def main() -> None:
 
     today_str = datetime.now().strftime("%Y-%m-%d")
     last_alerts = load_last_alerts()
-    sections: list[tuple[str, str, str, str]] = []
+    sections: list[tuple[str, str, str, str, str]] = []
 
     if os.path.exists(OUTPUT_JSON):
         with open(OUTPUT_JSON, encoding="utf-8") as handle:
@@ -177,6 +179,7 @@ def main() -> None:
                         morning_digest_subject(economy_deals),
                         "Morning Deals",
                         format_morning_digest_plain(economy_deals),
+                        format_morning_digest_imessage(economy_deals),
                         _morning_digest_cards(economy_deals),
                     )
                 )
@@ -206,6 +209,7 @@ def main() -> None:
                 premium_digest_subject(premium_deals),
                 "Premium Deals",
                 format_premium_digest_plain(premium_deals),
+                format_premium_digest_imessage(premium_deals),
                 _premium_digest_cards(premium_deals),
             )
         )
@@ -220,10 +224,15 @@ def main() -> None:
         print("No alerts sent.")
         return
 
-    subject, plain, html = combine_alert_content(sections)
+    subject, email_plain, imessage_plain, html = combine_alert_content(sections)
     print(f"Sending alert ({len(sections)} section(s))...")
     try:
-        channels = dispatch_alert(plain, html=html or None, subject=subject)
+        channels = dispatch_alert(
+            email_plain,
+            html=html or None,
+            imessage=imessage_plain or None,
+            subject=subject,
+        )
         save_last_alerts(last_alerts)
         print(f"Alert sent via: {', '.join(channels) or 'configured channels'}")
     except Exception as exc:
