@@ -21,6 +21,49 @@ def _load_alert():
 alert = _load_alert()
 
 
+class TestPremiumDedup:
+    def test_collapses_duplicate_san_rows(self):
+        deals = [
+            {
+                "destination": "San Diego",
+                "airport": "SAN",
+                "origin": "SLC",
+                "cabin_class": "BUSINESS",
+                "price": 359,
+                "points": 28720,
+                "out_date": "2026-07-29",
+                "ret_date": "2026-08-05",
+                "url": "https://example.com/a",
+            },
+            {
+                "destination": "San Diego",
+                "airport": "SAN",
+                "origin": "SLC",
+                "cabin_class": "BUSINESS",
+                "price": 359,
+                "points": 28720,
+                "out_date": "2026-07-29",
+                "ret_date": "2026-08-05",
+                "url": "https://example.com/b",
+            },
+            {
+                "destination": "Phoenix",
+                "airport": "PHX",
+                "origin": "SLC",
+                "cabin_class": "BUSINESS",
+                "price": None,
+                "points": 18000,
+                "out_date": "2026-08-11",
+                "ret_date": "2026-08-16",
+                "url": "",
+            },
+        ]
+        deduped = alert.dedupe_premium_for_alert(deals)
+        assert len(deduped) == 2
+        assert deduped[0]["airport"] == "SAN"
+        assert deduped[1]["airport"] == "PHX"
+
+
 class TestPremiumDigest:
     def test_format_premium_digest_includes_book_link(self):
         deals = [
