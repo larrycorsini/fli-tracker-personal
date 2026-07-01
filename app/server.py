@@ -19,6 +19,8 @@ from sse_starlette.sse import EventSourceResponse
 
 from app.airport_data import search_airports, iata_to_city
 from app.engine import (
+    FlightSearchOptions,
+    get_booking_options_async,
     search_dates_async,
     search_flights_async,
     search_hotels_async,
@@ -85,11 +87,52 @@ async def lifespan(app: FastAPI):
         _bg_task.cancel()
 
 
-app = FastAPI(title="Travel Planner Pro", version="2.1.0", lifespan=lifespan)
+app = FastAPI(title="Travel Planner Pro", version="2.2.0", lifespan=lifespan)
 
 # ── Static files ─────────────────────────────────────────────────────────────
 STATIC_DIR = Path(__file__).parent / "static"
+PRESETS_PATH = Path(__file__).parent / "data" / "presets.json"
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+
+def _parse_csv_list(value: str) -> list[str] | None:
+    items = [part.strip().upper() for part in value.split(",") if part.strip()]
+    return items or None
+
+
+def _flight_options_from_query(
+    *,
+    max_stops: str,
+    cabin_class: str,
+    airline: str,
+    exclude_airlines: str,
+    apply_default_exclusions: bool,
+    alliance: str,
+    exclude_alliance: str,
+    departure_window: str,
+    min_layover: int | None,
+    max_layover: int | None,
+    sort_by: str,
+    currency: str,
+    language: str,
+    country: str,
+) -> FlightSearchOptions:
+    return FlightSearchOptions(
+        max_stops=max_stops,
+        cabin_class=cabin_class,
+        airline_filter=airline if airline else None,
+        exclude_airlines=_parse_csv_list(exclude_airlines),
+        apply_default_exclusions=apply_default_exclusions,
+        alliance=_parse_csv_list(alliance),
+        exclude_alliance=_parse_csv_list(exclude_alliance),
+        departure_window=departure_window or None,
+        min_layover=min_layover,
+        max_layover=max_layover,
+        sort_by=sort_by or "CHEAPEST",
+        currency=currency or "USD",
+        language=language or "en",
+        country=country or "US",
+    )
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -135,6 +178,17 @@ async def search_flights_sse(request: Request,
     airline: str = Query(""),
     trip_type: str = Query("round_trip"),
     departure_days: str = Query(""),
+    exclude_airlines: str = Query(""),
+    apply_default_exclusions: bool = Query(True),
+    alliance: str = Query(""),
+    exclude_alliance: str = Query(""),
+    departure_window: str = Query(""),
+    min_layover: int | None = Query(None, ge=1),
+    max_layover: int | None = Query(None, ge=1),
+    sort_by: str = Query("CHEAPEST"),
+    currency: str = Query("USD"),
+    language: str = Query("en"),
+    country: str = Query("US"),
 ):
     """Stream flight search results via SSE."""
     origin_list = [o.strip().upper() for o in origins.split(",") if o.strip()]
@@ -149,6 +203,22 @@ async def search_flights_sse(request: Request,
         dur_list = [5]
         
     dep_days_list = [int(d.strip()) for d in departure_days.split(",") if d.strip()] if departure_days else None
+    search_options = _flight_options_from_query(
+        max_stops=max_stops,
+        cabin_class=cabin_class,
+        airline=airline,
+        exclude_airlines=exclude_airlines,
+        apply_default_exclusions=apply_default_exclusions,
+        alliance=alliance,
+        exclude_alliance=exclude_alliance,
+        departure_window=departure_window,
+        min_layover=min_layover,
+        max_layover=max_layover,
+        sort_by=sort_by,
+        currency=currency,
+        language=language,
+        country=country,
+    )
 
     async def event_generator():
         async for event in stream_flight_search(
@@ -162,6 +232,7 @@ async def search_flights_sse(request: Request,
             airline_filter=airline if airline else None,
             trip_type=trip_type,
             departure_days=dep_days_list,
+            options=search_options,
         ):
             if await request.is_disconnected():
                 break
@@ -247,6 +318,7 @@ async def search_combined_sse(request: Request,
     durations: str = Query("5"),
     max_stops: str = Query("ANY"),
     hotel_city: str = Query(""),
+    apply_default_exclusions: bool = Query(True),
 ):
     """Stream combined flight + hotel search results via SSE."""
     origin_list = [o.strip().upper() for o in origins.split(",") if o.strip()]
@@ -257,6 +329,11 @@ async def search_combined_sse(request: Request,
     except ValueError:
         dur_list = [5]
 
+    search_options = FlightSearchOptions(
+        max_stops=max_stops,
+        apply_default_exclusions=apply_default_exclusions,
+    )
+
     async def event_generator():
         async for event in stream_combined_search(
             origins=origin_list,
@@ -266,6 +343,7 @@ async def search_combined_sse(request: Request,
             durations=dur_list,
             max_stops=max_stops,
             hotel_city_override=hotel_city if hotel_city else None,
+            options=search_options,
         ):
             if await request.is_disconnected():
                 break
@@ -284,6 +362,47 @@ async def resolve_city(iata: str = Query("")):
         return JSONResponse({"city": ""})
     city = iata_to_city(iata.strip().upper())
     return JSONResponse({"city": city})
+
+
+@app.get("/api/presets")
+async def list_presets():
+    """Return saved trip search presets (events, routes)."""
+    if not PRESETS_PATH.exists():
+        return JSONResponse({"success": True, "presets": []})
+    try:
+        presets = json.loads(PRESETS_PATH.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        presets = []
+    return JSONResponse({"success": True, "presets": presets})
+
+
+@app.get("/api/booking-options")
+async def booking_options_endpoint(
+    origin: str = Query(...),
+    destination: str = Query(...),
+    departure_date: str = Query(...),
+    return_date: str | None = Query(None),
+    flight_numbers: str = Query(""),
+    max_stops: str = Query("ANY"),
+    cabin_class: str = Query("ECONOMY"),
+    apply_default_exclusions: bool = Query(True),
+):
+    """Compare vendor fares for a single itinerary."""
+    numbers = [n.strip() for n in flight_numbers.split(",") if n.strip()] or None
+    options = FlightSearchOptions(
+        max_stops=max_stops,
+        cabin_class=cabin_class,
+        apply_default_exclusions=apply_default_exclusions,
+    )
+    result = await get_booking_options_async(
+        origin=origin.strip().upper(),
+        destination=destination.strip().upper(),
+        departure_date=departure_date,
+        return_date=return_date,
+        flight_numbers=numbers,
+        options=options,
+    )
+    return JSONResponse(result)
 
 
 # ══════════════════════════════════════════════════════════════════════════════

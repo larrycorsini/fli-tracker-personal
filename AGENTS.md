@@ -35,6 +35,8 @@ workflows for the full process.
 
 - The MCP HTTP endpoint requires `Accept: application/json, text/event-stream` header.
 - The `fli/server/` module has been removed from the codebase.
+- `fli-mcp-http` and the FastAPI tracker (`uvicorn app.server:app`) both default to port `8000`, so they cannot run at the same time on the default port. Override the MCP server with `HOST=127.0.0.1 PORT=8010 uv run fli-mcp-http` (it reads `HOST`/`PORT`) to run it alongside the tracker.
+- Deploy profile for `fli-tracker`: use `nixpacks-tracker.toml` (starts `fli-tracker` on port 8000). Default `nixpacks.toml` still targets `fli-mcp-http`.
 
 ## Learned User Preferences
 

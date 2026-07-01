@@ -99,6 +99,7 @@ exclude = [
     ".venv",
     "build",
     "dist",
+    "examples/archive",
 ]
 
 [tool.ruff.lint]

@@ -1,8 +1,7 @@
 """Search engine — direct Python API calls to fli + hotels.
 
-This is the core performance win: instead of spawning a subprocess for every
-search, we call fli's SearchFlights/SearchDates classes directly through a
-single shared HTTP client with connection pooling and rate limiting.
+Calls fli's SearchFlights/SearchDates classes through a shared HTTP client
+with connection pooling, rate limiting, and per-itinerary booking deep links.
 """
 
 import asyncio
@@ -10,6 +9,7 @@ import json
 import logging
 import urllib.parse
 from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 from functools import lru_cache
 from typing import Any, AsyncGenerator, Optional
@@ -19,18 +19,22 @@ from fli.core import (
     build_flight_segments,
     build_time_restrictions,
     parse_airlines,
+    parse_alliances,
     parse_cabin_class,
     parse_max_stops,
+    parse_sort_by,
 )
 from fli.models import (
     DateSearchFilters,
     FlightSearchFilters,
+    LayoverRestrictions,
     PassengerInfo,
 )
 from fli.search import SearchDates, SearchFlights
 
 from app.airport_data import iata_to_city
 from app.tracker import get_refund_eligibility_by_code, TrackerDB
+from tracker_config import EXCLUDED_AIRLINES
 
 # Lazy import to avoid circular deps at import time
 _hotels_core = None
@@ -50,6 +54,67 @@ logger = logging.getLogger("engine")
 _flight_search: SearchFlights | None = None
 _date_search: SearchDates | None = None
 _executor = ThreadPoolExecutor(max_workers=8)
+
+
+@dataclass
+class FlightSearchOptions:
+    """Extended search knobs shared by sync, async, and SSE paths."""
+
+    max_stops: str = "ANY"
+    cabin_class: str = "ECONOMY"
+    airline_filter: str | None = None
+    exclude_airlines: list[str] | None = None
+    apply_default_exclusions: bool = True
+    airlines: list[str] | None = None
+    alliance: list[str] | None = None
+    exclude_alliance: list[str] | None = None
+    departure_window: str | None = None
+    min_layover: int | None = None
+    max_layover: int | None = None
+    sort_by: str = "CHEAPEST"
+    currency: str = "USD"
+    language: str = "en"
+    country: str = "US"
+
+
+def _merged_exclude_airlines(opts: FlightSearchOptions) -> list[str] | None:
+    excluded: list[str] = []
+    if opts.apply_default_exclusions:
+        excluded.extend(EXCLUDED_AIRLINES)
+    if opts.exclude_airlines:
+        excluded.extend(opts.exclude_airlines)
+    if not excluded:
+        return None
+    return list(dict.fromkeys(excluded))
+
+
+def _attach_booking_url(
+    searcher: SearchFlights,
+    raw_flight: Any,
+    flight_data: dict,
+    origin: str,
+    destination: str,
+    departure_date: str,
+    return_date: str | None,
+    opts: FlightSearchOptions,
+) -> None:
+    """Prefer per-itinerary tfs deep link; fall back to generic search URL."""
+    try:
+        booking_url = searcher.build_flight_booking_url(
+            raw_flight,
+            currency=opts.currency,
+            language=opts.language,
+            country=opts.country,
+        )
+        if booking_url:
+            flight_data["booking_url"] = booking_url
+            flight_data["url"] = booking_url
+            return
+    except Exception:
+        pass
+    fallback = _build_google_flights_url(origin, destination, departure_date, return_date)
+    flight_data["url"] = fallback
+    flight_data.setdefault("booking_url", fallback)
 
 
 def _get_flight_search() -> SearchFlights:
@@ -77,27 +142,49 @@ def _search_flights_sync(
     max_stops: str = "ANY",
     cabin_class: str = "ECONOMY",
     airline_filter: str | None = None,
+    options: FlightSearchOptions | None = None,
 ) -> list[dict]:
-    """Synchronous flight search using fli's Python API directly.
+    """Synchronous flight search using fli's Python API directly."""
+    opts = options or FlightSearchOptions(
+        max_stops=max_stops,
+        cabin_class=cabin_class,
+        airline_filter=airline_filter,
+    )
+    if options is None:
+        opts.max_stops = max_stops
+        opts.cabin_class = cabin_class
+        opts.airline_filter = airline_filter
 
-    This replaces the old subprocess.run(["uv", "run", "fli", ...]) approach.
-    Uses the shared SearchFlights instance with connection pooling.
-    """
     try:
         origin_airport = _resolve_airport_safe(origin)
         dest_airport = _resolve_airport_safe(destination)
         if not origin_airport or not dest_airport:
             return []
 
-        stops = parse_max_stops(max_stops)
-        seat = parse_cabin_class(cabin_class)
+        stops = parse_max_stops(opts.max_stops)
+        seat = parse_cabin_class(opts.cabin_class)
+        time_restrictions = build_time_restrictions(departure_window=opts.departure_window)
 
         segments, trip_type = build_flight_segments(
             origin=origin_airport,
             destination=dest_airport,
             departure_date=departure_date,
             return_date=return_date,
+            time_restrictions=time_restrictions,
         )
+
+        layover_restrictions = None
+        if opts.min_layover is not None or opts.max_layover is not None:
+            layover_restrictions = LayoverRestrictions(
+                min_duration=opts.min_layover,
+                max_duration=opts.max_layover,
+            )
+
+        exclude_codes = _merged_exclude_airlines(opts)
+        airlines_include = parse_airlines(opts.airlines) if opts.airlines else None
+        airlines_exclude = parse_airlines(exclude_codes) if exclude_codes else None
+        alliances = parse_alliances(opts.alliance) if opts.alliance else None
+        alliances_exclude = parse_alliances(opts.exclude_alliance) if opts.exclude_alliance else None
 
         filters = FlightSearchFilters(
             trip_type=trip_type,
@@ -105,29 +192,53 @@ def _search_flights_sync(
             flight_segments=segments,
             stops=stops,
             seat_type=seat,
+            airlines=airlines_include,
+            airlines_exclude=airlines_exclude,
+            alliances=alliances,
+            alliances_exclude=alliances_exclude,
+            layover_restrictions=layover_restrictions,
+            sort_by=parse_sort_by(opts.sort_by),
         )
 
         searcher = _get_flight_search()
-        results = searcher.search(filters)
+        results = searcher.search(
+            filters,
+            currency=opts.currency,
+            language=opts.language,
+            country=opts.country,
+        )
 
         if not results:
             return []
 
-        # Serialize results
         serialized = []
-        for r in results:
-            flight_data = _serialize_flight(r, trip_type.name == "ROUND_TRIP")
-            if flight_data:
-                # Apply airline filter if set
-                if airline_filter and airline_filter.lower() != "any":
-                    airline_name = flight_data.get("airline", "").lower()
-                    if airline_filter.lower() not in airline_name:
-                        continue
-                serialized.append(flight_data)
+        is_round_trip = trip_type.name == "ROUND_TRIP"
+        for raw in results:
+            flight_data = _serialize_flight(raw, is_round_trip)
+            if not flight_data:
+                continue
+            if opts.airline_filter and opts.airline_filter.lower() != "any":
+                airline_name = flight_data.get("airline", "").lower()
+                airline_label = flight_data.get("airline_name", "").lower()
+                needle = opts.airline_filter.lower()
+                if needle not in airline_name and needle not in airline_label:
+                    continue
+            _attach_booking_url(
+                searcher,
+                raw,
+                flight_data,
+                origin,
+                destination,
+                departure_date,
+                return_date,
+                opts,
+            )
+            flight_data["depart_date"] = departure_date
+            flight_data["return_date"] = return_date
+            serialized.append(flight_data)
 
-        # Sort by price (skip entries without a numeric price)
         serialized.sort(key=lambda x: x.get("price") if x.get("price") is not None else float("inf"))
-        
+
         if serialized:
             db = TrackerDB()
             cheapest = serialized[0]
@@ -137,7 +248,7 @@ def _search_flights_sync(
                 departure_date=departure_date,
                 return_date=return_date,
                 price=cheapest.get("price", 0),
-                airline=cheapest.get("airline", "")
+                airline=cheapest.get("airline", ""),
             )
             percentiles = db.get_historical_percentiles(origin, destination)
             if percentiles:
@@ -394,14 +505,90 @@ async def search_flights_async(
     max_stops: str = "ANY",
     cabin_class: str = "ECONOMY",
     airline_filter: str | None = None,
+    options: FlightSearchOptions | None = None,
 ) -> list[dict]:
     """Async wrapper — runs sync flight search in thread pool."""
+    opts = options or FlightSearchOptions(
+        max_stops=max_stops,
+        cabin_class=cabin_class,
+        airline_filter=airline_filter,
+    )
+    if options is None:
+        opts.max_stops = max_stops
+        opts.cabin_class = cabin_class
+        opts.airline_filter = airline_filter
+
     loop = asyncio.get_running_loop()
     return await loop.run_in_executor(
         _executor,
-        _search_flights_sync,
-        origin, destination, departure_date, return_date,
-        max_stops, cabin_class, airline_filter,
+        lambda: _search_flights_sync(
+            origin,
+            destination,
+            departure_date,
+            return_date,
+            opts.max_stops,
+            opts.cabin_class,
+            opts.airline_filter,
+            opts,
+        ),
+    )
+
+
+def _get_booking_options_sync(
+    origin: str,
+    destination: str,
+    departure_date: str,
+    return_date: str | None = None,
+    flight_numbers: list[str] | None = None,
+    options: FlightSearchOptions | None = None,
+) -> dict[str, Any]:
+    """Fetch vendor booking options for a single itinerary."""
+    from fli.mcp.server import FlightSearchParams, _execute_booking_options
+
+    opts = options or FlightSearchOptions()
+    exclude = _merged_exclude_airlines(opts)
+    params = FlightSearchParams(
+        origin=origin,
+        destination=destination,
+        departure_date=departure_date,
+        return_date=return_date,
+        cabin_class=opts.cabin_class,
+        max_stops=opts.max_stops,
+        exclude_airlines=exclude,
+        airlines=opts.airlines,
+        alliance=opts.alliance,
+        exclude_alliance=opts.exclude_alliance,
+        departure_window=opts.departure_window,
+        min_layover=opts.min_layover,
+        max_layover=opts.max_layover,
+        sort_by=opts.sort_by,
+        currency=opts.currency,
+        language=opts.language,
+        country=opts.country,
+    )
+    return _execute_booking_options(params, flight_numbers)
+
+
+async def get_booking_options_async(
+    origin: str,
+    destination: str,
+    departure_date: str,
+    return_date: str | None = None,
+    flight_numbers: list[str] | None = None,
+    options: FlightSearchOptions | None = None,
+) -> dict[str, Any]:
+    """Async wrapper for vendor fare lookup."""
+    loop = asyncio.get_running_loop()
+    return await loop.run_in_executor(
+        _executor,
+        lambda: _get_booking_options_sync(
+            origin,
+            destination,
+            departure_date,
+            return_date,
+            flight_numbers,
+            options,
+        ),
     )
 
 
@@ -448,6 +635,7 @@ async def stream_flight_search(
     airline_filter: str | None = None,
     trip_type: str = "round_trip",
     departure_days: list[int] | None = None,
+    options: FlightSearchOptions | None = None,
 ) -> AsyncGenerator[dict, None]:
     """Stream flight results as SSE events for multiple origin/dest/date combos.
 
@@ -463,6 +651,15 @@ async def stream_flight_search(
     cabin_list = [c.strip().upper() for c in cabin_class.split(",") if c.strip()]
     if not cabin_list:
         cabin_list = ["ECONOMY"]
+
+    base_opts = options or FlightSearchOptions(
+        max_stops=max_stops,
+        cabin_class=cabin_class,
+        airline_filter=airline_filter,
+    )
+    if options is None:
+        base_opts.max_stops = max_stops
+        base_opts.airline_filter = airline_filter
 
     for orig in origins:
         for dest in destinations:
@@ -510,14 +707,29 @@ async def stream_flight_search(
         
         async def fetch_trip(trip):
             try:
+                trip_opts = FlightSearchOptions(
+                    max_stops=base_opts.max_stops,
+                    cabin_class=trip["cabin"],
+                    airline_filter=base_opts.airline_filter,
+                    exclude_airlines=base_opts.exclude_airlines,
+                    apply_default_exclusions=base_opts.apply_default_exclusions,
+                    airlines=base_opts.airlines,
+                    alliance=base_opts.alliance,
+                    exclude_alliance=base_opts.exclude_alliance,
+                    departure_window=base_opts.departure_window,
+                    min_layover=base_opts.min_layover,
+                    max_layover=base_opts.max_layover,
+                    sort_by=base_opts.sort_by,
+                    currency=base_opts.currency,
+                    language=base_opts.language,
+                    country=base_opts.country,
+                )
                 results = await search_flights_async(
                     origin=trip["origin"],
                     destination=trip["destination"],
                     departure_date=trip["depart"],
                     return_date=trip["return"],
-                    max_stops=max_stops,
-                    cabin_class=trip["cabin"],
-                    airline_filter=airline_filter,
+                    options=trip_opts,
                 )
                 for r in results:
                     r["cabin_class"] = trip["cabin"]
@@ -532,7 +744,7 @@ async def stream_flight_search(
             completed += 1
             if results:
                 best = results[0]
-                flight_url = _build_google_flights_url(
+                flight_url = best.get("booking_url") or best.get("url") or _build_google_flights_url(
                     trip["origin"], trip["destination"],
                     trip["depart"], trip.get("return"),
                 )
@@ -547,13 +759,13 @@ async def stream_flight_search(
                         "price": best["price"],
                         "currency": best.get("currency", "USD"),
                         "airline": best.get("airline_name", best.get("airline", "")),
+                        "flight_number": best.get("flight_number", ""),
                         "departure_time": best.get("departure_time", ""),
                         "arrival_time": best.get("arrival_time", ""),
                         "stops": best.get("stops", 0),
-                        "duration": best.get("duration", 0),
                         "url": flight_url,
-                        # Pass full results back so local filtering has options
-                        "all_results": results 
+                        "booking_url": flight_url,
+                        "all_results": results,
                     },
                 }
 
@@ -576,6 +788,7 @@ async def stream_combined_search(
     durations: list[int],
     max_stops: str = "ANY",
     hotel_city_override: str | None = None,
+    options: FlightSearchOptions | None = None,
 ) -> AsyncGenerator[dict, None]:
     """Stream combined flight + hotel results."""
     start_dt = datetime.strptime(start_date, "%Y-%m-%d")
@@ -602,22 +815,21 @@ async def stream_combined_search(
     yield {"event": "status", "data": {"message": f"Analyzing {total} trip combinations...", "total": total}}
 
     all_results = []
+    search_opts = options or FlightSearchOptions(max_stops=max_stops)
 
     for i, trip in enumerate(trips):
         try:
-            # Flight search
             flights = _search_flights_sync(
                 origin=trip["origin"],
                 destination=trip["destination"],
                 departure_date=trip["depart"],
                 return_date=trip["return"],
-                max_stops=max_stops,
+                options=search_opts,
             )
 
             if flights:
                 best_flight = flights[0]
 
-                # Hotel search at destination city
                 dest_city = hotel_city_override or iata_to_city(trip["destination"])
                 hotels = _search_hotels_sync(dest_city, trip["depart"], trip["return"])
 
@@ -626,7 +838,7 @@ async def stream_combined_search(
                     h_total = best_hotel.get("total_price_float", 0)
                     total_cost = best_flight["price"] + h_total
 
-                    flight_url = _build_google_flights_url(
+                    flight_url = best_flight.get("booking_url") or best_flight.get("url") or _build_google_flights_url(
                         trip["origin"], trip["destination"],
                         trip["depart"], trip["return"],
                     )
@@ -642,6 +854,7 @@ async def stream_combined_search(
                             "departure_time": best_flight.get("departure_time", ""),
                             "stops": best_flight.get("stops", 0),
                             "url": flight_url,
+                            "booking_url": flight_url,
                         },
                         "hotel": {
                             "name": best_hotel["name"],

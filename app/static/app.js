@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTrackerForm();
   restoreFromStorage();
   initSavedFlightPresets();
+  handleTrackDeepLink();
   fetchRates();
 });
 
@@ -348,6 +349,17 @@ function handleFlightSearch(e) {
   const cabin = document.getElementById('f-cabin').value;
   const airline = document.getElementById('f-airline').value;
   const departureDays = document.getElementById('f-dep-days') ? document.getElementById('f-dep-days').value : '';
+  const depWindow = document.getElementById('f-dep-window')?.value || '';
+  const excludeAirlines = document.getElementById('f-exclude-airlines')?.value || '';
+  const alliance = document.getElementById('f-alliance')?.value || '';
+  const layoverRaw = document.getElementById('f-layover')?.value || '';
+  let minLayover = '';
+  let maxLayover = '';
+  if (layoverRaw.includes('-')) {
+    const [minPart, maxPart] = layoverRaw.split('-', 2);
+    minLayover = minPart.trim();
+    maxLayover = maxPart.trim();
+  }
 
   if (!origins || !destinations) { showToast('Please enter origin and destination', 'error'); return; }
 
@@ -397,6 +409,11 @@ function handleFlightSearch(e) {
   setBtn('flightsBtn', true, 'Searching…');
 
   const params = new URLSearchParams({ origins, destinations, start_date: startDate, end_date: endDate, durations: durationsVal, max_stops: stops, cabin_class: cabin, airline, trip_type: state.tripType, departure_days: departureDays });
+  if (depWindow) params.set('departure_window', depWindow);
+  if (excludeAirlines) params.set('exclude_airlines', excludeAirlines.replace(/\s+/g, ''));
+  if (alliance) params.set('alliance', alliance.replace(/\s+/g, ''));
+  if (minLayover) params.set('min_layover', minLayover);
+  if (maxLayover) params.set('max_layover', maxLayover);
   const es = new EventSource(`/api/search/flights?${params}`);
   state.eventSource = es;
 
@@ -609,6 +626,13 @@ function buildFlightCardHTML(f) {
     cabin_class: 'ECONOMY'
   }).replace(/"/g, '&quot;');
   const trackBtn = `<button class="btn-track" onclick='openTrackModal(${trackData})'>📊 Track</button>`;
+  const vendorData = escapeAttr(JSON.stringify({
+    origin: f.origin || '',
+    destination: f.destination || '',
+    depart_date: f.depart_date || '',
+    return_date: f.return_date || '',
+    flight_number: f.flight_number || '',
+  }));
 
   return `
   <div class="flight-card" data-price="${f.price}" data-departure="${f.departure_time || ''}" data-airline="${f.airline || ''}" data-route="${f.origin}-${f.destination}">
@@ -642,7 +666,8 @@ function buildFlightCardHTML(f) {
         ${trackBtn}
         <button class="btn-outline btn-sm" onclick='openAddToTripModal("flight", ${trackData})'>🎒 Add to Trip</button>
         ${f.refund_badge ? `<span class="tag tag-${f.refund_badge}">${escapeAttr(f.refund_badge_label || '')}</span>` : ''}
-        <a href="${f.url}" target="_blank" class="btn-primary card-link-btn">Book Flight ↗</a>
+        <a href="${f.booking_url || f.url}" target="_blank" class="btn-primary card-link-btn">Book Flight ↗</a>
+        <button type="button" class="btn-outline btn-sm vendor-btn" data-flight="${vendorData}" onclick="showVendorOptions(JSON.parse(this.dataset.flight))">Compare vendors</button>
     </div>
   </div>`;
 }
@@ -781,7 +806,7 @@ function appendTripCard(d) {
       </div>
     </div>
     <div class="booking-actions">
-      <a href="${d.flight?.url || '#'}" target="_blank" class="btn-book btn-book-flight">Book Flight ✈️</a>
+      <a href="${d.flight?.booking_url || d.flight?.url || '#'}" target="_blank" class="btn-book btn-book-flight">Book Flight ✈️</a>
       <a href="${d.hotel?.url || '#'}" target="_blank" class="btn-book btn-book-hotel">Book Hotel 🏨</a>
     </div>`;
   container.appendChild(card);
@@ -1304,49 +1329,88 @@ document.addEventListener('click', e => {
 // ── Saved & recent flight searches ─────────────────────────────────────────
 const FIFA_DFW_PRESET_ID = 'fifa-dfw-2026-slc-pvu';
 
-const FIFA_DFW_PRESET = {
-  id: FIFA_DFW_PRESET_ID,
-  label: 'FIFA DFW · June/July Thu-Sat trips',
-  origins: 'SLC, PVU',
-  destinations: 'DFW',
-  startDate: '2026-06-25', 
-  endDate: '2026-07-04',   
-  durations: '2',          // 2 nights = returning Saturday
-  departureDays: '3',      // 3 = Thursday (0=Mon)
-  maxStops: 'NON_STOP',
-  cabin: 'ECONOMY',
-  airline: '',
-  tripType: 'round_trip',
-  referenceDeals: [
-    {
-      label: 'SLC Jul 2–4 · AA/Delta ~$297',
-      book: 'https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA3LTAyIiAKA1NMQxIKMjAyNi0wNy0wMhoDREZXKgJBQTIEMTIxNGoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTA3LTA0IiAKA0RGVxIKMjAyNi0wNy0wNBoDU0xDKgJBQTIEMjA3M2oHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB&curr=USD',
-    },
-    {
-      label: 'PVU Jul 2–4 · American ~$389',
-      book: 'https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA3LTAyIiAKA1BWVRIKMjAyNi0wNy0wMhoDREZXKgJBQTIENDkxN2oHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI2LTA3LTA0IiAKA0RGVxIKMjAyNi0wNy0wNBoDUFZVKgJBQTIENDg4NmoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB&curr=USD',
-    },
-    {
-      label: 'PVU Jun 29–Jul 1 · Breeze ~$501',
-      book: 'https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTA2LTI5Ih8KA1BWVRIKMjAyNi0wNi0yORoDREZXKgJNWDIDMjE1agcIARIDUFZVcgcIARIDREZXGkASCjIwMjYtMDctMDEiIAoDREZXEgoyMDI2LTA3LTAxGgNQVlUqAkFBMgQ0OTgwagcIARIDREZXcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE&curr=USD',
-    },
-    {
-      label: 'SLC Jun 29–Jul 1 · American ~$533',
-      book: 'https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA2LTI5IiAKA1NMQxIKMjAyNi0wNi0yORoDREZXKgJBQTIEMTIxNGoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTA3LTAxIiAKA0RGVxIKMjAyNi0wNy0wMRoDU0xDKgJBQTIEMjYwN2oHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB&curr=USD',
-    },
-  ],
-};
+function mapServerPreset(p) {
+  return {
+    id: p.id,
+    label: p.label,
+    origins: (p.origins || '').replace(/,/g, ', '),
+    destinations: p.destinations,
+    startDate: p.start_date,
+    endDate: p.end_date,
+    durations: p.durations,
+    departureDays: p.departure_days || '',
+    maxStops: p.max_stops || 'ANY',
+    cabin: p.cabin_class || 'ECONOMY',
+    airline: '',
+    tripType: p.trip_type || 'round_trip',
+    notes: p.notes || '',
+  };
+}
 
-function initSavedFlightPresets() {
+async function initSavedFlightPresets() {
   const key = 'savedFlightPresets';
   let presets = JSON.parse(localStorage.getItem(key) || '[]');
-  
-  // Overwrite existing FIFA_DFW_PRESET to ensure it stays updated
-  presets = presets.filter(p => p.id !== FIFA_DFW_PRESET_ID);
-  presets.unshift(FIFA_DFW_PRESET);
-  
+  try {
+    const resp = await fetch('/api/presets');
+    const data = await resp.json();
+    const serverPresets = (data.presets || []).map(mapServerPreset);
+    const serverIds = new Set(serverPresets.map(p => p.id));
+    presets = serverPresets.concat(presets.filter(p => !serverIds.has(p.id)));
+  } catch (err) {
+    console.warn('Could not load server presets', err);
+  }
   localStorage.setItem(key, JSON.stringify(presets));
   renderRecentSearches();
+}
+
+async function showVendorOptions(flight) {
+  const params = new URLSearchParams({
+    origin: flight.origin,
+    destination: flight.destination,
+    departure_date: flight.depart_date,
+  });
+  if (flight.return_date) params.set('return_date', flight.return_date);
+  if (flight.flight_number) params.set('flight_numbers', flight.flight_number);
+  showToast('Fetching vendor fares…', 'info');
+  try {
+    const resp = await fetch(`/api/booking-options?${params}`);
+    const data = await resp.json();
+    if (!data.success) {
+      showToast(data.error || 'Vendor lookup failed', 'error');
+      return;
+    }
+    const options = data.options || [];
+    if (!options.length) {
+      const link = data.selected_flight?.booking_url || data.booking_url;
+      showToast(link ? 'No OTA vendors — opening itinerary link' : 'No vendor options returned', 'info');
+      if (link) window.open(link, '_blank');
+      return;
+    }
+    const lines = options.slice(0, 6).map(o =>
+      `${o.vendor_name || o.vendor}: ${o.price != null ? formatPrice(o.price) : '—'}`
+    ).join('\n');
+    alert(`Vendor fares:\n\n${lines}`);
+  } catch (err) {
+    showToast('Vendor lookup failed', 'error');
+  }
+}
+
+function handleTrackDeepLink() {
+  const params = new URLSearchParams(window.location.search);
+  const track = params.get('track');
+  if (!track) return;
+  const parts = track.split(',');
+  if (parts.length < 3) return;
+  const [origin, destination, depart, ret] = parts;
+  openTrackModal({
+    origin,
+    destination,
+    depart_date: depart,
+    return_date: ret || '',
+    airline: '',
+    price: 0,
+    cabin_class: 'ECONOMY',
+  });
 }
 
 function persistRecentSearch(params) {

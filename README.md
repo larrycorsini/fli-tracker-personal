@@ -46,12 +46,14 @@ fli-mcp-http  # serves at http://127.0.0.1:8000/mcp/
 
 ### MCP Tools Available
 
-The MCP server provides two main tools:
+The MCP server provides four tools:
 
-| Tool                 | Description                                                 |
-|----------------------|-------------------------------------------------------------|
-| **`search_flights`** | Search for flights on a specific date with detailed filters |
-| **`search_dates`**   | Find the cheapest travel dates across a flexible date range |
+| Tool                     | Description                                                       |
+|--------------------------|-------------------------------------------------------------------|
+| **`search_flights`**     | Search for flights on a specific date with detailed filters       |
+| **`search_dates`**       | Find the cheapest travel dates across a flexible date range       |
+| **`get_booking_options`** | Vendor fares and booking URLs for a specific itinerary           |
+| **`find_airports`**      | Autocomplete airport search by city or IATA code                  |
 
 #### `search_flights` Parameters
 

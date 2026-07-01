@@ -7,12 +7,14 @@ import json
 import os
 import sqlite3
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 
 from fli.core import google_flights_url
-
 from tracker_config import (
+    DISPLAY_TIMEZONE,
     FLIGHTS_JSON,
+    HEATMAP_THRESHOLDS,
     INTERNATIONAL_REGIONS,
     MAX_FARE_GROUPS_PER_REGION,
     MAX_TIMES_PER_GROUP,
@@ -21,6 +23,7 @@ from tracker_config import (
     PREMIUM_DEAL_ORIGINS,
     PREMIUM_DEAL_OUTPUT_JSON,
     PREMIUM_DEALS_JSON,
+    PRIOR_PRICES_JSON,
     REGIONS,
     SITE_URL,
 )
@@ -29,6 +32,25 @@ from tracker_io import atomic_write_json, atomic_write_text
 _DOMESTIC_AIRPORTS = {
     dest["airport"] for dest in PREMIUM_DEAL_DESTINATIONS if dest.get("type") == "domestic"
 }
+
+_DISPLAY_TZ = ZoneInfo(DISPLAY_TIMEZONE)
+
+
+def format_display_timestamp(instant: datetime) -> str:
+    """Format an instant for the public site in the tracker home timezone."""
+    if instant.tzinfo is None:
+        instant = instant.replace(tzinfo=timezone.utc)
+    local = instant.astimezone(_DISPLAY_TZ)
+    return local.strftime("%a, %b %d, %Y at %I:%M %p %Z")
+
+
+def resolve_last_updated(source_path: str | None = None) -> tuple[str, str]:
+    """Return display label and ISO-8601 UTC for a data file's last update."""
+    if source_path and os.path.exists(source_path):
+        instant = datetime.fromtimestamp(os.path.getmtime(source_path), tz=timezone.utc)
+    else:
+        instant = datetime.now(timezone.utc)
+    return format_display_timestamp(instant), instant.isoformat()
 
 
 def is_valid_deep_booking_url(url: str | None) -> bool:
@@ -112,6 +134,42 @@ def compute_max_price(all_results: dict[str, list[dict]]) -> int:
     if not prices:
         return 1500
     return max(1500, int((max(prices) + 49) // 50 * 50))
+
+
+def load_prior_prices() -> dict[str, int]:
+    if not os.path.exists(PRIOR_PRICES_JSON):
+        return {}
+    try:
+        with open(PRIOR_PRICES_JSON, encoding="utf-8") as handle:
+            data = json.load(handle)
+    except (json.JSONDecodeError, OSError):
+        return {}
+    if not isinstance(data, dict):
+        return {}
+    return {str(k): int(v) for k, v in data.items() if v is not None}
+
+
+def save_prior_prices(all_results: dict[str, list[dict]]) -> None:
+    """Snapshot today's lowest fare per region for next-run price-drop badges."""
+    snapshot: dict[str, int] = {}
+    for region_name, flights in normalized_results(all_results).items():
+        priced = priced_flights(flights)
+        if priced:
+            snapshot[region_name] = int(min(priced, key=lambda row: row["price"])["price"])
+    os.makedirs(os.path.dirname(PRIOR_PRICES_JSON), exist_ok=True)
+    atomic_write_json(PRIOR_PRICES_JSON, snapshot)
+
+
+def is_weekend_escape(out_date: str, ret_date: str, region_name: str) -> bool:
+    """Domestic Wed–Fri depart / Sat–Sun return; international passes through."""
+    if REGIONS.get(region_name, {}).get("type") != "domestic":
+        return True
+    try:
+        out_dt = datetime.strptime(out_date[:10], "%Y-%m-%d")
+        ret_dt = datetime.strptime(ret_date[:10], "%Y-%m-%d")
+    except (ValueError, TypeError):
+        return False
+    return out_dt.weekday() in (2, 3, 4) and ret_dt.weekday() in (5, 6)
 
 
 def get_base_html_head(
@@ -269,10 +327,10 @@ def get_base_html_head(
         "        .time-option-cta {",
         "            flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;",
         "            background: var(--accent-interactive); color: #fff; font-weight: 600; font-size: 13px;",
-        "            padding: 6px 14px; border-radius: 6px; text-decoration: none; transition: background .2s ease;",
-        "            width: 100%; min-height: 32px;",
+        "            padding: 10px 16px; border-radius: 8px; text-decoration: none; transition: background .2s ease;",
+        "            width: 100%; min-height: 44px; border: none; cursor: pointer; font-family: inherit;",
         "        }",
-        "        @media (min-width: 640px) { .time-option-cta { width: auto; } }",
+        "        @media (min-width: 640px) { .time-option-cta { width: auto; min-width: 5.5rem; } }",
         "        .time-option-cta:hover { background: var(--accent-interactive-hover); color: #fff; }",
         "        .nav-shell { transition: padding 200ms ease; }",
         "        .nav-links { transition: opacity 200ms ease, max-height 200ms ease; }",
@@ -297,6 +355,61 @@ def get_base_html_head(
         "            100% { transform: translateX(-120px) translateY(-24px) rotate(-8deg); }",
         "        }",
         "        @media (max-width: 640px) { .hero-airplane { width: 48px; height: 48px; top: 12%; } }",
+        "        .hero-cta-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch; max-width: 28rem; }",
+        "        .dt-btn-outline {",
+        "            background: transparent; color: var(--accent-interactive);",
+        "            border: 2px solid var(--accent-interactive); border-radius: 40px; font-weight: 700;",
+        "            padding: 12px 24px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center;",
+        "            text-decoration: none; text-transform: uppercase; letter-spacing: 0.06em; font-size: 13px;",
+        "            transition: background .2s ease, border-color .2s ease, color .2s ease;",
+        "        }",
+        "        .dt-btn-outline:hover {",
+        "            background: var(--accent-interactive-muted); color: var(--accent-interactive-hover);",
+        "            border-color: var(--accent-interactive-hover);",
+        "        }",
+        "        .time-option-actions { display: flex; flex-direction: column; gap: 8px; width: 100%; }",
+        "        @media (min-width: 640px) {",
+        "            .time-option-actions { flex-direction: row; flex-wrap: wrap; width: auto; justify-content: flex-end; }",
+        "        }",
+        "        .time-option-cta-outline {",
+        "            background: transparent; color: var(--accent-interactive);",
+        "            border: 1px solid var(--accent-interactive);",
+        "        }",
+        "        .time-option-cta-outline:hover {",
+        "            background: var(--accent-interactive-muted); color: var(--accent-interactive-hover);",
+        "        }",
+        "        .watch-toast {",
+        "            position: fixed; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); left: 16px; right: 16px;",
+        "            max-width: 24rem; margin: 0 auto; z-index: 60; padding: 14px 18px; border-radius: 12px;",
+        "            background: var(--brand-primary); color: #fff; font-size: 14px; font-weight: 500;",
+        "            box-shadow: 0 8px 24px rgba(31,42,55,0.25); display: flex; align-items: center; justify-content: space-between; gap: 12px;",
+        "        }",
+        "        .watch-toast button { color: #93C5FD; font-weight: 700; background: none; border: none; cursor: pointer; min-height: 44px; padding: 0 8px; }",
+        "        .watch-panel {",
+        "            margin-bottom: 1.5rem; padding: 1rem 1.25rem; border-radius: 12px;",
+        "            background: var(--accent-interactive-muted); border: 1px solid var(--accent-interactive-border);",
+        "        }",
+        "        .watch-panel-item {",
+        "            display: flex; flex-direction: column; gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--accent-interactive-border);",
+        "        }",
+        "        .watch-panel-item:last-child { border-bottom: none; padding-bottom: 0; }",
+        "        @media (min-width: 640px) {",
+        "            .watch-panel-item { flex-direction: row; align-items: center; justify-content: space-between; }",
+        "        }",
+        "        @media (max-width: 639px) {",
+        "            .hero-cta-group { flex-direction: column; gap: 10px; max-width: none; }",
+        "            .hero-cta-group .dt-btn-primary, .hero-cta-group .dt-btn-outline { width: 100%; }",
+        "            p.hero-text { font-size: 17px; margin-bottom: 20px; }",
+        "            .price-text { font-size: 26px; justify-content: flex-start; }",
+        "            .price-points, .earn-badge { text-align: left; }",
+        "            .section-pad { padding-left: 1rem !important; padding-right: 1rem !important; }",
+        "            .fare-row-price { width: 100%; margin-top: 8px; }",
+        "            .fare-row-price .price-text { justify-content: flex-start; }",
+        "        }",
+        "        @media (max-width: 380px) {",
+        "            h1, .page-header { font-size: 32px; }",
+        "            .dt-btn-primary, .dt-btn-outline { font-size: 12px; padding: 12px 16px; }",
+        "        }",
         "        [x-cloak] { display: none !important; }",
         "    </style>",
     ]
@@ -329,6 +442,7 @@ def render_nav(active_page: str, links: list[tuple[str, str, bool]]) -> list[str
     Args:
         active_page: Page id for aria-current (``index``, ``heatmap``, ``history``).
         links: ``(href, label_html, accent)`` tuples for right-side nav links.
+
     """
     page_href = {"index": "index.html", "heatmap": "heatmap.html", "history": "history.html"}
     current_href = page_href.get(active_page, "")
@@ -482,7 +596,7 @@ def log_region_price(
 def update_history(all_results: dict[str, list[dict]]) -> dict[str, float | None]:
     """Log today's lowest price per region; return 14-day average per region."""
     all_results = normalized_results(all_results)
-    averages: dict[str, float | None] = {region: None for region in REGIONS}
+    averages: dict[str, float | None] = dict.fromkeys(REGIONS)
     db_path = "app/data/tracker.db"
     if not os.path.exists(db_path):
         return averages
@@ -547,13 +661,17 @@ def cap_region_flights(flights: list[dict]) -> list[dict]:
 
 
 def build_region_groups(
-    flights: list[dict], region_name: str, hist_avg: dict[str, float | None]
+    flights: list[dict], region_name: str, hist_avg: dict[str, float | None],
+    prior_prices: dict[str, int] | None = None,
 ) -> dict:
     """Serialize capped fare groups for client-side rendering."""
     capped = cap_region_flights(flights)
     priced = priced_flights(capped)
     if not priced:
         return {"groups": [], "best": None, "groupCount": 0}
+
+    prior_prices = prior_prices or {}
+    prior_region_best = prior_prices.get(region_name)
 
     groups_map: dict[tuple, list[dict]] = defaultdict(list)
     for flight in priced:
@@ -575,6 +693,10 @@ def build_region_groups(
         if avg and price < avg:
             drop_pct = int(round((avg - price) / avg * 100))
 
+        price_delta = None
+        if prior_region_best is not None:
+            price_delta = int(prior_region_best - price)
+
         groups_out.append(
             {
                 "origin": origin,
@@ -588,6 +710,8 @@ def build_region_groups(
                 "outDateFmt": format_date(out_date),
                 "retDateFmt": format_date(ret_date),
                 "dropPct": drop_pct,
+                "priceDelta": price_delta,
+                "weekendEscape": is_weekend_escape(out_date, ret_date, region_name),
                 "times": [
                     {
                         "outDepFmt": format_datetime(f["out_dep"]),
@@ -617,6 +741,8 @@ def build_flights_payload(
     all_results: dict[str, list[dict]],
     last_updated: str,
     hist_avg: dict[str, float | None],
+    prior_prices: dict[str, int] | None = None,
+    last_updated_at: str | None = None,
 ) -> dict:
     """Build external JSON payload for lazy-loaded index page."""
     all_results = normalized_results(all_results)
@@ -627,7 +753,9 @@ def build_flights_payload(
         for flight in flights:
             if flight.get("airline"):
                 global_airlines.add(flight["airline"])
-        regions_payload[region_name] = build_region_groups(flights, region_name, hist_avg)
+        regions_payload[region_name] = build_region_groups(
+            flights, region_name, hist_avg, prior_prices
+        )
 
     deals = []
     for region_name, best in build_deal_board(all_results):
@@ -637,10 +765,15 @@ def build_flights_payload(
             deals.append({"region": region_name, "price": None})
 
     max_price = compute_max_price(all_results)
+    domestic_regions = [name for name, cfg in REGIONS.items() if cfg.get("type") == "domestic"]
     return {
         "lastUpdated": last_updated,
+        "lastUpdatedAt": last_updated_at,
         "siteUrl": SITE_URL,
+        "plannerUrl": SITE_URL,
         "intlTabs": INTERNATIONAL_REGIONS,
+        "domesticRegions": domestic_regions,
+        "heatmapThresholds": HEATMAP_THRESHOLDS,
         "regions": list(REGIONS.keys()),
         "maxPriceDefault": max_price,
         "airlines": sorted(global_airlines),
@@ -724,7 +857,9 @@ def _public_deal_to_sort_row(deal: dict) -> dict:
     }
 
 
-def build_premium_deals_payload(raw: dict, last_updated: str) -> dict:
+def build_premium_deals_payload(
+    raw: dict, last_updated: str, last_updated_at: str | None = None
+) -> dict:
     """Serialize premium deals for the public dashboard JSON."""
     deals_out: list[dict] = []
     for deal in raw.get("deals", []):
@@ -753,6 +888,7 @@ def build_premium_deals_payload(raw: dict, last_updated: str) -> dict:
                 "price": int(price) if price is not None else None,
                 "points": int(points) if points is not None else None,
                 "paymentType": deal.get("paymentType", "cash"),
+                "valueScore": deal.get("value_score", ""),
                 "hasCashPrice": bool(has_cash),
                 "isRoundTrip": bool(deal.get("isRoundTrip", True)),
                 "tripDuration": deal.get("trip_duration"),
@@ -771,6 +907,7 @@ def build_premium_deals_payload(raw: dict, last_updated: str) -> dict:
     deals_out.sort(key=lambda row: deal_sort_key(_public_deal_to_sort_row(row)))
     return {
         "lastUpdated": last_updated,
+        "lastUpdatedAt": last_updated_at,
         "origins": raw.get("origins", PREMIUM_DEAL_ORIGINS),
         "deals": deals_out,
     }
@@ -782,28 +919,42 @@ def write_premium_deals_json(payload: dict) -> None:
     print(f"Premium deals JSON written: {PREMIUM_DEALS_JSON}")
 
 
-def render_premium_deals_report(last_updated: str) -> None:
+def _existing_premium_deals_json_has_data() -> bool:
+    if not os.path.exists(PREMIUM_DEALS_JSON):
+        return False
+    try:
+        with open(PREMIUM_DEALS_JSON, encoding="utf-8") as handle:
+            payload = json.load(handle)
+    except (json.JSONDecodeError, OSError):
+        return False
+    deals = payload.get("deals", [])
+    return isinstance(deals, list) and len(deals) > 0
+
+
+def render_premium_deals_report(last_updated: str, last_updated_at: str) -> None:
     """Write public/data/premium-deals.json from find_deals.py output."""
     raw = load_premium_deals()
     if os.path.exists(PREMIUM_DEAL_OUTPUT_JSON):
-        mtime = datetime.fromtimestamp(os.path.getmtime(PREMIUM_DEAL_OUTPUT_JSON))
-        premium_updated = mtime.strftime("%a, %b %d, %Y at %I:%M %p")
+        premium_updated, premium_updated_at = resolve_last_updated(PREMIUM_DEAL_OUTPUT_JSON)
     else:
-        premium_updated = last_updated
-    payload = build_premium_deals_payload(raw, premium_updated)
+        premium_updated, premium_updated_at = last_updated, last_updated_at
+    payload = build_premium_deals_payload(raw, premium_updated, premium_updated_at)
+    if not payload.get("deals") and _existing_premium_deals_json_has_data():
+        print("No premium_deals.json source — keeping existing premium-deals.json")
+        return
     write_premium_deals_json(payload)
 
 
 def render_premium_deals_section() -> list[str]:
     """Standalone premium-deals discovery section (above economy region board)."""
     return [
-        "    <section id='premium-deals' class='py-12 md:py-16 px-6 max-w-5xl mx-auto scroll-mt-24'",
+            "    <section id='premium-deals' class='py-12 md:py-16 px-4 sm:px-6 max-w-5xl mx-auto scroll-mt-24 section-pad'",
         "             x-data='premiumDeals()' x-init='init()'>",
         "        <div class='mb-8 text-center'>",
         "            <h2 class='text-3xl font-bold text-gray-800 mb-2'>Premium deals from SLC</h2>",
         "            <p class='text-gray-500'>Round-trip business &amp; premium economy · cash fares open a Book link on Google Flights</p>",
         "            <p class='text-sm text-gray-500'>Points are award estimates (seats.aero / Chase portal) — use Search on Google Flights to shop cash alternatives</p>",
-        "            <p class='text-sm text-gray-500 mt-2' x-show='lastUpdated' x-text=\"'Updated: ' + lastUpdated\"></p>",
+        "            <p class='text-sm text-gray-500 mt-2' x-show='lastUpdatedAt || lastUpdated' x-text=\"'Updated: ' + (lastUpdatedAt ? fliFormatUpdatedAt(lastUpdatedAt) : lastUpdated)\"></p>",
         "        </div>",
         "        <div x-show='!loading && !error && allDeals.length > 0' x-cloak",
         "             class='mb-6 p-5 bg-white border border-gray-200 rounded-xl shadow-sm'>",
@@ -899,7 +1050,7 @@ def render_premium_deals_section() -> list[str]:
         "                            </span>",
         "                        </p>",
         "                    </div>",
-        "                    <div class='flex items-center gap-4 shrink-0'>",
+        "                    <div class='flex items-center gap-4 shrink-0 w-full sm:w-auto flex-col sm:flex-row'>",
         "                        <div class='text-right'>",
         "                            <div class='price-text' x-show='deal.hasCashPrice && deal.price !== null && deal.price !== undefined'>",
         "                                <span class='text-xs font-semibold text-gray-500 uppercase tracking-wide mr-1'>RT</span>",
@@ -909,9 +1060,9 @@ def render_premium_deals_section() -> list[str]:
         "                                 x-text=\"deal.points.toLocaleString() + ' pts est.'\"></div>",
         "                        </div>",
         "                        <a x-show='deal.hasCashPrice && deal.booking_url' :href='deal.booking_url' target='_blank' rel='noopener noreferrer'",
-        "                           class='btn-accent focus-ring text-sm' :aria-label=\"'Book round trip to ' + deal.destination + ' on Google Flights'\">Book</a>",
+        "                           class='btn-accent focus-ring text-sm w-full sm:w-auto text-center' :aria-label=\"'Book round trip to ' + deal.destination + ' on Google Flights'\">Book</a>",
         "                        <a x-show='!deal.hasCashPrice && deal.google_flights_url' :href='deal.google_flights_url' target='_blank' rel='noopener noreferrer'",
-        "                           class='btn-accent focus-ring text-sm' :aria-label=\"'Search round trip to ' + deal.destination + ' on Google Flights'\">Search on Google Flights</a>",
+        "                           class='btn-accent focus-ring text-sm w-full sm:w-auto text-center' :aria-label=\"'Search round trip to ' + deal.destination + ' on Google Flights'\">Search on Google Flights</a>",
         "                    </div>",
         "                </article>",
         "            </template>",
@@ -924,6 +1075,7 @@ def render_premium_deals_section() -> list[str]:
         "                error: null,",
         "                allDeals: [],",
         "                lastUpdated: null,",
+        "                lastUpdatedAt: null,",
         "                domesticOnly: false,",
         "                cashOnly: true,",
         "                maxOneStop: false,",
@@ -976,6 +1128,7 @@ def render_premium_deals_section() -> list[str]:
         "                        const data = await resp.json();",
         "                        this.allDeals = data.deals || [];",
         "                        this.lastUpdated = data.lastUpdated || null;",
+        "                        this.lastUpdatedAt = data.lastUpdatedAt || null;",
         "                        this.loading = false;",
         "                    } catch (err) {",
         "                        this.error = err.message || 'Failed to load premium deals';",
@@ -989,10 +1142,16 @@ def render_premium_deals_section() -> list[str]:
 
 
 def render_index(
-    all_results: dict[str, list[dict]], last_updated: str, hist_avg: dict[str, float | None]
+    all_results: dict[str, list[dict]],
+    last_updated: str,
+    hist_avg: dict[str, float | None],
+    prior_prices: dict[str, int] | None = None,
+    last_updated_at: str | None = None,
 ) -> None:
     all_results = normalized_results(all_results)
-    payload = build_flights_payload(all_results, last_updated, hist_avg)
+    payload = build_flights_payload(
+        all_results, last_updated, hist_avg, prior_prices, last_updated_at
+    )
     write_flights_json(payload)
 
     regions_json = json.dumps(payload["regions"])
@@ -1014,7 +1173,7 @@ def render_index(
     )
     lines.extend(
         [
-            "    <section class='hero-section py-16 md:py-28 px-6'>",
+            "    <section class='hero-section py-16 md:py-28 px-4 sm:px-6 section-pad'>",
             "        <div class='hero-airplane' aria-hidden='true'>",
             "            <svg viewBox='0 0 64 32' fill='none' xmlns='http://www.w3.org/2000/svg'>",
             "                <path d='M2 16 L14 14 L18 8 L26 8 L30 14 L62 16 L30 18 L26 24 L18 24 L14 18 Z' fill='#1A73E8'/>",
@@ -1025,9 +1184,12 @@ def render_index(
             "            <p class='text-sm font-bold tracking-[3px] text-gray-500 uppercase mb-4'>Weekend Escapes &amp; Global Travel</p>",
             "            <h1 class='page-header text-left'>Track your next adventure.</h1>",
             "            <p class='hero-text'>Daily curated fares from SLC and PVU across every tracked region. Points values optimized for Chase Sapphire Preferred.</p>",
-            f"            <p class='text-sm text-gray-500 mb-6' x-data x-text=\"window.__FLI_META?.lastUpdated ? 'Last updated: ' + window.__FLI_META.lastUpdated : 'Last updated: {html.escape(last_updated)}'\"></p>",
-            "            <a href='#premium-deals' class='dt-btn-primary focus-ring mr-3'>Premium deals</a>",
-            "            <a href='#flights' class='dt-btn-primary focus-ring' style='background:transparent;color:var(--accent-interactive);border-color:var(--accent-interactive)'>Economy regions</a>",
+            f"            <p class='text-sm text-gray-500 mb-6' x-data x-text=\"fliLastUpdatedLabel(window.__FLI_META) || 'Last updated: {html.escape(last_updated)}'\"></p>",
+            "            <div class='hero-cta-group'>",
+            "                <a href='#premium-deals' class='dt-btn-primary focus-ring'>Premium deals</a>",
+            "                <a href='#flights' class='dt-btn-outline focus-ring'>Economy regions</a>",
+            "                <a href='?weekend=1#flights' class='dt-btn-outline focus-ring'>Weekend escapes</a>",
+            "            </div>",
             "        </div>",
             "    </section>",
         ]
@@ -1035,8 +1197,29 @@ def render_index(
     lines.extend(render_premium_deals_section())
     lines.extend(
         [
-            "    <section id='flights' class='py-12 md:py-20 px-6 max-w-5xl mx-auto scroll-mt-24'",
+            "    <section id='flights' class='py-12 md:py-20 px-4 sm:px-6 max-w-5xl mx-auto scroll-mt-24 section-pad'",
             "             x-data='flightTracker()' x-init='init()' @scroll.window='showScrollTop = window.scrollY > 400'>",
+            "        <div x-show='watchToast' x-cloak x-transition",
+            "             class='watch-toast' role='status' aria-live='polite'>",
+            "            <span x-text='watchToast'></span>",
+            "            <button type='button' @click='showWatchPanel = !showWatchPanel' x-text=\"showWatchPanel ? 'Hide' : 'View'\"></button>",
+            "        </div>",
+            "        <div x-show='showWatchPanel && watchlist.length' x-cloak class='watch-panel' id='watchlist'>",
+            "            <h4 class='text-xs font-bold uppercase tracking-wider text-gray-600 mb-3'>Saved fares</h4>",
+            "            <template x-for='(item, wi) in watchlist' :key=\"'watch-' + wi\">",
+            "                <div class='watch-panel-item'>",
+            "                    <div class='text-sm text-gray-800'>",
+            "                        <span class='font-semibold' x-text=\"item.origin + ' → ' + item.destination\"></span>",
+            "                        <span class='text-gray-500' x-text=\"' · ' + item.outDateFmt + ' – ' + item.retDateFmt\"></span>",
+            "                        <span x-show='item.price' class='text-green-700 font-semibold' x-text=\"' · $' + item.price\"></span>",
+            "                    </div>",
+            "                    <div class='flex flex-wrap gap-2'>",
+            "                        <a x-show='item.url' :href='item.url' target='_blank' rel='noopener noreferrer' class='time-option-cta focus-ring text-sm'>Book</a>",
+            "                        <button type='button' @click='removeWatch(wi)' class='time-option-cta time-option-cta-outline focus-ring text-sm'>Remove</button>",
+            "                    </div>",
+            "                </div>",
+            "            </template>",
+            "        </div>",
             "        <div x-show='loading' class='text-center py-16 text-gray-500'>Loading flight data…</div>",
             "        <div x-show='error' x-cloak class='text-center py-16 text-red-600' x-text='error'></div>",
             "        <template x-if='!loading && !error'>",
@@ -1091,6 +1274,12 @@ def render_index(
             "                    </template>",
             "                </select>",
             "            </div>",
+            "            <div class='flex-1 flex items-end'>",
+            "                <label class='flex items-center gap-2 text-sm font-semibold text-gray-700 cursor-pointer'>",
+            "                    <input type='checkbox' class='rounded border-gray-300' :checked='weekendOnly' @change='weekendOnly = $event.target.checked'>",
+            "                    Weekend escapes only (domestic Wed–Sun)",
+            "                </label>",
+            "            </div>",
             "        </div>",
             "        <div class='card-container bg-white border border-gray-200 overflow-hidden'>",
             "            <div class='divide-y divide-gray-100'>",
@@ -1100,7 +1289,7 @@ def render_index(
             "                            No flights found for <span x-text='region'></span>. Check back after the next daily search (~6 AM).",
             "                        </div>",
             "                        <template x-for='(group, gi) in (regionData[region]?.groups || [])' :key=\"region + '-' + gi\">",
-            "                            <div x-show=\"(airlineFilter === 'All' || airlineFilter === group.airline) && group.price <= maxPrice\" x-cloak>",
+            "                            <div x-show='groupMatches(group)' x-cloak>",
             "                                <div x-data='{ expanded: false }' class='hover:bg-gray-50 transition-colors'>",
             "                                    <button type='button' @click='expanded = !expanded' :aria-expanded='expanded'",
             "                                        class='focus-ring w-full text-left cursor-pointer p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between'>",
@@ -1111,6 +1300,8 @@ def render_index(
             "                                                    x-text=\"group.origin + ' → ' + group.destination\"></span>",
             "                                                <span x-show='group.dropPct > 0' class='deal-badge text-xs font-bold px-2 py-1 rounded-full'",
             "                                                    x-text=\"'↓' + group.dropPct + '% vs avg'\"></span>",
+            "                                                <span x-show='group.priceDelta > 0' class='deal-badge text-xs font-bold px-2 py-1 rounded-full'",
+            "                                                    x-text=\"'↓ $' + group.priceDelta + ' since yesterday'\"></span>",
             "                                            </div>",
             "                                            <div class='text-[15px] text-gray-500'>",
             "                                                <span class='font-semibold text-gray-800'>Dates:</span>",
@@ -1119,7 +1310,7 @@ def render_index(
             "                                                <span class='font-semibold accent-text' x-text=\"group.times.length + ' time option' + (group.times.length !== 1 ? 's' : '')\"></span>",
             "                                            </div>",
             "                                        </div>",
-            "                                        <div class='flex items-center gap-6'>",
+            "                                        <div class='flex items-center gap-6 fare-row-price'>",
             "                                            <div class='text-right'>",
             "                                                <div class='price-text'><span class='mr-1'>$</span><span x-text='group.price'></span></div>",
             "                                                <div class='price-points' x-text=\"group.points.toLocaleString() + ' pts'\"></div>",
@@ -1145,7 +1336,10 @@ def render_index(
             "                                                            <span class='time-option-value' x-text='time.retArrFmt'></span>",
             "                                                        </div>",
             "                                                    </div>",
-            "                                                    <a :href='time.url || \"#\"' target='_blank' rel='noopener noreferrer' class='time-option-cta focus-ring'>Book</a>",
+            "                                                    <div class='time-option-actions'>",
+            "                                                        <a :href='time.url || \"#\"' target='_blank' rel='noopener noreferrer' class='time-option-cta focus-ring'>Book</a>",
+            "                                                        <button type='button' @click.stop='$root.watchFare(group)' class='time-option-cta time-option-cta-outline focus-ring'>Watch</button>",
+            "                                                    </div>",
             "                                                </div>",
             "                                            </template>",
             "                                        </div>",
@@ -1153,7 +1347,7 @@ def render_index(
             "                                </div>",
             "                            </div>",
             "                        </template>",
-            "                        <div class='p-8 text-center text-gray-500' x-show=\"regionData[region]?.groups?.length && !(regionData[region]?.groups || []).some(g => (airlineFilter === 'All' || airlineFilter === g.airline) && g.price <= maxPrice)\" x-cloak>",
+            "                        <div class='p-8 text-center text-gray-500' x-show=\"regionData[region]?.groups?.length && !(regionData[region]?.groups || []).some(g => groupMatches(g))\" x-cloak>",
             "                            No fares match your filters. Widen max price or choose All Airlines.",
             "                        </div>",
             "                        <div class='px-6 py-8' x-show='regionData[region]?.best'>",
@@ -1186,6 +1380,31 @@ def render_index(
             "    </section>",
             f"    <script>window.__FLI_REGIONS = {regions_json};</script>",
             "    <script>",
+            "        const FLI_WATCH_KEY = 'fli-watchlist';",
+            "        function fliLoadWatchlist() {",
+            "            try { return JSON.parse(localStorage.getItem(FLI_WATCH_KEY) || '[]'); }",
+            "            catch (e) { return []; }",
+            "        }",
+            "        function fliSaveWatchlist(list) {",
+            "            localStorage.setItem(FLI_WATCH_KEY, JSON.stringify(list.slice(0, 50)));",
+            "        }",
+            "        function fliFormatUpdatedAt(iso) {",
+            "            if (!iso) return '';",
+            "            const d = new Date(iso);",
+            "            if (Number.isNaN(d.getTime())) return '';",
+            "            return d.toLocaleString('en-US', {",
+            "                weekday: 'short', month: 'short', day: '2-digit', year: 'numeric',",
+            "                hour: 'numeric', minute: '2-digit', hour12: true,",
+            f"                timeZone: '{DISPLAY_TIMEZONE}', timeZoneName: 'short',",
+            "            });",
+            "        }",
+            "        function fliLastUpdatedLabel(meta) {",
+            "            if (!meta) return '';",
+            "            const formatted = meta.lastUpdatedAt",
+            "                ? fliFormatUpdatedAt(meta.lastUpdatedAt)",
+            "                : meta.lastUpdated;",
+            "            return formatted ? 'Last updated: ' + formatted : '';",
+            "        }",
             "        function flightTracker() {",
             "            return {",
             "                loading: true,",
@@ -1200,6 +1419,12 @@ def render_index(
             "                tabFilters: {},",
             "                showFilters: false,",
             "                showScrollTop: false,",
+            "                weekendOnly: false,",
+            "                domesticRegions: [],",
+            "                watchlist: [],",
+            "                watchToast: '',",
+            "                showWatchPanel: false,",
+            "                watchToastTimer: null,",
             "                get maxPrice() {",
             "                    const f = this.tabFilters[this.activeTab];",
             "                    return f ? f.maxPrice : this.globalMaxPrice;",
@@ -1221,6 +1446,15 @@ def render_index(
             "                    this.ensureTabFilters(this.activeTab);",
             "                    this.tabFilters[this.activeTab].airlineFilter = val;",
             "                },",
+            "                groupMatches(group) {",
+            "                    if ((this.airlineFilter !== 'All' && this.airlineFilter !== group.airline) || group.price > this.maxPrice) {",
+            "                        return false;",
+            "                    }",
+            "                    if (this.weekendOnly && this.domesticRegions.includes(this.activeTab) && !group.weekendEscape) {",
+            "                        return false;",
+            "                    }",
+            "                    return true;",
+            "                },",
             "                resolveInitialTab(regions) {",
             "                    const params = new URLSearchParams(window.location.search);",
             "                    const tabParam = params.get('tab');",
@@ -1240,22 +1474,82 @@ def render_index(
             "                    this.ensureTabFilters(tab);",
             "                    this.updateUrl(tab);",
             "                },",
+            "                refreshWatchlist() {",
+            "                    this.watchlist = fliLoadWatchlist();",
+            "                },",
+            "                watchFare(group) {",
+            "                    const url = (group.times && group.times[0] && group.times[0].url) || '';",
+            "                    const entry = {",
+            "                        origin: group.origin,",
+            "                        destination: group.destination,",
+            "                        outDate: group.outDate,",
+            "                        retDate: group.retDate,",
+            "                        outDateFmt: group.outDateFmt,",
+            "                        retDateFmt: group.retDateFmt,",
+            "                        price: group.price,",
+            "                        airline: group.airline,",
+            "                        url: url,",
+            "                        savedAt: Date.now(),",
+            "                    };",
+            "                    const list = fliLoadWatchlist().filter((w) => !(",
+            "                        w.origin === entry.origin && w.destination === entry.destination",
+            "                        && w.outDate === entry.outDate && w.retDate === entry.retDate",
+            "                    ));",
+            "                    list.unshift(entry);",
+            "                    fliSaveWatchlist(list);",
+            "                    this.refreshWatchlist();",
+            "                    this.watchToast = 'Saved ' + entry.origin + '→' + entry.destination + ' to your watchlist';",
+            "                    this.showWatchPanel = true;",
+            "                    clearTimeout(this.watchToastTimer);",
+            "                    this.watchToastTimer = setTimeout(() => { this.watchToast = ''; }, 5000);",
+            "                },",
+            "                removeWatch(index) {",
+            "                    const list = fliLoadWatchlist();",
+            "                    list.splice(index, 1);",
+            "                    fliSaveWatchlist(list);",
+            "                    this.refreshWatchlist();",
+            "                },",
+            "                handleWatchQuery() {",
+            "                    const params = new URLSearchParams(window.location.search);",
+            "                    const raw = params.get('watch') || params.get('track');",
+            "                    if (!raw) return;",
+            "                    const parts = raw.split(',');",
+            "                    if (parts.length < 3) return;",
+            "                    const [origin, destination, outDate, retDate = ''] = parts;",
+            "                    this.watchFare({",
+            "                        origin, destination, outDate, retDate,",
+            "                        outDateFmt: outDate, retDateFmt: retDate || '—',",
+            "                        price: null, airline: '', times: [{ url: '' }],",
+            "                    });",
+            "                    params.delete('watch');",
+            "                    params.delete('track');",
+            "                    const qs = params.toString();",
+            "                    history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : '') + window.location.hash);",
+            "                },",
             "                async init() {",
+            "                    this.refreshWatchlist();",
             "                    try {",
             "                        const resp = await fetch('data/flights.json');",
             "                        if (!resp.ok) throw new Error('Could not load flight data (' + resp.status + ')');",
             "                        const data = await resp.json();",
-            "                        window.__FLI_META = { lastUpdated: data.lastUpdated };",
+            "                        window.__FLI_META = {",
+            "                            lastUpdated: data.lastUpdated,",
+            "                            lastUpdatedAt: data.lastUpdatedAt,",
+            "                        };",
             "                        this.regions = data.regions || window.__FLI_REGIONS;",
             "                        this.deals = data.deals || [];",
             "                        this.regionData = data.regionData || {};",
             "                        this.intlTabs = data.intlTabs || [];",
+            "                        this.domesticRegions = data.domesticRegions || [];",
             "                        this.airlines = data.airlines || [];",
             "                        this.globalMaxPrice = data.maxPriceDefault || 1500;",
+            "                        this.weekendOnly = new URLSearchParams(window.location.search).get('weekend') === '1';",
+            "                        if (this.weekendOnly) this.showFilters = true;",
             "                        this.activeTab = this.resolveInitialTab(this.regions);",
             "                        this.ensureTabFilters(this.activeTab);",
             "                        this.updateUrl(this.activeTab);",
             "                        this.loading = false;",
+            "                        this.handleWatchQuery();",
             "                    } catch (err) {",
             "                        this.error = err.message || 'Failed to load flights';",
             "                        this.loading = false;",
@@ -1293,9 +1587,19 @@ def render_heatmap(all_results: dict[str, list[dict]]) -> None:
     regions = list(REGIONS.keys())
     first_region = regions[0]
     data_json = json.dumps(heatmap_data)
+    thresholds_json = json.dumps(HEATMAP_THRESHOLDS)
+    region_types_json = json.dumps({name: cfg.get("type", "domestic") for name, cfg in REGIONS.items()})
     heatmap_alpine = (
         f"{{ activeRegion: {json.dumps(first_region)}, "
-        f"get heatmapData() {{ return window.HEATMAP_DATA }} }}"
+        f"get heatmapData() {{ return window.HEATMAP_DATA }}, "
+        f"get thresholds() {{ return window.HEATMAP_THRESHOLDS }}, "
+        f"get regionTypes() {{ return window.HEATMAP_REGION_TYPES }}, "
+        f"heatmapClass(price, region) {{ "
+        f"const t = this.thresholds[this.regionTypes[region] || 'domestic'] || this.thresholds.domestic; "
+        f"if (price < t.low) return 'heatmap-low'; "
+        f"if (price <= t.mid) return 'heatmap-mid'; "
+        f"return 'heatmap-high'; "
+        f"}} }}"
     )
 
     lines = get_base_html_head(
@@ -1305,6 +1609,8 @@ def render_heatmap(all_results: dict[str, list[dict]]) -> None:
     lines.extend(
         [
             f"    <script>window.HEATMAP_DATA = {data_json};</script>",
+            f"    <script>window.HEATMAP_THRESHOLDS = {thresholds_json};</script>",
+            f"    <script>window.HEATMAP_REGION_TYPES = {region_types_json};</script>",
             get_skip_link("#main-content", "Skip to heatmap"),
             *render_nav("heatmap", [("index.html", "&larr; Back to Flights", True)]),
             f"    <section id='main-content' class='py-12 px-6 max-w-5xl mx-auto scroll-mt-24' x-data='{heatmap_alpine}'>",
@@ -1333,11 +1639,11 @@ def render_heatmap(all_results: dict[str, list[dict]]) -> None:
             "                <p class='text-gray-500 text-center py-12' x-show='Object.keys(heatmapData[region] || {}).length === 0'>No data for this region yet.</p>",
             "                <div class='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3' x-show='Object.keys(heatmapData[region] || {}).length > 0'>",
             "                    <template x-for='[date, flight] in Object.entries(heatmapData[region] || {}).sort((a,b) => a[0].localeCompare(b[0]))' :key='date'>",
-            "                        <a x-show='flight.url' :href='flight.url' target='_blank' rel='noopener noreferrer' class='heatmap-cell focus-ring' :class=\"flight.price < 320 ? 'heatmap-low' : flight.price <= 500 ? 'heatmap-mid' : 'heatmap-high'\">",
+            "                        <a x-show='flight.url' :href='flight.url' target='_blank' rel='noopener noreferrer' class='heatmap-cell focus-ring' :class=\"heatmapClass(flight.price, region)\">",
             '                            <div class=\'text-xs opacity-90\' x-text=\'new Date(date + "T12:00:00").toLocaleDateString(undefined, {weekday:"short", month:"short", day:"numeric"})\'></div>',
             "                            <div class='text-lg font-bold' x-text=\"'$' + flight.price\"></div>",
             "                        </a>",
-            "                        <div x-show='!flight.url' class='heatmap-cell' :class=\"flight.price < 320 ? 'heatmap-low' : flight.price <= 500 ? 'heatmap-mid' : 'heatmap-high'\">",
+            "                        <div x-show='!flight.url' class='heatmap-cell' :class=\"heatmapClass(flight.price, region)\">",
             '                            <div class=\'text-xs opacity-90\' x-text=\'new Date(date + "T12:00:00").toLocaleDateString(undefined, {weekday:"short", month:"short", day:"numeric"})\'></div>',
             "                            <div class='text-lg font-bold' x-text=\"'$' + flight.price\"></div>",
             "                        </div>",
@@ -1388,7 +1694,7 @@ def render_history(all_results: dict[str, list[dict]]) -> None:
                     ("index.html", "&larr; Flights", True),
                 ],
             ),
-            f"    <section id='main-content' class='py-12 px-6 max-w-5xl mx-auto scroll-mt-24' x-data='historyPage()' x-init='init()'>",
+            "    <section id='main-content' class='py-12 px-6 max-w-5xl mx-auto scroll-mt-24' x-data='historyPage()' x-init='init()'>",
             "        <div class='mb-8 text-center'>",
             "            <h3 class='text-3xl font-bold text-gray-800 mb-2'>14-Day Price Trends</h3>",
             "            <p class='text-gray-500'>Lowest fare for <span x-text='activeRegion'></span></p>",
@@ -1458,19 +1764,17 @@ def render_history(all_results: dict[str, list[dict]]) -> None:
 
 def main() -> None:
     all_results = load_results()
-    last_updated = datetime.now().strftime("%a, %b %d, %Y at %I:%M %p")
-    if os.path.exists(OUTPUT_JSON):
-        mtime = datetime.fromtimestamp(os.path.getmtime(OUTPUT_JSON))
-        last_updated = mtime.strftime("%a, %b %d, %Y at %I:%M %p")
+    source = OUTPUT_JSON if os.path.exists(OUTPUT_JSON) else None
+    last_updated, last_updated_at = resolve_last_updated(source)
 
     if not all_results:
         print("No flight data found.")
-        render_premium_deals_report(last_updated)
+        render_premium_deals_report(last_updated, last_updated_at)
         return
 
     has_priced = any(priced_flights(flights) for flights in all_results.values())
     if not has_priced:
-        render_premium_deals_report(last_updated)
+        render_premium_deals_report(last_updated, last_updated_at)
         if _existing_flights_json_has_data():
             print("No flight data in best_direct.json — keeping existing reports.")
             return
@@ -1478,10 +1782,12 @@ def main() -> None:
         return
 
     hist_avg = update_history(all_results)
-    render_index(all_results, last_updated, hist_avg)
-    render_premium_deals_report(last_updated)
+    prior_prices = load_prior_prices()
+    render_index(all_results, last_updated, hist_avg, prior_prices, last_updated_at)
+    render_premium_deals_report(last_updated, last_updated_at)
     render_heatmap(all_results)
     render_history(all_results)
+    save_prior_prices(all_results)
 
     manifest_path = "public/manifest.json"
     if os.path.exists(manifest_path):
