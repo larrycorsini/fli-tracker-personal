@@ -8,7 +8,6 @@ from alert_format import (
     format_morning_digest_imessage,
     format_morning_digest_plain,
     format_premium_digest_html,
-    format_premium_digest_imessage,
     format_premium_digest_plain,
     format_short_date_range,
     morning_digest_subject,

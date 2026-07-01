@@ -155,6 +155,7 @@ PREMIUM_SHORTLIST_SIZE = 2
 PREMIUM_SHORTLIST_SIZE_TEST = 1
 PREMIUM_MAX_DEALS_PER_DEST = 3
 PREMIUM_GLOBAL_TOP_N = 30
+PREMIUM_ALERT_MAX_DEALS = 5  # unique origin+airport+cabin rows in iMessage/email alerts
 
 # Chase Sapphire Preferred portal redemption (¢/point) for estimated points on cash fares.
 CHASE_POINTS_CENT_VALUE = 1.25

@@ -26,6 +26,7 @@ from tracker_config import (
     PREMIUM_DEAL_MAX_POINTS,
     PREMIUM_DEAL_MAX_PRICE,
     PREMIUM_DEAL_OUTPUT_JSON,
+    PREMIUM_ALERT_MAX_DEALS,
     REGIONS,
 )
 from tracker_io import atomic_write_json
@@ -93,6 +94,31 @@ def collect_deals_under_threshold(all_results: dict) -> list[dict]:
     return deals
 
 
+def _premium_alert_sort_key(row: dict) -> tuple[float, float]:
+    price = row.get("price")
+    points = row.get("points")
+    return (
+        float(price) if price is not None else float("inf"),
+        float(points) if points is not None else float("inf"),
+    )
+
+
+def dedupe_premium_for_alert(deals: list[dict]) -> list[dict]:
+    """Keep the best qualifying fare per origin+airport+cabin (drop duplicate date rows)."""
+    best_by_key: dict[tuple[str, str, str], dict] = {}
+    for deal in deals:
+        key = (
+            deal.get("origin", "SLC"),
+            deal.get("airport") or deal.get("destination", ""),
+            deal.get("cabin_class", "BUSINESS"),
+        )
+        current = best_by_key.get(key)
+        if current is None or _premium_alert_sort_key(deal) < _premium_alert_sort_key(current):
+            best_by_key[key] = deal
+    ranked = sorted(best_by_key.values(), key=_premium_alert_sort_key)
+    return ranked[:PREMIUM_ALERT_MAX_DEALS]
+
+
 def collect_premium_deals() -> list[dict]:
     """Return premium cabin deals at or below configured cash/points thresholds."""
     if not os.path.exists(PREMIUM_DEAL_OUTPUT_JSON):
@@ -132,13 +158,8 @@ def collect_premium_deals() -> list[dict]:
             }
         )
 
-    qualifying.sort(
-        key=lambda row: (
-            row["price"] if row.get("price") is not None else float("inf"),
-            row.get("points") or float("inf"),
-        )
-    )
-    return qualifying[:10]
+    qualifying.sort(key=_premium_alert_sort_key)
+    return dedupe_premium_for_alert(qualifying)
 
 
 def digest_already_sent(
