@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 from datetime import datetime
@@ -157,10 +158,13 @@ def digest_already_sent(
     return prior.get("deals") == snapshot
 
 
-def main() -> None:
-    if not os.environ.get("FLI_ALERT_PHONE") and not os.environ.get("FLI_ALERT_EMAIL"):
+def run_alerts(*, force: bool = False, preview: bool = False) -> int:
+    """Collect deals, format alerts, and send or preview."""
+    if preview:
+        pass
+    elif not os.environ.get("FLI_ALERT_PHONE") and not os.environ.get("FLI_ALERT_EMAIL"):
         print("FLI_ALERT_PHONE / FLI_ALERT_EMAIL not set — skipping alerts.")
-        return
+        return 1
 
     today_str = datetime.now().strftime("%Y-%m-%d")
     last_alerts = load_last_alerts()
@@ -173,7 +177,7 @@ def main() -> None:
             all_results = {"DFW": all_results}
         economy_deals = collect_deals_under_threshold(all_results)
         if economy_deals:
-            if not digest_already_sent(last_alerts, today_str, economy_deals, "_digest"):
+            if force or not digest_already_sent(last_alerts, today_str, economy_deals, "_digest"):
                 sections.append(
                     (
                         morning_digest_subject(economy_deals),
@@ -201,9 +205,9 @@ def main() -> None:
                 print(f"{region_name}: ${lowest:.0f} above threshold ${threshold:.0f}")
 
     premium_deals = collect_premium_deals()
-    if premium_deals and not digest_already_sent(
+    if premium_deals and (force or not digest_already_sent(
         last_alerts, today_str, premium_deals, "_premium_digest"
-    ):
+    )):
         sections.append(
             (
                 premium_digest_subject(premium_deals),
@@ -222,9 +226,18 @@ def main() -> None:
 
     if not sections:
         print("No alerts sent.")
-        return
+        return 0
 
     subject, email_plain, imessage_plain, html = combine_alert_content(sections)
+    if preview:
+        print(f"Subject: {subject}\n")
+        print("=== iMessage ===")
+        print(imessage_plain)
+        if html:
+            print("\n=== Email HTML: (truncated) ===")
+            print(html[:500] + ("…" if len(html) > 500 else ""))
+        return 0
+
     print(f"Sending alert ({len(sections)} section(s))...")
     try:
         channels = dispatch_alert(
@@ -237,7 +250,21 @@ def main() -> None:
         print(f"Alert sent via: {', '.join(channels) or 'configured channels'}")
     except Exception as exc:
         print(f"Failed to send alert: {exc}")
+        return 1
+    return 0
 
 
-if __name__ == "__main__":
-    main()
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Send Fli-Tracker deal alerts")
+    parser.add_argument(
+        "--preview",
+        action="store_true",
+        help="Print alert text without sending (no credentials required)",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Send even if today's digest was already delivered",
+    )
+    args = parser.parse_args()
+    raise SystemExit(run_alerts(force=args.force, preview=args.preview))
