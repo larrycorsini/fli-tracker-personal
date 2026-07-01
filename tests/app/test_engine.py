@@ -37,7 +37,9 @@ class TestMergedExcludeAirlines:
 class TestAttachBookingUrl:
     def test_prefers_deep_link(self):
         searcher = MagicMock()
-        searcher.build_flight_booking_url.return_value = "https://google.com/travel/flights/booking?tfs=abc"
+        searcher.build_flight_booking_url.return_value = (
+            "https://google.com/travel/flights/booking?tfs=abc"
+        )
         flight_data: dict = {}
         opts = FlightSearchOptions()
         _attach_booking_url(
