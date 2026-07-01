@@ -66,7 +66,7 @@ REGIONS = {
 
 OUTPUT_JSON = "best_direct.json"
 SITE_URL = "https://flights.larrycorsini.com"
-PLANNER_URL = os.environ.get("FLI_PLANNER_URL", "http://localhost:8000")
+PLANNER_URL = os.environ.get("FLI_PLANNER_URL", SITE_URL)
 FLIGHTS_JSON = "public/data/flights.json"
 PRIOR_PRICES_JSON = "public/data/prior_prices.json"
 
@@ -124,14 +124,14 @@ def heatmap_tier(price: float, region_name: str) -> str:
 
 
 def planner_track_url(origin: str, destination: str, depart: str, ret: str | None = None) -> str:
-    """Deep link into Travel Planner Pro to pre-fill price tracking."""
+    """Same-site watch link (handled client-side; no localhost planner)."""
     from urllib.parse import quote
 
     parts = [origin, destination, depart]
     if ret:
         parts.append(ret)
     query = quote(",".join(parts))
-    return f"{PLANNER_URL.rstrip('/')}/?track={query}"
+    return f"{SITE_URL.rstrip('/')}/?watch={query}"
 
 # Premium-cabin deal discovery (find_deals.py) — separate from economy region monitor.
 PREMIUM_DEAL_ORIGINS = ["SLC", "PVU"]

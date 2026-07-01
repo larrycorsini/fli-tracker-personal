@@ -29,5 +29,6 @@ class TestHeatmapTier:
 class TestPlannerTrackUrl:
     def test_builds_query_link(self):
         url = planner_track_url("SLC", "DFW", "2026-07-01", "2026-07-04")
-        assert "track=" in url
-        assert "SLC" in url
+        assert "flights.larrycorsini.com" in url
+        assert "watch=" in url
+        assert "localhost" not in url

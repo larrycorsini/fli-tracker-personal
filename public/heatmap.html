@@ -148,10 +148,10 @@
         .time-option-cta {
             flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;
             background: var(--accent-interactive); color: #fff; font-weight: 600; font-size: 13px;
-            padding: 6px 14px; border-radius: 6px; text-decoration: none; transition: background .2s ease;
-            width: 100%; min-height: 32px;
+            padding: 10px 16px; border-radius: 8px; text-decoration: none; transition: background .2s ease;
+            width: 100%; min-height: 44px; border: none; cursor: pointer; font-family: inherit;
         }
-        @media (min-width: 640px) { .time-option-cta { width: auto; } }
+        @media (min-width: 640px) { .time-option-cta { width: auto; min-width: 5.5rem; } }
         .time-option-cta:hover { background: var(--accent-interactive-hover); color: #fff; }
         .nav-shell { transition: padding 200ms ease; }
         .nav-links { transition: opacity 200ms ease, max-height 200ms ease; }
@@ -176,6 +176,61 @@
             100% { transform: translateX(-120px) translateY(-24px) rotate(-8deg); }
         }
         @media (max-width: 640px) { .hero-airplane { width: 48px; height: 48px; top: 12%; } }
+        .hero-cta-group { display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch; max-width: 28rem; }
+        .dt-btn-outline {
+            background: transparent; color: var(--accent-interactive);
+            border: 2px solid var(--accent-interactive); border-radius: 40px; font-weight: 700;
+            padding: 12px 24px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
+            text-decoration: none; text-transform: uppercase; letter-spacing: 0.06em; font-size: 13px;
+            transition: background .2s ease, border-color .2s ease, color .2s ease;
+        }
+        .dt-btn-outline:hover {
+            background: var(--accent-interactive-muted); color: var(--accent-interactive-hover);
+            border-color: var(--accent-interactive-hover);
+        }
+        .time-option-actions { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+        @media (min-width: 640px) {
+            .time-option-actions { flex-direction: row; flex-wrap: wrap; width: auto; justify-content: flex-end; }
+        }
+        .time-option-cta-outline {
+            background: transparent; color: var(--accent-interactive);
+            border: 1px solid var(--accent-interactive);
+        }
+        .time-option-cta-outline:hover {
+            background: var(--accent-interactive-muted); color: var(--accent-interactive-hover);
+        }
+        .watch-toast {
+            position: fixed; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); left: 16px; right: 16px;
+            max-width: 24rem; margin: 0 auto; z-index: 60; padding: 14px 18px; border-radius: 12px;
+            background: var(--brand-primary); color: #fff; font-size: 14px; font-weight: 500;
+            box-shadow: 0 8px 24px rgba(31,42,55,0.25); display: flex; align-items: center; justify-content: space-between; gap: 12px;
+        }
+        .watch-toast button { color: #93C5FD; font-weight: 700; background: none; border: none; cursor: pointer; min-height: 44px; padding: 0 8px; }
+        .watch-panel {
+            margin-bottom: 1.5rem; padding: 1rem 1.25rem; border-radius: 12px;
+            background: var(--accent-interactive-muted); border: 1px solid var(--accent-interactive-border);
+        }
+        .watch-panel-item {
+            display: flex; flex-direction: column; gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--accent-interactive-border);
+        }
+        .watch-panel-item:last-child { border-bottom: none; padding-bottom: 0; }
+        @media (min-width: 640px) {
+            .watch-panel-item { flex-direction: row; align-items: center; justify-content: space-between; }
+        }
+        @media (max-width: 639px) {
+            .hero-cta-group { flex-direction: column; gap: 10px; max-width: none; }
+            .hero-cta-group .dt-btn-primary, .hero-cta-group .dt-btn-outline { width: 100%; }
+            p.hero-text { font-size: 17px; margin-bottom: 20px; }
+            .price-text { font-size: 26px; justify-content: flex-start; }
+            .price-points, .earn-badge { text-align: left; }
+            .section-pad { padding-left: 1rem !important; padding-right: 1rem !important; }
+            .fare-row-price { width: 100%; margin-top: 8px; }
+            .fare-row-price .price-text { justify-content: flex-start; }
+        }
+        @media (max-width: 380px) {
+            h1, .page-header { font-size: 32px; }
+            .dt-btn-primary, .dt-btn-outline { font-size: 12px; padding: 12px 16px; }
+        }
         [x-cloak] { display: none !important; }
     </style>
 </head>
