@@ -268,3 +268,7 @@ def main() -> None:
     )
     args = parser.parse_args()
     raise SystemExit(run_alerts(force=args.force, preview=args.preview))
+
+
+if __name__ == "__main__":
+    main()

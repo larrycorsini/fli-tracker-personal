@@ -89,6 +89,22 @@ class TestMorningDigest:
         assert alert.format_morning_digest([]) == ""
 
 
+class TestAlertMain:
+    def test_script_entrypoint_runs_preview(self):
+        import subprocess
+        import sys
+
+        result = subprocess.run(
+            [sys.executable, str(REPO_ROOT / "alert.py"), "--preview"],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        assert result.returncode == 0
+        assert "iMessage" in result.stdout or "No alerts sent" in result.stdout
+
+
 class TestDigestDedup:
     def test_same_deals_same_day(self):
         deals = [{"region": "DFW", "price": 280}]
