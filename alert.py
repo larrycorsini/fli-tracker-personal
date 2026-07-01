@@ -1,33 +1,24 @@
-"""Send iMessage alerts when regional flight prices drop below configured thresholds."""
+"""Send iMessage/email alerts when regional or premium flight prices hit thresholds."""
 
 from __future__ import annotations
 
 import json
 import os
-import subprocess
 from datetime import datetime
 from urllib.parse import quote
 
-from tracker_config import OUTPUT_JSON, REGIONS, SITE_URL
+from alert_notifiers import dispatch_alert
+from tracker_config import (
+    OUTPUT_JSON,
+    PREMIUM_DEAL_MAX_POINTS,
+    PREMIUM_DEAL_MAX_PRICE,
+    PREMIUM_DEAL_OUTPUT_JSON,
+    REGIONS,
+    SITE_URL,
+)
 from tracker_io import atomic_write_json
 
-PHONE_NUMBER = os.environ.get("FLI_ALERT_PHONE")
 ALERT_LOG = "last_alert.json"
-
-
-def send_imessage(phone_number: str, message: str) -> None:
-    script = """
-    on run argv
-        set msg to item 1 of argv
-        set phone to item 2 of argv
-        tell application "Messages"
-            set targetService to 1st service whose service type = iMessage
-            set targetBuddy to buddy phone of targetService
-            send msg to targetBuddy
-        end tell
-    end run
-    """
-    subprocess.run(["osascript", "-e", script, message, phone_number], check=True)
 
 
 def load_last_alerts() -> dict:
@@ -48,6 +39,10 @@ def _priced_flights(flights: list[dict]) -> list[dict]:
 def region_deep_link(region_name: str) -> str:
     """Deep link to the dashboard with the destination tab selected."""
     return f"{SITE_URL}/?tab={quote(region_name)}"
+
+
+def premium_deals_deep_link() -> str:
+    return f"{SITE_URL}/#premium-deals"
 
 
 def _format_weekday_date(dt_str: str) -> str:
@@ -98,8 +93,56 @@ def collect_deals_under_threshold(all_results: dict) -> list[dict]:
     return deals
 
 
+def collect_premium_deals() -> list[dict]:
+    """Return premium cabin deals at or below configured cash/points thresholds."""
+    if not os.path.exists(PREMIUM_DEAL_OUTPUT_JSON):
+        return []
+
+    with open(PREMIUM_DEAL_OUTPUT_JSON, encoding="utf-8") as handle:
+        payload = json.load(handle)
+
+    deals_in = payload.get("deals", []) if isinstance(payload, dict) else []
+    qualifying: list[dict] = []
+
+    for deal in deals_in:
+        if not isinstance(deal, dict):
+            continue
+        market = deal.get("type", "international")
+        cabin = deal.get("cabin_class", "BUSINESS")
+        max_cash = PREMIUM_DEAL_MAX_PRICE.get(market, {}).get(cabin)
+        max_points = PREMIUM_DEAL_MAX_POINTS.get(market, {}).get(cabin)
+        price = deal.get("price")
+        points = deal.get("points")
+        cash_ok = price is not None and max_cash is not None and price <= max_cash
+        points_ok = points is not None and max_points is not None and points <= max_points
+        if not cash_ok and not points_ok:
+            continue
+        qualifying.append(
+            {
+                "destination": deal.get("destination", deal.get("airport", "")),
+                "airport": deal.get("airport", ""),
+                "origin": deal.get("origin", "SLC"),
+                "cabin_class": cabin,
+                "price": price,
+                "points": points,
+                "out_date": deal.get("out_date", ""),
+                "ret_date": deal.get("ret_date", ""),
+                "value_score": deal.get("value_score", ""),
+                "url": deal.get("booking_url") or deal.get("google_flights_url") or "",
+            }
+        )
+
+    qualifying.sort(
+        key=lambda row: (
+            row["price"] if row.get("price") is not None else float("inf"),
+            row.get("points") or float("inf"),
+        )
+    )
+    return qualifying[:10]
+
+
 def format_morning_digest(deals: list[dict]) -> str:
-    """Build a single morning summary iMessage listing all regions under threshold."""
+    """Build a single morning summary listing all economy regions under threshold."""
     if not deals:
         return ""
 
@@ -124,69 +167,107 @@ def format_morning_digest(deals: list[dict]) -> str:
     return "\n".join(lines)
 
 
-def digest_already_sent(last_alerts: dict, today_str: str, deals: list[dict]) -> bool:
+def format_premium_digest(deals: list[dict]) -> str:
+    if not deals:
+        return ""
+
+    lines = ["\u2728 FLI-TRACKER Premium Deals", ""]
+    for deal in deals:
+        dest = deal.get("destination") or deal.get("airport", "")
+        cabin = deal.get("cabin_class", "BUSINESS").replace("_", " ").title()
+        origin = deal.get("origin", "SLC")
+        out_fmt = _format_weekday_date(deal.get("out_date", ""))
+        ret_fmt = _format_weekday_date(deal.get("ret_date", ""))
+        price_part = f"${int(deal['price'])}" if deal.get("price") is not None else ""
+        points_part = (
+            f"{int(deal['points']):,} pts" if deal.get("points") is not None else ""
+        )
+        fare = " / ".join(part for part in (price_part, points_part) if part) or "—"
+        book = deal.get("url") or premium_deals_deep_link()
+        lines.append(f"• {dest} ({cabin}): {fare} ({origin}, {out_fmt}\u2013{ret_fmt})")
+        lines.append(f"  Book: {book}")
+
+    lines.append("")
+    lines.append(f"View all: {premium_deals_deep_link()}")
+    return "\n".join(lines)
+
+
+def digest_already_sent(
+    last_alerts: dict, today_str: str, deals: list[dict], key: str = "_digest"
+) -> bool:
     """True when today's digest was already sent for the same deal set."""
-    prior = last_alerts.get("_digest", {})
+    prior = last_alerts.get(key, {})
     if prior.get("date") != today_str:
         return False
-    snapshot = sorted((d["region"], d["price"]) for d in deals)
+    if key == "_digest":
+        snapshot = sorted((d["region"], d["price"]) for d in deals)
+    else:
+        snapshot = sorted(
+            (d.get("region") or d.get("destination", ""), d.get("price"), d.get("points"))
+            for d in deals
+        )
     return prior.get("deals") == snapshot
 
 
 def main() -> None:
-    if not PHONE_NUMBER:
-        print("FLI_ALERT_PHONE not set — skipping alerts.")
-        return
-
-    if not os.path.exists(OUTPUT_JSON):
-        print("No flights data found.")
-        return
-
-    with open(OUTPUT_JSON, encoding="utf-8") as handle:
-        all_results = json.load(handle)
-
-    if isinstance(all_results, list):
-        all_results = {"DFW": all_results}
-
-    if not all_results:
-        print("No flights available in data.")
+    if not os.environ.get("FLI_ALERT_PHONE") and not os.environ.get("FLI_ALERT_EMAIL"):
+        print("FLI_ALERT_PHONE / FLI_ALERT_EMAIL not set — skipping alerts.")
         return
 
     today_str = datetime.now().strftime("%Y-%m-%d")
     last_alerts = load_last_alerts()
-    deals = collect_deals_under_threshold(all_results)
+    messages: list[str] = []
 
-    if not deals:
-        for region_name, flights in all_results.items():
-            priced = _priced_flights(flights)
-            if not priced:
-                continue
-            threshold = REGIONS.get(region_name, {}).get("alert_threshold")
-            if threshold is None:
-                continue
-            lowest = min(priced, key=lambda row: row["price"])["price"]
-            print(f"{region_name}: ${lowest:.0f} above threshold ${threshold:.0f}")
+    if os.path.exists(OUTPUT_JSON):
+        with open(OUTPUT_JSON, encoding="utf-8") as handle:
+            all_results = json.load(handle)
+        if isinstance(all_results, list):
+            all_results = {"DFW": all_results}
+        economy_deals = collect_deals_under_threshold(all_results)
+        if economy_deals:
+            if not digest_already_sent(last_alerts, today_str, economy_deals, "_digest"):
+                messages.append(format_morning_digest(economy_deals))
+                last_alerts["_digest"] = {
+                    "date": today_str,
+                    "deals": sorted((d["region"], d["price"]) for d in economy_deals),
+                }
+                for deal in economy_deals:
+                    last_alerts[deal["region"]] = {"price": deal["price"], "date": today_str}
+        elif all_results:
+            for region_name, flights in all_results.items():
+                priced = _priced_flights(flights)
+                if not priced:
+                    continue
+                threshold = REGIONS.get(region_name, {}).get("alert_threshold")
+                if threshold is None:
+                    continue
+                lowest = min(priced, key=lambda row: row["price"])["price"]
+                print(f"{region_name}: ${lowest:.0f} above threshold ${threshold:.0f}")
+
+    premium_deals = collect_premium_deals()
+    if premium_deals and not digest_already_sent(
+        last_alerts, today_str, premium_deals, "_premium_digest"
+    ):
+        messages.append(format_premium_digest(premium_deals))
+        last_alerts["_premium_digest"] = {
+            "date": today_str,
+            "deals": sorted(
+                (d.get("destination", ""), d.get("price"), d.get("points")) for d in premium_deals
+            ),
+        }
+
+    if not messages:
         print("No alerts sent.")
         return
 
-    if digest_already_sent(last_alerts, today_str, deals):
-        print(f"Morning digest already sent today for {len(deals)} deal(s).")
-        return
-
-    message = format_morning_digest(deals)
-    print(f"Sending morning digest ({len(deals)} region(s) under threshold)...")
+    combined = "\n\n".join(messages)
+    print(f"Sending alert ({len(messages)} section(s))...")
     try:
-        send_imessage(PHONE_NUMBER, message)
-        last_alerts["_digest"] = {
-            "date": today_str,
-            "deals": sorted((d["region"], d["price"]) for d in deals),
-        }
-        for deal in deals:
-            last_alerts[deal["region"]] = {"price": deal["price"], "date": today_str}
+        channels = dispatch_alert(combined)
         save_last_alerts(last_alerts)
-        print("Morning digest sent successfully.")
+        print(f"Alert sent via: {', '.join(channels) or 'configured channels'}")
     except Exception as exc:
-        print(f"Failed to send morning digest: {exc}")
+        print(f"Failed to send alert: {exc}")
 
 
 if __name__ == "__main__":

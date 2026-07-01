@@ -38,6 +38,7 @@ from tracker_config import (
     REGIONS,
     SHORTLIST_SIZE,
     SHORTLIST_SIZE_TEST,
+    region_active,
 )
 from tracker_io import atomic_write_json
 
@@ -495,6 +496,9 @@ def main(argv: list[str] | None = None) -> int:
     int_end = (today + timedelta(days=42)).strftime("%Y-%m-%d")
 
     for region_name, config in REGIONS.items():
+        if not region_active(region_name, today):
+            log.info("Skipping %s — off-season for month %d", region_name, today.month)
+            continue
         if all_results[region_name] and not args.force:
             log.info(
                 "Skipping %s — already have %d flights (use --force to re-search)",

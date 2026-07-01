@@ -13,16 +13,21 @@ from fli.core import google_flights_url
 
 from tracker_config import (
     FLIGHTS_JSON,
+    HEATMAP_THRESHOLDS,
     INTERNATIONAL_REGIONS,
     MAX_FARE_GROUPS_PER_REGION,
     MAX_TIMES_PER_GROUP,
     OUTPUT_JSON,
+    PLANNER_URL,
     PREMIUM_DEAL_DESTINATIONS,
     PREMIUM_DEAL_ORIGINS,
     PREMIUM_DEAL_OUTPUT_JSON,
     PREMIUM_DEALS_JSON,
+    PRIOR_PRICES_JSON,
     REGIONS,
     SITE_URL,
+    heatmap_tier,
+    planner_track_url,
 )
 from tracker_io import atomic_write_json, atomic_write_text
 
@@ -112,6 +117,42 @@ def compute_max_price(all_results: dict[str, list[dict]]) -> int:
     if not prices:
         return 1500
     return max(1500, int((max(prices) + 49) // 50 * 50))
+
+
+def load_prior_prices() -> dict[str, int]:
+    if not os.path.exists(PRIOR_PRICES_JSON):
+        return {}
+    try:
+        with open(PRIOR_PRICES_JSON, encoding="utf-8") as handle:
+            data = json.load(handle)
+    except (json.JSONDecodeError, OSError):
+        return {}
+    if not isinstance(data, dict):
+        return {}
+    return {str(k): int(v) for k, v in data.items() if v is not None}
+
+
+def save_prior_prices(all_results: dict[str, list[dict]]) -> None:
+    """Snapshot today's lowest fare per region for next-run price-drop badges."""
+    snapshot: dict[str, int] = {}
+    for region_name, flights in normalized_results(all_results).items():
+        priced = priced_flights(flights)
+        if priced:
+            snapshot[region_name] = int(min(priced, key=lambda row: row["price"])["price"])
+    os.makedirs(os.path.dirname(PRIOR_PRICES_JSON), exist_ok=True)
+    atomic_write_json(PRIOR_PRICES_JSON, snapshot)
+
+
+def is_weekend_escape(out_date: str, ret_date: str, region_name: str) -> bool:
+    """Domestic Wed–Fri depart / Sat–Sun return; international passes through."""
+    if REGIONS.get(region_name, {}).get("type") != "domestic":
+        return True
+    try:
+        out_dt = datetime.strptime(out_date[:10], "%Y-%m-%d")
+        ret_dt = datetime.strptime(ret_date[:10], "%Y-%m-%d")
+    except (ValueError, TypeError):
+        return False
+    return out_dt.weekday() in (2, 3, 4) and ret_dt.weekday() in (5, 6)
 
 
 def get_base_html_head(
@@ -547,13 +588,17 @@ def cap_region_flights(flights: list[dict]) -> list[dict]:
 
 
 def build_region_groups(
-    flights: list[dict], region_name: str, hist_avg: dict[str, float | None]
+    flights: list[dict], region_name: str, hist_avg: dict[str, float | None],
+    prior_prices: dict[str, int] | None = None,
 ) -> dict:
     """Serialize capped fare groups for client-side rendering."""
     capped = cap_region_flights(flights)
     priced = priced_flights(capped)
     if not priced:
         return {"groups": [], "best": None, "groupCount": 0}
+
+    prior_prices = prior_prices or {}
+    prior_region_best = prior_prices.get(region_name)
 
     groups_map: dict[tuple, list[dict]] = defaultdict(list)
     for flight in priced:
@@ -575,6 +620,10 @@ def build_region_groups(
         if avg and price < avg:
             drop_pct = int(round((avg - price) / avg * 100))
 
+        price_delta = None
+        if prior_region_best is not None:
+            price_delta = int(prior_region_best - price)
+
         groups_out.append(
             {
                 "origin": origin,
@@ -588,11 +637,14 @@ def build_region_groups(
                 "outDateFmt": format_date(out_date),
                 "retDateFmt": format_date(ret_date),
                 "dropPct": drop_pct,
+                "priceDelta": price_delta,
+                "weekendEscape": is_weekend_escape(out_date, ret_date, region_name),
                 "times": [
                     {
                         "outDepFmt": format_datetime(f["out_dep"]),
                         "retArrFmt": format_datetime(f["ret_arr"]),
                         "url": f.get("url") or "",
+                        "trackUrl": planner_track_url(origin, dest, out_date, ret_date),
                     }
                     for f in group_flights
                 ],
@@ -617,6 +669,7 @@ def build_flights_payload(
     all_results: dict[str, list[dict]],
     last_updated: str,
     hist_avg: dict[str, float | None],
+    prior_prices: dict[str, int] | None = None,
 ) -> dict:
     """Build external JSON payload for lazy-loaded index page."""
     all_results = normalized_results(all_results)
@@ -627,7 +680,9 @@ def build_flights_payload(
         for flight in flights:
             if flight.get("airline"):
                 global_airlines.add(flight["airline"])
-        regions_payload[region_name] = build_region_groups(flights, region_name, hist_avg)
+        regions_payload[region_name] = build_region_groups(
+            flights, region_name, hist_avg, prior_prices
+        )
 
     deals = []
     for region_name, best in build_deal_board(all_results):
@@ -637,10 +692,14 @@ def build_flights_payload(
             deals.append({"region": region_name, "price": None})
 
     max_price = compute_max_price(all_results)
+    domestic_regions = [name for name, cfg in REGIONS.items() if cfg.get("type") == "domestic"]
     return {
         "lastUpdated": last_updated,
         "siteUrl": SITE_URL,
+        "plannerUrl": PLANNER_URL,
         "intlTabs": INTERNATIONAL_REGIONS,
+        "domesticRegions": domestic_regions,
+        "heatmapThresholds": HEATMAP_THRESHOLDS,
         "regions": list(REGIONS.keys()),
         "maxPriceDefault": max_price,
         "airlines": sorted(global_airlines),
@@ -753,6 +812,7 @@ def build_premium_deals_payload(raw: dict, last_updated: str) -> dict:
                 "price": int(price) if price is not None else None,
                 "points": int(points) if points is not None else None,
                 "paymentType": deal.get("paymentType", "cash"),
+                "valueScore": deal.get("value_score", ""),
                 "hasCashPrice": bool(has_cash),
                 "isRoundTrip": bool(deal.get("isRoundTrip", True)),
                 "tripDuration": deal.get("trip_duration"),
@@ -989,10 +1049,13 @@ def render_premium_deals_section() -> list[str]:
 
 
 def render_index(
-    all_results: dict[str, list[dict]], last_updated: str, hist_avg: dict[str, float | None]
+    all_results: dict[str, list[dict]],
+    last_updated: str,
+    hist_avg: dict[str, float | None],
+    prior_prices: dict[str, int] | None = None,
 ) -> None:
     all_results = normalized_results(all_results)
-    payload = build_flights_payload(all_results, last_updated, hist_avg)
+    payload = build_flights_payload(all_results, last_updated, hist_avg, prior_prices)
     write_flights_json(payload)
 
     regions_json = json.dumps(payload["regions"])
@@ -1027,7 +1090,8 @@ def render_index(
             "            <p class='hero-text'>Daily curated fares from SLC and PVU across every tracked region. Points values optimized for Chase Sapphire Preferred.</p>",
             f"            <p class='text-sm text-gray-500 mb-6' x-data x-text=\"window.__FLI_META?.lastUpdated ? 'Last updated: ' + window.__FLI_META.lastUpdated : 'Last updated: {html.escape(last_updated)}'\"></p>",
             "            <a href='#premium-deals' class='dt-btn-primary focus-ring mr-3'>Premium deals</a>",
-            "            <a href='#flights' class='dt-btn-primary focus-ring' style='background:transparent;color:var(--accent-interactive);border-color:var(--accent-interactive)'>Economy regions</a>",
+            "            <a href='#flights' class='dt-btn-primary focus-ring mr-3' style='background:transparent;color:var(--accent-interactive);border-color:var(--accent-interactive)'>Economy regions</a>",
+            "            <a href='?weekend=1#flights' class='dt-btn-primary focus-ring' style='background:transparent;color:var(--accent-interactive);border-color:var(--accent-interactive)'>Weekend escapes</a>",
             "        </div>",
             "    </section>",
         ]
@@ -1091,6 +1155,12 @@ def render_index(
             "                    </template>",
             "                </select>",
             "            </div>",
+            "            <div class='flex-1 flex items-end'>",
+            "                <label class='flex items-center gap-2 text-sm font-semibold text-gray-700 cursor-pointer'>",
+            "                    <input type='checkbox' class='rounded border-gray-300' :checked='weekendOnly' @change='weekendOnly = $event.target.checked'>",
+            "                    Weekend escapes only (domestic Wed–Sun)",
+            "                </label>",
+            "            </div>",
             "        </div>",
             "        <div class='card-container bg-white border border-gray-200 overflow-hidden'>",
             "            <div class='divide-y divide-gray-100'>",
@@ -1100,7 +1170,7 @@ def render_index(
             "                            No flights found for <span x-text='region'></span>. Check back after the next daily search (~6 AM).",
             "                        </div>",
             "                        <template x-for='(group, gi) in (regionData[region]?.groups || [])' :key=\"region + '-' + gi\">",
-            "                            <div x-show=\"(airlineFilter === 'All' || airlineFilter === group.airline) && group.price <= maxPrice\" x-cloak>",
+            "                            <div x-show='groupMatches(group)' x-cloak>",
             "                                <div x-data='{ expanded: false }' class='hover:bg-gray-50 transition-colors'>",
             "                                    <button type='button' @click='expanded = !expanded' :aria-expanded='expanded'",
             "                                        class='focus-ring w-full text-left cursor-pointer p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between'>",
@@ -1111,6 +1181,8 @@ def render_index(
             "                                                    x-text=\"group.origin + ' → ' + group.destination\"></span>",
             "                                                <span x-show='group.dropPct > 0' class='deal-badge text-xs font-bold px-2 py-1 rounded-full'",
             "                                                    x-text=\"'↓' + group.dropPct + '% vs avg'\"></span>",
+            "                                                <span x-show='group.priceDelta > 0' class='deal-badge text-xs font-bold px-2 py-1 rounded-full'",
+            "                                                    x-text=\"'↓ $' + group.priceDelta + ' since yesterday'\"></span>",
             "                                            </div>",
             "                                            <div class='text-[15px] text-gray-500'>",
             "                                                <span class='font-semibold text-gray-800'>Dates:</span>",
@@ -1146,6 +1218,7 @@ def render_index(
             "                                                        </div>",
             "                                                    </div>",
             "                                                    <a :href='time.url || \"#\"' target='_blank' rel='noopener noreferrer' class='time-option-cta focus-ring'>Book</a>",
+            "                                                    <a x-show='time.trackUrl' :href='time.trackUrl' target='_blank' rel='noopener noreferrer' class='time-option-cta focus-ring' style='background:transparent;color:var(--accent-interactive);border:1px solid var(--accent-interactive)'>Track</a>",
             "                                                </div>",
             "                                            </template>",
             "                                        </div>",
@@ -1153,7 +1226,7 @@ def render_index(
             "                                </div>",
             "                            </div>",
             "                        </template>",
-            "                        <div class='p-8 text-center text-gray-500' x-show=\"regionData[region]?.groups?.length && !(regionData[region]?.groups || []).some(g => (airlineFilter === 'All' || airlineFilter === g.airline) && g.price <= maxPrice)\" x-cloak>",
+            "                        <div class='p-8 text-center text-gray-500' x-show=\"regionData[region]?.groups?.length && !(regionData[region]?.groups || []).some(g => groupMatches(g))\" x-cloak>",
             "                            No fares match your filters. Widen max price or choose All Airlines.",
             "                        </div>",
             "                        <div class='px-6 py-8' x-show='regionData[region]?.best'>",
@@ -1200,6 +1273,8 @@ def render_index(
             "                tabFilters: {},",
             "                showFilters: false,",
             "                showScrollTop: false,",
+            "                weekendOnly: false,",
+            "                domesticRegions: [],",
             "                get maxPrice() {",
             "                    const f = this.tabFilters[this.activeTab];",
             "                    return f ? f.maxPrice : this.globalMaxPrice;",
@@ -1220,6 +1295,15 @@ def render_index(
             "                setAirlineFilter(val) {",
             "                    this.ensureTabFilters(this.activeTab);",
             "                    this.tabFilters[this.activeTab].airlineFilter = val;",
+            "                },",
+            "                groupMatches(group) {",
+            "                    if ((this.airlineFilter !== 'All' && this.airlineFilter !== group.airline) || group.price > this.maxPrice) {",
+            "                        return false;",
+            "                    }",
+            "                    if (this.weekendOnly && this.domesticRegions.includes(this.activeTab) && !group.weekendEscape) {",
+            "                        return false;",
+            "                    }",
+            "                    return true;",
             "                },",
             "                resolveInitialTab(regions) {",
             "                    const params = new URLSearchParams(window.location.search);",
@@ -1250,8 +1334,11 @@ def render_index(
             "                        this.deals = data.deals || [];",
             "                        this.regionData = data.regionData || {};",
             "                        this.intlTabs = data.intlTabs || [];",
+            "                        this.domesticRegions = data.domesticRegions || [];",
             "                        this.airlines = data.airlines || [];",
             "                        this.globalMaxPrice = data.maxPriceDefault || 1500;",
+            "                        this.weekendOnly = new URLSearchParams(window.location.search).get('weekend') === '1';",
+            "                        if (this.weekendOnly) this.showFilters = true;",
             "                        this.activeTab = this.resolveInitialTab(this.regions);",
             "                        this.ensureTabFilters(this.activeTab);",
             "                        this.updateUrl(this.activeTab);",
@@ -1293,9 +1380,19 @@ def render_heatmap(all_results: dict[str, list[dict]]) -> None:
     regions = list(REGIONS.keys())
     first_region = regions[0]
     data_json = json.dumps(heatmap_data)
+    thresholds_json = json.dumps(HEATMAP_THRESHOLDS)
+    region_types_json = json.dumps({name: cfg.get("type", "domestic") for name, cfg in REGIONS.items()})
     heatmap_alpine = (
         f"{{ activeRegion: {json.dumps(first_region)}, "
-        f"get heatmapData() {{ return window.HEATMAP_DATA }} }}"
+        f"get heatmapData() {{ return window.HEATMAP_DATA }}, "
+        f"get thresholds() {{ return window.HEATMAP_THRESHOLDS }}, "
+        f"get regionTypes() {{ return window.HEATMAP_REGION_TYPES }}, "
+        f"heatmapClass(price, region) {{ "
+        f"const t = this.thresholds[this.regionTypes[region] || 'domestic'] || this.thresholds.domestic; "
+        f"if (price < t.low) return 'heatmap-low'; "
+        f"if (price <= t.mid) return 'heatmap-mid'; "
+        f"return 'heatmap-high'; "
+        f"}} }}"
     )
 
     lines = get_base_html_head(
@@ -1305,6 +1402,8 @@ def render_heatmap(all_results: dict[str, list[dict]]) -> None:
     lines.extend(
         [
             f"    <script>window.HEATMAP_DATA = {data_json};</script>",
+            f"    <script>window.HEATMAP_THRESHOLDS = {thresholds_json};</script>",
+            f"    <script>window.HEATMAP_REGION_TYPES = {region_types_json};</script>",
             get_skip_link("#main-content", "Skip to heatmap"),
             *render_nav("heatmap", [("index.html", "&larr; Back to Flights", True)]),
             f"    <section id='main-content' class='py-12 px-6 max-w-5xl mx-auto scroll-mt-24' x-data='{heatmap_alpine}'>",
@@ -1333,11 +1432,11 @@ def render_heatmap(all_results: dict[str, list[dict]]) -> None:
             "                <p class='text-gray-500 text-center py-12' x-show='Object.keys(heatmapData[region] || {}).length === 0'>No data for this region yet.</p>",
             "                <div class='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3' x-show='Object.keys(heatmapData[region] || {}).length > 0'>",
             "                    <template x-for='[date, flight] in Object.entries(heatmapData[region] || {}).sort((a,b) => a[0].localeCompare(b[0]))' :key='date'>",
-            "                        <a x-show='flight.url' :href='flight.url' target='_blank' rel='noopener noreferrer' class='heatmap-cell focus-ring' :class=\"flight.price < 320 ? 'heatmap-low' : flight.price <= 500 ? 'heatmap-mid' : 'heatmap-high'\">",
+            "                        <a x-show='flight.url' :href='flight.url' target='_blank' rel='noopener noreferrer' class='heatmap-cell focus-ring' :class=\"heatmapClass(flight.price, region)\">",
             '                            <div class=\'text-xs opacity-90\' x-text=\'new Date(date + "T12:00:00").toLocaleDateString(undefined, {weekday:"short", month:"short", day:"numeric"})\'></div>',
             "                            <div class='text-lg font-bold' x-text=\"'$' + flight.price\"></div>",
             "                        </a>",
-            "                        <div x-show='!flight.url' class='heatmap-cell' :class=\"flight.price < 320 ? 'heatmap-low' : flight.price <= 500 ? 'heatmap-mid' : 'heatmap-high'\">",
+            "                        <div x-show='!flight.url' class='heatmap-cell' :class=\"heatmapClass(flight.price, region)\">",
             '                            <div class=\'text-xs opacity-90\' x-text=\'new Date(date + "T12:00:00").toLocaleDateString(undefined, {weekday:"short", month:"short", day:"numeric"})\'></div>',
             "                            <div class='text-lg font-bold' x-text=\"'$' + flight.price\"></div>",
             "                        </div>",
@@ -1478,10 +1577,12 @@ def main() -> None:
         return
 
     hist_avg = update_history(all_results)
-    render_index(all_results, last_updated, hist_avg)
+    prior_prices = load_prior_prices()
+    render_index(all_results, last_updated, hist_avg, prior_prices)
     render_premium_deals_report(last_updated)
     render_heatmap(all_results)
     render_history(all_results)
+    save_prior_prices(all_results)
 
     manifest_path = "public/manifest.json"
     if os.path.exists(manifest_path):

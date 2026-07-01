@@ -1,6 +1,7 @@
 """Shared configuration for the Fli-Tracker daily search pipeline."""
 
 import os
+from datetime import datetime
 
 ORIGINS = ["SLC", "PVU"]
 
@@ -65,7 +66,24 @@ REGIONS = {
 
 OUTPUT_JSON = "best_direct.json"
 SITE_URL = "https://flights.larrycorsini.com"
+PLANNER_URL = os.environ.get("FLI_PLANNER_URL", "http://localhost:8000")
 FLIGHTS_JSON = "public/data/flights.json"
+PRIOR_PRICES_JSON = "public/data/prior_prices.json"
+
+# Region-aware heatmap color tiers (USD round-trip).
+HEATMAP_THRESHOLDS = {
+    "domestic": {"low": 320, "mid": 500},
+    "international": {"low": 700, "mid": 1100},
+}
+
+# Months (1–12) when a region is actively searched; omitted regions run year-round.
+REGION_ACTIVE_MONTHS: dict[str, list[int]] = {
+    "Cancun": [10, 11, 12, 1, 2, 3, 4],
+    "Europe": [3, 4, 5, 6, 9, 10],
+    "Greece": [4, 5, 6, 9, 10],
+    "Japan": [3, 4, 5, 10, 11],
+    "South Korea": [3, 4, 5, 9, 10, 11],
+}
 
 # Display caps — keep HTML/JSON payloads small for faster page loads.
 MAX_FARE_GROUPS_PER_REGION = 15
@@ -81,6 +99,39 @@ INTERNATIONAL_TRIP_DURATIONS = [7, 10]
 INTERNATIONAL_REGIONS = [
     name for name, cfg in REGIONS.items() if cfg.get("type") == "international"
 ]
+
+
+def region_active(region_name: str, when: datetime | None = None) -> bool:
+    """Return whether a region should be searched on the given date."""
+    from datetime import datetime as dt
+
+    when = when or dt.now()
+    months = REGION_ACTIVE_MONTHS.get(region_name)
+    if not months:
+        return True
+    return when.month in months
+
+
+def heatmap_tier(price: float, region_name: str) -> str:
+    """Return heatmap CSS class suffix: low, mid, or high."""
+    region_type = REGIONS.get(region_name, {}).get("type", "domestic")
+    thresholds = HEATMAP_THRESHOLDS.get(region_type, HEATMAP_THRESHOLDS["domestic"])
+    if price < thresholds["low"]:
+        return "low"
+    if price <= thresholds["mid"]:
+        return "mid"
+    return "high"
+
+
+def planner_track_url(origin: str, destination: str, depart: str, ret: str | None = None) -> str:
+    """Deep link into Travel Planner Pro to pre-fill price tracking."""
+    from urllib.parse import quote
+
+    parts = [origin, destination, depart]
+    if ret:
+        parts.append(ret)
+    query = quote(",".join(parts))
+    return f"{PLANNER_URL.rstrip('/')}/?track={query}"
 
 # Premium-cabin deal discovery (find_deals.py) — separate from economy region monitor.
 PREMIUM_DEAL_ORIGINS = ["SLC", "PVU"]

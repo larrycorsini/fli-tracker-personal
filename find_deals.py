@@ -163,6 +163,29 @@ def payment_type_for_deal(
     return "cash"
 
 
+def compute_value_score(
+    price: float | None,
+    points: int | None,
+    *,
+    points_from_award: bool,
+) -> str:
+    """Recommend cash vs award when both are known."""
+    if price is None and points and points_from_award:
+        return "award"
+    if points is None and price is not None:
+        return "cash"
+    if price is None or points is None:
+        return "either"
+    if not points_from_award:
+        return "cash"
+    points_value = points * CHASE_POINTS_CENT_VALUE / 100.0
+    if points_value < price * 0.9:
+        return "award_better"
+    if price < points_value * 0.9:
+        return "cash_better"
+    return "either"
+
+
 def durations_for_run(*, is_test: bool) -> list[int]:
     """Rotate trip durations daily so the full set is covered over multiple runs."""
     all_durations = list(PREMIUM_TRIP_DURATIONS)
@@ -629,6 +652,11 @@ def _deal_from_flight(
         "points": points,
         "points_source": points_source,
         "paymentType": payment_type_for_deal(
+            float(price) if price is not None else None,
+            points,
+            points_from_award=points_from_award,
+        ),
+        "value_score": compute_value_score(
             float(price) if price is not None else None,
             points,
             points_from_award=points_from_award,
