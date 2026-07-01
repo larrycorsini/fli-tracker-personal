@@ -5,8 +5,18 @@ from __future__ import annotations
 import json
 import os
 from datetime import datetime
-from urllib.parse import quote
 
+from alert_format import (
+    _morning_digest_cards,
+    _premium_digest_cards,
+    combine_alert_content,
+    format_morning_digest_plain,
+    format_premium_digest_plain,
+    morning_digest_subject,
+    premium_digest_subject,
+    premium_deals_deep_link,
+    region_deep_link,
+)
 from alert_notifiers import dispatch_alert
 from tracker_config import (
     OUTPUT_JSON,
@@ -14,7 +24,6 @@ from tracker_config import (
     PREMIUM_DEAL_MAX_PRICE,
     PREMIUM_DEAL_OUTPUT_JSON,
     REGIONS,
-    SITE_URL,
 )
 from tracker_io import atomic_write_json
 
@@ -36,26 +45,14 @@ def _priced_flights(flights: list[dict]) -> list[dict]:
     return [f for f in flights if f.get("price") is not None]
 
 
-def region_deep_link(region_name: str) -> str:
-    """Deep link to the dashboard with the destination tab selected."""
-    return f"{SITE_URL}/?tab={quote(region_name)}"
+def format_morning_digest(deals: list[dict]) -> str:
+    """Plain-text morning digest (iMessage)."""
+    return format_morning_digest_plain(deals)
 
 
-def premium_deals_deep_link() -> str:
-    return f"{SITE_URL}/#premium-deals"
-
-
-def _format_weekday_date(dt_str: str) -> str:
-    if not dt_str:
-        return "—"
-    try:
-        if "T" in dt_str:
-            dt = datetime.fromisoformat(dt_str)
-        else:
-            dt = datetime.strptime(dt_str, "%Y-%m-%d")
-        return dt.strftime("%a, %b %d")
-    except (ValueError, TypeError):
-        return dt_str
+def format_premium_digest(deals: list[dict]) -> str:
+    """Plain-text premium digest (iMessage)."""
+    return format_premium_digest_plain(deals)
 
 
 def collect_deals_under_threshold(all_results: dict) -> list[dict]:
@@ -141,57 +138,6 @@ def collect_premium_deals() -> list[dict]:
     return qualifying[:10]
 
 
-def format_morning_digest(deals: list[dict]) -> str:
-    """Build a single morning summary listing all economy regions under threshold."""
-    if not deals:
-        return ""
-
-    lines = ["\U0001f6eb FLI-TRACKER Morning Deals", ""]
-    for deal in deals:
-        region = deal["region"]
-        price = int(deal["price"])
-        origin = deal["origin"]
-        dest = deal["destination"]
-        out_fmt = _format_weekday_date(deal["out_date"])
-        ret_fmt = _format_weekday_date(deal["ret_date"])
-        airline = deal.get("airline") or "—"
-        book = deal.get("url") or region_deep_link(region)
-        lines.append(
-            f"• {region}: ${price} ({origin}\u2192{dest}, {out_fmt}\u2013{ret_fmt}, {airline})"
-        )
-        lines.append(f"  Book: {book}")
-
-    default_tab = deals[0]["region"]
-    lines.append("")
-    lines.append(f"View all: {region_deep_link(default_tab)}")
-    return "\n".join(lines)
-
-
-def format_premium_digest(deals: list[dict]) -> str:
-    if not deals:
-        return ""
-
-    lines = ["\u2728 FLI-TRACKER Premium Deals", ""]
-    for deal in deals:
-        dest = deal.get("destination") or deal.get("airport", "")
-        cabin = deal.get("cabin_class", "BUSINESS").replace("_", " ").title()
-        origin = deal.get("origin", "SLC")
-        out_fmt = _format_weekday_date(deal.get("out_date", ""))
-        ret_fmt = _format_weekday_date(deal.get("ret_date", ""))
-        price_part = f"${int(deal['price'])}" if deal.get("price") is not None else ""
-        points_part = (
-            f"{int(deal['points']):,} pts" if deal.get("points") is not None else ""
-        )
-        fare = " / ".join(part for part in (price_part, points_part) if part) or "—"
-        book = deal.get("url") or premium_deals_deep_link()
-        lines.append(f"• {dest} ({cabin}): {fare} ({origin}, {out_fmt}\u2013{ret_fmt})")
-        lines.append(f"  Book: {book}")
-
-    lines.append("")
-    lines.append(f"View all: {premium_deals_deep_link()}")
-    return "\n".join(lines)
-
-
 def digest_already_sent(
     last_alerts: dict, today_str: str, deals: list[dict], key: str = "_digest"
 ) -> bool:
@@ -216,7 +162,7 @@ def main() -> None:
 
     today_str = datetime.now().strftime("%Y-%m-%d")
     last_alerts = load_last_alerts()
-    messages: list[str] = []
+    sections: list[tuple[str, str, str, str]] = []
 
     if os.path.exists(OUTPUT_JSON):
         with open(OUTPUT_JSON, encoding="utf-8") as handle:
@@ -226,7 +172,14 @@ def main() -> None:
         economy_deals = collect_deals_under_threshold(all_results)
         if economy_deals:
             if not digest_already_sent(last_alerts, today_str, economy_deals, "_digest"):
-                messages.append(format_morning_digest(economy_deals))
+                sections.append(
+                    (
+                        morning_digest_subject(economy_deals),
+                        "Morning Deals",
+                        format_morning_digest_plain(economy_deals),
+                        _morning_digest_cards(economy_deals),
+                    )
+                )
                 last_alerts["_digest"] = {
                     "date": today_str,
                     "deals": sorted((d["region"], d["price"]) for d in economy_deals),
@@ -248,7 +201,14 @@ def main() -> None:
     if premium_deals and not digest_already_sent(
         last_alerts, today_str, premium_deals, "_premium_digest"
     ):
-        messages.append(format_premium_digest(premium_deals))
+        sections.append(
+            (
+                premium_digest_subject(premium_deals),
+                "Premium Deals",
+                format_premium_digest_plain(premium_deals),
+                _premium_digest_cards(premium_deals),
+            )
+        )
         last_alerts["_premium_digest"] = {
             "date": today_str,
             "deals": sorted(
@@ -256,14 +216,14 @@ def main() -> None:
             ),
         }
 
-    if not messages:
+    if not sections:
         print("No alerts sent.")
         return
 
-    combined = "\n\n".join(messages)
-    print(f"Sending alert ({len(messages)} section(s))...")
+    subject, plain, html = combine_alert_content(sections)
+    print(f"Sending alert ({len(sections)} section(s))...")
     try:
-        channels = dispatch_alert(combined)
+        channels = dispatch_alert(plain, html=html or None, subject=subject)
         save_last_alerts(last_alerts)
         print(f"Alert sent via: {', '.join(channels) or 'configured channels'}")
     except Exception as exc:

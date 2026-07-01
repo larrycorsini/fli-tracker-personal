@@ -12,7 +12,7 @@ from typing import Protocol
 class AlertNotifier(Protocol):
     """Send a plain-text alert message."""
 
-    def send(self, message: str) -> None: ...
+    def send(self, message: str, *, html: str | None = None, subject: str | None = None) -> None: ...
 
 
 class IMessageNotifier:
@@ -21,7 +21,8 @@ class IMessageNotifier:
     def __init__(self, phone_number: str) -> None:
         self.phone_number = phone_number
 
-    def send(self, message: str) -> None:
+    def send(self, message: str, *, html: str | None = None, subject: str | None = None) -> None:
+        _ = html, subject
         script = """
         on run argv
             set msg to item 1 of argv
@@ -59,12 +60,14 @@ class EmailNotifier:
         self.smtp_password = smtp_password or os.environ.get("FLI_SMTP_PASSWORD", "")
         self.from_address = from_address or os.environ.get("FLI_ALERT_FROM", self.smtp_user or to_address)
 
-    def send(self, message: str) -> None:
+    def send(self, message: str, *, html: str | None = None, subject: str | None = None) -> None:
         msg = EmailMessage()
-        msg["Subject"] = "Fli-Tracker deal alert"
+        msg["Subject"] = subject or "Fli-Tracker deal alert"
         msg["From"] = self.from_address
         msg["To"] = self.to_address
         msg.set_content(message)
+        if html:
+            msg.add_alternative(html, subtype="html")
         with smtplib.SMTP(self.smtp_host, self.smtp_port, timeout=30) as server:
             server.starttls()
             if self.smtp_user and self.smtp_password:
@@ -84,14 +87,19 @@ def build_notifiers() -> list[AlertNotifier]:
     return notifiers
 
 
-def dispatch_alert(message: str) -> list[str]:
+def dispatch_alert(
+    message: str,
+    *,
+    html: str | None = None,
+    subject: str | None = None,
+) -> list[str]:
     """Send message through all configured notifiers; return channels used."""
     notifiers = build_notifiers()
     if not notifiers:
         return []
     channels: list[str] = []
     for notifier in notifiers:
-        notifier.send(message)
+        notifier.send(message, html=html, subject=subject)
         if isinstance(notifier, IMessageNotifier):
             channels.append("imessage")
         elif isinstance(notifier, EmailNotifier):

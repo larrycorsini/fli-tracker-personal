@@ -79,10 +79,11 @@ class TestMorningDigest:
         ]
         msg = alert.format_morning_digest(deals)
         assert "Morning Deals" in msg
-        assert "DFW: $280" in msg
-        assert "Wed, Jul 01" in msg
+        assert "DFW · $280" in msg
+        assert "Jul 1–4" in msg
         assert "https://google.com/flights/book" in msg
         assert "flights.larrycorsini.com/?tab=DFW" in msg
+        assert "Book:" not in msg
 
     def test_empty_deals_returns_empty_string(self):
         assert alert.format_morning_digest([]) == ""

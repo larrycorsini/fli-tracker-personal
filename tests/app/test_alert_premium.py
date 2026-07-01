@@ -38,5 +38,5 @@ class TestPremiumDigest:
         ]
         msg = alert.format_premium_digest(deals)
         assert "Premium Deals" in msg
-        assert "London" in msg
+        assert "London · Business · $3,200" in msg
         assert "https://example.com/book" in msg
