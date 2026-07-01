@@ -213,7 +213,8 @@
              x-data='premiumDeals()' x-init='init()'>
         <div class='mb-8 text-center'>
             <h2 class='text-3xl font-bold text-gray-800 mb-2'>Premium deals from SLC</h2>
-            <p class='text-gray-500'>Business &amp; premium economy · flexible trip lengths · day+7 to day+90 · cash &amp; points</p>
+            <p class='text-gray-500'>Round-trip business &amp; premium economy · cash fares open a Book link on Google Flights</p>
+            <p class='text-sm text-gray-500'>Points are award estimates (seats.aero / Chase portal) — use Search on Google Flights to shop cash alternatives</p>
             <p class='text-sm text-gray-500 mt-2' x-show='lastUpdated' x-text="'Updated: ' + lastUpdated"></p>
         </div>
         <div x-show='!loading && !error && allDeals.length > 0' x-cloak
@@ -225,6 +226,12 @@
             </div>
             <div class='flex flex-col gap-5'>
                 <div class='flex flex-wrap items-center gap-x-6 gap-y-3'>
+                    <label class='inline-flex items-center gap-2 min-h-[44px] cursor-pointer select-none'>
+                        <input type='checkbox' class='w-5 h-5 rounded border-gray-300'
+                               style='accent-color: var(--accent-interactive)'
+                               x-model='cashOnly' aria-label='Show cash round-trip deals only'>
+                        <span class='text-sm font-medium text-gray-700'>Cash deals only</span>
+                    </label>
                     <label class='inline-flex items-center gap-2 min-h-[44px] cursor-pointer select-none'>
                         <input type='checkbox' class='w-5 h-5 rounded border-gray-300'
                                style='accent-color: var(--accent-interactive)'
@@ -306,17 +313,17 @@
                     </div>
                     <div class='flex items-center gap-4 shrink-0'>
                         <div class='text-right'>
-                            <div class='price-text' x-show='deal.price !== null && deal.price !== undefined'>
+                            <div class='price-text' x-show='deal.hasCashPrice && deal.price !== null && deal.price !== undefined'>
+                                <span class='text-xs font-semibold text-gray-500 uppercase tracking-wide mr-1'>RT</span>
                                 <span class='mr-1'>$</span><span x-text='deal.price'></span>
                             </div>
                             <div class='price-points' x-show='deal.points'
-                                 x-text="deal.points.toLocaleString() + ' pts'"></div>
+                                 x-text="deal.points.toLocaleString() + ' pts est.'"></div>
                         </div>
-                        <a x-show='deal.booking_url' :href='deal.booking_url' target='_blank' rel='noopener noreferrer'
-                           class='btn-accent focus-ring text-sm' :aria-label="'Book ' + deal.destination + ' on Google Flights'">Book</a>
-                        <span x-show='!deal.booking_url' x-cloak
-                              class='btn-accent text-sm opacity-40 cursor-not-allowed select-none'
-                              aria-disabled='true' title='Booking link unavailable'>Book</span>
+                        <a x-show='deal.hasCashPrice && deal.booking_url' :href='deal.booking_url' target='_blank' rel='noopener noreferrer'
+                           class='btn-accent focus-ring text-sm' :aria-label="'Book round trip to ' + deal.destination + ' on Google Flights'">Book</a>
+                        <a x-show='!deal.hasCashPrice && deal.google_flights_url' :href='deal.google_flights_url' target='_blank' rel='noopener noreferrer'
+                           class='btn-accent focus-ring text-sm' :aria-label="'Search round trip to ' + deal.destination + ' on Google Flights'">Search on Google Flights</a>
                     </div>
                 </article>
             </template>
@@ -330,9 +337,10 @@
                 allDeals: [],
                 lastUpdated: null,
                 domesticOnly: false,
+                cashOnly: true,
                 maxOneStop: false,
                 maxPrice: null,
-                paymentFilter: 'any',
+                paymentFilter: 'cash',
                 paymentOptions: [
                     { label: 'Any', value: 'any' },
                     { label: 'Cash', value: 'cash' },
@@ -347,6 +355,7 @@
                 ],
                 get filteredDeals() {
                     return this.allDeals.filter((deal) => {
+                        if (this.cashOnly && !deal.hasCashPrice) return false;
                         if (this.domesticOnly && !deal.isDomestic) return false;
                         if (this.maxOneStop && deal.stops !== null && deal.stops !== undefined && deal.stops > 1) {
                             return false;
@@ -360,16 +369,17 @@
                     });
                 },
                 get filtersActive() {
-                    return this.domesticOnly || this.maxOneStop || this.maxPrice !== null || this.paymentFilter !== 'any';
+                    return this.cashOnly || this.domesticOnly || this.maxOneStop || this.maxPrice !== null || this.paymentFilter !== 'cash';
                 },
                 setMaxPrice(value) {
                     this.maxPrice = value;
                 },
                 clearFilters() {
+                    this.cashOnly = true;
                     this.domesticOnly = false;
                     this.maxOneStop = false;
                     this.maxPrice = null;
-                    this.paymentFilter = 'any';
+                    this.paymentFilter = 'cash';
                 },
                 async init() {
                     try {

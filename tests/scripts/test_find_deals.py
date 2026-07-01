@@ -99,6 +99,41 @@ class TestRankDeals:
         lhr = [d for d in ranked if d["airport"] == "LHR"]
         assert len(lhr) == 2
 
+    def test_cash_with_booking_url_ranks_before_points(self):
+        deep = "https://www.google.com/travel/flights/booking?tfs=ABC"
+        deals = [
+            {
+                "airport": "PHX",
+                "cabin": "Business",
+                "price": None,
+                "points": 18000,
+                "google_flights_url": "https://www.google.com/travel/flights?q=PHX",
+            },
+            {"airport": "SAN", "cabin": "Business", "price": 359, "booking_url": deep},
+        ]
+        ranked = find_deals.rank_deals(deals)
+        assert ranked[0]["airport"] == "SAN"
+        assert ranked[0]["booking_url"] == deep
+
+
+class TestDealSortHelpers:
+    def test_is_valid_deep_booking_url(self):
+        assert find_deals.is_valid_deep_booking_url(
+            "https://www.google.com/travel/flights/booking?tfs=ABC"
+        )
+        assert not find_deals.is_valid_deep_booking_url(
+            "https://www.google.com/travel/flights?q=SLC"
+        )
+        assert not find_deals.is_valid_deep_booking_url("")
+
+    def test_deal_rank_tier_prefers_bookable_cash(self):
+        deep = "https://www.google.com/travel/flights/booking?tfs=ABC"
+        cash_bookable = {"price": 400, "booking_url": deep}
+        cash_no_link = {"price": 300, "booking_url": ""}
+        points_only = {"points": 50000, "google_flights_url": "https://example.com/gf"}
+        assert find_deals.deal_rank_tier(cash_bookable) < find_deals.deal_rank_tier(points_only)
+        assert find_deals.deal_rank_tier(cash_bookable) < find_deals.deal_rank_tier(cash_no_link)
+
 
 class TestMergeRotatedResults:
     def test_replaces_searched_destinations_only(self):
@@ -217,6 +252,9 @@ class TestAwardOnlyDeals:
         assert deals[0]["points_source"] == "seats_aero"
         assert deals[0]["mileage_program"] == "united"
         assert deals[0]["paymentType"] == "points"
-        assert deals[0]["booking_url"].startswith("https://www.google.com/travel/flights")
-        assert "SLC" in deals[0]["booking_url"]
-        assert "LHR" in deals[0]["booking_url"]
+        assert deals[0]["hasCashPrice"] is False
+        assert deals[0]["isRoundTrip"] is True
+        assert deals[0]["booking_url"] == ""
+        assert deals[0]["google_flights_url"].startswith("https://www.google.com/travel/flights")
+        assert "SLC" in deals[0]["google_flights_url"]
+        assert "LHR" in deals[0]["google_flights_url"]

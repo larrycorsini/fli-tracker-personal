@@ -79,6 +79,8 @@ _stats = {
 _stats_lock = Lock()
 MAX_RETRIES = 3
 RETRY_BACKOFF_SEC = 2.0
+
+
 def _get_flight_searcher() -> SearchFlights:
     global _flight_searcher
     with _searcher_lock:
@@ -103,9 +105,7 @@ def price_threshold(dest_type: str, cabin: str) -> float:
 
 def points_threshold(dest_type: str, cabin: str) -> int:
     """Return max round-trip award points for a destination type and cabin."""
-    thresholds = PREMIUM_DEAL_MAX_POINTS.get(
-        dest_type, PREMIUM_DEAL_MAX_POINTS["international"]
-    )
+    thresholds = PREMIUM_DEAL_MAX_POINTS.get(dest_type, PREMIUM_DEAL_MAX_POINTS["international"])
     return int(thresholds.get(cabin, thresholds.get("BUSINESS", 200_000)))
 
 
@@ -166,9 +166,7 @@ def payment_type_for_deal(
 def durations_for_run(*, is_test: bool) -> list[int]:
     """Rotate trip durations daily so the full set is covered over multiple runs."""
     all_durations = list(PREMIUM_TRIP_DURATIONS)
-    per_run = (
-        PREMIUM_TRIP_DURATIONS_PER_RUN_TEST if is_test else PREMIUM_TRIP_DURATIONS_PER_RUN
-    )
+    per_run = PREMIUM_TRIP_DURATIONS_PER_RUN_TEST if is_test else PREMIUM_TRIP_DURATIONS_PER_RUN
     if len(all_durations) <= per_run:
         return all_durations
 
@@ -242,6 +240,33 @@ def merge_rotated_results(
     return rank_deals(merged)
 
 
+def is_valid_deep_booking_url(url: str | None) -> bool:
+    """Return whether URL is a Google Flights itinerary deep link (tfs= booking page)."""
+    if not url:
+        return False
+    cleaned = str(url).strip()
+    return cleaned.startswith("https://") and "tfs=" in cleaned
+
+
+def deal_has_cash_price(deal: dict) -> bool:
+    """Return True when the deal includes a round-trip cash fare."""
+    return deal.get("price") is not None
+
+
+def deal_rank_tier(deal: dict) -> int:
+    """Lower tier sorts first: cash+book link, cash only, points+search, other."""
+    has_cash = deal_has_cash_price(deal)
+    deep_url = deal.get("booking_url") or ""
+    search_url = deal.get("google_flights_url") or ""
+    if has_cash and is_valid_deep_booking_url(deep_url):
+        return 0
+    if has_cash:
+        return 1
+    if deal.get("points") is not None and (search_url or deep_url):
+        return 2
+    return 3
+
+
 def _deal_sort_value(deal: dict) -> float:
     """Lower is better; cash price preferred, else points converted to cash equiv."""
     price = deal.get("price")
@@ -253,10 +278,15 @@ def _deal_sort_value(deal: dict) -> float:
     return float("inf")
 
 
+def deal_sort_key(deal: dict) -> tuple[int, float]:
+    """Sort key: bookable cash first, then by best value within tier."""
+    return (deal_rank_tier(deal), _deal_sort_value(deal))
+
+
 def rank_deals(deals: list[dict]) -> list[dict]:
-    """Sort by best value; cap per destination and global top N."""
+    """Sort by bookable cash first, then best value; cap per destination and global top N."""
     priced = [d for d in deals if d.get("price") is not None or d.get("points") is not None]
-    priced.sort(key=_deal_sort_value)
+    priced.sort(key=deal_sort_key)
 
     per_dest: dict[tuple[str, str], int] = {}
     capped: list[dict] = []
@@ -469,13 +499,18 @@ def _award_only_deals_from_cache(
                     "points_source": "seats_aero",
                     "mileage_program": row.mileage_program,
                     "paymentType": "points",
+                    "hasCashPrice": False,
+                    "isRoundTrip": True,
                     "trip_duration": duration,
                     "out_date": out_date,
                     "ret_date": ret_date,
                     "airline": airline,
                     "duration": None,
                     "stops": None,
-                    "booking_url": google_flights_url(origin, dest_airport, out_date, ret_date),
+                    "booking_url": "",
+                    "google_flights_url": google_flights_url(
+                        origin, dest_airport, out_date, ret_date
+                    ),
                     "out_dep": None,
                     "ret_arr": None,
                 }
@@ -580,9 +615,8 @@ def _deal_from_flight(
 
     cabin_label = cabin.replace("_", " ").title()
     deal_price = int(float(price)) if price is not None else None
-    points_source = (
-        "seats_aero" if points_from_award else ("chase_estimate" if points else None)
-    )
+    points_source = "seats_aero" if points_from_award else ("chase_estimate" if points else None)
+    deep_booking_url = flight.get("booking_url") or flight.get("url") or ""
     deal: dict = {
         "origin": origin,
         "destination": dest_info["label"],
@@ -599,13 +633,20 @@ def _deal_from_flight(
             points,
             points_from_award=points_from_award,
         ),
+        "hasCashPrice": deal_price is not None,
+        "isRoundTrip": True,
         "trip_duration": trip_duration,
         "out_date": out_date,
         "ret_date": ret_date,
         "airline": airline_name,
         "duration": flight.get("duration"),
         "stops": flight.get("stops"),
-        "booking_url": flight.get("booking_url") or flight.get("url") or "",
+        "booking_url": deep_booking_url,
+        "google_flights_url": (
+            ""
+            if is_valid_deep_booking_url(deep_booking_url)
+            else google_flights_url(origin, dest_info["airport"], out_date, ret_date)
+        ),
         "out_dep": out_dep,
         "ret_arr": ret_arr,
     }
@@ -706,9 +747,7 @@ def _search_pair(
 def estimate_api_calls(dest_count: int, *, is_test: bool) -> int:
     """Rough API call budget for a run."""
     cabins = len(PREMIUM_CABIN_CLASSES)
-    durations = (
-        PREMIUM_TRIP_DURATIONS_PER_RUN_TEST if is_test else PREMIUM_TRIP_DURATIONS_PER_RUN
-    )
+    durations = PREMIUM_TRIP_DURATIONS_PER_RUN_TEST if is_test else PREMIUM_TRIP_DURATIONS_PER_RUN
     shortlist = PREMIUM_SHORTLIST_SIZE_TEST if is_test else PREMIUM_SHORTLIST_SIZE
     origins = len(PREMIUM_DEAL_ORIGINS)
     phase1 = dest_count * cabins * durations

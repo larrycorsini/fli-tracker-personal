@@ -121,7 +121,7 @@ class TestBuildPremiumDealsPayload:
                     "airline": "Delta",
                     "stops": 0,
                     "is_domestic": True,
-                    "booking_url": "https://example.com/dfw",
+                    "booking_url": "https://www.google.com/travel/flights/booking?tfs=DFW",
                 },
                 {
                     "destination": "London",
@@ -135,13 +135,18 @@ class TestBuildPremiumDealsPayload:
                     "airline": "British Airways",
                     "stops": 1,
                     "type": "international",
-                    "booking_url": "https://example.com/lhr",
+                    "booking_url": "https://www.google.com/travel/flights/booking?tfs=LHR",
                 },
             ],
         }
         payload = report.build_premium_deals_payload(raw, "Fri, Jun 26, 2026 at 09:00 AM")
         assert payload["deals"][0]["isDomestic"] is True
         assert payload["deals"][0]["stops"] == 0
+        assert payload["deals"][0]["hasCashPrice"] is True
+        assert payload["deals"][0]["isRoundTrip"] is True
+        assert payload["deals"][0]["booking_url"].startswith(
+            "https://www.google.com/travel/flights/booking?tfs="
+        )
         assert payload["deals"][0]["outDateFmt"] == "Thu, Aug 06"
         assert payload["deals"][1]["isDomestic"] is False
         assert payload["deals"][1]["stops"] == 1
@@ -182,7 +187,7 @@ class TestBuildPremiumDealsPayload:
         payload = report.build_premium_deals_payload(raw, "now")
         assert payload["deals"][0]["isDomestic"] is True
 
-    def test_builds_booking_url_when_missing(self):
+    def test_builds_google_flights_url_for_points_only(self):
         raw = {
             "deals": [
                 {
@@ -193,17 +198,66 @@ class TestBuildPremiumDealsPayload:
                     "ret_date": "2026-08-17",
                     "price": None,
                     "points": 30000,
+                    "hasCashPrice": False,
+                    "isRoundTrip": True,
+                    "google_flights_url": "",
                 }
             ]
         }
         payload = report.build_premium_deals_payload(raw, "now")
-        url = payload["deals"][0]["booking_url"]
-        assert url.startswith("https://www.google.com/travel/flights")
-        assert "SLC" in url
-        assert "ORD" in url
+        deal = payload["deals"][0]
+        assert deal["hasCashPrice"] is False
+        assert deal["isRoundTrip"] is True
+        assert deal["booking_url"] == ""
+        assert deal["google_flights_url"].startswith("https://www.google.com/travel/flights")
+        assert "SLC" in deal["google_flights_url"]
+        assert "ORD" in deal["google_flights_url"]
+
+    def test_cash_deep_link_only_in_booking_url(self):
+        deep = "https://www.google.com/travel/flights/booking?tfs=ABC"
+        raw = {
+            "deals": [
+                {
+                    "destination": "San Diego",
+                    "airport": "SAN",
+                    "origin": "SLC",
+                    "out_date": "2026-07-29",
+                    "ret_date": "2026-08-05",
+                    "price": 359,
+                    "hasCashPrice": True,
+                    "booking_url": deep,
+                }
+            ]
+        }
+        payload = report.build_premium_deals_payload(raw, "now")
+        deal = payload["deals"][0]
+        assert deal["booking_url"] == deep
+        assert deal["google_flights_url"] == ""
+
+    def test_cash_deals_rank_before_points_in_payload(self):
+        deep = "https://www.google.com/travel/flights/booking?tfs=ABC"
+        raw = {
+            "deals": [
+                {
+                    "airport": "PHX",
+                    "price": None,
+                    "points": 18000,
+                    "google_flights_url": "https://www.google.com/travel/flights?q=PHX",
+                },
+                {
+                    "airport": "SAN",
+                    "price": 359,
+                    "booking_url": deep,
+                    "hasCashPrice": True,
+                },
+            ]
+        }
+        payload = report.build_premium_deals_payload(raw, "now")
+        assert payload["deals"][0]["airport"] == "SAN"
 
     def test_premium_section_never_uses_hash_fallback(self):
         section = "\n".join(report.render_premium_deals_section())
         assert 'deal.booking_url || "#"' not in section
-        assert "x-show='deal.booking_url'" in section
-        assert "x-show='!deal.booking_url'" in section
+        assert "deal.hasCashPrice && deal.booking_url" in section
+        assert "Search on Google Flights" in section
+        assert "Cash deals only" in section

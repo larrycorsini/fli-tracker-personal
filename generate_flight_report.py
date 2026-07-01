@@ -24,12 +24,48 @@ from tracker_config import (
     REGIONS,
     SITE_URL,
 )
+from tracker_io import atomic_write_json, atomic_write_text
 
 _DOMESTIC_AIRPORTS = {
     dest["airport"] for dest in PREMIUM_DEAL_DESTINATIONS if dest.get("type") == "domestic"
 }
 
-from tracker_io import atomic_write_json, atomic_write_text
+
+def is_valid_deep_booking_url(url: str | None) -> bool:
+    """Return whether URL is a Google Flights itinerary deep link (tfs= booking page)."""
+    if not url:
+        return False
+    cleaned = str(url).strip()
+    return cleaned.startswith("https://") and "tfs=" in cleaned
+
+
+def _premium_deal_sort_value(deal: dict) -> float:
+    price = deal.get("price")
+    if price is not None:
+        return float(price)
+    points = deal.get("points")
+    if points is not None:
+        return float(points) * 0.0125
+    return float("inf")
+
+
+def _premium_deal_rank_tier(deal: dict) -> int:
+    has_cash = deal.get("hasCashPrice") if "hasCashPrice" in deal else deal.get("price") is not None
+    deep_url = deal.get("booking_url") or ""
+    search_url = deal.get("google_flights_url") or ""
+    if has_cash and is_valid_deep_booking_url(deep_url):
+        return 0
+    if has_cash:
+        return 1
+    if deal.get("points") is not None and (search_url or deep_url):
+        return 2
+    return 3
+
+
+def deal_sort_key(deal: dict) -> tuple[int, float]:
+    """Sort key: bookable cash first, then best value within tier."""
+    return (_premium_deal_rank_tier(deal), _premium_deal_sort_value(deal))
+
 
 ALPINE_CORE = "https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"
 ALPINE_COLLAPSE = "https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.14.9/dist/cdn.min.js"
@@ -78,7 +114,9 @@ def compute_max_price(all_results: dict[str, list[dict]]) -> int:
     return max(1500, int((max(prices) + 49) // 50 * 50))
 
 
-def get_base_html_head(title: str, description: str, *, extra_scripts: list[str] | None = None) -> list[str]:
+def get_base_html_head(
+    title: str, description: str, *, extra_scripts: list[str] | None = None
+) -> list[str]:
     scripts = extra_scripts or []
     head = [
         "<!DOCTYPE html>",
@@ -263,12 +301,16 @@ def get_base_html_head(title: str, description: str, *, extra_scripts: list[str]
         "    </style>",
     ]
     head.extend(scripts)
-    head.extend(["</head>", "<body class='antialiased bg-gray-50 text-gray-800 overflow-x-hidden'>"])
+    head.extend(
+        ["</head>", "<body class='antialiased bg-gray-50 text-gray-800 overflow-x-hidden'>"]
+    )
     return head
 
 
 def get_skip_link(target: str, label: str) -> str:
-    return f"    <a href='{html.escape(target)}' class='skip-link focus-ring'>{html.escape(label)}</a>"
+    return (
+        f"    <a href='{html.escape(target)}' class='skip-link focus-ring'>{html.escape(label)}</a>"
+    )
 
 
 _NAV_LINK_CLASS = (
@@ -632,13 +674,33 @@ def load_premium_deals() -> dict:
         for row in deals
         if isinstance(row, dict) and (row.get("price") is not None or row.get("points") is not None)
     ]
-    valid.sort(
-        key=lambda row: float(row["price"])
-        if row.get("price") is not None
-        else float(row.get("points", 0)) * 0.0125
-    )
+    valid.sort(key=deal_sort_key)
     origins = data.get("origins", PREMIUM_DEAL_ORIGINS)
     return {"deals": valid, "origins": origins, "last_run": data.get("last_run")}
+
+
+def premium_deal_google_flights_url(deal: dict) -> str:
+    """Round-trip Google Flights search URL for points-only or fallback rows."""
+    url = deal.get("google_flights_url") or ""
+    if url:
+        return url
+    origin = deal.get("origin", "SLC")
+    airport = deal.get("airport", "")
+    out_date = deal.get("out_date") or deal.get("outDate", "")
+    ret_date = deal.get("ret_date") or deal.get("retDate", "")
+    if origin and airport and out_date:
+        return google_flights_url(origin, airport, out_date, ret_date or None)
+    return ""
+
+
+def premium_deal_booking_url(deal: dict) -> str:
+    """Itinerary deep link for cash round-trip deals only."""
+    if deal.get("price") is None and not deal.get("hasCashPrice"):
+        return ""
+    url = deal.get("booking_url") or deal.get("url") or ""
+    if is_valid_deep_booking_url(url):
+        return url
+    return ""
 
 
 def infer_premium_deal_is_domestic(deal: dict) -> bool:
@@ -651,18 +713,15 @@ def infer_premium_deal_is_domestic(deal: dict) -> bool:
     return airport in _DOMESTIC_AIRPORTS
 
 
-def premium_deal_booking_url(deal: dict) -> str:
-    """Resolve a Google Flights link for a premium deal row."""
-    url = deal.get("booking_url") or deal.get("url") or ""
-    if url:
-        return url
-    origin = deal.get("origin", "SLC")
-    airport = deal.get("airport", "")
-    out_date = deal.get("out_date") or deal.get("outDate", "")
-    ret_date = deal.get("ret_date") or deal.get("retDate", "")
-    if origin and airport and out_date:
-        return google_flights_url(origin, airport, out_date, ret_date or None)
-    return ""
+def _public_deal_to_sort_row(deal: dict) -> dict:
+    """Map public JSON deal fields to find_deals sort key shape."""
+    return {
+        "price": deal.get("price"),
+        "points": deal.get("points"),
+        "booking_url": deal.get("booking_url"),
+        "google_flights_url": deal.get("google_flights_url"),
+        "hasCashPrice": deal.get("hasCashPrice"),
+    }
 
 
 def build_premium_deals_payload(raw: dict, last_updated: str) -> dict:
@@ -679,6 +738,11 @@ def build_premium_deals_payload(raw: dict, last_updated: str) -> dict:
                 stops = None
         price = deal.get("price")
         points = deal.get("points")
+        has_cash = deal.get("hasCashPrice")
+        if has_cash is None:
+            has_cash = price is not None
+        booking_url = premium_deal_booking_url(deal)
+        gf_url = premium_deal_google_flights_url(deal)
         deals_out.append(
             {
                 "destination": deal.get("destination", deal.get("airport", "")),
@@ -689,6 +753,8 @@ def build_premium_deals_payload(raw: dict, last_updated: str) -> dict:
                 "price": int(price) if price is not None else None,
                 "points": int(points) if points is not None else None,
                 "paymentType": deal.get("paymentType", "cash"),
+                "hasCashPrice": bool(has_cash),
+                "isRoundTrip": bool(deal.get("isRoundTrip", True)),
                 "tripDuration": deal.get("trip_duration"),
                 "outDate": out_date,
                 "retDate": ret_date,
@@ -698,9 +764,11 @@ def build_premium_deals_payload(raw: dict, last_updated: str) -> dict:
                 "duration": deal.get("duration"),
                 "stops": stops,
                 "isDomestic": infer_premium_deal_is_domestic(deal),
-                "booking_url": premium_deal_booking_url(deal),
+                "booking_url": booking_url,
+                "google_flights_url": gf_url if not has_cash else "",
             }
         )
+    deals_out.sort(key=lambda row: deal_sort_key(_public_deal_to_sort_row(row)))
     return {
         "lastUpdated": last_updated,
         "origins": raw.get("origins", PREMIUM_DEAL_ORIGINS),
@@ -733,7 +801,8 @@ def render_premium_deals_section() -> list[str]:
         "             x-data='premiumDeals()' x-init='init()'>",
         "        <div class='mb-8 text-center'>",
         "            <h2 class='text-3xl font-bold text-gray-800 mb-2'>Premium deals from SLC</h2>",
-        "            <p class='text-gray-500'>Business &amp; premium economy · flexible trip lengths · day+7 to day+90 · cash &amp; points</p>",
+        "            <p class='text-gray-500'>Round-trip business &amp; premium economy · cash fares open a Book link on Google Flights</p>",
+        "            <p class='text-sm text-gray-500'>Points are award estimates (seats.aero / Chase portal) — use Search on Google Flights to shop cash alternatives</p>",
         "            <p class='text-sm text-gray-500 mt-2' x-show='lastUpdated' x-text=\"'Updated: ' + lastUpdated\"></p>",
         "        </div>",
         "        <div x-show='!loading && !error && allDeals.length > 0' x-cloak",
@@ -745,6 +814,12 @@ def render_premium_deals_section() -> list[str]:
         "            </div>",
         "            <div class='flex flex-col gap-5'>",
         "                <div class='flex flex-wrap items-center gap-x-6 gap-y-3'>",
+        "                    <label class='inline-flex items-center gap-2 min-h-[44px] cursor-pointer select-none'>",
+        "                        <input type='checkbox' class='w-5 h-5 rounded border-gray-300'",
+        "                               style='accent-color: var(--accent-interactive)'",
+        "                               x-model='cashOnly' aria-label='Show cash round-trip deals only'>",
+        "                        <span class='text-sm font-medium text-gray-700'>Cash deals only</span>",
+        "                    </label>",
         "                    <label class='inline-flex items-center gap-2 min-h-[44px] cursor-pointer select-none'>",
         "                        <input type='checkbox' class='w-5 h-5 rounded border-gray-300'",
         "                               style='accent-color: var(--accent-interactive)'",
@@ -767,7 +842,7 @@ def render_premium_deals_section() -> list[str]:
         "                        <template x-for='opt in paymentOptions' :key='opt.value'>",
         "                            <button type='button' @click='paymentFilter = opt.value'",
         "                                    :class=\"paymentFilter === opt.value ? 'deal-chip deal-chip-active focus-ring' : 'deal-chip focus-ring'\"",
-        "                                    :aria-pressed=\"paymentFilter === opt.value\"",
+        '                                    :aria-pressed="paymentFilter === opt.value"',
         "                                    x-text='opt.label'></button>",
         "                        </template>",
         "                    </div>",
@@ -778,7 +853,7 @@ def render_premium_deals_section() -> list[str]:
         "                        <template x-for='preset in pricePresets' :key='preset.label'>",
         "                            <button type='button' @click='setMaxPrice(preset.value)'",
         "                                    :class=\"maxPrice === preset.value ? 'deal-chip deal-chip-active focus-ring' : 'deal-chip focus-ring'\"",
-        "                                    :aria-pressed=\"maxPrice === preset.value\"",
+        '                                    :aria-pressed="maxPrice === preset.value"',
         "                                    x-text='preset.label'></button>",
         "                        </template>",
         "                    </div>",
@@ -826,17 +901,17 @@ def render_premium_deals_section() -> list[str]:
         "                    </div>",
         "                    <div class='flex items-center gap-4 shrink-0'>",
         "                        <div class='text-right'>",
-        "                            <div class='price-text' x-show='deal.price !== null && deal.price !== undefined'>",
+        "                            <div class='price-text' x-show='deal.hasCashPrice && deal.price !== null && deal.price !== undefined'>",
+        "                                <span class='text-xs font-semibold text-gray-500 uppercase tracking-wide mr-1'>RT</span>",
         "                                <span class='mr-1'>$</span><span x-text='deal.price'></span>",
         "                            </div>",
         "                            <div class='price-points' x-show='deal.points'",
-        "                                 x-text=\"deal.points.toLocaleString() + ' pts'\"></div>",
+        "                                 x-text=\"deal.points.toLocaleString() + ' pts est.'\"></div>",
         "                        </div>",
-        "                        <a x-show='deal.booking_url' :href='deal.booking_url' target='_blank' rel='noopener noreferrer'",
-        "                           class='btn-accent focus-ring text-sm' :aria-label=\"'Book ' + deal.destination + ' on Google Flights'\">Book</a>",
-        "                        <span x-show='!deal.booking_url' x-cloak",
-        "                              class='btn-accent text-sm opacity-40 cursor-not-allowed select-none'",
-        "                              aria-disabled='true' title='Booking link unavailable'>Book</span>",
+        "                        <a x-show='deal.hasCashPrice && deal.booking_url' :href='deal.booking_url' target='_blank' rel='noopener noreferrer'",
+        "                           class='btn-accent focus-ring text-sm' :aria-label=\"'Book round trip to ' + deal.destination + ' on Google Flights'\">Book</a>",
+        "                        <a x-show='!deal.hasCashPrice && deal.google_flights_url' :href='deal.google_flights_url' target='_blank' rel='noopener noreferrer'",
+        "                           class='btn-accent focus-ring text-sm' :aria-label=\"'Search round trip to ' + deal.destination + ' on Google Flights'\">Search on Google Flights</a>",
         "                    </div>",
         "                </article>",
         "            </template>",
@@ -850,9 +925,10 @@ def render_premium_deals_section() -> list[str]:
         "                allDeals: [],",
         "                lastUpdated: null,",
         "                domesticOnly: false,",
+        "                cashOnly: true,",
         "                maxOneStop: false,",
         "                maxPrice: null,",
-        "                paymentFilter: 'any',",
+        "                paymentFilter: 'cash',",
         "                paymentOptions: [",
         "                    { label: 'Any', value: 'any' },",
         "                    { label: 'Cash', value: 'cash' },",
@@ -867,6 +943,7 @@ def render_premium_deals_section() -> list[str]:
         "                ],",
         "                get filteredDeals() {",
         "                    return this.allDeals.filter((deal) => {",
+        "                        if (this.cashOnly && !deal.hasCashPrice) return false;",
         "                        if (this.domesticOnly && !deal.isDomestic) return false;",
         "                        if (this.maxOneStop && deal.stops !== null && deal.stops !== undefined && deal.stops > 1) {",
         "                            return false;",
@@ -880,16 +957,17 @@ def render_premium_deals_section() -> list[str]:
         "                    });",
         "                },",
         "                get filtersActive() {",
-        "                    return this.domesticOnly || this.maxOneStop || this.maxPrice !== null || this.paymentFilter !== 'any';",
+        "                    return this.cashOnly || this.domesticOnly || this.maxOneStop || this.maxPrice !== null || this.paymentFilter !== 'cash';",
         "                },",
         "                setMaxPrice(value) {",
         "                    this.maxPrice = value;",
         "                },",
         "                clearFilters() {",
+        "                    this.cashOnly = true;",
         "                    this.domesticOnly = false;",
         "                    this.maxOneStop = false;",
         "                    this.maxPrice = null;",
-        "                    this.paymentFilter = 'any';",
+        "                    this.paymentFilter = 'cash';",
         "                },",
         "                async init() {",
         "                    try {",
@@ -910,7 +988,9 @@ def render_premium_deals_section() -> list[str]:
     ]
 
 
-def render_index(all_results: dict[str, list[dict]], last_updated: str, hist_avg: dict[str, float | None]) -> None:
+def render_index(
+    all_results: dict[str, list[dict]], last_updated: str, hist_avg: dict[str, float | None]
+) -> None:
     all_results = normalized_results(all_results)
     payload = build_flights_payload(all_results, last_updated, hist_avg)
     write_flights_json(payload)
@@ -1254,11 +1334,11 @@ def render_heatmap(all_results: dict[str, list[dict]]) -> None:
             "                <div class='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3' x-show='Object.keys(heatmapData[region] || {}).length > 0'>",
             "                    <template x-for='[date, flight] in Object.entries(heatmapData[region] || {}).sort((a,b) => a[0].localeCompare(b[0]))' :key='date'>",
             "                        <a x-show='flight.url' :href='flight.url' target='_blank' rel='noopener noreferrer' class='heatmap-cell focus-ring' :class=\"flight.price < 320 ? 'heatmap-low' : flight.price <= 500 ? 'heatmap-mid' : 'heatmap-high'\">",
-            "                            <div class='text-xs opacity-90' x-text='new Date(date + \"T12:00:00\").toLocaleDateString(undefined, {weekday:\"short\", month:\"short\", day:\"numeric\"})'></div>",
+            '                            <div class=\'text-xs opacity-90\' x-text=\'new Date(date + "T12:00:00").toLocaleDateString(undefined, {weekday:"short", month:"short", day:"numeric"})\'></div>',
             "                            <div class='text-lg font-bold' x-text=\"'$' + flight.price\"></div>",
             "                        </a>",
             "                        <div x-show='!flight.url' class='heatmap-cell' :class=\"flight.price < 320 ? 'heatmap-low' : flight.price <= 500 ? 'heatmap-mid' : 'heatmap-high'\">",
-            "                            <div class='text-xs opacity-90' x-text='new Date(date + \"T12:00:00\").toLocaleDateString(undefined, {weekday:\"short\", month:\"short\", day:\"numeric\"})'></div>",
+            '                            <div class=\'text-xs opacity-90\' x-text=\'new Date(date + "T12:00:00").toLocaleDateString(undefined, {weekday:"short", month:"short", day:"numeric"})\'></div>',
             "                            <div class='text-lg font-bold' x-text=\"'$' + flight.price\"></div>",
             "                        </div>",
             "                    </template>",
@@ -1276,7 +1356,9 @@ def render_heatmap(all_results: dict[str, list[dict]]) -> None:
 def render_history(all_results: dict[str, list[dict]]) -> None:
     all_results = normalized_results(all_results)
     db_path = "app/data/tracker.db"
-    history: dict[str, dict[str, list]] = {region: {"labels": [], "prices": []} for region in REGIONS}
+    history: dict[str, dict[str, list]] = {
+        region: {"labels": [], "prices": []} for region in REGIONS
+    }
 
     if os.path.exists(db_path):
         conn = sqlite3.connect(db_path)
