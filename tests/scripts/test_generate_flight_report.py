@@ -53,6 +53,21 @@ class TestFormatDate:
         assert report.format_chart_date("2026-07-01") == "Wed Jul 01"
 
 
+class TestDisplayTimestamp:
+    def test_utc_instant_shows_mountain_time(self):
+        from datetime import datetime, timezone
+
+        instant = datetime(2026, 7, 1, 11, 33, tzinfo=timezone.utc)
+        label = report.format_display_timestamp(instant)
+        assert "5:33 AM" in label
+        assert "MDT" in label
+
+    def test_resolve_last_updated_returns_iso(self):
+        display, iso = report.resolve_last_updated()
+        assert "MDT" in display or "MST" in display
+        assert iso.endswith("+00:00") or iso.endswith("Z") or "+" in iso
+
+
 class TestCapRegionFlights:
     def test_caps_groups_and_times(self, monkeypatch):
         monkeypatch.setattr(report, "MAX_FARE_GROUPS_PER_REGION", 2)

@@ -7,11 +7,12 @@ import json
 import os
 import sqlite3
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 
 from fli.core import google_flights_url
-
 from tracker_config import (
+    DISPLAY_TIMEZONE,
     FLIGHTS_JSON,
     HEATMAP_THRESHOLDS,
     INTERNATIONAL_REGIONS,
@@ -25,13 +26,31 @@ from tracker_config import (
     PRIOR_PRICES_JSON,
     REGIONS,
     SITE_URL,
-    heatmap_tier,
 )
 from tracker_io import atomic_write_json, atomic_write_text
 
 _DOMESTIC_AIRPORTS = {
     dest["airport"] for dest in PREMIUM_DEAL_DESTINATIONS if dest.get("type") == "domestic"
 }
+
+_DISPLAY_TZ = ZoneInfo(DISPLAY_TIMEZONE)
+
+
+def format_display_timestamp(instant: datetime) -> str:
+    """Format an instant for the public site in the tracker home timezone."""
+    if instant.tzinfo is None:
+        instant = instant.replace(tzinfo=timezone.utc)
+    local = instant.astimezone(_DISPLAY_TZ)
+    return local.strftime("%a, %b %d, %Y at %I:%M %p %Z")
+
+
+def resolve_last_updated(source_path: str | None = None) -> tuple[str, str]:
+    """Return display label and ISO-8601 UTC for a data file's last update."""
+    if source_path and os.path.exists(source_path):
+        instant = datetime.fromtimestamp(os.path.getmtime(source_path), tz=timezone.utc)
+    else:
+        instant = datetime.now(timezone.utc)
+    return format_display_timestamp(instant), instant.isoformat()
 
 
 def is_valid_deep_booking_url(url: str | None) -> bool:
@@ -423,6 +442,7 @@ def render_nav(active_page: str, links: list[tuple[str, str, bool]]) -> list[str
     Args:
         active_page: Page id for aria-current (``index``, ``heatmap``, ``history``).
         links: ``(href, label_html, accent)`` tuples for right-side nav links.
+
     """
     page_href = {"index": "index.html", "heatmap": "heatmap.html", "history": "history.html"}
     current_href = page_href.get(active_page, "")
@@ -576,7 +596,7 @@ def log_region_price(
 def update_history(all_results: dict[str, list[dict]]) -> dict[str, float | None]:
     """Log today's lowest price per region; return 14-day average per region."""
     all_results = normalized_results(all_results)
-    averages: dict[str, float | None] = {region: None for region in REGIONS}
+    averages: dict[str, float | None] = dict.fromkeys(REGIONS)
     db_path = "app/data/tracker.db"
     if not os.path.exists(db_path):
         return averages
@@ -722,6 +742,7 @@ def build_flights_payload(
     last_updated: str,
     hist_avg: dict[str, float | None],
     prior_prices: dict[str, int] | None = None,
+    last_updated_at: str | None = None,
 ) -> dict:
     """Build external JSON payload for lazy-loaded index page."""
     all_results = normalized_results(all_results)
@@ -747,6 +768,7 @@ def build_flights_payload(
     domestic_regions = [name for name, cfg in REGIONS.items() if cfg.get("type") == "domestic"]
     return {
         "lastUpdated": last_updated,
+        "lastUpdatedAt": last_updated_at,
         "siteUrl": SITE_URL,
         "plannerUrl": SITE_URL,
         "intlTabs": INTERNATIONAL_REGIONS,
@@ -835,7 +857,9 @@ def _public_deal_to_sort_row(deal: dict) -> dict:
     }
 
 
-def build_premium_deals_payload(raw: dict, last_updated: str) -> dict:
+def build_premium_deals_payload(
+    raw: dict, last_updated: str, last_updated_at: str | None = None
+) -> dict:
     """Serialize premium deals for the public dashboard JSON."""
     deals_out: list[dict] = []
     for deal in raw.get("deals", []):
@@ -883,6 +907,7 @@ def build_premium_deals_payload(raw: dict, last_updated: str) -> dict:
     deals_out.sort(key=lambda row: deal_sort_key(_public_deal_to_sort_row(row)))
     return {
         "lastUpdated": last_updated,
+        "lastUpdatedAt": last_updated_at,
         "origins": raw.get("origins", PREMIUM_DEAL_ORIGINS),
         "deals": deals_out,
     }
@@ -906,15 +931,14 @@ def _existing_premium_deals_json_has_data() -> bool:
     return isinstance(deals, list) and len(deals) > 0
 
 
-def render_premium_deals_report(last_updated: str) -> None:
+def render_premium_deals_report(last_updated: str, last_updated_at: str) -> None:
     """Write public/data/premium-deals.json from find_deals.py output."""
     raw = load_premium_deals()
     if os.path.exists(PREMIUM_DEAL_OUTPUT_JSON):
-        mtime = datetime.fromtimestamp(os.path.getmtime(PREMIUM_DEAL_OUTPUT_JSON))
-        premium_updated = mtime.strftime("%a, %b %d, %Y at %I:%M %p")
+        premium_updated, premium_updated_at = resolve_last_updated(PREMIUM_DEAL_OUTPUT_JSON)
     else:
-        premium_updated = last_updated
-    payload = build_premium_deals_payload(raw, premium_updated)
+        premium_updated, premium_updated_at = last_updated, last_updated_at
+    payload = build_premium_deals_payload(raw, premium_updated, premium_updated_at)
     if not payload.get("deals") and _existing_premium_deals_json_has_data():
         print("No premium_deals.json source — keeping existing premium-deals.json")
         return
@@ -930,7 +954,7 @@ def render_premium_deals_section() -> list[str]:
         "            <h2 class='text-3xl font-bold text-gray-800 mb-2'>Premium deals from SLC</h2>",
         "            <p class='text-gray-500'>Round-trip business &amp; premium economy · cash fares open a Book link on Google Flights</p>",
         "            <p class='text-sm text-gray-500'>Points are award estimates (seats.aero / Chase portal) — use Search on Google Flights to shop cash alternatives</p>",
-        "            <p class='text-sm text-gray-500 mt-2' x-show='lastUpdated' x-text=\"'Updated: ' + lastUpdated\"></p>",
+        "            <p class='text-sm text-gray-500 mt-2' x-show='lastUpdatedAt || lastUpdated' x-text=\"'Updated: ' + (lastUpdatedAt ? fliFormatUpdatedAt(lastUpdatedAt) : lastUpdated)\"></p>",
         "        </div>",
         "        <div x-show='!loading && !error && allDeals.length > 0' x-cloak",
         "             class='mb-6 p-5 bg-white border border-gray-200 rounded-xl shadow-sm'>",
@@ -1051,6 +1075,7 @@ def render_premium_deals_section() -> list[str]:
         "                error: null,",
         "                allDeals: [],",
         "                lastUpdated: null,",
+        "                lastUpdatedAt: null,",
         "                domesticOnly: false,",
         "                cashOnly: true,",
         "                maxOneStop: false,",
@@ -1103,6 +1128,7 @@ def render_premium_deals_section() -> list[str]:
         "                        const data = await resp.json();",
         "                        this.allDeals = data.deals || [];",
         "                        this.lastUpdated = data.lastUpdated || null;",
+        "                        this.lastUpdatedAt = data.lastUpdatedAt || null;",
         "                        this.loading = false;",
         "                    } catch (err) {",
         "                        this.error = err.message || 'Failed to load premium deals';",
@@ -1120,9 +1146,12 @@ def render_index(
     last_updated: str,
     hist_avg: dict[str, float | None],
     prior_prices: dict[str, int] | None = None,
+    last_updated_at: str | None = None,
 ) -> None:
     all_results = normalized_results(all_results)
-    payload = build_flights_payload(all_results, last_updated, hist_avg, prior_prices)
+    payload = build_flights_payload(
+        all_results, last_updated, hist_avg, prior_prices, last_updated_at
+    )
     write_flights_json(payload)
 
     regions_json = json.dumps(payload["regions"])
@@ -1155,7 +1184,7 @@ def render_index(
             "            <p class='text-sm font-bold tracking-[3px] text-gray-500 uppercase mb-4'>Weekend Escapes &amp; Global Travel</p>",
             "            <h1 class='page-header text-left'>Track your next adventure.</h1>",
             "            <p class='hero-text'>Daily curated fares from SLC and PVU across every tracked region. Points values optimized for Chase Sapphire Preferred.</p>",
-            f"            <p class='text-sm text-gray-500 mb-6' x-data x-text=\"window.__FLI_META?.lastUpdated ? 'Last updated: ' + window.__FLI_META.lastUpdated : 'Last updated: {html.escape(last_updated)}'\"></p>",
+            f"            <p class='text-sm text-gray-500 mb-6' x-data x-text=\"fliLastUpdatedLabel(window.__FLI_META) || 'Last updated: {html.escape(last_updated)}'\"></p>",
             "            <div class='hero-cta-group'>",
             "                <a href='#premium-deals' class='dt-btn-primary focus-ring'>Premium deals</a>",
             "                <a href='#flights' class='dt-btn-outline focus-ring'>Economy regions</a>",
@@ -1359,6 +1388,23 @@ def render_index(
             "        function fliSaveWatchlist(list) {",
             "            localStorage.setItem(FLI_WATCH_KEY, JSON.stringify(list.slice(0, 50)));",
             "        }",
+            "        function fliFormatUpdatedAt(iso) {",
+            "            if (!iso) return '';",
+            "            const d = new Date(iso);",
+            "            if (Number.isNaN(d.getTime())) return '';",
+            "            return d.toLocaleString('en-US', {",
+            "                weekday: 'short', month: 'short', day: '2-digit', year: 'numeric',",
+            "                hour: 'numeric', minute: '2-digit', hour12: true,",
+            f"                timeZone: '{DISPLAY_TIMEZONE}', timeZoneName: 'short',",
+            "            });",
+            "        }",
+            "        function fliLastUpdatedLabel(meta) {",
+            "            if (!meta) return '';",
+            "            const formatted = meta.lastUpdatedAt",
+            "                ? fliFormatUpdatedAt(meta.lastUpdatedAt)",
+            "                : meta.lastUpdated;",
+            "            return formatted ? 'Last updated: ' + formatted : '';",
+            "        }",
             "        function flightTracker() {",
             "            return {",
             "                loading: true,",
@@ -1486,7 +1532,10 @@ def render_index(
             "                        const resp = await fetch('data/flights.json');",
             "                        if (!resp.ok) throw new Error('Could not load flight data (' + resp.status + ')');",
             "                        const data = await resp.json();",
-            "                        window.__FLI_META = { lastUpdated: data.lastUpdated };",
+            "                        window.__FLI_META = {",
+            "                            lastUpdated: data.lastUpdated,",
+            "                            lastUpdatedAt: data.lastUpdatedAt,",
+            "                        };",
             "                        this.regions = data.regions || window.__FLI_REGIONS;",
             "                        this.deals = data.deals || [];",
             "                        this.regionData = data.regionData || {};",
@@ -1645,7 +1694,7 @@ def render_history(all_results: dict[str, list[dict]]) -> None:
                     ("index.html", "&larr; Flights", True),
                 ],
             ),
-            f"    <section id='main-content' class='py-12 px-6 max-w-5xl mx-auto scroll-mt-24' x-data='historyPage()' x-init='init()'>",
+            "    <section id='main-content' class='py-12 px-6 max-w-5xl mx-auto scroll-mt-24' x-data='historyPage()' x-init='init()'>",
             "        <div class='mb-8 text-center'>",
             "            <h3 class='text-3xl font-bold text-gray-800 mb-2'>14-Day Price Trends</h3>",
             "            <p class='text-gray-500'>Lowest fare for <span x-text='activeRegion'></span></p>",
@@ -1715,19 +1764,17 @@ def render_history(all_results: dict[str, list[dict]]) -> None:
 
 def main() -> None:
     all_results = load_results()
-    last_updated = datetime.now().strftime("%a, %b %d, %Y at %I:%M %p")
-    if os.path.exists(OUTPUT_JSON):
-        mtime = datetime.fromtimestamp(os.path.getmtime(OUTPUT_JSON))
-        last_updated = mtime.strftime("%a, %b %d, %Y at %I:%M %p")
+    source = OUTPUT_JSON if os.path.exists(OUTPUT_JSON) else None
+    last_updated, last_updated_at = resolve_last_updated(source)
 
     if not all_results:
         print("No flight data found.")
-        render_premium_deals_report(last_updated)
+        render_premium_deals_report(last_updated, last_updated_at)
         return
 
     has_priced = any(priced_flights(flights) for flights in all_results.values())
     if not has_priced:
-        render_premium_deals_report(last_updated)
+        render_premium_deals_report(last_updated, last_updated_at)
         if _existing_flights_json_has_data():
             print("No flight data in best_direct.json — keeping existing reports.")
             return
@@ -1736,8 +1783,8 @@ def main() -> None:
 
     hist_avg = update_history(all_results)
     prior_prices = load_prior_prices()
-    render_index(all_results, last_updated, hist_avg, prior_prices)
-    render_premium_deals_report(last_updated)
+    render_index(all_results, last_updated, hist_avg, prior_prices, last_updated_at)
+    render_premium_deals_report(last_updated, last_updated_at)
     render_heatmap(all_results)
     render_history(all_results)
     save_prior_prices(all_results)

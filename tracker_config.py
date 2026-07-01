@@ -67,6 +67,7 @@ REGIONS = {
 OUTPUT_JSON = "best_direct.json"
 SITE_URL = "https://flights.larrycorsini.com"
 PLANNER_URL = os.environ.get("FLI_PLANNER_URL", SITE_URL)
+DISPLAY_TIMEZONE = "America/Denver"
 FLIGHTS_JSON = "public/data/flights.json"
 PRIOR_PRICES_JSON = "public/data/prior_prices.json"
 
