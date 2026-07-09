@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "Wed, Jul 08, 2026 at 06:45 AM MDT",
-  "lastUpdatedAt": "2026-07-08T12:45:21.796707+00:00",
+  "lastUpdated": "Thu, Jul 09, 2026 at 06:00 AM MDT",
+  "lastUpdatedAt": "2026-07-09T12:00:07.882601+00:00",
   "siteUrl": "https://flights.larrycorsini.com",
   "plannerUrl": "https://flights.larrycorsini.com",
   "intlTabs": [
@@ -96,8 +96,8 @@
           "retDate": "2026-08-15",
           "outDateFmt": "Wed, Aug 12",
           "retDateFmt": "Sat, Aug 15",
-          "dropPct": 24,
-          "priceDelta": 126,
+          "dropPct": 22,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -128,8 +128,8 @@
           "retDate": "2026-08-22",
           "outDateFmt": "Wed, Aug 19",
           "retDateFmt": "Sat, Aug 22",
-          "dropPct": 24,
-          "priceDelta": 126,
+          "dropPct": 22,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -160,8 +160,8 @@
           "retDate": "2026-08-29",
           "outDateFmt": "Wed, Aug 26",
           "retDateFmt": "Sat, Aug 29",
-          "dropPct": 24,
-          "priceDelta": 126,
+          "dropPct": 22,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -192,8 +192,8 @@
           "retDate": "2026-09-05",
           "outDateFmt": "Wed, Sep 02",
           "retDateFmt": "Sat, Sep 05",
-          "dropPct": 24,
-          "priceDelta": 126,
+          "dropPct": 22,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -224,8 +224,8 @@
           "retDate": "2026-09-12",
           "outDateFmt": "Wed, Sep 09",
           "retDateFmt": "Sat, Sep 12",
-          "dropPct": 24,
-          "priceDelta": 126,
+          "dropPct": 22,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -256,8 +256,8 @@
           "retDate": "2026-09-19",
           "outDateFmt": "Wed, Sep 16",
           "retDateFmt": "Sat, Sep 19",
-          "dropPct": 24,
-          "priceDelta": 126,
+          "dropPct": 22,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -288,8 +288,8 @@
           "retDate": "2026-09-06",
           "outDateFmt": "Wed, Sep 02",
           "retDateFmt": "Sun, Sep 06",
-          "dropPct": 3,
-          "priceDelta": 63,
+          "dropPct": 0,
+          "priceDelta": -63,
           "weekendEscape": true,
           "times": [
             {
@@ -321,7 +321,7 @@
           "outDateFmt": "Thu, Aug 13",
           "retDateFmt": "Sun, Aug 16",
           "dropPct": 0,
-          "priceDelta": 18,
+          "priceDelta": -108,
           "weekendEscape": true,
           "times": [
             {
@@ -353,7 +353,7 @@
           "outDateFmt": "Thu, Aug 13",
           "retDateFmt": "Sun, Aug 16",
           "dropPct": 0,
-          "priceDelta": 18,
+          "priceDelta": -108,
           "weekendEscape": true,
           "times": [
             {
@@ -385,7 +385,7 @@
           "outDateFmt": "Thu, Aug 20",
           "retDateFmt": "Sun, Aug 23",
           "dropPct": 0,
-          "priceDelta": 18,
+          "priceDelta": -108,
           "weekendEscape": true,
           "times": [
             {
@@ -417,7 +417,7 @@
           "outDateFmt": "Thu, Aug 27",
           "retDateFmt": "Sun, Aug 30",
           "dropPct": 0,
-          "priceDelta": 18,
+          "priceDelta": -108,
           "weekendEscape": true,
           "times": [
             {
@@ -449,7 +449,7 @@
           "outDateFmt": "Thu, Aug 27",
           "retDateFmt": "Sun, Aug 30",
           "dropPct": 0,
-          "priceDelta": 18,
+          "priceDelta": -108,
           "weekendEscape": true,
           "times": [
             {
@@ -481,7 +481,7 @@
           "outDateFmt": "Thu, Sep 03",
           "retDateFmt": "Sun, Sep 06",
           "dropPct": 0,
-          "priceDelta": 18,
+          "priceDelta": -108,
           "weekendEscape": true,
           "times": [
             {
@@ -513,7 +513,7 @@
           "outDateFmt": "Thu, Sep 17",
           "retDateFmt": "Sun, Sep 20",
           "dropPct": 0,
-          "priceDelta": 18,
+          "priceDelta": -108,
           "weekendEscape": true,
           "times": [
             {
@@ -545,7 +545,7 @@
           "outDateFmt": "Wed, Aug 12",
           "retDateFmt": "Sun, Aug 16",
           "dropPct": 0,
-          "priceDelta": 18,
+          "priceDelta": -108,
           "weekendEscape": true,
           "times": [
             {
@@ -588,8 +588,8 @@
           "retDate": "2026-08-15",
           "outDateFmt": "Wed, Aug 12",
           "retDateFmt": "Sat, Aug 15",
-          "dropPct": 31,
-          "priceDelta": 36,
+          "dropPct": 29,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -610,8 +610,8 @@
           "retDate": "2026-08-22",
           "outDateFmt": "Wed, Aug 19",
           "retDateFmt": "Sat, Aug 22",
-          "dropPct": 31,
-          "priceDelta": 36,
+          "dropPct": 29,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -632,8 +632,8 @@
           "retDate": "2026-08-29",
           "outDateFmt": "Wed, Aug 26",
           "retDateFmt": "Sat, Aug 29",
-          "dropPct": 31,
-          "priceDelta": 36,
+          "dropPct": 29,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -654,8 +654,8 @@
           "retDate": "2026-09-12",
           "outDateFmt": "Wed, Sep 09",
           "retDateFmt": "Sat, Sep 12",
-          "dropPct": 31,
-          "priceDelta": 36,
+          "dropPct": 29,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -676,8 +676,8 @@
           "retDate": "2026-09-19",
           "outDateFmt": "Wed, Sep 16",
           "retDateFmt": "Sat, Sep 19",
-          "dropPct": 31,
-          "priceDelta": 36,
+          "dropPct": 29,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -698,8 +698,8 @@
           "retDate": "2026-08-15",
           "outDateFmt": "Wed, Aug 12",
           "retDateFmt": "Sat, Aug 15",
-          "dropPct": 26,
-          "priceDelta": 26,
+          "dropPct": 24,
+          "priceDelta": -10,
           "weekendEscape": true,
           "times": [
             {
@@ -730,8 +730,8 @@
           "retDate": "2026-08-29",
           "outDateFmt": "Wed, Aug 26",
           "retDateFmt": "Sat, Aug 29",
-          "dropPct": 26,
-          "priceDelta": 26,
+          "dropPct": 24,
+          "priceDelta": -10,
           "weekendEscape": true,
           "times": [
             {
@@ -752,8 +752,8 @@
           "retDate": "2026-09-05",
           "outDateFmt": "Wed, Sep 02",
           "retDateFmt": "Sat, Sep 05",
-          "dropPct": 26,
-          "priceDelta": 26,
+          "dropPct": 24,
+          "priceDelta": -10,
           "weekendEscape": true,
           "times": [
             {
@@ -774,8 +774,8 @@
           "retDate": "2026-09-19",
           "outDateFmt": "Wed, Sep 16",
           "retDateFmt": "Sat, Sep 19",
-          "dropPct": 26,
-          "priceDelta": 26,
+          "dropPct": 24,
+          "priceDelta": -10,
           "weekendEscape": true,
           "times": [
             {
@@ -796,8 +796,8 @@
           "retDate": "2026-08-08",
           "outDateFmt": "Wed, Aug 05",
           "retDateFmt": "Sat, Aug 08",
-          "dropPct": 26,
-          "priceDelta": 26,
+          "dropPct": 24,
+          "priceDelta": -10,
           "weekendEscape": true,
           "times": [
             {
@@ -828,8 +828,8 @@
           "retDate": "2026-08-29",
           "outDateFmt": "Wed, Aug 26",
           "retDateFmt": "Sat, Aug 29",
-          "dropPct": 13,
-          "priceDelta": 1,
+          "dropPct": 10,
+          "priceDelta": -35,
           "weekendEscape": true,
           "times": [
             {
@@ -850,8 +850,8 @@
           "retDate": "2026-09-05",
           "outDateFmt": "Wed, Sep 02",
           "retDateFmt": "Sat, Sep 05",
-          "dropPct": 13,
-          "priceDelta": 1,
+          "dropPct": 10,
+          "priceDelta": -35,
           "weekendEscape": true,
           "times": [
             {
@@ -872,8 +872,8 @@
           "retDate": "2026-09-12",
           "outDateFmt": "Wed, Sep 09",
           "retDateFmt": "Sat, Sep 12",
-          "dropPct": 13,
-          "priceDelta": 1,
+          "dropPct": 10,
+          "priceDelta": -35,
           "weekendEscape": true,
           "times": [
             {
@@ -894,8 +894,8 @@
           "retDate": "2026-09-19",
           "outDateFmt": "Wed, Sep 16",
           "retDateFmt": "Sat, Sep 19",
-          "dropPct": 13,
-          "priceDelta": 1,
+          "dropPct": 10,
+          "priceDelta": -35,
           "weekendEscape": true,
           "times": [
             {
@@ -916,8 +916,8 @@
           "retDate": "2026-08-15",
           "outDateFmt": "Wed, Aug 12",
           "retDateFmt": "Sat, Aug 15",
-          "dropPct": 13,
-          "priceDelta": 1,
+          "dropPct": 10,
+          "priceDelta": -35,
           "weekendEscape": true,
           "times": [
             {
@@ -950,8 +950,8 @@
           "retDate": "2026-08-16",
           "outDateFmt": "Wed, Aug 12",
           "retDateFmt": "Sun, Aug 16",
-          "dropPct": 18,
-          "priceDelta": null,
+          "dropPct": 16,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -982,8 +982,8 @@
           "retDate": "2026-08-23",
           "outDateFmt": "Wed, Aug 19",
           "retDateFmt": "Sun, Aug 23",
-          "dropPct": 18,
-          "priceDelta": null,
+          "dropPct": 16,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1014,8 +1014,8 @@
           "retDate": "2026-08-30",
           "outDateFmt": "Wed, Aug 26",
           "retDateFmt": "Sun, Aug 30",
-          "dropPct": 18,
-          "priceDelta": null,
+          "dropPct": 16,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1046,8 +1046,8 @@
           "retDate": "2026-09-06",
           "outDateFmt": "Wed, Sep 02",
           "retDateFmt": "Sun, Sep 06",
-          "dropPct": 2,
-          "priceDelta": null,
+          "dropPct": 0,
+          "priceDelta": -48,
           "weekendEscape": true,
           "times": [
             {
@@ -1079,7 +1079,7 @@
           "outDateFmt": "Wed, Aug 12",
           "retDateFmt": "Sun, Aug 16",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -189,
           "weekendEscape": true,
           "times": [
             {
@@ -1111,7 +1111,7 @@
           "outDateFmt": "Wed, Sep 02",
           "retDateFmt": "Sun, Sep 06",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -189,
           "weekendEscape": true,
           "times": [
             {
@@ -1143,7 +1143,7 @@
           "outDateFmt": "Wed, Sep 09",
           "retDateFmt": "Sun, Sep 13",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -189,
           "weekendEscape": true,
           "times": [
             {
