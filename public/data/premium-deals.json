@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "Thu, Jul 16, 2026 at 07:08 AM MDT",
-  "lastUpdatedAt": "2026-07-16T13:08:19.994281+00:00",
+  "lastUpdated": "Fri, Jul 17, 2026 at 07:01 AM MDT",
+  "lastUpdatedAt": "2026-07-17T13:01:53.281564+00:00",
   "origins": [
     "SLC",
     "PVU"
@@ -691,16 +691,16 @@
       "hasCashPrice": false,
       "isRoundTrip": true,
       "tripDuration": 3,
-      "outDate": "2026-08-13",
-      "retDate": "2026-08-16",
-      "outDateFmt": "Thu, Aug 13",
-      "retDateFmt": "Sun, Aug 16",
+      "outDate": "2026-08-17",
+      "retDate": "2026-08-20",
+      "outDateFmt": "Mon, Aug 17",
+      "retDateFmt": "Thu, Aug 20",
       "airline": "AA",
       "duration": null,
       "stops": null,
       "isDomestic": true,
       "booking_url": "",
-      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ORD%20on%202026-08-13%20through%202026-08-16"
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ORD%20on%202026-08-17%20through%202026-08-20"
     },
     {
       "destination": "Chicago",
@@ -715,16 +715,16 @@
       "hasCashPrice": false,
       "isRoundTrip": true,
       "tripDuration": 4,
-      "outDate": "2026-08-13",
-      "retDate": "2026-08-17",
-      "outDateFmt": "Thu, Aug 13",
-      "retDateFmt": "Mon, Aug 17",
+      "outDate": "2026-08-17",
+      "retDate": "2026-08-21",
+      "outDateFmt": "Mon, Aug 17",
+      "retDateFmt": "Fri, Aug 21",
       "airline": "AA",
       "duration": null,
       "stops": null,
       "isDomestic": true,
       "booking_url": "",
-      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ORD%20on%202026-08-13%20through%202026-08-17"
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ORD%20on%202026-08-17%20through%202026-08-21"
     }
   ]
 }
