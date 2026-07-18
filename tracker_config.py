@@ -70,6 +70,31 @@ PLANNER_URL = os.environ.get("FLI_PLANNER_URL", SITE_URL)
 DISPLAY_TIMEZONE = "America/Denver"
 FLIGHTS_JSON = "public/data/flights.json"
 PRIOR_PRICES_JSON = "public/data/prior_prices.json"
+FEATURED_SEARCHES_JSON = "featured_searches.json"
+FEATURED_SEARCHES_PUBLIC_JSON = "public/data/featured-searches.json"
+
+# Pinned trip watches — searched daily and surfaced in the morning digest + site.
+# Drop or edit entries when the trip is over; inactive when ret_date is in the past.
+FEATURED_SEARCHES: list[dict] = [
+    {
+        "id": "dfw-sep-23-26",
+        "title": "DFW · Sep 23–26",
+        "blurb": (
+            "Cheap direct flights · Wed afternoon or Thu early morning out · "
+            "back Sat · SLC or PVU · no Frontier/Breeze"
+        ),
+        "region": "DFW",
+        "origins": ["SLC", "PVU"],
+        "destination": "DFW",
+        "ret_date": "2026-09-26",
+        "max_stops": "0",
+        "out_windows": [
+            {"date": "2026-09-23", "after_hour": 12},  # Wed afternoon
+            {"date": "2026-09-24", "before_hour": 12},  # Thu early / morning
+        ],
+        "max_options": 6,
+    },
+]
 
 # Region-aware heatmap color tiers (USD round-trip).
 HEATMAP_THRESHOLDS = {

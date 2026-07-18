@@ -59,6 +59,13 @@ def premium_deals_deep_link() -> str:
     return f"{SITE_URL}/#premium-deals"
 
 
+def featured_deep_link(search_id: str | None = None) -> str:
+    """Return the site deep link for the featured-trips spotlight."""
+    if search_id:
+        return f"{SITE_URL}/#featured-{search_id}"
+    return f"{SITE_URL}/#featured"
+
+
 def format_money(amount: int | float) -> str:
     return f"${int(amount):,}"
 
@@ -118,11 +125,7 @@ def _format_economy_deal_imessage(deal: dict) -> str:
     dates = format_short_date_range(deal["out_date"], deal["ret_date"])
     airline = deal.get("airline") or "—"
     board = region_deep_link(region)
-    return (
-        f"{region} · ${price}\n"
-        f"{origin}→{dest} · {dates} · {airline}\n"
-        f"{board}"
-    )
+    return f"{region} · ${price}\n{origin}→{dest} · {dates} · {airline}\n{board}"
 
 
 def format_morning_digest_plain(deals: list[dict]) -> str:
@@ -144,10 +147,10 @@ def format_morning_digest_plain(deals: list[dict]) -> str:
 
 
 def format_morning_digest_imessage(deals: list[dict]) -> str:
-    """iMessage digest — short tappable site links only (no tfs walls).
+    """IMessage digest — short tappable site links only (no tfs walls).
 
     iMessage cannot render custom hyperlink text via AppleScript; URLs must
-  appear as plain text. Google Flights booking links are omitted here because
+    appear as plain text. Google Flights booking links are omitted here because
     they wrap across dozens of lines on iPhone. Tap the region link to open
     the dashboard and book from there. Direct book links are in HTML email.
     """
@@ -156,11 +159,110 @@ def format_morning_digest_imessage(deals: list[dict]) -> str:
 
     lowest = min(int(d["price"]) for d in deals)
     header = (
-        f"✈️ FLI-TRACKER · {len(deals)} morning deal"
-        f"{'' if len(deals) == 1 else 's'} from ${lowest}"
+        f"✈️ FLI-TRACKER · {len(deals)} morning deal{'' if len(deals) == 1 else 's'} from ${lowest}"
     )
     blocks = [_format_economy_deal_imessage(deal) for deal in deals]
     return header + "\n\n" + "\n\n".join(blocks) + f"\n\n{SITE_URL}"
+
+
+def _format_featured_deal_plain(deal: dict, index: int, *, include_booking_url: bool) -> list[str]:
+    title = deal.get("title") or "Featured trip"
+    price = int(deal["price"])
+    origin = deal.get("origin") or "—"
+    dest = deal.get("destination") or "—"
+    dates = format_short_date_range(deal.get("out_date", ""), deal.get("ret_date", ""))
+    airline = deal.get("airline") or "—"
+    window = deal.get("window_label") or ""
+    board = deal.get("site_url") or featured_deep_link(deal.get("id"))
+    book = deal.get("url") or board
+    route = f"{origin}→{dest} · {dates}"
+    if window:
+        route = f"{route} · {window}"
+    lines = [
+        f"{index}. {title} · ${price}",
+        f"   {route} · {airline}",
+        f"   ↗ {site_link_display(board)}",
+    ]
+    if include_booking_url and book != board:
+        lines.append(f"   🔗 {book}")
+    return lines
+
+
+def _format_featured_deal_imessage(deal: dict) -> str:
+    title = deal.get("title") or "Featured trip"
+    price = int(deal["price"])
+    origin = deal.get("origin") or "—"
+    dest = deal.get("destination") or "—"
+    dates = format_short_date_range(deal.get("out_date", ""), deal.get("ret_date", ""))
+    airline = deal.get("airline") or "—"
+    window = deal.get("window_label") or ""
+    board = deal.get("site_url") or featured_deep_link(deal.get("id"))
+    detail = f"{origin}→{dest} · {dates}"
+    if window:
+        detail = f"{detail} · {window}"
+    return f"{title} · ${price}\n{detail} · {airline}\n{board}"
+
+
+def format_featured_digest_plain(deals: list[dict]) -> str:
+    """Plain-text featured-trip section for email fallback."""
+    if not deals:
+        return ""
+    lines = [
+        "📌 FLI-TRACKER · Watching",
+        _DIVIDER,
+        "",
+    ]
+    for index, deal in enumerate(deals, start=1):
+        lines.extend(_format_featured_deal_plain(deal, index, include_booking_url=True))
+        lines.append("")
+    lines.extend([_DIVIDER, site_link_display(SITE_URL)])
+    return "\n".join(lines).rstrip()
+
+
+def format_featured_digest_imessage(deals: list[dict]) -> str:
+    """IMessage featured section with short site deep links only."""
+    if not deals:
+        return ""
+    lowest = min(int(d["price"]) for d in deals)
+    header = f"📌 FLI-TRACKER · Watching · from ${lowest}"
+    blocks = [_format_featured_deal_imessage(deal) for deal in deals]
+    return header + "\n\n" + "\n\n".join(blocks)
+
+
+def featured_digest_subject(deals: list[dict]) -> str:
+    """Build the email/iMessage subject for featured-trip alerts."""
+    if not deals:
+        return "Fli-Tracker featured trip"
+    lowest = min(int(d["price"]) for d in deals)
+    title = deals[0].get("title") or "Featured trip"
+    return f"Fli-Tracker: {title} from ${lowest}"
+
+
+def _featured_digest_cards(deals: list[dict]) -> str:
+    cards = []
+    for deal in deals:
+        title = deal.get("title") or "Featured trip"
+        price = int(deal["price"])
+        origin = deal.get("origin") or "—"
+        dest = deal.get("destination") or "—"
+        dates = format_short_date_range(deal.get("out_date", ""), deal.get("ret_date", ""))
+        airline = deal.get("airline") or "—"
+        window = deal.get("window_label") or ""
+        board = deal.get("site_url") or featured_deep_link(deal.get("id"))
+        book = deal.get("url") or board
+        sub = f"{origin} → {dest} · {dates}"
+        if window:
+            sub = f"{sub} · {window}"
+        cards.append(
+            _html_deal_card(
+                headline=f"{title} · ${price}",
+                subline=sub,
+                meta=airline,
+                book_url=book,
+                board_url=board,
+            )
+        )
+    return "".join(cards)
 
 
 def _format_premium_deal_plain(deal: dict, index: int, *, include_booking_url: bool) -> list[str]:
@@ -215,7 +317,7 @@ def format_premium_digest_plain(deals: list[dict]) -> str:
 
 
 def format_premium_digest_imessage(deals: list[dict]) -> str:
-    """iMessage premium digest with short dashboard links only."""
+    """IMessage premium digest with short dashboard links only."""
     if not deals:
         return ""
 

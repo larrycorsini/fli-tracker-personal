@@ -1,0 +1,61 @@
+{
+  "lastUpdated": "Fri, Jul 17, 2026 at 11:41 PM MDT",
+  "lastUpdatedAt": "2026-07-18T05:48:17.299222+00:00",
+  "searches": [
+    {
+      "id": "dfw-sep-23-26",
+      "title": "DFW \u00b7 Sep 23\u201326",
+      "blurb": "Cheap direct flights \u00b7 Wed afternoon or Thu early morning out \u00b7 back Sat \u00b7 SLC or PVU \u00b7 no Frontier/Breeze",
+      "region": "DFW",
+      "destination": "DFW",
+      "retDate": "2026-09-26",
+      "bestPrice": 237,
+      "siteUrl": "https://flights.larrycorsini.com/#featured-dfw-sep-23-26",
+      "regionUrl": "https://flights.larrycorsini.com/?tab=DFW",
+      "options": [
+        {
+          "origin": "SLC",
+          "destination": "DFW",
+          "airline": "Delta Air Lines",
+          "price": 237,
+          "outDate": "2026-09-23",
+          "retDate": "2026-09-26",
+          "outDep": "2026-09-23T17:20:00",
+          "retArr": "2026-09-26T09:27:00",
+          "outDepFmt": "Wed, Sep 23, 05:20 PM",
+          "retArrFmt": "Sat, Sep 26, 09:27 AM",
+          "windowLabel": "Wed afternoon",
+          "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA5LTIzIiAKA1NMQxIKMjAyNi0wOS0yMxoDREZXKgJETDIEMjc5NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTA5LTI2IiAKA0RGVxIKMjAyNi0wOS0yNhoDU0xDKgJETDIEMTI5MWoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+        },
+        {
+          "origin": "SLC",
+          "destination": "DFW",
+          "airline": "American Airlines",
+          "price": 275,
+          "outDate": "2026-09-24",
+          "retDate": "2026-09-26",
+          "outDep": "2026-09-24T07:00:00",
+          "retArr": "2026-09-26T15:51:00",
+          "outDepFmt": "Thu, Sep 24, 07:00 AM",
+          "retArrFmt": "Sat, Sep 26, 03:51 PM",
+          "windowLabel": "Thu morning",
+          "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTA5LTI0Ih8KA1NMQxIKMjAyNi0wOS0yNBoDREZXKgJBQTIDNjQ0agcIARIDU0xDcgcIARIDREZXGkASCjIwMjYtMDktMjYiIAoDREZXEgoyMDI2LTA5LTI2GgNTTEMqAkFBMgQxNDU2agcIARIDREZXcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE"
+        },
+        {
+          "origin": "SLC",
+          "destination": "DFW",
+          "airline": "Delta Air Lines",
+          "price": 237,
+          "outDate": "2026-09-23",
+          "retDate": "2026-09-26",
+          "outDep": "2026-09-23T17:20:00",
+          "retArr": "2026-09-26T14:14:00",
+          "outDepFmt": "Wed, Sep 23, 05:20 PM",
+          "retArrFmt": "Sat, Sep 26, 02:14 PM",
+          "windowLabel": "Wed afternoon",
+          "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA5LTIzIiAKA1NMQxIKMjAyNi0wOS0yMxoDREZXKgJETDIEMjc5NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTA5LTI2IiAKA0RGVxIKMjAyNi0wOS0yNhoDU0xDKgJETDIEMjc5OGoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+        }
+      ]
+    }
+  ]
+}

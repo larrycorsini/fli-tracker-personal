@@ -170,6 +170,7 @@ app/data/seats_aero_usage.json
 # Fli-Tracker pipeline runtime output
 best_direct.json
 premium_deals.json
+featured_searches.json
 last_alert.json
 logs/
 out_*.json
