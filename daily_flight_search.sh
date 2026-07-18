@@ -55,7 +55,7 @@ deploy_public_via_git() {
   report_date="$(date +%Y-%m-%d)"
   remote_url="$(git remote get-url personal 2>/dev/null || echo "personal (unknown)")"
 
-  git add public/index.html public/heatmap.html public/history.html public/manifest.json public/data/flights.json public/data/premium-deals.json
+  git add public/index.html public/heatmap.html public/history.html public/manifest.json public/data/flights.json public/data/premium-deals.json public/data/featured-searches.json
 
   if git diff --staged --quiet; then
     echo "INFO: No public/ changes to commit — skipping git push"

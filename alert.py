@@ -8,25 +8,36 @@ import os
 from datetime import datetime
 
 from alert_format import (
+    _featured_digest_cards,
     _morning_digest_cards,
     _premium_digest_cards,
     combine_alert_content,
-    format_morning_digest_plain,
+    featured_digest_subject,
+    format_featured_digest_imessage,
+    format_featured_digest_plain,
     format_morning_digest_imessage,
-    format_premium_digest_plain,
+    format_morning_digest_plain,
     format_premium_digest_imessage,
+    format_premium_digest_plain,
     morning_digest_subject,
-    premium_digest_subject,
     premium_deals_deep_link,
+    premium_digest_subject,
     region_deep_link,
 )
+
+# Re-export deep-link helpers for tests and callers that import from alert.
+__all__ = [
+    "premium_deals_deep_link",
+    "region_deep_link",
+]
 from alert_notifiers import dispatch_alert
+from featured_searches import flatten_featured_for_alert, load_featured_searches
 from tracker_config import (
     OUTPUT_JSON,
+    PREMIUM_ALERT_MAX_DEALS,
     PREMIUM_DEAL_MAX_POINTS,
     PREMIUM_DEAL_MAX_PRICE,
     PREMIUM_DEAL_OUTPUT_JSON,
-    PREMIUM_ALERT_MAX_DEALS,
     REGIONS,
 )
 from tracker_io import atomic_write_json
@@ -171,6 +182,8 @@ def digest_already_sent(
         return False
     if key == "_digest":
         snapshot = sorted((d["region"], d["price"]) for d in deals)
+    elif key == "_featured_digest":
+        snapshot = sorted((d.get("id") or d.get("title", ""), d.get("price")) for d in deals)
     else:
         snapshot = sorted(
             (d.get("region") or d.get("destination", ""), d.get("price"), d.get("points"))
@@ -190,6 +203,26 @@ def run_alerts(*, force: bool = False, preview: bool = False) -> int:
     today_str = datetime.now().strftime("%Y-%m-%d")
     last_alerts = load_last_alerts()
     sections: list[tuple[str, str, str, str, str]] = []
+
+    featured_deals = flatten_featured_for_alert(load_featured_searches())
+    if featured_deals and (
+        force or not digest_already_sent(last_alerts, today_str, featured_deals, "_featured_digest")
+    ):
+        sections.append(
+            (
+                featured_digest_subject(featured_deals),
+                "Watching",
+                format_featured_digest_plain(featured_deals),
+                format_featured_digest_imessage(featured_deals),
+                _featured_digest_cards(featured_deals),
+            )
+        )
+        last_alerts["_featured_digest"] = {
+            "date": today_str,
+            "deals": sorted(
+                (d.get("id") or d.get("title", ""), d.get("price")) for d in featured_deals
+            ),
+        }
 
     if os.path.exists(OUTPUT_JSON):
         with open(OUTPUT_JSON, encoding="utf-8") as handle:
@@ -226,9 +259,9 @@ def run_alerts(*, force: bool = False, preview: bool = False) -> int:
                 print(f"{region_name}: ${lowest:.0f} above threshold ${threshold:.0f}")
 
     premium_deals = collect_premium_deals()
-    if premium_deals and (force or not digest_already_sent(
-        last_alerts, today_str, premium_deals, "_premium_digest"
-    )):
+    if premium_deals and (
+        force or not digest_already_sent(last_alerts, today_str, premium_deals, "_premium_digest")
+    ):
         sections.append(
             (
                 premium_digest_subject(premium_deals),

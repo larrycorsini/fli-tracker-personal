@@ -10,9 +10,12 @@ from collections import defaultdict
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 
+from featured_searches import load_featured_searches, write_featured_searches
 from fli.core import google_flights_url
 from tracker_config import (
     DISPLAY_TIMEZONE,
+    FEATURED_SEARCHES_JSON,
+    FEATURED_SEARCHES_PUBLIC_JSON,
     FLIGHTS_JSON,
     HEATMAP_THRESHOLDS,
     INTERNATIONAL_REGIONS,
@@ -945,6 +948,121 @@ def render_premium_deals_report(last_updated: str, last_updated_at: str) -> None
     write_premium_deals_json(payload)
 
 
+def render_featured_searches_report(
+    all_results: dict[str, list[dict]] | None,
+    last_updated: str,
+    last_updated_at: str,
+) -> None:
+    """Write public/data/featured-searches.json for the site spotlight section."""
+    if os.path.exists(FEATURED_SEARCHES_JSON):
+        payload = load_featured_searches()
+        if not payload.get("lastUpdated"):
+            payload["lastUpdated"] = last_updated
+        if not payload.get("lastUpdatedAt"):
+            payload["lastUpdatedAt"] = last_updated_at
+    else:
+        payload = write_featured_searches(
+            all_results or {},
+            live_search=False,
+            last_updated=last_updated,
+            last_updated_at=last_updated_at,
+        )
+    os.makedirs(os.path.dirname(FEATURED_SEARCHES_PUBLIC_JSON), exist_ok=True)
+    atomic_write_json(FEATURED_SEARCHES_PUBLIC_JSON, payload)
+    print(f"Featured searches JSON written: {FEATURED_SEARCHES_PUBLIC_JSON}")
+
+
+def render_featured_searches_section() -> list[str]:
+    """Small pinned-trip spotlight above the economy board."""
+    return [
+        "    <section id='featured' class='py-10 md:py-14 px-4 sm:px-6 max-w-5xl mx-auto scroll-mt-24 section-pad'",
+        "             x-data='featuredSearches()' x-init='init()'>",
+        "        <div class='mb-6 text-center'>",
+        "            <p class='text-xs font-bold uppercase tracking-wider text-gray-500 mb-2'>Watching</p>",
+        "            <h2 class='text-2xl md:text-3xl font-bold text-gray-800 mb-2'>Pinned weekend search</h2>",
+        "            <p class='text-gray-500 max-w-2xl mx-auto'>Direct SLC/PVU fares refreshed with the morning run — no Frontier or Breeze.</p>",
+        "            <p class='text-sm text-gray-500 mt-2' x-show='lastUpdatedAt || lastUpdated'",
+        "               x-text=\"'Updated: ' + (lastUpdatedAt ? fliFormatUpdatedAt(lastUpdatedAt) : lastUpdated)\"></p>",
+        "        </div>",
+        "        <div x-show='loading' class='text-center py-8 text-gray-500'>Loading featured trips…</div>",
+        "        <div x-show='error' x-cloak class='text-center py-8 text-red-600' x-text='error'></div>",
+        "        <div x-show='!loading && !error && searches.length === 0' x-cloak",
+        "             class='bg-white border border-gray-200 rounded-xl p-6 text-center text-gray-500'>",
+        "            No pinned trips right now.",
+        "        </div>",
+        "        <template x-for='search in searches' :key='search.id'>",
+        "            <article :id=\"'featured-' + search.id\"",
+        "                     class='bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-4'",
+        "                     role='region' :aria-label='search.title'>",
+        "                <div class='px-5 py-4 md:px-6 md:py-5 border-b border-gray-100 flex flex-col md:flex-row md:items-center md:justify-between gap-3'>",
+        "                    <div class='min-w-0'>",
+        "                        <h3 class='text-xl font-bold text-gray-800' x-text='search.title'></h3>",
+        "                        <p class='text-sm text-gray-500 mt-1' x-text='search.blurb'></p>",
+        "                    </div>",
+        "                    <div class='flex flex-wrap items-center gap-3 shrink-0'>",
+        "                        <span class='text-2xl font-bold' style='color: var(--price-positive)'",
+        "                              x-show='search.bestPrice != null' x-text=\"'from $' + search.bestPrice\"></span>",
+        "                        <a :href=\"'?tab=' + encodeURIComponent(search.region || 'DFW') + '#flights'\"",
+        "                           class='time-option-cta time-option-cta-outline focus-ring text-sm'>DFW board</a>",
+        "                    </div>",
+        "                </div>",
+        "                <div class='divide-y divide-gray-100' role='list' aria-label='Featured flight options'>",
+        "                    <template x-for='(opt, oi) in (search.options || [])' :key=\"search.id + '-' + oi\">",
+        "                        <div class='px-5 py-4 md:px-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3' role='listitem'>",
+        "                            <div class='min-w-0'>",
+        "                                <div class='flex flex-wrap items-center gap-2 mb-1'>",
+        "                                    <span class='font-bold text-gray-800' x-text=\"opt.origin + ' → ' + opt.destination\"></span>",
+        "                                    <span class='text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 border'",
+        "                                          x-show='opt.windowLabel' x-text='opt.windowLabel'></span>",
+        "                                    <span class='text-lg font-bold' style='color: var(--price-positive)' x-text=\"'$' + opt.price\"></span>",
+        "                                </div>",
+        "                                <p class='text-sm text-gray-500'>",
+        "                                    <span x-text='opt.outDepFmt'></span>",
+        "                                    <span> → </span>",
+        "                                    <span x-text='opt.retArrFmt'></span>",
+        "                                    <span x-show='opt.airline'> · </span>",
+        "                                    <span x-text='opt.airline'></span>",
+        "                                </p>",
+        "                            </div>",
+        "                            <a x-show='opt.url' :href='opt.url' target='_blank' rel='noopener noreferrer'",
+        "                               class='time-option-cta focus-ring text-sm shrink-0'>Book</a>",
+        "                        </div>",
+        "                    </template>",
+        "                    <div x-show='!(search.options || []).length' class='px-5 py-6 text-sm text-gray-500'>",
+        "                        No matching direct fares in this morning's search — check back tomorrow.",
+        "                    </div>",
+        "                </div>",
+        "            </article>",
+        "        </template>",
+        "    </section>",
+        "    <script>",
+        "        function featuredSearches() {",
+        "            return {",
+        "                loading: true,",
+        "                error: '',",
+        "                searches: [],",
+        "                lastUpdated: '',",
+        "                lastUpdatedAt: '',",
+        "                async init() {",
+        "                    try {",
+        "                        const resp = await fetch('data/featured-searches.json');",
+        "                        if (!resp.ok) throw new Error('Could not load featured trips (' + resp.status + ')');",
+        "                        const data = await resp.json();",
+        "                        this.searches = data.searches || [];",
+        "                        this.lastUpdated = data.lastUpdated || '';",
+        "                        this.lastUpdatedAt = data.lastUpdatedAt || '';",
+        "                    } catch (err) {",
+        "                        this.error = err.message || 'Failed to load featured trips';",
+        "                    } finally {",
+        "                        this.loading = false;",
+        "                    }",
+        "                }",
+        "            };",
+        "        }",
+        "    </script>",
+    ]
+
+
 def render_premium_deals_section() -> list[str]:
     """Standalone premium-deals discovery section (above economy region board)."""
     return [
@@ -1186,7 +1304,8 @@ def render_index(
             "            <p class='hero-text'>Daily curated fares from SLC and PVU across every tracked region. Points values optimized for Chase Sapphire Preferred.</p>",
             f"            <p class='text-sm text-gray-500 mb-6' x-data x-text=\"fliLastUpdatedLabel(window.__FLI_META) || 'Last updated: {html.escape(last_updated)}'\"></p>",
             "            <div class='hero-cta-group'>",
-            "                <a href='#premium-deals' class='dt-btn-primary focus-ring'>Premium deals</a>",
+            "                <a href='#featured' class='dt-btn-primary focus-ring'>Pinned weekend</a>",
+            "                <a href='#premium-deals' class='dt-btn-outline focus-ring'>Premium deals</a>",
             "                <a href='#flights' class='dt-btn-outline focus-ring'>Economy regions</a>",
             "                <a href='?weekend=1#flights' class='dt-btn-outline focus-ring'>Weekend escapes</a>",
             "            </div>",
@@ -1194,6 +1313,7 @@ def render_index(
             "    </section>",
         ]
     )
+    lines.extend(render_featured_searches_section())
     lines.extend(render_premium_deals_section())
     lines.extend(
         [
@@ -1769,11 +1889,13 @@ def main() -> None:
 
     if not all_results:
         print("No flight data found.")
+        render_featured_searches_report(None, last_updated, last_updated_at)
         render_premium_deals_report(last_updated, last_updated_at)
         return
 
     has_priced = any(priced_flights(flights) for flights in all_results.values())
     if not has_priced:
+        render_featured_searches_report(all_results, last_updated, last_updated_at)
         render_premium_deals_report(last_updated, last_updated_at)
         if _existing_flights_json_has_data():
             print("No flight data in best_direct.json — keeping existing reports.")
@@ -1784,6 +1906,7 @@ def main() -> None:
     hist_avg = update_history(all_results)
     prior_prices = load_prior_prices()
     render_index(all_results, last_updated, hist_avg, prior_prices, last_updated_at)
+    render_featured_searches_report(all_results, last_updated, last_updated_at)
     render_premium_deals_report(last_updated, last_updated_at)
     render_heatmap(all_results)
     render_history(all_results)

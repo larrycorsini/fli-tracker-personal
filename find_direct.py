@@ -15,6 +15,7 @@ import time
 from datetime import datetime, timedelta
 from threading import Lock
 
+from featured_searches import write_featured_searches
 from fli.cli.utils import serialize_flight_result
 from fli.core import (
     build_date_search_segments,
@@ -563,7 +564,13 @@ def main(argv: list[str] | None = None) -> int:
             _count_flights(prior_results),
         )
         atomic_write_json(OUTPUT_JSON, prior_results)
-        return 0
+        all_results = prior_results
+
+    # Pinned trip watches (e.g. DFW Sep 23–26) — live search fills morning digest + site.
+    try:
+        write_featured_searches(all_results, live_search=True)
+    except Exception as exc:
+        log.warning("Featured search refresh failed (non-fatal): %s", exc)
 
     return _compute_exit_code(all_results)
 
