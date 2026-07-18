@@ -20,8 +20,16 @@ from alert_format import (
     format_premium_digest_imessage,
     format_premium_digest_plain,
     morning_digest_subject,
+    premium_deals_deep_link,
     premium_digest_subject,
+    region_deep_link,
 )
+
+# Re-export deep-link helpers for tests and callers that import from alert.
+__all__ = [
+    "premium_deals_deep_link",
+    "region_deep_link",
+]
 from alert_notifiers import dispatch_alert
 from featured_searches import flatten_featured_for_alert, load_featured_searches
 from tracker_config import (
