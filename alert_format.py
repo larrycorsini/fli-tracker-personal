@@ -165,42 +165,118 @@ def format_morning_digest_imessage(deals: list[dict]) -> str:
     return header + "\n\n" + "\n\n".join(blocks) + f"\n\n{SITE_URL}"
 
 
+def _compact_departure_time(out_dep_fmt: str) -> str:
+    """Short label for iMessage (Wed 5:20 PM)."""
+    if not out_dep_fmt:
+        return ""
+    parts = [p.strip() for p in out_dep_fmt.split(",")]
+    if len(parts) >= 3:
+        day = parts[0]
+        time_part = parts[-1].lstrip("0")
+        return f"{day} {time_part}"
+    return out_dep_fmt
+
+
+def _dedupe_featured_options(options: list[dict]) -> list[dict]:
+    """Keep cheapest fare per departure window for alert text."""
+    by_window: dict[str, dict] = {}
+    for opt in sorted(options, key=lambda o: (o.get("price") or 9999, o.get("outDep") or "")):
+        price = opt.get("price")
+        if price is None:
+            continue
+        key = opt.get("windowLabel") or opt.get("outDep") or str(price)
+        current = by_window.get(key)
+        if current is None or price < current.get("price", 9999):
+            by_window[key] = opt
+    return sorted(by_window.values(), key=lambda o: (o.get("outDate") or "", o.get("outDep") or ""))
+
+
+def _format_featured_option_line_plain(opt: dict, *, include_booking_url: bool) -> list[str]:
+    origin = opt.get("origin") or "—"
+    dest = opt.get("destination") or "—"
+    dates = format_short_date_range(opt.get("outDate", ""), opt.get("retDate", ""))
+    airline = opt.get("airline") or "—"
+    window = opt.get("windowLabel") or ""
+    price = int(opt["price"])
+    out_time = _compact_departure_time(opt.get("outDepFmt") or "")
+    ret_time = _compact_departure_time(opt.get("retArrFmt") or "")
+    time_part = f" · {out_time} out"
+    if ret_time:
+        time_part = f"{time_part}, {ret_time} back"
+    label = f"   {window} · ${price}" if window else f"   ${price}"
+    lines = [label, f"   {origin}→{dest} · {dates} · {airline}{time_part}"]
+    book = opt.get("url") or ""
+    if include_booking_url and book:
+        lines.append(f"   🔗 {book}")
+    return lines
+
+
+def _format_featured_option_line_imessage(opt: dict) -> str:
+    origin = opt.get("origin") or "—"
+    dest = opt.get("destination") or "—"
+    dates = format_short_date_range(opt.get("outDate", ""), opt.get("retDate", ""))
+    airline = opt.get("airline") or "—"
+    window = opt.get("windowLabel") or ""
+    price = int(opt["price"])
+    out_time = _compact_departure_time(opt.get("outDepFmt") or "")
+    prefix = f"{window} · ${price}" if window else f"${price}"
+    time_suffix = f" · {out_time} out" if out_time else ""
+    return f"{prefix}\n{origin}→{dest} · {dates} · {airline}{time_suffix}"
+
+
 def _format_featured_deal_plain(deal: dict, index: int, *, include_booking_url: bool) -> list[str]:
     title = deal.get("title") or "Featured trip"
     price = int(deal["price"])
-    origin = deal.get("origin") or "—"
-    dest = deal.get("destination") or "—"
-    dates = format_short_date_range(deal.get("out_date", ""), deal.get("ret_date", ""))
-    airline = deal.get("airline") or "—"
-    window = deal.get("window_label") or ""
     board = deal.get("site_url") or featured_deep_link(deal.get("id"))
-    book = deal.get("url") or board
-    route = f"{origin}→{dest} · {dates}"
-    if window:
-        route = f"{route} · {window}"
-    lines = [
-        f"{index}. {title} · ${price}",
-        f"   {route} · {airline}",
-        f"   ↗ {site_link_display(board)}",
-    ]
-    if include_booking_url and book != board:
-        lines.append(f"   🔗 {book}")
+    blurb = (deal.get("blurb") or "").strip()
+    options = _dedupe_featured_options(deal.get("options") or [])
+
+    lines = [f"{index}. {title} · from ${price}"]
+    if blurb:
+        lines.append(f"   {blurb}")
+    if options:
+        for opt in options:
+            lines.extend(_format_featured_option_line_plain(opt, include_booking_url=include_booking_url))
+    else:
+        origin = deal.get("origin") or "—"
+        dest = deal.get("destination") or "—"
+        dates = format_short_date_range(deal.get("out_date", ""), deal.get("ret_date", ""))
+        airline = deal.get("airline") or "—"
+        window = deal.get("window_label") or ""
+        route = f"{origin}→{dest} · {dates}"
+        if window:
+            route = f"{route} · {window}"
+        lines.append(f"   {route} · {airline}")
+        if include_booking_url and deal.get("url"):
+            lines.append(f"   🔗 {deal['url']}")
+    lines.append(f"   ↗ {site_link_display(board)}")
     return lines
 
 
 def _format_featured_deal_imessage(deal: dict) -> str:
     title = deal.get("title") or "Featured trip"
     price = int(deal["price"])
-    origin = deal.get("origin") or "—"
-    dest = deal.get("destination") or "—"
-    dates = format_short_date_range(deal.get("out_date", ""), deal.get("ret_date", ""))
-    airline = deal.get("airline") or "—"
-    window = deal.get("window_label") or ""
     board = deal.get("site_url") or featured_deep_link(deal.get("id"))
-    detail = f"{origin}→{dest} · {dates}"
-    if window:
-        detail = f"{detail} · {window}"
-    return f"{title} · ${price}\n{detail} · {airline}\n{board}"
+    blurb = (deal.get("blurb") or "").strip()
+    options = _dedupe_featured_options(deal.get("options") or [])
+
+    lines = [f"{title} · from ${price}"]
+    if blurb:
+        lines.append(blurb)
+    if options:
+        lines.extend(_format_featured_option_line_imessage(opt) for opt in options)
+    else:
+        origin = deal.get("origin") or "—"
+        dest = deal.get("destination") or "—"
+        dates = format_short_date_range(deal.get("out_date", ""), deal.get("ret_date", ""))
+        airline = deal.get("airline") or "—"
+        window = deal.get("window_label") or ""
+        detail = f"{origin}→{dest} · {dates}"
+        if window:
+            detail = f"{detail} · {window}"
+        lines.append(f"{detail} · {airline}")
+    lines.append(board)
+    return "\n".join(lines)
 
 
 def format_featured_digest_plain(deals: list[dict]) -> str:
@@ -243,21 +319,44 @@ def _featured_digest_cards(deals: list[dict]) -> str:
     for deal in deals:
         title = deal.get("title") or "Featured trip"
         price = int(deal["price"])
-        origin = deal.get("origin") or "—"
-        dest = deal.get("destination") or "—"
-        dates = format_short_date_range(deal.get("out_date", ""), deal.get("ret_date", ""))
-        airline = deal.get("airline") or "—"
-        window = deal.get("window_label") or ""
         board = deal.get("site_url") or featured_deep_link(deal.get("id"))
-        book = deal.get("url") or board
-        sub = f"{origin} → {dest} · {dates}"
-        if window:
-            sub = f"{sub} · {window}"
+        blurb = (deal.get("blurb") or "").strip()
+        options = _dedupe_featured_options(deal.get("options") or [])
+        if options:
+            option_lines = []
+            for opt in options:
+                origin = opt.get("origin") or "—"
+                dest = opt.get("destination") or "—"
+                dates = format_short_date_range(opt.get("outDate", ""), opt.get("retDate", ""))
+                window = opt.get("windowLabel") or ""
+                airline = opt.get("airline") or "—"
+                out_time = _compact_departure_time(opt.get("outDepFmt") or "")
+                label = f"{window} · ${int(opt['price'])}" if window else f"${int(opt['price'])}"
+                option_lines.append(
+                    f"{html.escape(label)} — {html.escape(origin)} → {html.escape(dest)} · "
+                    f"{html.escape(dates)} · {html.escape(airline)}"
+                    + (f" · {html.escape(out_time)} out" if out_time else "")
+                )
+            subline = "<br>".join(option_lines)
+            meta = blurb or "Pinned weekend search"
+            book = options[0].get("url") or board
+        else:
+            origin = deal.get("origin") or "—"
+            dest = deal.get("destination") or "—"
+            dates = format_short_date_range(deal.get("out_date", ""), deal.get("ret_date", ""))
+            airline = deal.get("airline") or "—"
+            window = deal.get("window_label") or ""
+            sub = f"{origin} → {dest} · {dates}"
+            if window:
+                sub = f"{sub} · {window}"
+            subline = sub
+            meta = airline
+            book = deal.get("url") or board
         cards.append(
             _html_deal_card(
-                headline=f"{title} · ${price}",
-                subline=sub,
-                meta=airline,
+                headline=f"{title} · from ${price}",
+                subline=subline,
+                meta=meta,
                 book_url=book,
                 board_url=board,
             )

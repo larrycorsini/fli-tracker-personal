@@ -21,6 +21,7 @@ from tracker_config import (
     EXCLUDED_AIRLINES,
     FEATURED_SEARCHES,
     FEATURED_SEARCHES_JSON,
+    FEATURED_SEARCHES_PUBLIC_JSON,
     SITE_URL,
 )
 from tracker_io import atomic_write_json
@@ -370,22 +371,24 @@ def write_featured_searches(
 
 
 def load_featured_searches() -> dict:
-    """Load root featured_searches.json if present."""
-    if not os.path.exists(FEATURED_SEARCHES_JSON):
-        return {"searches": []}
-    try:
-        import json
+    """Load featured search payload from root or public JSON."""
+    for path in (FEATURED_SEARCHES_JSON, FEATURED_SEARCHES_PUBLIC_JSON):
+        if not os.path.exists(path):
+            continue
+        try:
+            import json
 
-        with open(FEATURED_SEARCHES_JSON, encoding="utf-8") as handle:
-            data = json.load(handle)
-    except (json.JSONDecodeError, OSError):
-        return {"searches": []}
-    if not isinstance(data, dict):
-        return {"searches": []}
-    searches = data.get("searches", [])
-    if not isinstance(searches, list):
-        searches = []
-    return {**data, "searches": [s for s in searches if isinstance(s, dict)]}
+            with open(path, encoding="utf-8") as handle:
+                data = json.load(handle)
+        except (json.JSONDecodeError, OSError):
+            continue
+        if not isinstance(data, dict):
+            continue
+        searches = data.get("searches", [])
+        if not isinstance(searches, list):
+            searches = []
+        return {**data, "searches": [s for s in searches if isinstance(s, dict)]}
+    return {"searches": []}
 
 
 def flatten_featured_for_alert(payload: dict | None = None) -> list[dict]:
