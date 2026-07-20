@@ -122,13 +122,43 @@ class TestPayloadAndAlert:
         msg = format_featured_digest_imessage(deals)
         assert "tfs=" not in msg
         assert "Watching" in msg
-        assert "DFW · Sep 23–26 · $237" in msg
+        assert "DFW · Sep 23–26 · from $237" in msg
+        assert "Wed afternoon · $237" in msg
+        assert "5:20 PM" in msg
         assert "flights.larrycorsini.com/#featured-dfw-sep-23-26" in msg
 
+    def test_imessage_lists_multiple_windows(self):
+        rows = [
+            _flight(price=237, out_dep="2026-09-23T17:20:00"),
+            _flight(
+                price=275,
+                out_date="2026-09-24",
+                out_dep="2026-09-24T07:00:00",
+                airline="American Airlines",
+            ),
+        ]
+        deals = flatten_featured_for_alert(build_featured_payload([(DFW_SPEC, rows)]))
+        msg = format_featured_digest_imessage(deals)
+        assert "Wed afternoon · $237" in msg
+        assert "Thu morning · $275" in msg
+        assert "5:20 PM" in msg
+        assert "7:00 AM" in msg
+
     def test_plain_includes_booking(self):
-        deals = flatten_featured_for_alert(build_featured_payload([(DFW_SPEC, [_flight()])]))
+        rows = [
+            _flight(price=237, out_dep="2026-09-23T17:20:00"),
+            _flight(
+                price=275,
+                out_date="2026-09-24",
+                out_dep="2026-09-24T07:00:00",
+                airline="American Airlines",
+            ),
+        ]
+        deals = flatten_featured_for_alert(build_featured_payload([(DFW_SPEC, rows)]))
         msg = format_featured_digest_plain(deals)
         assert "tfs=TEST" in msg
+        assert "Wed afternoon" in msg
+        assert "Thu morning" in msg
         assert featured_digest_subject(deals) == "Fli-Tracker: DFW · Sep 23–26 from $237"
 
     def test_format_option_thu_label(self):
