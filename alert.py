@@ -202,27 +202,8 @@ def run_alerts(*, force: bool = False, preview: bool = False) -> int:
 
     today_str = datetime.now().strftime("%Y-%m-%d")
     last_alerts = load_last_alerts()
-    sections: list[tuple[str, str, str, str, str]] = []
-
-    featured_deals = flatten_featured_for_alert(load_featured_searches())
-    if featured_deals and (
-        force or not digest_already_sent(last_alerts, today_str, featured_deals, "_featured_digest")
-    ):
-        sections.append(
-            (
-                featured_digest_subject(featured_deals),
-                "Watching",
-                format_featured_digest_plain(featured_deals),
-                format_featured_digest_imessage(featured_deals),
-                _featured_digest_cards(featured_deals),
-            )
-        )
-        last_alerts["_featured_digest"] = {
-            "date": today_str,
-            "deals": sorted(
-                (d.get("id") or d.get("title", ""), d.get("price")) for d in featured_deals
-            ),
-        }
+    # Build non-featured sections first; Watching is always prepended at the top.
+    other_sections: list[tuple[str, str, str, str, str]] = []
 
     if os.path.exists(OUTPUT_JSON):
         with open(OUTPUT_JSON, encoding="utf-8") as handle:
@@ -232,7 +213,7 @@ def run_alerts(*, force: bool = False, preview: bool = False) -> int:
         economy_deals = collect_deals_under_threshold(all_results)
         if economy_deals:
             if force or not digest_already_sent(last_alerts, today_str, economy_deals, "_digest"):
-                sections.append(
+                other_sections.append(
                     (
                         morning_digest_subject(economy_deals),
                         "Morning Deals",
@@ -262,7 +243,7 @@ def run_alerts(*, force: bool = False, preview: bool = False) -> int:
     if premium_deals and (
         force or not digest_already_sent(last_alerts, today_str, premium_deals, "_premium_digest")
     ):
-        sections.append(
+        other_sections.append(
             (
                 premium_digest_subject(premium_deals),
                 "Premium Deals",
@@ -277,6 +258,35 @@ def run_alerts(*, force: bool = False, preview: bool = False) -> int:
                 (d.get("destination", ""), d.get("price"), d.get("points")) for d in premium_deals
             ),
         }
+
+    featured_deals = flatten_featured_for_alert(load_featured_searches())
+    featured_already = bool(featured_deals) and digest_already_sent(
+        last_alerts, today_str, featured_deals, "_featured_digest"
+    )
+    # Always put Watching first when present. Re-include it whenever morning/premium
+    # sections are sending so DFW stays at the top of the combined message.
+    include_featured = bool(featured_deals) and (
+        force or not featured_already or bool(other_sections)
+    )
+
+    sections: list[tuple[str, str, str, str, str]] = []
+    if include_featured:
+        sections.append(
+            (
+                featured_digest_subject(featured_deals),
+                "Watching",
+                format_featured_digest_plain(featured_deals),
+                format_featured_digest_imessage(featured_deals),
+                _featured_digest_cards(featured_deals),
+            )
+        )
+        last_alerts["_featured_digest"] = {
+            "date": today_str,
+            "deals": sorted(
+                (d.get("id") or d.get("title", ""), d.get("price")) for d in featured_deals
+            ),
+        }
+    sections.extend(other_sections)
 
     if not sections:
         print("No alerts sent.")

@@ -231,12 +231,15 @@ def _format_featured_deal_plain(deal: dict, index: int, *, include_booking_url: 
     blurb = (deal.get("blurb") or "").strip()
     options = _dedupe_featured_options(deal.get("options") or [])
 
+    # Price options first so the Watching block leads with actionable fares.
     lines = [f"{index}. {title} · from ${price}"]
-    if blurb:
-        lines.append(f"   {blurb}")
     if options:
         for opt in options:
-            lines.extend(_format_featured_option_line_plain(opt, include_booking_url=include_booking_url))
+            lines.extend(
+                _format_featured_option_line_plain(
+                    opt, include_booking_url=include_booking_url
+                )
+            )
     else:
         origin = deal.get("origin") or "—"
         dest = deal.get("destination") or "—"
@@ -249,6 +252,8 @@ def _format_featured_deal_plain(deal: dict, index: int, *, include_booking_url: 
         lines.append(f"   {route} · {airline}")
         if include_booking_url and deal.get("url"):
             lines.append(f"   🔗 {deal['url']}")
+    if blurb:
+        lines.append(f"   {blurb}")
     lines.append(f"   ↗ {site_link_display(board)}")
     return lines
 
@@ -257,12 +262,10 @@ def _format_featured_deal_imessage(deal: dict) -> str:
     title = deal.get("title") or "Featured trip"
     price = int(deal["price"])
     board = deal.get("site_url") or featured_deep_link(deal.get("id"))
-    blurb = (deal.get("blurb") or "").strip()
     options = _dedupe_featured_options(deal.get("options") or [])
 
+    # Lead with title + fare lines (skip long blurb in iMessage for scannability).
     lines = [f"{title} · from ${price}"]
-    if blurb:
-        lines.append(blurb)
     if options:
         lines.extend(_format_featured_option_line_imessage(opt) for opt in options)
     else:
@@ -320,7 +323,7 @@ def _featured_digest_cards(deals: list[dict]) -> str:
         title = deal.get("title") or "Featured trip"
         price = int(deal["price"])
         board = deal.get("site_url") or featured_deep_link(deal.get("id"))
-        blurb = (deal.get("blurb") or "").strip()
+        blurb = (deal.get("blurb") or "").strip() or "Pinned weekend search"
         options = _dedupe_featured_options(deal.get("options") or [])
         if options:
             option_lines = []
@@ -337,9 +340,19 @@ def _featured_digest_cards(deals: list[dict]) -> str:
                     f"{html.escape(dates)} · {html.escape(airline)}"
                     + (f" · {html.escape(out_time)} out" if out_time else "")
                 )
-            subline = "<br>".join(option_lines)
-            meta = blurb or "Pinned weekend search"
+            # Options lead the card; blurb sits as secondary meta (raw HTML for <br>).
+            subline_html = "<br>".join(option_lines)
             book = options[0].get("url") or board
+            cards.append(
+                _html_deal_card(
+                    headline=f"{title} · from ${price}",
+                    subline=subline_html,
+                    meta=blurb,
+                    book_url=book,
+                    board_url=board,
+                    escape_subline=False,
+                )
+            )
         else:
             origin = deal.get("origin") or "—"
             dest = deal.get("destination") or "—"
@@ -349,18 +362,16 @@ def _featured_digest_cards(deals: list[dict]) -> str:
             sub = f"{origin} → {dest} · {dates}"
             if window:
                 sub = f"{sub} · {window}"
-            subline = sub
-            meta = airline
             book = deal.get("url") or board
-        cards.append(
-            _html_deal_card(
-                headline=f"{title} · from ${price}",
-                subline=subline,
-                meta=meta,
-                book_url=book,
-                board_url=board,
+            cards.append(
+                _html_deal_card(
+                    headline=f"{title} · from ${price}",
+                    subline=sub,
+                    meta=airline,
+                    book_url=book,
+                    board_url=board,
+                )
             )
-        )
     return "".join(cards)
 
 
@@ -467,15 +478,17 @@ def _html_deal_card(
     meta: str,
     book_url: str,
     board_url: str,
+    escape_subline: bool = True,
 ) -> str:
     book = html.escape(book_url)
     board = html.escape(board_url)
+    subline_html = html.escape(subline) if escape_subline else subline
     return f"""
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-bottom:16px;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;">
   <tr>
     <td style="padding:16px 18px;">
       <div style="font-size:18px;font-weight:700;color:{_BRAND_PRIMARY};">{html.escape(headline)}</div>
-      <div style="font-size:14px;color:#4b5563;margin-top:6px;">{html.escape(subline)}</div>
+      <div style="font-size:14px;color:#4b5563;margin-top:6px;">{subline_html}</div>
       <div style="font-size:13px;color:#6b7280;margin-top:4px;">{html.escape(meta)}</div>
       <table role="presentation" cellspacing="0" cellpadding="0" style="margin-top:14px;">
         <tr>

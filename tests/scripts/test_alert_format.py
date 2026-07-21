@@ -119,7 +119,32 @@ class TestCombineAlertContent:
         assert subject == "Fli-Tracker: deal alerts"
         assert "email-a" in email_plain and "email-b" in email_plain
         assert "imessage-a" in imessage_plain and "imessage-b" in imessage_plain
+        assert imessage_plain.index("imessage-a") < imessage_plain.index("imessage-b")
         assert "Morning Deals" in html and "Premium Deals" in html
+
+    def test_watching_section_leads_combined_imessage(self):
+        subject, email_plain, imessage_plain, html = combine_alert_content(
+            [
+                (
+                    "Featured subject",
+                    "Watching",
+                    "featured-email",
+                    "📌 Watching\nDFW · from $237",
+                    "<featured />",
+                ),
+                (
+                    "Morning subject",
+                    "Morning Deals",
+                    "morning-email",
+                    "✈️ Morning deals\nLAX · $199",
+                    "<morning />",
+                ),
+            ]
+        )
+        assert imessage_plain.index("Watching") < imessage_plain.index("Morning deals")
+        assert html.index("Watching") < html.index("Morning Deals")
+        assert "featured-email" in email_plain
+        assert subject == "Fli-Tracker: deal alerts"
 
 
 class TestHelpers:
