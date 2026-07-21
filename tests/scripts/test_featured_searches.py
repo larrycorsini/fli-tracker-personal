@@ -143,6 +143,9 @@ class TestPayloadAndAlert:
         assert "Thu morning · $275" in msg
         assert "5:20 PM" in msg
         assert "7:00 AM" in msg
+        # Options lead the block (before any long blurb).
+        assert msg.index("Wed afternoon") < msg.index("https://")
+        assert "Cheap direct" not in msg
 
     def test_plain_includes_booking(self):
         rows = [
