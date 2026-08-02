@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "Sat, Aug 01, 2026 at 07:15 AM MDT",
-  "lastUpdatedAt": "2026-08-01T13:15:15.608153+00:00",
+  "lastUpdated": "Sun, Aug 02, 2026 at 07:45 AM MDT",
+  "lastUpdatedAt": "2026-08-02T13:45:35.089013+00:00",
   "siteUrl": "https://flights.larrycorsini.com",
   "plannerUrl": "https://flights.larrycorsini.com",
   "intlTabs": [
@@ -98,7 +98,7 @@
           "outDateFmt": "Thu, Sep 03",
           "retDateFmt": "Sun, Sep 06",
           "dropPct": 0,
-          "priceDelta": 12,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -130,7 +130,7 @@
           "outDateFmt": "Thu, Sep 03",
           "retDateFmt": "Sun, Sep 06",
           "dropPct": 0,
-          "priceDelta": 12,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -162,12 +162,12 @@
           "outDateFmt": "Wed, Sep 16",
           "retDateFmt": "Sat, Sep 19",
           "dropPct": 0,
-          "priceDelta": 0,
+          "priceDelta": -12,
           "weekendEscape": true,
           "times": [
             {
               "outDepFmt": "Wed, Sep 16, 01:53 PM",
-              "retArrFmt": "Sat, Sep 19, 09:37 AM",
+              "retArrFmt": "Sat, Sep 19, 10:07 AM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA5LTE2IiAKA1NMQxIKMjAyNi0wOS0xNhoDREZXKgJETDIEMjgxMWoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTA5LTE5IiAKA0RGVxIKMjAyNi0wOS0xORoDU0xDKgJETDIEMTI5MWoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             },
             {
@@ -189,12 +189,12 @@
           "outDateFmt": "Wed, Sep 23",
           "retDateFmt": "Sat, Sep 26",
           "dropPct": 0,
-          "priceDelta": 0,
+          "priceDelta": -12,
           "weekendEscape": true,
           "times": [
             {
               "outDepFmt": "Wed, Sep 23, 05:20 PM",
-              "retArrFmt": "Sat, Sep 26, 09:37 AM",
+              "retArrFmt": "Sat, Sep 26, 10:07 AM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA5LTIzIiAKA1NMQxIKMjAyNi0wOS0yMxoDREZXKgJETDIEMjc5NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTA5LTI2IiAKA0RGVxIKMjAyNi0wOS0yNhoDU0xDKgJETDIEMTI5MWoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             },
             {
@@ -216,7 +216,7 @@
           "outDateFmt": "Wed, Sep 02",
           "retDateFmt": "Sat, Sep 05",
           "dropPct": 0,
-          "priceDelta": -66,
+          "priceDelta": -78,
           "weekendEscape": true,
           "times": [
             {
@@ -238,7 +238,7 @@
           "outDateFmt": "Wed, Sep 09",
           "retDateFmt": "Sat, Sep 12",
           "dropPct": 0,
-          "priceDelta": -66,
+          "priceDelta": -78,
           "weekendEscape": true,
           "times": [
             {
@@ -260,7 +260,7 @@
           "outDateFmt": "Wed, Sep 23",
           "retDateFmt": "Sat, Sep 26",
           "dropPct": 0,
-          "priceDelta": -66,
+          "priceDelta": -78,
           "weekendEscape": true,
           "times": [
             {
@@ -282,7 +282,7 @@
           "outDateFmt": "Wed, Sep 30",
           "retDateFmt": "Sat, Oct 03",
           "dropPct": 0,
-          "priceDelta": -66,
+          "priceDelta": -78,
           "weekendEscape": true,
           "times": [
             {
@@ -304,13 +304,35 @@
           "outDateFmt": "Wed, Oct 07",
           "retDateFmt": "Sat, Oct 10",
           "dropPct": 0,
-          "priceDelta": -66,
+          "priceDelta": -78,
           "weekendEscape": true,
           "times": [
             {
               "outDepFmt": "Wed, Oct 07, 01:55 PM",
-              "retArrFmt": "Sat, Oct 10, 01:28 PM",
+              "retArrFmt": "Sat, Oct 10, 01:33 PM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEwLTA3IiAKA1BWVRIKMjAyNi0xMC0wNxoDREZXKgJBQTIENjI0OGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI2LTEwLTEwIiAKA0RGVxIKMjAyNi0xMC0xMBoDUFZVKgJBQTIENjI0OGoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB"
+            }
+          ]
+        },
+        {
+          "origin": "PVU",
+          "destination": "DFW",
+          "airline": "American Airlines",
+          "price": 374,
+          "points": 29920,
+          "earn": 1870,
+          "outDate": "2026-09-16",
+          "retDate": "2026-09-19",
+          "outDateFmt": "Wed, Sep 16",
+          "retDateFmt": "Sat, Sep 19",
+          "dropPct": 0,
+          "priceDelta": -85,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Sep 16, 01:32 PM",
+              "retArrFmt": "Sat, Sep 19, 01:00 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA5LTE2IiAKA1BWVRIKMjAyNi0wOS0xNhoDREZXKgJBQTIENjI0OGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI2LTA5LTE5IiAKA0RGVxIKMjAyNi0wOS0xORoDUFZVKgJBQTIENjI0OGoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB"
             }
           ]
         },
@@ -326,7 +348,7 @@
           "outDateFmt": "Thu, Sep 17",
           "retDateFmt": "Sun, Sep 20",
           "dropPct": 0,
-          "priceDelta": -73,
+          "priceDelta": -85,
           "weekendEscape": true,
           "times": [
             {
@@ -358,12 +380,12 @@
           "outDateFmt": "Thu, Sep 24",
           "retDateFmt": "Sun, Sep 27",
           "dropPct": 0,
-          "priceDelta": -73,
+          "priceDelta": -85,
           "weekendEscape": true,
           "times": [
             {
               "outDepFmt": "Thu, Sep 24, 07:51 AM",
-              "retArrFmt": "Sun, Sep 27, 09:37 AM",
+              "retArrFmt": "Sun, Sep 27, 10:07 AM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA5LTI0IiAKA1NMQxIKMjAyNi0wOS0yNBoDREZXKgJETDIEMjc5OGoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTA5LTI3IiAKA0RGVxIKMjAyNi0wOS0yNxoDU0xDKgJETDIEMTI5MWoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             },
             {
@@ -385,7 +407,7 @@
           "outDateFmt": "Thu, Sep 24",
           "retDateFmt": "Sun, Sep 27",
           "dropPct": 0,
-          "priceDelta": -73,
+          "priceDelta": -85,
           "weekendEscape": true,
           "times": [
             {
@@ -417,7 +439,7 @@
           "outDateFmt": "Thu, Oct 01",
           "retDateFmt": "Sun, Oct 04",
           "dropPct": 0,
-          "priceDelta": -73,
+          "priceDelta": -85,
           "weekendEscape": true,
           "times": [
             {
@@ -438,28 +460,6 @@
           ]
         },
         {
-          "origin": "PVU",
-          "destination": "DFW",
-          "airline": "American Airlines",
-          "price": 375,
-          "points": 30000,
-          "earn": 1875,
-          "outDate": "2026-09-16",
-          "retDate": "2026-09-19",
-          "outDateFmt": "Wed, Sep 16",
-          "retDateFmt": "Sat, Sep 19",
-          "dropPct": 0,
-          "priceDelta": -74,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Wed, Sep 16, 01:32 PM",
-              "retArrFmt": "Sat, Sep 19, 01:00 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA5LTE2IiAKA1BWVRIKMjAyNi0wOS0xNhoDREZXKgJBQTIENjI0OGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI2LTA5LTE5IiAKA0RGVxIKMjAyNi0wOS0xORoDUFZVKgJBQTIENjI0OGoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB"
-            }
-          ]
-        },
-        {
           "origin": "SLC",
           "destination": "DFW",
           "airline": "American Airlines",
@@ -471,7 +471,7 @@
           "outDateFmt": "Thu, Sep 10",
           "retDateFmt": "Sun, Sep 13",
           "dropPct": 0,
-          "priceDelta": -76,
+          "priceDelta": -88,
           "weekendEscape": true,
           "times": [
             {
@@ -514,7 +514,7 @@
           "retDate": "2026-08-29",
           "outDateFmt": "Wed, Aug 26",
           "retDateFmt": "Sat, Aug 29",
-          "dropPct": 34,
+          "dropPct": 31,
           "priceDelta": 0,
           "weekendEscape": true,
           "times": [
@@ -528,22 +528,22 @@
         {
           "origin": "SLC",
           "destination": "SAN",
-          "airline": "Southwest Airlines",
+          "airline": "Alaska Airlines",
           "price": 97,
           "points": 7760,
           "earn": 485,
-          "outDate": "2026-09-02",
-          "retDate": "2026-09-05",
-          "outDateFmt": "Wed, Sep 02",
-          "retDateFmt": "Sat, Sep 05",
-          "dropPct": 34,
+          "outDate": "2026-09-09",
+          "retDate": "2026-09-12",
+          "outDateFmt": "Wed, Sep 09",
+          "retDateFmt": "Sat, Sep 12",
+          "dropPct": 31,
           "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
-              "outDepFmt": "Wed, Sep 02, 03:40 PM",
-              "retArrFmt": "Sat, Sep 05, 12:00 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA5LTAyIiAKA1NMQxIKMjAyNi0wOS0wMhoDU0FOKgJXTjIEMzk2NGoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTA5LTA1IiAKA1NBThIKMjAyNi0wOS0wNRoDU0xDKgJXTjIEMzkyOGoHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "outDepFmt": "Wed, Sep 09, 02:34 PM",
+              "retArrFmt": "Sat, Sep 12, 12:02 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA5LTA5IiAKA1NMQxIKMjAyNi0wOS0wORoDU0FOKgJBUzIEMzA1OWoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTA5LTEyIiAKA1NBThIKMjAyNi0wOS0xMhoDU0xDKgJBUzIEMzA1OGoHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             }
           ]
         },
@@ -558,7 +558,7 @@
           "retDate": "2026-09-12",
           "outDateFmt": "Wed, Sep 09",
           "retDateFmt": "Sat, Sep 12",
-          "dropPct": 34,
+          "dropPct": 31,
           "priceDelta": 0,
           "weekendEscape": true,
           "times": [
@@ -580,7 +580,7 @@
           "retDate": "2026-09-19",
           "outDateFmt": "Wed, Sep 16",
           "retDateFmt": "Sat, Sep 19",
-          "dropPct": 34,
+          "dropPct": 31,
           "priceDelta": 0,
           "weekendEscape": true,
           "times": [
@@ -602,7 +602,7 @@
           "retDate": "2026-09-26",
           "outDateFmt": "Wed, Sep 23",
           "retDateFmt": "Sat, Sep 26",
-          "dropPct": 34,
+          "dropPct": 31,
           "priceDelta": 0,
           "weekendEscape": true,
           "times": [
@@ -624,7 +624,7 @@
           "retDate": "2026-10-03",
           "outDateFmt": "Wed, Sep 30",
           "retDateFmt": "Sat, Oct 03",
-          "dropPct": 34,
+          "dropPct": 31,
           "priceDelta": 0,
           "weekendEscape": true,
           "times": [
@@ -646,7 +646,7 @@
           "retDate": "2026-10-10",
           "outDateFmt": "Wed, Oct 07",
           "retDateFmt": "Sat, Oct 10",
-          "dropPct": 34,
+          "dropPct": 31,
           "priceDelta": 0,
           "weekendEscape": true,
           "times": [
@@ -660,22 +660,22 @@
         {
           "origin": "SLC",
           "destination": "SAN",
-          "airline": "Alaska Airlines",
-          "price": 126,
-          "points": 10080,
-          "earn": 630,
-          "outDate": "2026-09-09",
-          "retDate": "2026-09-12",
-          "outDateFmt": "Wed, Sep 09",
-          "retDateFmt": "Sat, Sep 12",
-          "dropPct": 14,
-          "priceDelta": -29,
+          "airline": "Southwest Airlines",
+          "price": 117,
+          "points": 9360,
+          "earn": 585,
+          "outDate": "2026-10-07",
+          "retDate": "2026-10-11",
+          "outDateFmt": "Wed, Oct 07",
+          "retDateFmt": "Sun, Oct 11",
+          "dropPct": 17,
+          "priceDelta": -20,
           "weekendEscape": true,
           "times": [
             {
-              "outDepFmt": "Wed, Sep 09, 02:34 PM",
-              "retArrFmt": "Sat, Sep 12, 12:02 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA5LTA5IiAKA1NMQxIKMjAyNi0wOS0wORoDU0FOKgJBUzIEMzA1OWoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTA5LTEyIiAKA1NBThIKMjAyNi0wOS0xMhoDU0xDKgJBUzIEMzA1OGoHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "outDepFmt": "Wed, Oct 07, 02:45 PM",
+              "retArrFmt": "Sun, Oct 11, 11:35 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEwLTA3IiAKA1NMQxIKMjAyNi0xMC0wNxoDU0FOKgJXTjIENDI1NWoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTEwLTExIiAKA1NBThIKMjAyNi0xMC0xMRoDU0xDKgJXTjIEMzQ4NWoHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             }
           ]
         },
@@ -690,7 +690,7 @@
           "retDate": "2026-08-30",
           "outDateFmt": "Wed, Aug 26",
           "retDateFmt": "Sun, Aug 30",
-          "dropPct": 13,
+          "dropPct": 10,
           "priceDelta": -30,
           "weekendEscape": true,
           "times": [
@@ -714,6 +714,38 @@
         {
           "origin": "SLC",
           "destination": "SAN",
+          "airline": "Alaska Airlines",
+          "price": 127,
+          "points": 10160,
+          "earn": 635,
+          "outDate": "2026-09-09",
+          "retDate": "2026-09-13",
+          "outDateFmt": "Wed, Sep 09",
+          "retDateFmt": "Sun, Sep 13",
+          "dropPct": 10,
+          "priceDelta": -30,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Sep 09, 02:34 PM",
+              "retArrFmt": "Sun, Sep 13, 09:21 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA5LTA5IiAKA1NMQxIKMjAyNi0wOS0wORoDU0FOKgJBUzIEMzA1OWoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTA5LTEzIiAKA1NBThIKMjAyNi0wOS0xMxoDU0xDKgJETDIEMTExN2oHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+            },
+            {
+              "outDepFmt": "Wed, Sep 09, 02:34 PM",
+              "retArrFmt": "Sun, Sep 13, 12:45 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA5LTA5IiAKA1NMQxIKMjAyNi0wOS0wORoDU0FOKgJBUzIEMzA1OWoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTA5LTEzIiAKA1NBThIKMjAyNi0wOS0xMxoDU0xDKgJXTjIEMjMwNWoHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+            },
+            {
+              "outDepFmt": "Wed, Sep 09, 02:34 PM",
+              "retArrFmt": "Sun, Sep 13, 12:02 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA5LTA5IiAKA1NMQxIKMjAyNi0wOS0wORoDU0FOKgJBUzIEMzA1OWoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTA5LTEzIiAKA1NBThIKMjAyNi0wOS0xMxoDU0xDKgJBUzIEMzA1OGoHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "SAN",
           "airline": "Southwest Airlines",
           "price": 127,
           "points": 10160,
@@ -722,7 +754,7 @@
           "retDate": "2026-09-13",
           "outDateFmt": "Wed, Sep 09",
           "retDateFmt": "Sun, Sep 13",
-          "dropPct": 13,
+          "dropPct": 10,
           "priceDelta": -30,
           "weekendEscape": true,
           "times": [
@@ -754,7 +786,7 @@
           "retDate": "2026-09-20",
           "outDateFmt": "Wed, Sep 16",
           "retDateFmt": "Sun, Sep 20",
-          "dropPct": 13,
+          "dropPct": 10,
           "priceDelta": -30,
           "weekendEscape": true,
           "times": [
@@ -786,7 +818,7 @@
           "retDate": "2026-09-27",
           "outDateFmt": "Wed, Sep 23",
           "retDateFmt": "Sun, Sep 27",
-          "dropPct": 13,
+          "dropPct": 10,
           "priceDelta": -30,
           "weekendEscape": true,
           "times": [
@@ -802,8 +834,8 @@
             },
             {
               "outDepFmt": "Wed, Sep 23, 03:40 PM",
-              "retArrFmt": "Sun, Sep 27, 12:02 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA5LTIzIiAKA1NMQxIKMjAyNi0wOS0yMxoDU0FOKgJXTjIEMzk2NGoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTA5LTI3IiAKA1NBThIKMjAyNi0wOS0yNxoDU0xDKgJBUzIEMzA1OGoHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "retArrFmt": "Sun, Sep 27, 12:50 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA5LTIzIiAKA1NMQxIKMjAyNi0wOS0yMxoDU0FOKgJXTjIEMzk2NGoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTA5LTI3IiAKA1NBThIKMjAyNi0wOS0yNxoDU0xDKgJETDIEMTE3N2oHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             }
           ]
         },
@@ -818,7 +850,7 @@
           "retDate": "2026-10-04",
           "outDateFmt": "Wed, Sep 30",
           "retDateFmt": "Sun, Oct 04",
-          "dropPct": 13,
+          "dropPct": 10,
           "priceDelta": -30,
           "weekendEscape": true,
           "times": [
@@ -842,59 +874,27 @@
         {
           "origin": "SLC",
           "destination": "SAN",
-          "airline": "Southwest Airlines",
-          "price": 127,
-          "points": 10160,
-          "earn": 635,
-          "outDate": "2026-10-07",
-          "retDate": "2026-10-11",
-          "outDateFmt": "Wed, Oct 07",
-          "retDateFmt": "Sun, Oct 11",
-          "dropPct": 13,
-          "priceDelta": -30,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Wed, Oct 07, 02:45 PM",
-              "retArrFmt": "Sun, Oct 11, 09:26 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEwLTA3IiAKA1NMQxIKMjAyNi0xMC0wNxoDU0FOKgJXTjIENDI1NWoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTEwLTExIiAKA1NBThIKMjAyNi0xMC0xMRoDU0xDKgJETDIEMTExN2oHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
-            },
-            {
-              "outDepFmt": "Wed, Oct 07, 02:45 PM",
-              "retArrFmt": "Sun, Oct 11, 11:35 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEwLTA3IiAKA1NMQxIKMjAyNi0xMC0wNxoDU0FOKgJXTjIENDI1NWoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTEwLTExIiAKA1NBThIKMjAyNi0xMC0xMRoDU0xDKgJXTjIEMzQ4NWoHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
-            },
-            {
-              "outDepFmt": "Wed, Oct 07, 02:45 PM",
-              "retArrFmt": "Sun, Oct 11, 11:42 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEwLTA3IiAKA1NMQxIKMjAyNi0xMC0wNxoDU0FOKgJXTjIENDI1NWoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTEwLTExIiAKA1NBThIKMjAyNi0xMC0xMRoDU0xDKgJBUzIEMzExOGoHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
-            }
-          ]
-        },
-        {
-          "origin": "SLC",
-          "destination": "SAN",
           "airline": "Delta Air Lines",
           "price": 137,
           "points": 10960,
           "earn": 685,
-          "outDate": "2026-09-16",
-          "retDate": "2026-09-19",
-          "outDateFmt": "Wed, Sep 16",
-          "retDateFmt": "Sat, Sep 19",
-          "dropPct": 6,
+          "outDate": "2026-08-26",
+          "retDate": "2026-08-29",
+          "outDateFmt": "Wed, Aug 26",
+          "retDateFmt": "Sat, Aug 29",
+          "dropPct": 3,
           "priceDelta": -40,
           "weekendEscape": true,
           "times": [
             {
-              "outDepFmt": "Wed, Sep 16, 03:00 PM",
-              "retArrFmt": "Sat, Sep 19, 09:21 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA5LTE2IiAKA1NMQxIKMjAyNi0wOS0xNhoDU0FOKgJETDIEMTIxMGoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTA5LTE5IiAKA1NBThIKMjAyNi0wOS0xORoDU0xDKgJETDIEMTExN2oHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "outDepFmt": "Wed, Aug 26, 03:00 PM",
+              "retArrFmt": "Sat, Aug 29, 09:34 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA4LTI2IiAKA1NMQxIKMjAyNi0wOC0yNhoDU0FOKgJETDIEMTIxMGoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTA4LTI5IiAKA1NBThIKMjAyNi0wOC0yORoDU0xDKgJETDIEMTExN2oHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             },
             {
-              "outDepFmt": "Wed, Sep 16, 03:00 PM",
-              "retArrFmt": "Sat, Sep 19, 12:50 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA5LTE2IiAKA1NMQxIKMjAyNi0wOS0xNhoDU0FOKgJETDIEMTIxMGoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTA5LTE5IiAKA1NBThIKMjAyNi0wOS0xORoDU0xDKgJETDIEMTE3N2oHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "outDepFmt": "Wed, Aug 26, 03:00 PM",
+              "retArrFmt": "Sat, Aug 29, 12:50 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTA4LTI2IiAKA1NMQxIKMjAyNi0wOC0yNhoDU0FOKgJETDIEMTIxMGoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTA4LTI5IiAKA1NBThIKMjAyNi0wOC0yORoDU0xDKgJETDIEMTE3N2oHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             }
           ]
         }
@@ -921,8 +921,8 @@
           "retDate": "2026-08-29",
           "outDateFmt": "Wed, Aug 26",
           "retDateFmt": "Sat, Aug 29",
-          "dropPct": 5,
-          "priceDelta": null,
+          "dropPct": 6,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -953,8 +953,8 @@
           "retDate": "2026-08-30",
           "outDateFmt": "Thu, Aug 27",
           "retDateFmt": "Sun, Aug 30",
-          "dropPct": 5,
-          "priceDelta": null,
+          "dropPct": 6,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -985,8 +985,8 @@
           "retDate": "2026-08-30",
           "outDateFmt": "Wed, Aug 26",
           "retDateFmt": "Sun, Aug 30",
-          "dropPct": 5,
-          "priceDelta": null,
+          "dropPct": 6,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1018,23 +1018,23 @@
           "outDateFmt": "Thu, Sep 03",
           "retDateFmt": "Sun, Sep 06",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -31,
           "weekendEscape": true,
           "times": [
             {
               "outDepFmt": "Thu, Sep 03, 07:00 AM",
               "retArrFmt": "Sun, Sep 06, 01:08 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTAzIiAKA1BWVRIKMjAyNi0wOS0wMxoDREZXKgJBQTIENjQ5MiIgCgNERlcSCjIwMjYtMDktMDMaA0FUTCoCQUEyBDIzOThqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOS0wNiIgCgNBVEwSCjIwMjYtMDktMDYaA0RGVyoCQUEyBDI3NzAiIAoDREZXEgoyMDI2LTA5LTA2GgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTAzIiAKA1BWVRIKMjAyNi0wOS0wMxoDREZXKgJBQTIENjQ5MiIgCgNERlcSCjIwMjYtMDktMDMaA0FUTCoCQUEyBDEwMDhqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOS0wNiIgCgNBVEwSCjIwMjYtMDktMDYaA0RGVyoCQUEyBDI3NzAiIAoDREZXEgoyMDI2LTA5LTA2GgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
             },
             {
               "outDepFmt": "Thu, Sep 03, 07:00 AM",
               "retArrFmt": "Sun, Sep 06, 02:53 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTAzIiAKA1BWVRIKMjAyNi0wOS0wMxoDREZXKgJBQTIENjQ5MiIgCgNERlcSCjIwMjYtMDktMDMaA0FUTCoCQUEyBDIzOThqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOS0wNiIgCgNBVEwSCjIwMjYtMDktMDYaA1BIWCoCQUEyBDE3NzciIAoDUEhYEgoyMDI2LTA5LTA2GgNQVlUqAkFBMgQ2MjQ3agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTAzIiAKA1BWVRIKMjAyNi0wOS0wMxoDREZXKgJBQTIENjQ5MiIgCgNERlcSCjIwMjYtMDktMDMaA0FUTCoCQUEyBDEwMDhqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOS0wNiIgCgNBVEwSCjIwMjYtMDktMDYaA1BIWCoCQUEyBDE3NzciIAoDUEhYEgoyMDI2LTA5LTA2GgNQVlUqAkFBMgQ2MjQ3agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
             },
             {
               "outDepFmt": "Thu, Sep 03, 07:00 AM",
               "retArrFmt": "Sun, Sep 06, 01:08 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTAzIiAKA1BWVRIKMjAyNi0wOS0wMxoDREZXKgJBQTIENjQ5MiIgCgNERlcSCjIwMjYtMDktMDMaA0FUTCoCQUEyBDIzOThqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOS0wNiIgCgNBVEwSCjIwMjYtMDktMDYaA0RGVyoCQUEyBDE1NjciIAoDREZXEgoyMDI2LTA5LTA2GgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTAzIiAKA1BWVRIKMjAyNi0wOS0wMxoDREZXKgJBQTIENjQ5MiIgCgNERlcSCjIwMjYtMDktMDMaA0FUTCoCQUEyBDEwMDhqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOS0wNiIgCgNBVEwSCjIwMjYtMDktMDYaA0RGVyoCQUEyBDE1NjciIAoDREZXEgoyMDI2LTA5LTA2GgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
             }
           ]
         },
@@ -1050,7 +1050,7 @@
           "outDateFmt": "Thu, Sep 10",
           "retDateFmt": "Sun, Sep 13",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -31,
           "weekendEscape": true,
           "times": [
             {
@@ -1077,44 +1077,12 @@
           "price": 286,
           "points": 22880,
           "earn": 1430,
-          "outDate": "2026-08-19",
-          "retDate": "2026-08-22",
-          "outDateFmt": "Wed, Aug 19",
-          "retDateFmt": "Sat, Aug 22",
-          "dropPct": 0,
-          "priceDelta": null,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Wed, Aug 19, 01:38 PM",
-              "retArrFmt": "Sat, Aug 22, 01:08 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA4LTE5IiAKA1BWVRIKMjAyNi0wOC0xORoDREZXKgJBQTIENjI0OCIgCgNERlcSCjIwMjYtMDgtMTkaA0FUTCoCQUEyBDMyMTJqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOC0yMiIgCgNBVEwSCjIwMjYtMDgtMjIaA0RGVyoCQUEyBDI3NzAiIAoDREZXEgoyMDI2LTA4LTIyGgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
-            },
-            {
-              "outDepFmt": "Wed, Aug 19, 01:38 PM",
-              "retArrFmt": "Sat, Aug 22, 01:08 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA4LTE5IiAKA1BWVRIKMjAyNi0wOC0xORoDREZXKgJBQTIENjI0OCIgCgNERlcSCjIwMjYtMDgtMTkaA0FUTCoCQUEyBDMyMTJqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOC0yMiIgCgNBVEwSCjIwMjYtMDgtMjIaA0RGVyoCQUEyBDE1NjciIAoDREZXEgoyMDI2LTA4LTIyGgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
-            },
-            {
-              "outDepFmt": "Wed, Aug 19, 01:38 PM",
-              "retArrFmt": "Sun, Aug 23, 01:08 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA4LTE5IiAKA1BWVRIKMjAyNi0wOC0xORoDREZXKgJBQTIENjI0OCIgCgNERlcSCjIwMjYtMDgtMTkaA0FUTCoCQUEyBDMyMTJqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOC0yMiIgCgNBVEwSCjIwMjYtMDgtMjIaA0RGVyoCQUEyBDMxMDQiIAoDREZXEgoyMDI2LTA4LTIzGgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
-            }
-          ]
-        },
-        {
-          "origin": "PVU",
-          "destination": "ATL",
-          "airline": "American Airlines",
-          "price": 286,
-          "points": 22880,
-          "earn": 1430,
           "outDate": "2026-08-20",
           "retDate": "2026-08-23",
           "outDateFmt": "Thu, Aug 20",
           "retDateFmt": "Sun, Aug 23",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -31,
           "weekendEscape": true,
           "times": [
             {
@@ -1146,7 +1114,7 @@
           "outDateFmt": "Wed, Aug 19",
           "retDateFmt": "Sun, Aug 23",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -31,
           "weekendEscape": true,
           "times": [
             {
@@ -1178,18 +1146,18 @@
           "outDateFmt": "Wed, Sep 02",
           "retDateFmt": "Sat, Sep 05",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -48,
           "weekendEscape": true,
           "times": [
             {
               "outDepFmt": "Wed, Sep 02, 01:38 PM",
               "retArrFmt": "Sat, Sep 05, 01:08 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTAyIiAKA1BWVRIKMjAyNi0wOS0wMhoDREZXKgJBQTIENjI0OCIgCgNERlcSCjIwMjYtMDktMDIaA0FUTCoCQUEyBDMyMTJqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOS0wNSIgCgNBVEwSCjIwMjYtMDktMDUaA0RGVyoCQUEyBDE1NjciIAoDREZXEgoyMDI2LTA5LTA1GgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTAyIiAKA1BWVRIKMjAyNi0wOS0wMhoDREZXKgJBQTIENjI0OCIgCgNERlcSCjIwMjYtMDktMDIaA0FUTCoCQUEyBDMyMTJqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOS0wNSIgCgNBVEwSCjIwMjYtMDktMDUaA0RGVyoCQUEyBDI3NzAiIAoDREZXEgoyMDI2LTA5LTA1GgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
             },
             {
               "outDepFmt": "Wed, Sep 02, 01:38 PM",
               "retArrFmt": "Sat, Sep 05, 01:08 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTAyIiAKA1BWVRIKMjAyNi0wOS0wMhoDREZXKgJBQTIENjI0OCIgCgNERlcSCjIwMjYtMDktMDIaA0FUTCoCQUEyBDMyMTJqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOS0wNSIgCgNBVEwSCjIwMjYtMDktMDUaA0RGVyoCQUEyBDI3NzAiIAoDREZXEgoyMDI2LTA5LTA1GgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTAyIiAKA1BWVRIKMjAyNi0wOS0wMhoDREZXKgJBQTIENjI0OCIgCgNERlcSCjIwMjYtMDktMDIaA0FUTCoCQUEyBDMyMTJqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOS0wNSIgCgNBVEwSCjIwMjYtMDktMDUaA0RGVyoCQUEyBDE1NjciIAoDREZXEgoyMDI2LTA5LTA1GgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
             },
             {
               "outDepFmt": "Wed, Sep 02, 01:38 PM",
@@ -1205,44 +1173,12 @@
           "price": 303,
           "points": 24240,
           "earn": 1515,
-          "outDate": "2026-09-10",
-          "retDate": "2026-09-13",
-          "outDateFmt": "Thu, Sep 10",
-          "retDateFmt": "Sun, Sep 13",
-          "dropPct": 0,
-          "priceDelta": null,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Thu, Sep 10, 06:53 AM",
-              "retArrFmt": "Sun, Sep 13, 01:00 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTEwIiAKA1BWVRIKMjAyNi0wOS0xMBoDREZXKgJBQTIENjQ5MiIgCgNERlcSCjIwMjYtMDktMTAaA0FUTCoCQUEyBDIzOThqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOS0xMyIgCgNBVEwSCjIwMjYtMDktMTMaA0RGVyoCQUEyBDI3NzAiIAoDREZXEgoyMDI2LTA5LTEzGgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
-            },
-            {
-              "outDepFmt": "Thu, Sep 10, 06:53 AM",
-              "retArrFmt": "Sun, Sep 13, 02:58 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTEwIiAKA1BWVRIKMjAyNi0wOS0xMBoDREZXKgJBQTIENjQ5MiIgCgNERlcSCjIwMjYtMDktMTAaA0FUTCoCQUEyBDIzOThqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOS0xMyIgCgNBVEwSCjIwMjYtMDktMTMaA1BIWCoCQUEyBDE3NzciIAoDUEhYEgoyMDI2LTA5LTEzGgNQVlUqAkFBMgQ2MjQ3agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
-            },
-            {
-              "outDepFmt": "Thu, Sep 10, 06:53 AM",
-              "retArrFmt": "Sun, Sep 13, 01:00 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTEwIiAKA1BWVRIKMjAyNi0wOS0xMBoDREZXKgJBQTIENjQ5MiIgCgNERlcSCjIwMjYtMDktMTAaA0FUTCoCQUEyBDIzOThqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOS0xMyIgCgNBVEwSCjIwMjYtMDktMTMaA0RGVyoCQUEyBDE1NjciIAoDREZXEgoyMDI2LTA5LTEzGgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
-            }
-          ]
-        },
-        {
-          "origin": "PVU",
-          "destination": "ATL",
-          "airline": "American Airlines",
-          "price": 303,
-          "points": 24240,
-          "earn": 1515,
           "outDate": "2026-09-02",
           "retDate": "2026-09-06",
           "outDateFmt": "Wed, Sep 02",
           "retDateFmt": "Sun, Sep 06",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -48,
           "weekendEscape": true,
           "times": [
             {
@@ -1274,14 +1210,9 @@
           "outDateFmt": "Wed, Oct 07",
           "retDateFmt": "Sat, Oct 10",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -48,
           "weekendEscape": true,
           "times": [
-            {
-              "outDepFmt": "Wed, Oct 07, 01:55 PM",
-              "retArrFmt": "Sat, Oct 10, 01:28 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEwLTA3IiAKA1BWVRIKMjAyNi0xMC0wNxoDREZXKgJBQTIENjI0OCIgCgNERlcSCjIwMjYtMTAtMDcaA0FUTCoCQUEyBDI3NDlqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0xMC0xMCIgCgNBVEwSCjIwMjYtMTAtMTAaA0RGVyoCQUEyBDE1NjciIAoDREZXEgoyMDI2LTEwLTEwGgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
-            },
             {
               "outDepFmt": "Wed, Oct 07, 01:55 PM",
               "retArrFmt": "Sat, Oct 10, 02:59 PM",
@@ -1289,8 +1220,45 @@
             },
             {
               "outDepFmt": "Wed, Oct 07, 01:55 PM",
+              "retArrFmt": "Sat, Oct 10, 01:28 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEwLTA3IiAKA1BWVRIKMjAyNi0xMC0wNxoDREZXKgJBQTIENjI0OCIgCgNERlcSCjIwMjYtMTAtMDcaA0FUTCoCQUEyBDI3NDlqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0xMC0xMCIgCgNBVEwSCjIwMjYtMTAtMTAaA0RGVyoCQUEyBDE1NjciIAoDREZXEgoyMDI2LTEwLTEwGgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
+            },
+            {
+              "outDepFmt": "Wed, Oct 07, 01:55 PM",
               "retArrFmt": "Sun, Oct 11, 01:25 PM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEwLTA3IiAKA1BWVRIKMjAyNi0xMC0wNxoDREZXKgJBQTIENjI0OCIgCgNERlcSCjIwMjYtMTAtMDcaA0FUTCoCQUEyBDI3NDlqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0xMC0xMCIgCgNBVEwSCjIwMjYtMTAtMTAaA0RGVyoCQUEyBDMxMDQiIAoDREZXEgoyMDI2LTEwLTExGgNQVlUqAkFBMgQyOTU5agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
+            }
+          ]
+        },
+        {
+          "origin": "PVU",
+          "destination": "ATL",
+          "airline": "American Airlines",
+          "price": 317,
+          "points": 25360,
+          "earn": 1585,
+          "outDate": "2026-08-19",
+          "retDate": "2026-08-22",
+          "outDateFmt": "Wed, Aug 19",
+          "retDateFmt": "Sat, Aug 22",
+          "dropPct": 0,
+          "priceDelta": -62,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Aug 19, 01:38 PM",
+              "retArrFmt": "Sat, Aug 22, 01:08 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA4LTE5IiAKA1BWVRIKMjAyNi0wOC0xORoDREZXKgJBQTIENjI0OCIgCgNERlcSCjIwMjYtMDgtMTkaA0FUTCoCQUEyBDMyMTJqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOC0yMiIgCgNBVEwSCjIwMjYtMDgtMjIaA0RGVyoCQUEyBDI3NzAiIAoDREZXEgoyMDI2LTA4LTIyGgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
+            },
+            {
+              "outDepFmt": "Wed, Aug 19, 01:38 PM",
+              "retArrFmt": "Sat, Aug 22, 01:08 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA4LTE5IiAKA1BWVRIKMjAyNi0wOC0xORoDREZXKgJBQTIENjI0OCIgCgNERlcSCjIwMjYtMDgtMTkaA0FUTCoCQUEyBDMyMTJqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOC0yMiIgCgNBVEwSCjIwMjYtMDgtMjIaA0RGVyoCQUEyBDE1NjciIAoDREZXEgoyMDI2LTA4LTIyGgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
+            },
+            {
+              "outDepFmt": "Wed, Aug 19, 01:38 PM",
+              "retArrFmt": "Sun, Aug 23, 01:08 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA4LTE5IiAKA1BWVRIKMjAyNi0wOC0xORoDREZXKgJBQTIENjI0OCIgCgNERlcSCjIwMjYtMDgtMTkaA0FUTCoCQUEyBDMyMTJqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOC0yMiIgCgNBVEwSCjIwMjYtMDgtMjIaA0RGVyoCQUEyBDEyNzYiIAoDREZXEgoyMDI2LTA4LTIzGgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
             }
           ]
         },
@@ -1306,7 +1274,7 @@
           "outDateFmt": "Wed, Aug 26",
           "retDateFmt": "Sat, Aug 29",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -87,
           "weekendEscape": true,
           "times": [
             {
@@ -1327,38 +1295,6 @@
           ]
         },
         {
-          "origin": "PVU",
-          "destination": "ATL",
-          "airline": "American Airlines",
-          "price": 349,
-          "points": 27920,
-          "earn": 1745,
-          "outDate": "2026-09-03",
-          "retDate": "2026-09-06",
-          "outDateFmt": "Thu, Sep 03",
-          "retDateFmt": "Sun, Sep 06",
-          "dropPct": 0,
-          "priceDelta": null,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Thu, Sep 03, 07:00 AM",
-              "retArrFmt": "Sun, Sep 06, 01:08 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTAzIiAKA1BWVRIKMjAyNi0wOS0wMxoDREZXKgJBQTIENjQ5MiIgCgNERlcSCjIwMjYtMDktMDMaA0FUTCoCQUEyBDEwMDhqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOS0wNiIgCgNBVEwSCjIwMjYtMDktMDYaA0RGVyoCQUEyBDI3NzAiIAoDREZXEgoyMDI2LTA5LTA2GgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
-            },
-            {
-              "outDepFmt": "Thu, Sep 03, 07:00 AM",
-              "retArrFmt": "Sun, Sep 06, 02:53 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTAzIiAKA1BWVRIKMjAyNi0wOS0wMxoDREZXKgJBQTIENjQ5MiIgCgNERlcSCjIwMjYtMDktMDMaA0FUTCoCQUEyBDEwMDhqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOS0wNiIgCgNBVEwSCjIwMjYtMDktMDYaA1BIWCoCQUEyBDE3NzciIAoDUEhYEgoyMDI2LTA5LTA2GgNQVlUqAkFBMgQ2MjQ3agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
-            },
-            {
-              "outDepFmt": "Thu, Sep 03, 07:00 AM",
-              "retArrFmt": "Sun, Sep 06, 01:08 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTAzIiAKA1BWVRIKMjAyNi0wOS0wMxoDREZXKgJBQTIENjQ5MiIgCgNERlcSCjIwMjYtMDktMDMaA0FUTCoCQUEyBDEwMDhqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNi0wOS0wNiIgCgNBVEwSCjIwMjYtMDktMDYaA0RGVyoCQUEyBDE1NjciIAoDREZXEgoyMDI2LTA5LTA2GgNQVlUqAkFBMgQ2MjQ4agcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
-            }
-          ]
-        },
-        {
           "origin": "SLC",
           "destination": "ATL",
           "airline": "Southwest Airlines",
@@ -1370,7 +1306,7 @@
           "outDateFmt": "Wed, Sep 02",
           "retDateFmt": "Sat, Sep 05",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -110,
           "weekendEscape": true,
           "times": [
             {
@@ -1387,6 +1323,70 @@
               "outDepFmt": "Wed, Sep 02, 12:15 PM",
               "retArrFmt": "Sat, Sep 05, 02:40 PM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTAyIiAKA1NMQxIKMjAyNi0wOS0wMhoDREVOKgJXTjIENDM5OSIgCgNERU4SCjIwMjYtMDktMDIaA0FUTCoCV04yBDIxNDVqBwgBEgNTTENyBwgBEgNBVEwaYhIKMjAyNi0wOS0wNSIgCgNBVEwSCjIwMjYtMDktMDUaA0JOQSoCV04yBDM5MDQiIAoDQk5BEgoyMDI2LTA5LTA1GgNTTEMqAldOMgQ0NDQxagcIARIDQVRMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "ATL",
+          "airline": "Southwest Airlines",
+          "price": 370,
+          "points": 29600,
+          "earn": 1850,
+          "outDate": "2026-09-02",
+          "retDate": "2026-09-06",
+          "outDateFmt": "Wed, Sep 02",
+          "retDateFmt": "Sun, Sep 06",
+          "dropPct": 0,
+          "priceDelta": -115,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Sep 02, 12:15 PM",
+              "retArrFmt": "Sun, Sep 06, 01:20 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTAyIiAKA1NMQxIKMjAyNi0wOS0wMhoDREVOKgJXTjIENDM5OSIgCgNERU4SCjIwMjYtMDktMDIaA0FUTCoCV04yBDIxNDVqBwgBEgNTTENyBwgBEgNBVEwaYhIKMjAyNi0wOS0wNiIgCgNBVEwSCjIwMjYtMDktMDYaA01EVyoCV04yBDIwNzAiIAoDTURXEgoyMDI2LTA5LTA2GgNTTEMqAldOMgQ0ODAzagcIARIDQVRMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE"
+            },
+            {
+              "outDepFmt": "Wed, Sep 02, 12:15 PM",
+              "retArrFmt": "Sun, Sep 06, 02:05 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA5LTAyIiAKA1NMQxIKMjAyNi0wOS0wMhoDREVOKgJXTjIENDM5OSIgCgNERU4SCjIwMjYtMDktMDIaA0FUTCoCV04yBDIxNDVqBwgBEgNTTENyBwgBEgNBVEwaYRIKMjAyNi0wOS0wNiIfCgNBVEwSCjIwMjYtMDktMDYaA0RFTioCV04yAzIwNCIgCgNERU4SCjIwMjYtMDktMDYaA1NMQyoCV04yBDE0MjRqBwgBEgNBVExyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ"
+            },
+            {
+              "outDepFmt": "Wed, Sep 02, 03:40 PM",
+              "retArrFmt": "Sun, Sep 06, 01:20 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTAyIiAKA1NMQxIKMjAyNi0wOS0wMhoDREVOKgJXTjIEMzY2MiIfCgNERU4SCjIwMjYtMDktMDIaA0FUTCoCV04yAzQ3OWoHCAESA1NMQ3IHCAESA0FUTBpiEgoyMDI2LTA5LTA2IiAKA0FUTBIKMjAyNi0wOS0wNhoDTURXKgJXTjIEMjA3MCIgCgNNRFcSCjIwMjYtMDktMDYaA1NMQyoCV04yBDQ4MDNqBwgBEgNBVExyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "ATL",
+          "airline": "Southwest Airlines",
+          "price": 377,
+          "points": 30160,
+          "earn": 1885,
+          "outDate": "2026-08-26",
+          "retDate": "2026-08-29",
+          "outDateFmt": "Wed, Aug 26",
+          "retDateFmt": "Sat, Aug 29",
+          "dropPct": 0,
+          "priceDelta": -122,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Aug 26, 12:15 PM",
+              "retArrFmt": "Sat, Aug 29, 10:20 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA4LTI2IiAKA1NMQxIKMjAyNi0wOC0yNhoDREVOKgJXTjIENDM5OSIgCgNERU4SCjIwMjYtMDgtMjYaA0FUTCoCV04yBDIxNDVqBwgBEgNTTENyBwgBEgNBVEwaYBIKMjAyNi0wOC0yOSIfCgNBVEwSCjIwMjYtMDgtMjkaA0hPVSoCV04yAzQ0MCIfCgNIT1USCjIwMjYtMDgtMjkaA1NMQyoCV04yAzYyM2oHCAESA0FUTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+            },
+            {
+              "outDepFmt": "Wed, Aug 26, 12:15 PM",
+              "retArrFmt": "Sat, Aug 29, 10:45 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA4LTI2IiAKA1NMQxIKMjAyNi0wOC0yNhoDREVOKgJXTjIENDM5OSIgCgNERU4SCjIwMjYtMDgtMjYaA0FUTCoCV04yBDIxNDVqBwgBEgNTTENyBwgBEgNBVEwaYRIKMjAyNi0wOC0yOSIfCgNBVEwSCjIwMjYtMDgtMjkaA0RFTioCV04yAzIwNCIgCgNERU4SCjIwMjYtMDgtMjkaA1NMQyoCV04yBDE2ODBqBwgBEgNBVExyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ"
+            },
+            {
+              "outDepFmt": "Wed, Aug 26, 12:15 PM",
+              "retArrFmt": "Sat, Aug 29, 12:25 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTA4LTI2IiAKA1NMQxIKMjAyNi0wOC0yNhoDREVOKgJXTjIENDM5OSIgCgNERU4SCjIwMjYtMDgtMjYaA0FUTCoCV04yBDIxNDVqBwgBEgNTTENyBwgBEgNBVEwaYRIKMjAyNi0wOC0yOSIfCgNBVEwSCjIwMjYtMDgtMjkaA01EVyoCV04yAzIzMiIgCgNNRFcSCjIwMjYtMDgtMjkaA1NMQyoCV04yBDQ4MDNqBwgBEgNBVExyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ"
             }
           ]
         }
@@ -1419,7 +1419,7 @@
           "outDateFmt": "Mon, Aug 31",
           "retDateFmt": "Mon, Sep 07",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1434,8 +1434,8 @@
             },
             {
               "outDepFmt": "Mon, Aug 31, 09:40 AM",
-              "retArrFmt": "Tue, Sep 08, 09:31 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA4LTMxIiAKA1NMQxIKMjAyNi0wOC0zMRoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMDgtMzEaA1NBTCoCQVYyAzU2M2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTA3Ih8KA1NBTBIKMjAyNi0wOS0wNxoDU0ZPKgJBVjIDNTYwIiAKA1NGTxIKMjAyNi0wOS0wOBoDU0xDKgJVQTIENDc1M2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "retArrFmt": "Tue, Sep 08, 07:18 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA4LTMxIiAKA1NMQxIKMjAyNi0wOC0zMRoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMDgtMzEaA1NBTCoCQVYyAzU2M2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTA3Ih8KA1NBTBIKMjAyNi0wOS0wNxoDTEFYKgJBVjIDNTIwIiAKA0xBWBIKMjAyNi0wOS0wOBoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             }
           ]
         },
@@ -1451,7 +1451,7 @@
           "outDateFmt": "Fri, Sep 04",
           "retDateFmt": "Fri, Sep 11",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1483,7 +1483,7 @@
           "outDateFmt": "Sat, Sep 05",
           "retDateFmt": "Sat, Sep 12",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1495,6 +1495,11 @@
               "outDepFmt": "Sat, Sep 05, 04:35 PM",
               "retArrFmt": "Sat, Sep 12, 07:18 PM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTA5LTA1Ih8KA1NMQxIKMjAyNi0wOS0wNRoDU0ZPKgJVQTIDNzk2Ih8KA1NGTxIKMjAyNi0wOS0wNRoDU0FMKgJBVjIDNTYxagcIARIDU0xDcgcIARIDU0FMGmESCjIwMjYtMDktMTIiHwoDU0FMEgoyMDI2LTA5LTEyGgNMQVgqAkFWMgM1MjIiIAoDTEFYEgoyMDI2LTA5LTEyGgNTTEMqAlVBMgQ1MzA3agcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE"
+            },
+            {
+              "outDepFmt": "Sat, Sep 05, 04:35 PM",
+              "retArrFmt": "Sun, Sep 13, 07:18 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTA5LTA1Ih8KA1NMQxIKMjAyNi0wOS0wNRoDU0ZPKgJVQTIDNzk2Ih8KA1NGTxIKMjAyNi0wOS0wNRoDU0FMKgJBVjIDNTYxagcIARIDU0xDcgcIARIDU0FMGmESCjIwMjYtMDktMTIiHwoDU0FMEgoyMDI2LTA5LTEyGgNMQVgqAkFWMgM1MjAiIAoDTEFYEgoyMDI2LTA5LTEzGgNTTEMqAlVBMgQ1MzA3agcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE"
             }
           ]
         },
@@ -1510,7 +1515,7 @@
           "outDateFmt": "Sat, Sep 12",
           "retDateFmt": "Sat, Sep 19",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1525,8 +1530,8 @@
             },
             {
               "outDepFmt": "Sat, Sep 12, 09:40 AM",
-              "retArrFmt": "Sun, Sep 20, 07:18 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTEyIiAKA1NMQxIKMjAyNi0wOS0xMhoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMDktMTIaA1NBTCoCQVYyAzU2M2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTE5Ih8KA1NBTBIKMjAyNi0wOS0xORoDTEFYKgJBVjIDNTI4IiAKA0xBWBIKMjAyNi0wOS0yMBoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "retArrFmt": "Sun, Sep 20, 11:54 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTEyIiAKA1NMQxIKMjAyNi0wOS0xMhoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMDktMTIaA1NBTCoCQVYyAzU2M2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTE5Ih8KA1NBTBIKMjAyNi0wOS0xORoDU0ZPKgJBVjIDNTYwIiAKA1NGTxIKMjAyNi0wOS0yMBoDU0xDKgJVQTIENTc1M2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             }
           ]
         },
@@ -1542,7 +1547,7 @@
           "outDateFmt": "Tue, Sep 01",
           "retDateFmt": "Fri, Sep 11",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1557,8 +1562,8 @@
             },
             {
               "outDepFmt": "Tue, Sep 01, 09:40 AM",
-              "retArrFmt": "Sat, Sep 12, 07:18 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTAxIiAKA1NMQxIKMjAyNi0wOS0wMRoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMDktMDEaA1NBTCoCQVYyAzU2M2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTExIh8KA1NBTBIKMjAyNi0wOS0xMRoDTEFYKgJBVjIDNTI4IiAKA0xBWBIKMjAyNi0wOS0xMhoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "retArrFmt": "Sat, Sep 12, 09:31 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTAxIiAKA1NMQxIKMjAyNi0wOS0wMRoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMDktMDEaA1NBTCoCQVYyAzU2M2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTExIh8KA1NBTBIKMjAyNi0wOS0xMRoDU0ZPKgJBVjIDNTYwIiAKA1NGTxIKMjAyNi0wOS0xMhoDU0xDKgJVQTIENDc1M2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             }
           ]
         },
@@ -1574,7 +1579,7 @@
           "outDateFmt": "Sat, Sep 05",
           "retDateFmt": "Tue, Sep 15",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1606,7 +1611,7 @@
           "outDateFmt": "Thu, Sep 10",
           "retDateFmt": "Sun, Sep 20",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1638,7 +1643,7 @@
           "outDateFmt": "Fri, Sep 11",
           "retDateFmt": "Mon, Sep 21",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1649,12 +1654,12 @@
             {
               "outDepFmt": "Fri, Sep 11, 09:40 AM",
               "retArrFmt": "Tue, Sep 22, 07:18 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTExIiAKA1NMQxIKMjAyNi0wOS0xMRoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMDktMTEaA1NBTCoCQVYyAzU2M2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTIxIh8KA1NBTBIKMjAyNi0wOS0yMRoDTEFYKgJBVjIDNTIwIiAKA0xBWBIKMjAyNi0wOS0yMhoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTExIiAKA1NMQxIKMjAyNi0wOS0xMRoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMDktMTEaA1NBTCoCQVYyAzU2M2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTIxIh8KA1NBTBIKMjAyNi0wOS0yMRoDTEFYKgJBVjIDNTI4IiAKA0xBWBIKMjAyNi0wOS0yMhoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             },
             {
               "outDepFmt": "Fri, Sep 11, 09:40 AM",
-              "retArrFmt": "Tue, Sep 22, 07:18 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTExIiAKA1NMQxIKMjAyNi0wOS0xMRoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMDktMTEaA1NBTCoCQVYyAzU2M2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTIxIh8KA1NBTBIKMjAyNi0wOS0yMRoDTEFYKgJBVjIDNTI4IiAKA0xBWBIKMjAyNi0wOS0yMhoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "retArrFmt": "Mon, Sep 21, 07:18 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTExIiAKA1NMQxIKMjAyNi0wOS0xMRoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMDktMTEaA1NBTCoCQVYyAzU2M2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTIxIh8KA1NBTBIKMjAyNi0wOS0yMRoDTEFYKgJBVjIDNTIyIiAKA0xBWBIKMjAyNi0wOS0yMRoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             }
           ]
         },
@@ -1670,7 +1675,7 @@
           "outDateFmt": "Sat, Sep 12",
           "retDateFmt": "Sat, Sep 19",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -3,
           "weekendEscape": true,
           "times": [
             {
@@ -1685,8 +1690,8 @@
             },
             {
               "outDepFmt": "Sat, Sep 12, 08:15 AM",
-              "retArrFmt": "Sun, Sep 20, 07:18 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTEyIiAKA1NMQxIKMjAyNi0wOS0xMhoDTEFYKgJVQTIENTQwOCIfCgNMQVgSCjIwMjYtMDktMTIaA1NBTCoCQVYyAzUyM2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTE5Ih8KA1NBTBIKMjAyNi0wOS0xORoDTEFYKgJBVjIDNTI4IiAKA0xBWBIKMjAyNi0wOS0yMBoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "retArrFmt": "Sun, Sep 20, 11:54 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTEyIiAKA1NMQxIKMjAyNi0wOS0xMhoDTEFYKgJVQTIENTQwOCIfCgNMQVgSCjIwMjYtMDktMTIaA1NBTCoCQVYyAzUyM2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTE5Ih8KA1NBTBIKMjAyNi0wOS0xORoDU0ZPKgJBVjIDNTYwIiAKA1NGTxIKMjAyNi0wOS0yMBoDU0xDKgJVQTIENTc1M2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             }
           ]
         },
@@ -1702,7 +1707,7 @@
           "outDateFmt": "Tue, Sep 01",
           "retDateFmt": "Fri, Sep 11",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -3,
           "weekendEscape": true,
           "times": [
             {
@@ -1717,8 +1722,8 @@
             },
             {
               "outDepFmt": "Tue, Sep 01, 08:15 AM",
-              "retArrFmt": "Sat, Sep 12, 07:18 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTAxIiAKA1NMQxIKMjAyNi0wOS0wMRoDTEFYKgJVQTIENTQwOCIfCgNMQVgSCjIwMjYtMDktMDEaA1NBTCoCQVYyAzUyM2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTExIh8KA1NBTBIKMjAyNi0wOS0xMRoDTEFYKgJBVjIDNTI4IiAKA0xBWBIKMjAyNi0wOS0xMhoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "retArrFmt": "Sat, Sep 12, 09:31 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTAxIiAKA1NMQxIKMjAyNi0wOS0wMRoDTEFYKgJVQTIENTQwOCIfCgNMQVgSCjIwMjYtMDktMDEaA1NBTCoCQVYyAzUyM2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTExIh8KA1NBTBIKMjAyNi0wOS0xMRoDU0ZPKgJBVjIDNTYwIiAKA1NGTxIKMjAyNi0wOS0xMhoDU0xDKgJVQTIENDc1M2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             }
           ]
         },
@@ -1734,7 +1739,7 @@
           "outDateFmt": "Thu, Sep 10",
           "retDateFmt": "Sun, Sep 20",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -3,
           "weekendEscape": true,
           "times": [
             {
@@ -1766,7 +1771,7 @@
           "outDateFmt": "Fri, Sep 11",
           "retDateFmt": "Mon, Sep 21",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -3,
           "weekendEscape": true,
           "times": [
             {
@@ -1777,44 +1782,12 @@
             {
               "outDepFmt": "Fri, Sep 11, 08:15 AM",
               "retArrFmt": "Tue, Sep 22, 07:18 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTExIiAKA1NMQxIKMjAyNi0wOS0xMRoDTEFYKgJVQTIENTQwOCIfCgNMQVgSCjIwMjYtMDktMTEaA1NBTCoCQVYyAzUyM2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTIxIh8KA1NBTBIKMjAyNi0wOS0yMRoDTEFYKgJBVjIDNTIwIiAKA0xBWBIKMjAyNi0wOS0yMhoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTExIiAKA1NMQxIKMjAyNi0wOS0xMRoDTEFYKgJVQTIENTQwOCIfCgNMQVgSCjIwMjYtMDktMTEaA1NBTCoCQVYyAzUyM2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTIxIh8KA1NBTBIKMjAyNi0wOS0yMRoDTEFYKgJBVjIDNTI4IiAKA0xBWBIKMjAyNi0wOS0yMhoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             },
             {
               "outDepFmt": "Fri, Sep 11, 08:15 AM",
-              "retArrFmt": "Tue, Sep 22, 07:18 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTExIiAKA1NMQxIKMjAyNi0wOS0xMRoDTEFYKgJVQTIENTQwOCIfCgNMQVgSCjIwMjYtMDktMTEaA1NBTCoCQVYyAzUyM2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTIxIh8KA1NBTBIKMjAyNi0wOS0yMRoDTEFYKgJBVjIDNTI4IiAKA0xBWBIKMjAyNi0wOS0yMhoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
-            }
-          ]
-        },
-        {
-          "origin": "SLC",
-          "destination": "SAL",
-          "airline": "United Airlines",
-          "price": 744,
-          "points": 59520,
-          "earn": 3720,
-          "outDate": "2026-08-29",
-          "retDate": "2026-09-05",
-          "outDateFmt": "Sat, Aug 29",
-          "retDateFmt": "Sat, Sep 05",
-          "dropPct": 0,
-          "priceDelta": null,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Sat, Aug 29, 09:40 AM",
-              "retArrFmt": "Sat, Sep 05, 07:18 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA4LTI5IiAKA1NMQxIKMjAyNi0wOC0yORoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMDgtMjkaA1NBTCoCQVYyAzU2M2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTA1Ih8KA1NBTBIKMjAyNi0wOS0wNRoDTEFYKgJBVjIDNTIyIiAKA0xBWBIKMjAyNi0wOS0wNRoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
-            },
-            {
-              "outDepFmt": "Sat, Aug 29, 09:40 AM",
-              "retArrFmt": "Sun, Sep 06, 11:54 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA4LTI5IiAKA1NMQxIKMjAyNi0wOC0yORoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMDgtMjkaA1NBTCoCQVYyAzU2M2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTA1Ih8KA1NBTBIKMjAyNi0wOS0wNRoDU0ZPKgJBVjIDNTYwIiAKA1NGTxIKMjAyNi0wOS0wNhoDU0xDKgJVQTIENTc1M2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
-            },
-            {
-              "outDepFmt": "Sat, Aug 29, 09:40 AM",
-              "retArrFmt": "Sun, Sep 06, 11:54 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA4LTI5IiAKA1NMQxIKMjAyNi0wOC0yORoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMDgtMjkaA1NBTCoCQVYyAzU2M2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTA1Ih8KA1NBTBIKMjAyNi0wOS0wNRoDU0ZPKgJBVjIDNTU4IiAKA1NGTxIKMjAyNi0wOS0wNhoDU0xDKgJVQTIENTc1M2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "retArrFmt": "Mon, Sep 21, 07:18 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTExIiAKA1NMQxIKMjAyNi0wOS0xMRoDTEFYKgJVQTIENTQwOCIfCgNMQVgSCjIwMjYtMDktMTEaA1NBTCoCQVYyAzUyM2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTIxIh8KA1NBTBIKMjAyNi0wOS0yMRoDTEFYKgJBVjIDNTIyIiAKA0xBWBIKMjAyNi0wOS0yMRoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             }
           ]
         },
@@ -1830,7 +1803,7 @@
           "outDateFmt": "Sun, Aug 30",
           "retDateFmt": "Sun, Sep 06",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -3,
           "weekendEscape": true,
           "times": [
             {
@@ -1845,8 +1818,8 @@
             },
             {
               "outDepFmt": "Sun, Aug 30, 08:15 AM",
-              "retArrFmt": "Mon, Sep 07, 11:54 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA4LTMwIiAKA1NMQxIKMjAyNi0wOC0zMBoDTEFYKgJVQTIENTQwOCIfCgNMQVgSCjIwMjYtMDgtMzAaA1NBTCoCQVYyAzUyM2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTA2Ih8KA1NBTBIKMjAyNi0wOS0wNhoDU0ZPKgJBVjIDNTYwIiAKA1NGTxIKMjAyNi0wOS0wNxoDU0xDKgJVQTIENTc1M2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "retArrFmt": "Mon, Sep 07, 07:18 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA4LTMwIiAKA1NMQxIKMjAyNi0wOC0zMBoDTEFYKgJVQTIENTQwOCIfCgNMQVgSCjIwMjYtMDgtMzAaA1NBTCoCQVYyAzUyM2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTA2Ih8KA1NBTBIKMjAyNi0wOS0wNhoDTEFYKgJBVjIDNTIwIiAKA0xBWBIKMjAyNi0wOS0wNxoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             }
           ]
         },
@@ -1862,7 +1835,7 @@
           "outDateFmt": "Thu, Sep 03",
           "retDateFmt": "Thu, Sep 10",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -3,
           "weekendEscape": true,
           "times": [
             {
@@ -1872,13 +1845,45 @@
             },
             {
               "outDepFmt": "Thu, Sep 03, 09:40 AM",
-              "retArrFmt": "Fri, Sep 11, 11:54 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTAzIiAKA1NMQxIKMjAyNi0wOS0wMxoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMDktMDMaA1NBTCoCQVYyAzU2M2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTEwIh8KA1NBTBIKMjAyNi0wOS0xMBoDU0ZPKgJBVjIDNTU4IiAKA1NGTxIKMjAyNi0wOS0xMRoDU0xDKgJVQTIENTc1M2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "retArrFmt": "Fri, Sep 11, 07:18 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTAzIiAKA1NMQxIKMjAyNi0wOS0wMxoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMDktMDMaA1NBTCoCQVYyAzU2M2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTEwIh8KA1NBTBIKMjAyNi0wOS0xMBoDTEFYKgJBVjIDNTIwIiAKA0xBWBIKMjAyNi0wOS0xMRoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             },
             {
               "outDepFmt": "Thu, Sep 03, 09:40 AM",
               "retArrFmt": "Fri, Sep 11, 07:18 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTAzIiAKA1NMQxIKMjAyNi0wOS0wMxoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMDktMDMaA1NBTCoCQVYyAzU2M2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTEwIh8KA1NBTBIKMjAyNi0wOS0xMBoDTEFYKgJBVjIDNTIwIiAKA0xBWBIKMjAyNi0wOS0xMRoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA5LTAzIiAKA1NMQxIKMjAyNi0wOS0wMxoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMDktMDMaA1NBTCoCQVYyAzU2M2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTEwIh8KA1NBTBIKMjAyNi0wOS0xMBoDTEFYKgJBVjIDNTI4IiAKA0xBWBIKMjAyNi0wOS0xMRoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "SAL",
+          "airline": "United Airlines",
+          "price": 744,
+          "points": 59520,
+          "earn": 3720,
+          "outDate": "2026-08-30",
+          "retDate": "2026-09-09",
+          "outDateFmt": "Sun, Aug 30",
+          "retDateFmt": "Wed, Sep 09",
+          "dropPct": 0,
+          "priceDelta": -3,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Sun, Aug 30, 08:15 AM",
+              "retArrFmt": "Wed, Sep 09, 11:54 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA4LTMwIiAKA1NMQxIKMjAyNi0wOC0zMBoDTEFYKgJVQTIENTQwOCIfCgNMQVgSCjIwMjYtMDgtMzAaA1NBTCoCQVYyAzUyM2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTA5Ih8KA1NBTBIKMjAyNi0wOS0wORoDU0ZPKgJBVjIDNTYyIiAKA1NGTxIKMjAyNi0wOS0wORoDU0xDKgJVQTIENTc1M2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+            },
+            {
+              "outDepFmt": "Sun, Aug 30, 08:15 AM",
+              "retArrFmt": "Wed, Sep 09, 07:18 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA4LTMwIiAKA1NMQxIKMjAyNi0wOC0zMBoDTEFYKgJVQTIENTQwOCIfCgNMQVgSCjIwMjYtMDgtMzAaA1NBTCoCQVYyAzUyM2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTA5Ih8KA1NBTBIKMjAyNi0wOS0wORoDTEFYKgJBVjIDNTIyIiAKA0xBWBIKMjAyNi0wOS0wORoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+            },
+            {
+              "outDepFmt": "Sun, Aug 30, 08:15 AM",
+              "retArrFmt": "Thu, Sep 10, 07:18 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTA4LTMwIiAKA1NMQxIKMjAyNi0wOC0zMBoDTEFYKgJVQTIENTQwOCIfCgNMQVgSCjIwMjYtMDgtMzAaA1NBTCoCQVYyAzUyM2oHCAESA1NMQ3IHCAESA1NBTBphEgoyMDI2LTA5LTA5Ih8KA1NBTBIKMjAyNi0wOS0wORoDTEFYKgJBVjIDNTIwIiAKA0xBWBIKMjAyNi0wOS0xMBoDU0xDKgJVQTIENTMwN2oHCAESA1NBTHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             }
           ]
         }
