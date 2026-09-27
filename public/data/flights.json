@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "Sat, Sep 19, 2026 at 06:22 AM MDT",
-  "lastUpdatedAt": "2026-09-19T12:22:31.792202+00:00",
+  "lastUpdated": "Sun, Sep 27, 2026 at 05:57 PM MDT",
+  "lastUpdatedAt": "2026-09-27T23:57:10.533409+00:00",
   "siteUrl": "https://flights.larrycorsini.com",
   "plannerUrl": "https://flights.larrycorsini.com",
   "intlTabs": [
@@ -97,8 +97,8 @@
           "retDate": "2026-10-24",
           "outDateFmt": "Wed, Oct 21",
           "retDateFmt": "Sat, Oct 24",
-          "dropPct": 11,
-          "priceDelta": -20,
+          "dropPct": 10,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -124,8 +124,8 @@
           "retDate": "2026-11-21",
           "outDateFmt": "Wed, Nov 18",
           "retDateFmt": "Sat, Nov 21",
-          "dropPct": 11,
-          "priceDelta": -20,
+          "dropPct": 10,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -157,7 +157,7 @@
           "outDateFmt": "Thu, Oct 22",
           "retDateFmt": "Sun, Oct 25",
           "dropPct": 0,
-          "priceDelta": -112,
+          "priceDelta": -92,
           "weekendEscape": true,
           "times": [
             {
@@ -189,7 +189,7 @@
           "outDateFmt": "Thu, Oct 29",
           "retDateFmt": "Sun, Nov 01",
           "dropPct": 0,
-          "priceDelta": -112,
+          "priceDelta": -92,
           "weekendEscape": true,
           "times": [
             {
@@ -221,7 +221,7 @@
           "outDateFmt": "Thu, Nov 05",
           "retDateFmt": "Sun, Nov 08",
           "dropPct": 0,
-          "priceDelta": -112,
+          "priceDelta": -92,
           "weekendEscape": true,
           "times": [
             {
@@ -253,7 +253,7 @@
           "outDateFmt": "Thu, Nov 12",
           "retDateFmt": "Sun, Nov 15",
           "dropPct": 0,
-          "priceDelta": -112,
+          "priceDelta": -92,
           "weekendEscape": true,
           "times": [
             {
@@ -285,7 +285,7 @@
           "outDateFmt": "Thu, Oct 29",
           "retDateFmt": "Sun, Nov 01",
           "dropPct": 0,
-          "priceDelta": -115,
+          "priceDelta": -95,
           "weekendEscape": true,
           "times": [
             {
@@ -312,7 +312,7 @@
           "outDateFmt": "Thu, Nov 05",
           "retDateFmt": "Sun, Nov 08",
           "dropPct": 0,
-          "priceDelta": -115,
+          "priceDelta": -95,
           "weekendEscape": true,
           "times": [
             {
@@ -339,7 +339,7 @@
           "outDateFmt": "Thu, Nov 12",
           "retDateFmt": "Sun, Nov 15",
           "dropPct": 0,
-          "priceDelta": -115,
+          "priceDelta": -95,
           "weekendEscape": true,
           "times": [
             {
@@ -366,7 +366,7 @@
           "outDateFmt": "Wed, Oct 21",
           "retDateFmt": "Sun, Oct 25",
           "dropPct": 0,
-          "priceDelta": -115,
+          "priceDelta": -95,
           "weekendEscape": true,
           "times": [
             {
@@ -393,7 +393,7 @@
           "outDateFmt": "Thu, Nov 19",
           "retDateFmt": "Sun, Nov 22",
           "dropPct": 0,
-          "priceDelta": -115,
+          "priceDelta": -95,
           "weekendEscape": true,
           "times": [
             {
@@ -425,7 +425,7 @@
           "outDateFmt": "Wed, Nov 18",
           "retDateFmt": "Sun, Nov 22",
           "dropPct": 0,
-          "priceDelta": -115,
+          "priceDelta": -95,
           "weekendEscape": true,
           "times": [
             {
@@ -457,7 +457,7 @@
           "outDateFmt": "Wed, Oct 28",
           "retDateFmt": "Sat, Oct 31",
           "dropPct": 0,
-          "priceDelta": -130,
+          "priceDelta": -110,
           "weekendEscape": true,
           "times": [
             {
@@ -479,7 +479,7 @@
           "outDateFmt": "Wed, Nov 04",
           "retDateFmt": "Sat, Nov 07",
           "dropPct": 0,
-          "priceDelta": -130,
+          "priceDelta": -110,
           "weekendEscape": true,
           "times": [
             {
@@ -501,7 +501,7 @@
           "outDateFmt": "Thu, Nov 19",
           "retDateFmt": "Sun, Nov 22",
           "dropPct": 0,
-          "priceDelta": -145,
+          "priceDelta": -125,
           "weekendEscape": true,
           "times": [
             {
@@ -545,7 +545,7 @@
           "outDateFmt": "Wed, Oct 28",
           "retDateFmt": "Sat, Oct 31",
           "dropPct": 6,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -567,7 +567,7 @@
           "outDateFmt": "Wed, Oct 28",
           "retDateFmt": "Sat, Oct 31",
           "dropPct": 6,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -589,7 +589,7 @@
           "outDateFmt": "Thu, Oct 29",
           "retDateFmt": "Sun, Nov 01",
           "dropPct": 6,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -611,7 +611,7 @@
           "outDateFmt": "Wed, Nov 04",
           "retDateFmt": "Sat, Nov 07",
           "dropPct": 6,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -633,7 +633,7 @@
           "outDateFmt": "Wed, Nov 04",
           "retDateFmt": "Sat, Nov 07",
           "dropPct": 6,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -655,7 +655,7 @@
           "outDateFmt": "Wed, Nov 11",
           "retDateFmt": "Sat, Nov 14",
           "dropPct": 6,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -677,7 +677,7 @@
           "outDateFmt": "Wed, Oct 28",
           "retDateFmt": "Sun, Nov 01",
           "dropPct": 6,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -698,8 +698,8 @@
           "retDate": "2026-11-07",
           "outDateFmt": "Wed, Nov 04",
           "retDateFmt": "Sat, Nov 07",
-          "dropPct": 1,
-          "priceDelta": null,
+          "dropPct": 0,
+          "priceDelta": -10,
           "weekendEscape": true,
           "times": [
             {
@@ -725,8 +725,8 @@
           "retDate": "2026-10-24",
           "outDateFmt": "Wed, Oct 21",
           "retDateFmt": "Sat, Oct 24",
-          "dropPct": 1,
-          "priceDelta": null,
+          "dropPct": 0,
+          "priceDelta": -10,
           "weekendEscape": true,
           "times": [
             {
@@ -752,8 +752,8 @@
           "retDate": "2026-11-21",
           "outDateFmt": "Wed, Nov 18",
           "retDateFmt": "Sat, Nov 21",
-          "dropPct": 1,
-          "priceDelta": null,
+          "dropPct": 0,
+          "priceDelta": -10,
           "weekendEscape": true,
           "times": [
             {
@@ -774,8 +774,8 @@
           "retDate": "2026-11-22",
           "outDateFmt": "Wed, Nov 18",
           "retDateFmt": "Sun, Nov 22",
-          "dropPct": 1,
-          "priceDelta": null,
+          "dropPct": 0,
+          "priceDelta": -10,
           "weekendEscape": true,
           "times": [
             {
@@ -797,7 +797,7 @@
           "outDateFmt": "Thu, Oct 29",
           "retDateFmt": "Sun, Nov 01",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -12,
           "weekendEscape": true,
           "times": [
             {
@@ -819,7 +819,7 @@
           "outDateFmt": "Wed, Oct 28",
           "retDateFmt": "Sun, Nov 01",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -12,
           "weekendEscape": true,
           "times": [
             {
@@ -841,7 +841,7 @@
           "outDateFmt": "Thu, Oct 29",
           "retDateFmt": "Sun, Nov 01",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -20,
           "weekendEscape": true,
           "times": [
             {
@@ -868,7 +868,7 @@
           "outDateFmt": "Wed, Nov 11",
           "retDateFmt": "Sun, Nov 15",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -20,
           "weekendEscape": true,
           "times": [
             {
@@ -907,7 +907,7 @@
           "outDateFmt": "Wed, Oct 28",
           "retDateFmt": "Sat, Oct 31",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -939,7 +939,7 @@
           "outDateFmt": "Thu, Oct 29",
           "retDateFmt": "Sun, Nov 01",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -971,7 +971,7 @@
           "outDateFmt": "Wed, Nov 04",
           "retDateFmt": "Sat, Nov 07",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1003,7 +1003,7 @@
           "outDateFmt": "Wed, Nov 11",
           "retDateFmt": "Sat, Nov 14",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1035,7 +1035,7 @@
           "outDateFmt": "Wed, Dec 02",
           "retDateFmt": "Sat, Dec 05",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1067,7 +1067,7 @@
           "outDateFmt": "Wed, Oct 28",
           "retDateFmt": "Sun, Nov 01",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1099,7 +1099,7 @@
           "outDateFmt": "Wed, Nov 04",
           "retDateFmt": "Sun, Nov 08",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1131,7 +1131,7 @@
           "outDateFmt": "Wed, Nov 11",
           "retDateFmt": "Sun, Nov 15",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1163,7 +1163,7 @@
           "outDateFmt": "Wed, Dec 02",
           "retDateFmt": "Sun, Dec 06",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1195,7 +1195,7 @@
           "outDateFmt": "Thu, Oct 29",
           "retDateFmt": "Sun, Nov 01",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -31,
           "weekendEscape": true,
           "times": [
             {
@@ -1227,7 +1227,7 @@
           "outDateFmt": "Thu, Nov 12",
           "retDateFmt": "Sun, Nov 15",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -31,
           "weekendEscape": true,
           "times": [
             {
@@ -1259,7 +1259,7 @@
           "outDateFmt": "Wed, Nov 18",
           "retDateFmt": "Sun, Nov 22",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -89,
           "weekendEscape": true,
           "times": [
             {
@@ -1291,7 +1291,7 @@
           "outDateFmt": "Thu, Nov 05",
           "retDateFmt": "Sun, Nov 08",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -104,
           "weekendEscape": true,
           "times": [
             {
@@ -1323,7 +1323,7 @@
           "outDateFmt": "Wed, Oct 21",
           "retDateFmt": "Sat, Oct 24",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -110,
           "weekendEscape": true,
           "times": [
             {
@@ -1355,7 +1355,7 @@
           "outDateFmt": "Wed, Nov 11",
           "retDateFmt": "Sat, Nov 14",
           "dropPct": 0,
-          "priceDelta": null,
+          "priceDelta": -122,
           "weekendEscape": true,
           "times": [
             {
@@ -1403,8 +1403,8 @@
           "retDate": "2026-10-15",
           "outDateFmt": "Mon, Oct 05",
           "retDateFmt": "Thu, Oct 15",
-          "dropPct": 8,
-          "priceDelta": null,
+          "dropPct": 7,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1435,8 +1435,8 @@
           "retDate": "2026-10-16",
           "outDateFmt": "Tue, Oct 06",
           "retDateFmt": "Fri, Oct 16",
-          "dropPct": 8,
-          "priceDelta": null,
+          "dropPct": 7,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1467,8 +1467,8 @@
           "retDate": "2026-10-22",
           "outDateFmt": "Mon, Oct 12",
           "retDateFmt": "Thu, Oct 22",
-          "dropPct": 8,
-          "priceDelta": null,
+          "dropPct": 7,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1499,8 +1499,8 @@
           "retDate": "2026-10-29",
           "outDateFmt": "Mon, Oct 19",
           "retDateFmt": "Thu, Oct 29",
-          "dropPct": 8,
-          "priceDelta": null,
+          "dropPct": 7,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1531,8 +1531,8 @@
           "retDate": "2026-11-05",
           "outDateFmt": "Mon, Oct 26",
           "retDateFmt": "Thu, Nov 05",
-          "dropPct": 8,
-          "priceDelta": null,
+          "dropPct": 7,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1563,8 +1563,8 @@
           "retDate": "2026-10-16",
           "outDateFmt": "Tue, Oct 06",
           "retDateFmt": "Fri, Oct 16",
-          "dropPct": 6,
-          "priceDelta": null,
+          "dropPct": 5,
+          "priceDelta": -14,
           "weekendEscape": true,
           "times": [
             {
@@ -1595,8 +1595,8 @@
           "retDate": "2026-11-06",
           "outDateFmt": "Tue, Oct 27",
           "retDateFmt": "Fri, Nov 06",
-          "dropPct": 6,
-          "priceDelta": null,
+          "dropPct": 5,
+          "priceDelta": -14,
           "weekendEscape": true,
           "times": [
             {
@@ -1627,8 +1627,8 @@
           "retDate": "2026-11-08",
           "outDateFmt": "Thu, Oct 29",
           "retDateFmt": "Sun, Nov 08",
-          "dropPct": 6,
-          "priceDelta": null,
+          "dropPct": 5,
+          "priceDelta": -14,
           "weekendEscape": true,
           "times": [
             {
@@ -1659,8 +1659,8 @@
           "retDate": "2026-11-10",
           "outDateFmt": "Sat, Oct 31",
           "retDateFmt": "Tue, Nov 10",
-          "dropPct": 4,
-          "priceDelta": null,
+          "dropPct": 3,
+          "priceDelta": -29,
           "weekendEscape": true,
           "times": [
             {
@@ -1691,8 +1691,8 @@
           "retDate": "2026-10-13",
           "outDateFmt": "Tue, Oct 06",
           "retDateFmt": "Tue, Oct 13",
-          "dropPct": 4,
-          "priceDelta": null,
+          "dropPct": 3,
+          "priceDelta": -30,
           "weekendEscape": true,
           "times": [
             {
@@ -1723,8 +1723,8 @@
           "retDate": "2026-10-29",
           "outDateFmt": "Thu, Oct 22",
           "retDateFmt": "Thu, Oct 29",
-          "dropPct": 4,
-          "priceDelta": null,
+          "dropPct": 3,
+          "priceDelta": -30,
           "weekendEscape": true,
           "times": [
             {
@@ -1755,8 +1755,8 @@
           "retDate": "2026-11-05",
           "outDateFmt": "Thu, Oct 29",
           "retDateFmt": "Thu, Nov 05",
-          "dropPct": 4,
-          "priceDelta": null,
+          "dropPct": 3,
+          "priceDelta": -30,
           "weekendEscape": true,
           "times": [
             {
@@ -1788,7 +1788,7 @@
           "outDateFmt": "Thu, Oct 29",
           "retDateFmt": "Sun, Nov 08",
           "dropPct": 3,
-          "priceDelta": null,
+          "priceDelta": -31,
           "weekendEscape": true,
           "times": [
             {
@@ -1819,8 +1819,8 @@
           "retDate": "2026-11-09",
           "outDateFmt": "Fri, Oct 30",
           "retDateFmt": "Mon, Nov 09",
-          "dropPct": 3,
-          "priceDelta": null,
+          "dropPct": 2,
+          "priceDelta": -37,
           "weekendEscape": true,
           "times": [
             {
@@ -1852,7 +1852,7 @@
           "outDateFmt": "Mon, Oct 05",
           "retDateFmt": "Thu, Oct 15",
           "dropPct": 2,
-          "priceDelta": null,
+          "priceDelta": -40,
           "weekendEscape": true,
           "times": [
             {
@@ -1895,8 +1895,8 @@
           "retDate": "2026-10-27",
           "outDateFmt": "Tue, Oct 20",
           "retDateFmt": "Tue, Oct 27",
-          "dropPct": 17,
-          "priceDelta": null,
+          "dropPct": 16,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1927,8 +1927,8 @@
           "retDate": "2026-10-27",
           "outDateFmt": "Tue, Oct 20",
           "retDateFmt": "Tue, Oct 27",
-          "dropPct": 15,
-          "priceDelta": null,
+          "dropPct": 13,
+          "priceDelta": -23,
           "weekendEscape": true,
           "times": [
             {
@@ -1959,8 +1959,8 @@
           "retDate": "2026-10-27",
           "outDateFmt": "Tue, Oct 20",
           "retDateFmt": "Tue, Oct 27",
-          "dropPct": 14,
-          "priceDelta": null,
+          "dropPct": 13,
+          "priceDelta": -25,
           "weekendEscape": true,
           "times": [
             {
@@ -1991,8 +1991,8 @@
           "retDate": "2026-11-06",
           "outDateFmt": "Fri, Oct 30",
           "retDateFmt": "Fri, Nov 06",
-          "dropPct": 14,
-          "priceDelta": null,
+          "dropPct": 12,
+          "priceDelta": -33,
           "weekendEscape": true,
           "times": [
             {
@@ -2023,8 +2023,8 @@
           "retDate": "2026-11-06",
           "outDateFmt": "Fri, Oct 30",
           "retDateFmt": "Fri, Nov 06",
-          "dropPct": 14,
-          "priceDelta": null,
+          "dropPct": 12,
+          "priceDelta": -33,
           "weekendEscape": true,
           "times": [
             {
@@ -2055,8 +2055,8 @@
           "retDate": "2026-11-03",
           "outDateFmt": "Tue, Oct 27",
           "retDateFmt": "Tue, Nov 03",
-          "dropPct": 13,
-          "priceDelta": null,
+          "dropPct": 11,
+          "priceDelta": -36,
           "weekendEscape": true,
           "times": [
             {
@@ -2087,8 +2087,8 @@
           "retDate": "2026-11-03",
           "outDateFmt": "Tue, Oct 27",
           "retDateFmt": "Tue, Nov 03",
-          "dropPct": 13,
-          "priceDelta": null,
+          "dropPct": 11,
+          "priceDelta": -36,
           "weekendEscape": true,
           "times": [
             {
@@ -2109,8 +2109,8 @@
           "retDate": "2026-11-04",
           "outDateFmt": "Wed, Oct 28",
           "retDateFmt": "Wed, Nov 04",
-          "dropPct": 13,
-          "priceDelta": null,
+          "dropPct": 11,
+          "priceDelta": -36,
           "weekendEscape": true,
           "times": [
             {
@@ -2136,8 +2136,8 @@
           "retDate": "2026-11-04",
           "outDateFmt": "Wed, Oct 28",
           "retDateFmt": "Wed, Nov 04",
-          "dropPct": 13,
-          "priceDelta": null,
+          "dropPct": 11,
+          "priceDelta": -36,
           "weekendEscape": true,
           "times": [
             {
@@ -2168,8 +2168,8 @@
           "retDate": "2026-11-04",
           "outDateFmt": "Sun, Oct 25",
           "retDateFmt": "Wed, Nov 04",
-          "dropPct": 13,
-          "priceDelta": null,
+          "dropPct": 11,
+          "priceDelta": -36,
           "weekendEscape": true,
           "times": [
             {
@@ -2200,8 +2200,8 @@
           "retDate": "2026-11-04",
           "outDateFmt": "Sun, Oct 25",
           "retDateFmt": "Wed, Nov 04",
-          "dropPct": 13,
-          "priceDelta": null,
+          "dropPct": 11,
+          "priceDelta": -36,
           "weekendEscape": true,
           "times": [
             {
@@ -2232,8 +2232,8 @@
           "retDate": "2026-11-05",
           "outDateFmt": "Mon, Oct 26",
           "retDateFmt": "Thu, Nov 05",
-          "dropPct": 13,
-          "priceDelta": null,
+          "dropPct": 11,
+          "priceDelta": -36,
           "weekendEscape": true,
           "times": [
             {
@@ -2264,8 +2264,8 @@
           "retDate": "2026-11-05",
           "outDateFmt": "Mon, Oct 26",
           "retDateFmt": "Thu, Nov 05",
-          "dropPct": 13,
-          "priceDelta": null,
+          "dropPct": 11,
+          "priceDelta": -36,
           "weekendEscape": true,
           "times": [
             {
@@ -2296,8 +2296,8 @@
           "retDate": "2026-11-05",
           "outDateFmt": "Mon, Oct 26",
           "retDateFmt": "Thu, Nov 05",
-          "dropPct": 13,
-          "priceDelta": null,
+          "dropPct": 11,
+          "priceDelta": -36,
           "weekendEscape": true,
           "times": [
             {
@@ -2318,8 +2318,8 @@
           "retDate": "2026-11-06",
           "outDateFmt": "Tue, Oct 27",
           "retDateFmt": "Fri, Nov 06",
-          "dropPct": 13,
-          "priceDelta": null,
+          "dropPct": 11,
+          "priceDelta": -36,
           "weekendEscape": true,
           "times": [
             {
@@ -2362,8 +2362,8 @@
           "retDate": "2026-10-21",
           "outDateFmt": "Wed, Oct 14",
           "retDateFmt": "Wed, Oct 21",
-          "dropPct": 21,
-          "priceDelta": null,
+          "dropPct": 20,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -2394,8 +2394,8 @@
           "retDate": "2026-10-22",
           "outDateFmt": "Mon, Oct 12",
           "retDateFmt": "Thu, Oct 22",
-          "dropPct": 21,
-          "priceDelta": null,
+          "dropPct": 19,
+          "priceDelta": -6,
           "weekendEscape": true,
           "times": [
             {
@@ -2426,8 +2426,8 @@
           "retDate": "2026-11-03",
           "outDateFmt": "Tue, Oct 27",
           "retDateFmt": "Tue, Nov 03",
-          "dropPct": 20,
-          "priceDelta": null,
+          "dropPct": 18,
+          "priceDelta": -14,
           "weekendEscape": true,
           "times": [
             {
@@ -2458,8 +2458,8 @@
           "retDate": "2026-11-04",
           "outDateFmt": "Wed, Oct 28",
           "retDateFmt": "Wed, Nov 04",
-          "dropPct": 20,
-          "priceDelta": null,
+          "dropPct": 18,
+          "priceDelta": -14,
           "weekendEscape": true,
           "times": [
             {
@@ -2490,8 +2490,8 @@
           "retDate": "2026-11-04",
           "outDateFmt": "Sun, Oct 25",
           "retDateFmt": "Wed, Nov 04",
-          "dropPct": 20,
-          "priceDelta": null,
+          "dropPct": 18,
+          "priceDelta": -14,
           "weekendEscape": true,
           "times": [
             {
@@ -2522,8 +2522,8 @@
           "retDate": "2026-11-06",
           "outDateFmt": "Tue, Oct 27",
           "retDateFmt": "Fri, Nov 06",
-          "dropPct": 20,
-          "priceDelta": null,
+          "dropPct": 18,
+          "priceDelta": -14,
           "weekendEscape": true,
           "times": [
             {
@@ -2554,8 +2554,8 @@
           "retDate": "2026-11-05",
           "outDateFmt": "Mon, Oct 26",
           "retDateFmt": "Thu, Nov 05",
-          "dropPct": 18,
-          "priceDelta": null,
+          "dropPct": 16,
+          "priceDelta": -27,
           "weekendEscape": true,
           "times": [
             {
@@ -2586,8 +2586,8 @@
           "retDate": "2026-10-21",
           "outDateFmt": "Sun, Oct 11",
           "retDateFmt": "Wed, Oct 21",
-          "dropPct": 18,
-          "priceDelta": null,
+          "dropPct": 16,
+          "priceDelta": -28,
           "weekendEscape": true,
           "times": [
             {
@@ -2618,8 +2618,8 @@
           "retDate": "2026-10-21",
           "outDateFmt": "Sun, Oct 11",
           "retDateFmt": "Wed, Oct 21",
-          "dropPct": 18,
-          "priceDelta": null,
+          "dropPct": 16,
+          "priceDelta": -28,
           "weekendEscape": true,
           "times": [
             {
@@ -2650,8 +2650,8 @@
           "retDate": "2026-10-22",
           "outDateFmt": "Mon, Oct 12",
           "retDateFmt": "Thu, Oct 22",
-          "dropPct": 18,
-          "priceDelta": null,
+          "dropPct": 16,
+          "priceDelta": -29,
           "weekendEscape": true,
           "times": [
             {
@@ -2682,8 +2682,8 @@
           "retDate": "2026-10-20",
           "outDateFmt": "Sat, Oct 10",
           "retDateFmt": "Tue, Oct 20",
-          "dropPct": 17,
-          "priceDelta": null,
+          "dropPct": 15,
+          "priceDelta": -40,
           "weekendEscape": true,
           "times": [
             {
@@ -2714,8 +2714,8 @@
           "retDate": "2026-10-21",
           "outDateFmt": "Sun, Oct 11",
           "retDateFmt": "Wed, Oct 21",
-          "dropPct": 16,
-          "priceDelta": null,
+          "dropPct": 15,
+          "priceDelta": -43,
           "weekendEscape": true,
           "times": [
             {
@@ -2746,8 +2746,8 @@
           "retDate": "2026-10-21",
           "outDateFmt": "Wed, Oct 14",
           "retDateFmt": "Wed, Oct 21",
-          "dropPct": 15,
-          "priceDelta": null,
+          "dropPct": 14,
+          "priceDelta": -50,
           "weekendEscape": true,
           "times": [
             {
@@ -2778,8 +2778,8 @@
           "retDate": "2026-10-22",
           "outDateFmt": "Thu, Oct 15",
           "retDateFmt": "Thu, Oct 22",
-          "dropPct": 15,
-          "priceDelta": null,
+          "dropPct": 14,
+          "priceDelta": -50,
           "weekendEscape": true,
           "times": [
             {
@@ -2810,8 +2810,8 @@
           "retDate": "2026-10-22",
           "outDateFmt": "Thu, Oct 15",
           "retDateFmt": "Thu, Oct 22",
-          "dropPct": 15,
-          "priceDelta": null,
+          "dropPct": 13,
+          "priceDelta": -57,
           "weekendEscape": true,
           "times": [
             {
@@ -2859,8 +2859,8 @@
           "retDate": "2026-10-13",
           "outDateFmt": "Tue, Oct 06",
           "retDateFmt": "Tue, Oct 13",
-          "dropPct": 22,
-          "priceDelta": null,
+          "dropPct": 20,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -2891,8 +2891,8 @@
           "retDate": "2026-10-14",
           "outDateFmt": "Wed, Oct 07",
           "retDateFmt": "Wed, Oct 14",
-          "dropPct": 22,
-          "priceDelta": null,
+          "dropPct": 20,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -2923,8 +2923,8 @@
           "retDate": "2026-10-15",
           "outDateFmt": "Thu, Oct 08",
           "retDateFmt": "Thu, Oct 15",
-          "dropPct": 22,
-          "priceDelta": null,
+          "dropPct": 20,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -2955,8 +2955,8 @@
           "retDate": "2026-10-19",
           "outDateFmt": "Mon, Oct 12",
           "retDateFmt": "Mon, Oct 19",
-          "dropPct": 22,
-          "priceDelta": null,
+          "dropPct": 20,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -2987,8 +2987,8 @@
           "retDate": "2026-10-20",
           "outDateFmt": "Tue, Oct 13",
           "retDateFmt": "Tue, Oct 20",
-          "dropPct": 22,
-          "priceDelta": null,
+          "dropPct": 20,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -3019,8 +3019,8 @@
           "retDate": "2026-10-21",
           "outDateFmt": "Wed, Oct 14",
           "retDateFmt": "Wed, Oct 21",
-          "dropPct": 22,
-          "priceDelta": null,
+          "dropPct": 20,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -3051,8 +3051,8 @@
           "retDate": "2026-10-26",
           "outDateFmt": "Mon, Oct 19",
           "retDateFmt": "Mon, Oct 26",
-          "dropPct": 22,
-          "priceDelta": null,
+          "dropPct": 20,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -3083,8 +3083,8 @@
           "retDate": "2026-10-27",
           "outDateFmt": "Tue, Oct 20",
           "retDateFmt": "Tue, Oct 27",
-          "dropPct": 22,
-          "priceDelta": null,
+          "dropPct": 20,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -3115,8 +3115,8 @@
           "retDate": "2026-10-28",
           "outDateFmt": "Wed, Oct 21",
           "retDateFmt": "Wed, Oct 28",
-          "dropPct": 22,
-          "priceDelta": null,
+          "dropPct": 20,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -3147,8 +3147,8 @@
           "retDate": "2026-10-29",
           "outDateFmt": "Thu, Oct 22",
           "retDateFmt": "Thu, Oct 29",
-          "dropPct": 22,
-          "priceDelta": null,
+          "dropPct": 20,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -3179,8 +3179,8 @@
           "retDate": "2026-11-02",
           "outDateFmt": "Mon, Oct 26",
           "retDateFmt": "Mon, Nov 02",
-          "dropPct": 22,
-          "priceDelta": null,
+          "dropPct": 20,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -3211,8 +3211,8 @@
           "retDate": "2026-11-03",
           "outDateFmt": "Tue, Oct 27",
           "retDateFmt": "Tue, Nov 03",
-          "dropPct": 22,
-          "priceDelta": null,
+          "dropPct": 20,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -3243,8 +3243,8 @@
           "retDate": "2026-11-04",
           "outDateFmt": "Wed, Oct 28",
           "retDateFmt": "Wed, Nov 04",
-          "dropPct": 22,
-          "priceDelta": null,
+          "dropPct": 20,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -3275,8 +3275,8 @@
           "retDate": "2026-11-05",
           "outDateFmt": "Thu, Oct 29",
           "retDateFmt": "Thu, Nov 05",
-          "dropPct": 22,
-          "priceDelta": null,
+          "dropPct": 20,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -3307,8 +3307,8 @@
           "retDate": "2026-10-22",
           "outDateFmt": "Mon, Oct 12",
           "retDateFmt": "Thu, Oct 22",
-          "dropPct": 22,
-          "priceDelta": null,
+          "dropPct": 20,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
