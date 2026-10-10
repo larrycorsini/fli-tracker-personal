@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "Fri, Oct 09, 2026 at 07:41 AM MDT",
-  "lastUpdatedAt": "2026-10-09T13:41:46.685902+00:00",
+  "lastUpdated": "Sat, Oct 10, 2026 at 03:42 PM MDT",
+  "lastUpdatedAt": "2026-10-10T21:42:50.324513+00:00",
   "siteUrl": "https://flights.larrycorsini.com",
   "plannerUrl": "https://flights.larrycorsini.com",
   "intlTabs": [
@@ -93,7 +93,7 @@
           "retDate": "2026-11-07",
           "outDateFmt": "Wed, Nov 04",
           "retDateFmt": "Sat, Nov 07",
-          "dropPct": 21,
+          "dropPct": 20,
           "priceDelta": 0,
           "weekendEscape": true,
           "times": [
