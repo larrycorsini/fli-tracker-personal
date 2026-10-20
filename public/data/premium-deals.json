@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "Mon, Oct 19, 2026 at 07:23 PM MDT",
-  "lastUpdatedAt": "2026-10-20T01:23:53.179080+00:00",
+  "lastUpdated": "Tue, Oct 20, 2026 at 06:43 AM MDT",
+  "lastUpdatedAt": "2026-10-20T12:43:33.765736+00:00",
   "origins": [
     "SLC",
     "PVU"
@@ -676,6 +676,54 @@
       "stops": 2,
       "isDomestic": false,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTExLTA4IiAKA1NMQxIKMjAyNi0xMS0wOBoDSUFIKgJVQTIENTM3OSIgCgNJQUgSCjIwMjYtMTEtMDkaA1NKTyoCVUEyBDI0NDhqBwgBEgNTTENyBwgBEgNTSk8aYhIKMjAyNi0xMS0xMyIgCgNTSk8SCjIwMjYtMTEtMTMaA0lBSCoCVUEyBDE1ODkiIAoDSUFIEgoyMDI2LTExLTE0GgNTTEMqAlVBMgQ2MTEwagcIARIDU0pPcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+      "google_flights_url": ""
+    },
+    {
+      "destination": "Lima",
+      "airport": "LIM",
+      "regionLabel": "South America",
+      "origin": "SLC",
+      "cabin": "Premium Economy",
+      "price": 1589,
+      "points": 127120,
+      "paymentType": "both",
+      "valueScore": "cash",
+      "hasCashPrice": true,
+      "isRoundTrip": true,
+      "tripDuration": 14,
+      "outDate": "2027-01-14",
+      "retDate": "2027-01-28",
+      "outDateFmt": "Thu, Jan 14",
+      "retDateFmt": "Thu, Jan 28",
+      "airline": "United Airlines",
+      "duration": 1651,
+      "stops": 2,
+      "isDomestic": false,
+      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI3LTAxLTE0IiAKA1NMQxIKMjAyNy0wMS0xNBoDSUFIKgJVQTIEMjM2NiIfCgNJQUgSCjIwMjctMDEtMTQaA0xJTSoCVUEyAzg1NGoHCAESA1NMQ3IHCAESA0xJTRphEgoyMDI3LTAxLTI4Ih8KA0xJTRIKMjAyNy0wMS0yOBoDSUFIKgJVQTIDODU1IiAKA0lBSBIKMjAyNy0wMS0yOBoDU0xDKgJVQTIEMjI0MmoHCAESA0xJTXIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+      "google_flights_url": ""
+    },
+    {
+      "destination": "Lima",
+      "airport": "LIM",
+      "regionLabel": "South America",
+      "origin": "SLC",
+      "cabin": "Premium Economy",
+      "price": 1589,
+      "points": 127120,
+      "paymentType": "both",
+      "valueScore": "cash",
+      "hasCashPrice": true,
+      "isRoundTrip": true,
+      "tripDuration": 14,
+      "outDate": "2027-01-14",
+      "retDate": "2027-01-28",
+      "outDateFmt": "Thu, Jan 14",
+      "retDateFmt": "Thu, Jan 28",
+      "airline": "United Airlines",
+      "duration": 1825,
+      "stops": 2,
+      "isDomestic": false,
+      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI3LTAxLTE0IiAKA1NMQxIKMjAyNy0wMS0xNBoDSUFIKgJVQTIEMjM2NiIfCgNJQUgSCjIwMjctMDEtMTQaA0xJTSoCVUEyAzg1NGoHCAESA1NMQ3IHCAESA0xJTRpgEgoyMDI3LTAxLTI4Ih8KA0xJTRIKMjAyNy0wMS0yOBoDSUFIKgJVQTIDODU1Ih8KA0lBSBIKMjAyNy0wMS0yOBoDU0xDKgJVQTIDNjU1agcIARIDTElNcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
       "google_flights_url": ""
     }
   ]
