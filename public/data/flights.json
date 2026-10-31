@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "Fri, Oct 30, 2026 at 07:38 AM MDT",
-  "lastUpdatedAt": "2026-10-30T13:38:59.533244+00:00",
+  "lastUpdated": "Sat, Oct 31, 2026 at 08:02 AM MDT",
+  "lastUpdatedAt": "2026-10-31T14:02:05.989163+00:00",
   "siteUrl": "https://flights.larrycorsini.com",
   "plannerUrl": "https://flights.larrycorsini.com",
   "intlTabs": [
@@ -39,12 +39,13 @@
   ],
   "maxPriceDefault": 1500,
   "airlines": [
-    "American Airlines"
+    "American Airlines",
+    "Delta Air Lines"
   ],
   "deals": [
     {
       "region": "DFW",
-      "price": 199
+      "price": 209
     },
     {
       "region": "California Coast",
@@ -83,70 +84,6 @@
     "DFW": {
       "groups": [
         {
-          "origin": "SLC",
-          "destination": "DFW",
-          "airline": "American Airlines",
-          "price": 199,
-          "points": 15920,
-          "earn": 995,
-          "outDate": "2026-12-02",
-          "retDate": "2026-12-05",
-          "outDateFmt": "Wed, Dec 02",
-          "retDateFmt": "Sat, Dec 05",
-          "dropPct": 8,
-          "priceDelta": 0,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Wed, Dec 02, 04:44 PM",
-              "retArrFmt": "Sat, Dec 05, 03:54 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTAyIiAKA1NMQxIKMjAyNi0xMi0wMhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTA1IiAKA0RGVxIKMjAyNi0xMi0wNRoDU0xDKgJBQTIEMTQ1NmoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
-            },
-            {
-              "outDepFmt": "Wed, Dec 02, 04:44 PM",
-              "retArrFmt": "Sat, Dec 05, 10:24 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTAyIiAKA1NMQxIKMjAyNi0xMi0wMhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTA1IiAKA0RGVxIKMjAyNi0xMi0wNRoDU0xDKgJBQTIEMjE3OGoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
-            },
-            {
-              "outDepFmt": "Wed, Dec 02, 04:44 PM",
-              "retArrFmt": "Sat, Dec 05, 01:04 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTAyIiAKA1NMQxIKMjAyNi0xMi0wMhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTA1IiAKA0RGVxIKMjAyNi0xMi0wNRoDU0xDKgJBQTIEMjg0NWoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
-            }
-          ]
-        },
-        {
-          "origin": "SLC",
-          "destination": "DFW",
-          "airline": "American Airlines",
-          "price": 199,
-          "points": 15920,
-          "earn": 995,
-          "outDate": "2026-12-09",
-          "retDate": "2026-12-12",
-          "outDateFmt": "Wed, Dec 09",
-          "retDateFmt": "Sat, Dec 12",
-          "dropPct": 8,
-          "priceDelta": 0,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Wed, Dec 09, 01:57 PM",
-              "retArrFmt": "Sat, Dec 12, 03:54 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTA5IiAKA1NMQxIKMjAyNi0xMi0wORoDREZXKgJBQTIEMjg0NWoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTEyIiAKA0RGVxIKMjAyNi0xMi0xMhoDU0xDKgJBQTIEMTQ1NmoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
-            },
-            {
-              "outDepFmt": "Wed, Dec 09, 01:57 PM",
-              "retArrFmt": "Sat, Dec 12, 10:24 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTA5IiAKA1NMQxIKMjAyNi0xMi0wORoDREZXKgJBQTIEMjg0NWoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTEyIiAKA0RGVxIKMjAyNi0xMi0xMhoDU0xDKgJBQTIEMjE3OGoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
-            },
-            {
-              "outDepFmt": "Wed, Dec 09, 01:57 PM",
-              "retArrFmt": "Sat, Dec 12, 01:04 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTA5IiAKA1NMQxIKMjAyNi0xMi0wORoDREZXKgJBQTIEMjg0NWoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTEyIiAKA0RGVxIKMjAyNi0xMi0xMhoDU0xDKgJBQTIEMjg0NWoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
-            }
-          ]
-        },
-        {
           "origin": "PVU",
           "destination": "DFW",
           "airline": "American Airlines",
@@ -157,7 +94,7 @@
           "retDate": "2027-01-09",
           "outDateFmt": "Wed, Jan 06",
           "retDateFmt": "Sat, Jan 09",
-          "dropPct": 3,
+          "dropPct": 2,
           "priceDelta": -10,
           "weekendEscape": true,
           "times": [
@@ -172,32 +109,228 @@
           "origin": "PVU",
           "destination": "DFW",
           "airline": "American Airlines",
-          "price": 378,
-          "points": 30240,
-          "earn": 1890,
-          "outDate": "2026-12-16",
-          "retDate": "2026-12-19",
-          "outDateFmt": "Wed, Dec 16",
-          "retDateFmt": "Sat, Dec 19",
-          "dropPct": 0,
-          "priceDelta": -179,
+          "price": 209,
+          "points": 16720,
+          "earn": 1045,
+          "outDate": "2027-01-13",
+          "retDate": "2027-01-16",
+          "outDateFmt": "Wed, Jan 13",
+          "retDateFmt": "Sat, Jan 16",
+          "dropPct": 2,
+          "priceDelta": -10,
           "weekendEscape": true,
           "times": [
             {
-              "outDepFmt": "Wed, Dec 16, 01:54 PM",
-              "retArrFmt": "Sat, Dec 19, 01:00 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1BWVRIKMjAyNi0xMi0xNhoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI2LTEyLTE5IiAKA0RGVxIKMjAyNi0xMi0xORoDUFZVKgJBQTIENjQ2OGoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB"
+              "outDepFmt": "Wed, Jan 13, 02:24 PM",
+              "retArrFmt": "Sat, Jan 16, 02:03 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTEzIiAKA1BWVRIKMjAyNy0wMS0xMxoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI3LTAxLTE2IiAKA0RGVxIKMjAyNy0wMS0xNhoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB"
+            }
+          ]
+        },
+        {
+          "origin": "PVU",
+          "destination": "DFW",
+          "airline": "American Airlines",
+          "price": 249,
+          "points": 19920,
+          "earn": 1245,
+          "outDate": "2026-12-02",
+          "retDate": "2026-12-05",
+          "outDateFmt": "Wed, Dec 02",
+          "retDateFmt": "Sat, Dec 05",
+          "dropPct": 0,
+          "priceDelta": -50,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Dec 02, 01:54 PM",
+              "retArrFmt": "Sat, Dec 05, 01:23 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTAyIiAKA1BWVRIKMjAyNi0xMi0wMhoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI2LTEyLTA1IiAKA0RGVxIKMjAyNi0xMi0wNRoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB"
+            }
+          ]
+        },
+        {
+          "origin": "PVU",
+          "destination": "DFW",
+          "airline": "American Airlines",
+          "price": 249,
+          "points": 19920,
+          "earn": 1245,
+          "outDate": "2026-12-09",
+          "retDate": "2026-12-12",
+          "outDateFmt": "Wed, Dec 09",
+          "retDateFmt": "Sat, Dec 12",
+          "dropPct": 0,
+          "priceDelta": -50,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Dec 09, 01:54 PM",
+              "retArrFmt": "Sat, Dec 12, 01:23 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTA5IiAKA1BWVRIKMjAyNi0xMi0wORoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI2LTEyLTEyIiAKA0RGVxIKMjAyNi0xMi0xMhoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "DFW",
+          "airline": "Delta Air Lines",
+          "price": 277,
+          "points": 22160,
+          "earn": 1385,
+          "outDate": "2027-01-06",
+          "retDate": "2027-01-09",
+          "outDateFmt": "Wed, Jan 06",
+          "retDateFmt": "Sat, Jan 09",
+          "dropPct": 0,
+          "priceDelta": -78,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Jan 06, 01:40 PM",
+              "retArrFmt": "Sat, Jan 09, 10:15 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDREZXKgJETDIEMjgxMWoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI3LTAxLTA5IiAKA0RGVxIKMjAyNy0wMS0wORoDU0xDKgJETDIEMTI5MWoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "DFW",
+          "airline": "American Airlines",
+          "price": 277,
+          "points": 22160,
+          "earn": 1385,
+          "outDate": "2027-01-06",
+          "retDate": "2027-01-09",
+          "outDateFmt": "Wed, Jan 06",
+          "retDateFmt": "Sat, Jan 09",
+          "dropPct": 0,
+          "priceDelta": -78,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Jan 06, 04:58 PM",
+              "retArrFmt": "Sat, Jan 09, 10:38 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI3LTAxLTA5IiAKA0RGVxIKMjAyNy0wMS0wORoDU0xDKgJBQTIEMjE3OGoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+            },
+            {
+              "outDepFmt": "Wed, Jan 06, 04:58 PM",
+              "retArrFmt": "Sat, Jan 09, 01:02 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI3LTAxLTA5IiAKA0RGVxIKMjAyNy0wMS0wORoDU0xDKgJBQTIEMTQzMGoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+            }
+          ]
+        },
+        {
+          "origin": "PVU",
+          "destination": "DFW",
+          "airline": "American Airlines",
+          "price": 350,
+          "points": 28000,
+          "earn": 1750,
+          "outDate": "2027-01-06",
+          "retDate": "2027-01-10",
+          "outDateFmt": "Wed, Jan 06",
+          "retDateFmt": "Sun, Jan 10",
+          "dropPct": 0,
+          "priceDelta": -151,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Jan 06, 02:24 PM",
+              "retArrFmt": "Sun, Jan 10, 01:38 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1BWVRIKMjAyNy0wMS0wNhoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxo_EgoyMDI3LTAxLTEwIh8KA0RGVxIKMjAyNy0wMS0xMBoDUFZVKgJBQTIDNzUzagcIARIDREZXcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
+            }
+          ]
+        },
+        {
+          "origin": "PVU",
+          "destination": "DFW",
+          "airline": "American Airlines",
+          "price": 350,
+          "points": 28000,
+          "earn": 1750,
+          "outDate": "2027-01-13",
+          "retDate": "2027-01-17",
+          "outDateFmt": "Wed, Jan 13",
+          "retDateFmt": "Sun, Jan 17",
+          "dropPct": 0,
+          "priceDelta": -151,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Jan 13, 02:24 PM",
+              "retArrFmt": "Sun, Jan 17, 01:38 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTEzIiAKA1BWVRIKMjAyNy0wMS0xMxoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxo_EgoyMDI3LTAxLTE3Ih8KA0RGVxIKMjAyNy0wMS0xNxoDUFZVKgJBQTIDNzUzagcIARIDREZXcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "DFW",
+          "airline": "American Airlines",
+          "price": 353,
+          "points": 28240,
+          "earn": 1765,
+          "outDate": "2026-12-16",
+          "retDate": "2026-12-20",
+          "outDateFmt": "Wed, Dec 16",
+          "retDateFmt": "Sun, Dec 20",
+          "dropPct": 0,
+          "priceDelta": -154,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Dec 16, 04:44 PM",
+              "retArrFmt": "Sun, Dec 20, 10:29 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1NMQxIKMjAyNi0xMi0xNhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTIwIiAKA0RGVxIKMjAyNi0xMi0yMBoDU0xDKgJBQTIEMjE3OGoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+            },
+            {
+              "outDepFmt": "Wed, Dec 16, 04:44 PM",
+              "retArrFmt": "Sun, Dec 20, 01:03 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1NMQxIKMjAyNi0xMi0xNhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTIwIiAKA0RGVxIKMjAyNi0xMi0yMBoDU0xDKgJBQTIEMjg0NWoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+            },
+            {
+              "outDepFmt": "Wed, Dec 16, 04:44 PM",
+              "retArrFmt": "Sun, Dec 20, 03:55 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1NMQxIKMjAyNi0xMi0xNhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTIwIiAKA0RGVxIKMjAyNi0xMi0yMBoDU0xDKgJBQTIEMTQ1NmoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "DFW",
+          "airline": "Delta Air Lines",
+          "price": 353,
+          "points": 28240,
+          "earn": 1765,
+          "outDate": "2026-12-16",
+          "retDate": "2026-12-20",
+          "outDateFmt": "Wed, Dec 16",
+          "retDateFmt": "Sun, Dec 20",
+          "dropPct": 0,
+          "priceDelta": -154,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Dec 16, 05:44 PM",
+              "retArrFmt": "Sun, Dec 20, 10:15 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1NMQxIKMjAyNi0xMi0xNhoDREZXKgJETDIEMjc5NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTIwIiAKA0RGVxIKMjAyNi0xMi0yMBoDU0xDKgJETDIEMTI5MWoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+            },
+            {
+              "outDepFmt": "Wed, Dec 16, 05:44 PM",
+              "retArrFmt": "Sun, Dec 20, 02:30 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1NMQxIKMjAyNi0xMi0xNhoDREZXKgJETDIEMjc5NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTIwIiAKA0RGVxIKMjAyNi0xMi0yMBoDU0xDKgJETDIEMjc5OGoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
             }
           ]
         }
       ],
-      "groupCount": 4,
+      "groupCount": 10,
       "best": {
         "airline": "American Airlines",
         "destination": "DFW",
-        "price": 199,
-        "outDateFmt": "Wed, Dec 02",
-        "retDateFmt": "Sat, Dec 05"
+        "price": 209,
+        "outDateFmt": "Wed, Jan 06",
+        "retDateFmt": "Sat, Jan 09"
       }
     },
     "California Coast": {
