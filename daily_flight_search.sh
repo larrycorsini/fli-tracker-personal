@@ -68,12 +68,27 @@ deploy_public_via_git() {
   fi
 
   if ! git push personal main; then
-    echo "ERROR: git push personal main failed — Netlify will not auto-deploy until push succeeds"
+    echo "ERROR: git push personal main failed — GitHub will not have the report until push succeeds"
     echo "INFO: Remote personal URL: ${remote_url} (launchd needs non-interactive SSH or credential helper)"
     return 1
   fi
 
-  echo "INFO: Pushed to personal/main — Netlify Git-linked site will publish public/"
+  echo "INFO: Pushed to personal/main"
+
+  local netlify_bin="${NETLIFY_BIN:-$(command -v netlify || true)}"
+  if [[ -z "$netlify_bin" && -x /opt/homebrew/bin/netlify ]]; then
+    netlify_bin=/opt/homebrew/bin/netlify
+  fi
+  if [[ -n "$netlify_bin" ]]; then
+    if "$netlify_bin" deploy --prod --dir=public --message "daily flight report ${report_date}"; then
+      echo "INFO: Netlify CLI production deploy succeeded"
+    else
+      echo "ERROR: netlify deploy --prod failed — Git-linked build may still publish if it is not skipped"
+      return 1
+    fi
+  else
+    echo "WARN: netlify CLI not on PATH — relying on Git-linked Netlify build"
+  fi
   return 0
 }
 
