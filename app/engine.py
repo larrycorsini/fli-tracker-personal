@@ -105,6 +105,8 @@ def _attach_booking_url(
             currency=opts.currency,
             language=opts.language,
             country=opts.country,
+            seat_type=parse_cabin_class(opts.cabin_class),
+            passenger_info=PassengerInfo(adults=1),
         )
         if booking_url:
             flight_data["booking_url"] = booking_url

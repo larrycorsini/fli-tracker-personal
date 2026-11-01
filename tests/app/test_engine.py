@@ -47,6 +47,22 @@ class TestAttachBookingUrl:
         )
         assert flight_data["booking_url"].startswith("https://google.com/travel/flights/booking")
         assert flight_data["url"] == flight_data["booking_url"]
+        kwargs = searcher.build_flight_booking_url.call_args.kwargs
+        assert kwargs["seat_type"].name == "ECONOMY"
+        assert kwargs["passenger_info"].adults == 1
+
+    def test_passes_premium_cabin_into_booking_token(self):
+        searcher = MagicMock()
+        searcher.build_flight_booking_url.return_value = (
+            "https://google.com/travel/flights/booking?tfs=biz"
+        )
+        flight_data: dict = {}
+        opts = FlightSearchOptions(cabin_class="BUSINESS")
+        _attach_booking_url(
+            searcher, object(), flight_data, "SLC", "EWR", "2026-11-11", "2026-11-14", opts
+        )
+        kwargs = searcher.build_flight_booking_url.call_args.kwargs
+        assert kwargs["seat_type"].name == "BUSINESS"
 
     def test_fallback_when_build_fails(self):
         searcher = MagicMock()
