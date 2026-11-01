@@ -28,18 +28,18 @@ from fli.models import DateSearchFilters, FlightSearchFilters, PassengerInfo
 from fli.search import SearchDates, SearchFlights
 from fli.search.dates import DatePrice
 from tracker_config import (
-    DOMESTIC_TRIP_DURATIONS,
     EXCLUDED_AIRLINES,
-    INTERNATIONAL_TRIP_DURATIONS,
     MAX_FARE_GROUPS_PER_REGION,
     MAX_TIMES_PER_GROUP,
-    ORIGINS,
     OUTPUT_JSON,
     REGIONS,
     SHORTLIST_SIZE,
     SHORTLIST_SIZE_TEST,
     is_current_travel_date,
     region_active,
+    region_adults,
+    region_origins,
+    region_trip_durations,
 )
 from tracker_io import atomic_write_json
 
@@ -199,6 +199,8 @@ def _search_dates_route(
     end_date: str,
     trip_duration: int,
     max_stops: str,
+    *,
+    adults: int = 1,
 ) -> list[DatePrice]:
     try:
         origin_airport = resolve_airport(origin)
@@ -216,7 +218,7 @@ def _search_dates_route(
         )
         filters = DateSearchFilters(
             trip_type=trip_type,
-            passenger_info=PassengerInfo(adults=1),
+            passenger_info=PassengerInfo(adults=adults),
             flight_segments=segments,
             stops=stops,
             seat_type=seat,
@@ -309,7 +311,9 @@ def _phase1_shortlist(
     max_stops = config["max_stops"]
     start_date = dom_start if r_type == "domestic" else int_start
     end_date = dom_end if r_type == "domestic" else int_end
-    durations = DOMESTIC_TRIP_DURATIONS if r_type == "domestic" else INTERNATIONAL_TRIP_DURATIONS
+    durations = region_trip_durations(config)
+    origins = region_origins(config)
+    adults = region_adults(config)
 
     if is_test:
         start_dt = datetime.strptime(start_date, "%Y-%m-%d")
@@ -318,11 +322,17 @@ def _phase1_shortlist(
     candidates: list[tuple[str, str, str, str, float]] = []
     dates_calls = 0
 
-    for origin in ORIGINS:
+    for origin in origins:
         for dest in config["destinations"]:
             for duration in durations:
                 results = _search_dates_route(
-                    origin, dest, start_date, end_date, duration, max_stops
+                    origin,
+                    dest,
+                    start_date,
+                    end_date,
+                    duration,
+                    max_stops,
+                    adults=adults,
                 )
                 dates_calls += 1
                 candidates.extend(_date_pairs_from_results(results, origin, dest, r_type))
@@ -333,12 +343,24 @@ def _phase1_shortlist(
         if key not in best or price < best[key]:
             best[key] = price
 
+    preferred_nights = durations[0] if durations else 3
+
+    def _rank_key(row: tuple[str, str, str, str, float]) -> tuple[float, int]:
+        out_d, ret_d, price = row[2], row[3], row[4]
+        try:
+            nights = (
+                datetime.strptime(ret_d, "%Y-%m-%d") - datetime.strptime(out_d, "%Y-%m-%d")
+            ).days
+        except ValueError:
+            nights = preferred_nights
+        return (price, abs(nights - preferred_nights))
+
     ranked = sorted(
         [
             (origin, dest, out_d, ret_d, best[(origin, dest, out_d, ret_d)])
             for origin, dest, out_d, ret_d in best
         ],
-        key=lambda row: row[4],
+        key=_rank_key,
     )
     limit = SHORTLIST_SIZE_TEST if is_test else SHORTLIST_SIZE
     shortlist = [(o, d, out_d, ret_d) for o, d, out_d, ret_d, _ in ranked[:limit]]
@@ -360,8 +382,11 @@ def _search_pair(
     ret_date_str: str,
     max_stops: str,
     r_type: str,
+    *,
+    adults: int = 1,
 ) -> list[dict]:
     matches: list[dict] = []
+    passenger_info = PassengerInfo(adults=adults)
     try:
         origin_airport = resolve_airport(origin)
         dest_airport = resolve_airport(dest)
@@ -377,7 +402,7 @@ def _search_pair(
         )
         filters = FlightSearchFilters(
             trip_type=trip_type,
-            passenger_info=PassengerInfo(adults=1),
+            passenger_info=passenger_info,
             flight_segments=segments,
             stops=stops,
             seat_type=seat,
@@ -413,7 +438,11 @@ def _search_pair(
             return matches
 
         for result in results:
-            booking_url = searcher.build_flight_booking_url(result)
+            booking_url = searcher.build_flight_booking_url(
+                result,
+                seat_type=seat,
+                passenger_info=passenger_info,
+            )
             flight = serialize_flight_result(result, booking_url=booking_url)
             if not _flight_matches(flight, r_type):
                 with _stats_lock:
@@ -431,6 +460,7 @@ def _search_pair(
                     "out_dep": flight["outbound"]["legs"][0]["departure_time"],
                     "ret_arr": flight["return"]["legs"][-1]["arrival_time"],
                     "url": flight.get("booking_url") or "",
+                    "adults": adults,
                 }
             )
 
@@ -556,8 +586,17 @@ def main(argv: list[str] | None = None) -> int:
             continue
 
         log.info("%s phase 2: %d flight searches", region_name, len(shortlist))
+        adults = region_adults(config)
         for i, (origin, dest, out_date, ret_date) in enumerate(shortlist, start=1):
-            flights = _search_pair(origin, dest, out_date, ret_date, config["max_stops"], r_type)
+            flights = _search_pair(
+                origin,
+                dest,
+                out_date,
+                ret_date,
+                config["max_stops"],
+                r_type,
+                adults=adults,
+            )
             all_results[region_name].extend(flights)
             if i % 5 == 0 or i == len(shortlist):
                 log.info(
@@ -589,9 +628,7 @@ def main(argv: list[str] | None = None) -> int:
         log.info("%s: %d matching flights", region_name, len(all_results[region_name]))
 
     if _count_flights(all_results) == 0 and prior_results is not None:
-        kept_prior = {
-            name: current_flights(flights) for name, flights in prior_results.items()
-        }
+        kept_prior = {name: current_flights(flights) for name, flights in prior_results.items()}
         log.warning(
             "Search returned zero flights — preserving prior %s (%d current flights)",
             OUTPUT_JSON,

@@ -35,6 +35,11 @@ class TestDomesticFilters:
         ret_dt = datetime(2026, 7, 11)  # Sat
         assert find_direct._domestic_date_pair_valid(out_dt, ret_dt) is False
 
+    def test_domestic_date_pair_valid_fri_sun_couple_days(self):
+        out_dt = datetime(2026, 7, 3)  # Fri
+        ret_dt = datetime(2026, 7, 5)  # Sun
+        assert find_direct._domestic_date_pair_valid(out_dt, ret_dt) is True
+
     def test_domestic_time_valid_wed_afternoon(self):
         out_dep = datetime(2026, 7, 1, 14, 0)
         ret_arr = datetime(2026, 7, 4, 15, 0)
@@ -154,9 +159,7 @@ class TestKeepCurrentFares:
             ]
         }
         current = {name: [] for name in find_direct.REGIONS}
-        find_direct.restore_prior_region_if_empty(
-            "California Coast", current, prior, today=today
-        )
+        find_direct.restore_prior_region_if_empty("California Coast", current, prior, today=today)
         assert [f["out_date"] for f in current["California Coast"]] == ["2026-12-09"]
 
     def test_restore_skips_when_region_already_has_fares(self):
@@ -165,3 +168,28 @@ class TestKeepCurrentFares:
         prior = {"DFW": [{"out_date": "2027-01-20", "price": 250}]}
         find_direct.restore_prior_region_if_empty("DFW", current, prior, today=today)
         assert current["DFW"][0]["price"] == 209
+
+
+class TestPhase1RegionOverrides:
+    def test_seattle_searches_slc_sea_two_adults_custom_durations(self, monkeypatch):
+        calls = []
+
+        def fake_search(origin, dest, start, end, duration, max_stops, *, adults=1):
+            calls.append((origin, dest, duration, max_stops, adults))
+            return []
+
+        monkeypatch.setattr(find_direct, "_search_dates_route", fake_search)
+        find_direct._phase1_shortlist(
+            "Seattle",
+            find_direct.REGIONS["Seattle"],
+            dom_start="2026-11-14",
+            dom_end="2026-12-14",
+            int_start="2026-11-14",
+            int_end="2026-12-14",
+            is_test=False,
+        )
+        assert calls == [
+            ("SLC", "SEA", 3, "0", 2),
+            ("SLC", "SEA", 4, "0", 2),
+            ("SLC", "SEA", 2, "0", 2),
+        ]

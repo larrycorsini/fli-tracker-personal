@@ -14,6 +14,15 @@ REGIONS = {
         "type": "domestic",
         "alert_threshold": 300,
     },
+    "Seattle": {
+        "destinations": ["SEA"],
+        "max_stops": "0",
+        "type": "domestic",
+        "alert_threshold": 350,
+        "origins": ["SLC"],
+        "adults": 2,
+        "trip_durations": [3, 4, 2],
+    },
     "California Coast": {
         "destinations": ["LAX", "SAN", "SNA"],
         "max_stops": "0",
@@ -129,6 +138,40 @@ def region_active(region_name: str, when: datetime | None = None) -> bool:
     return when.month in months
 
 
+def region_origins(config: dict) -> list[str]:
+    """Airports to search from for a region (defaults to ORIGINS)."""
+    origins = config.get("origins") or ORIGINS
+    return [str(code).strip().upper() for code in origins if str(code).strip()]
+
+
+def region_adults(config: dict) -> int:
+    """Adult passenger count for a region's searches and booking links."""
+    try:
+        adults = int(config.get("adults", 1))
+    except (TypeError, ValueError):
+        return 1
+    return max(1, adults)
+
+
+def region_trip_durations(config: dict) -> list[int]:
+    """Nights away for a region (defaults by domestic/international type)."""
+    configured = config.get("trip_durations")
+    if configured:
+        durations: list[int] = []
+        for value in configured:
+            try:
+                nights = int(value)
+            except (TypeError, ValueError):
+                continue
+            if nights > 0:
+                durations.append(nights)
+        if durations:
+            return durations
+    if config.get("type") == "international":
+        return list(INTERNATIONAL_TRIP_DURATIONS)
+    return list(DOMESTIC_TRIP_DURATIONS)
+
+
 def heatmap_tier(price: float, region_name: str) -> str:
     """Return heatmap CSS class suffix: low, mid, or high."""
     region_type = REGIONS.get(region_name, {}).get("type", "domestic")
@@ -149,6 +192,7 @@ def planner_track_url(origin: str, destination: str, depart: str, ret: str | Non
         parts.append(ret)
     query = quote(",".join(parts))
     return f"{SITE_URL.rstrip('/')}/?watch={query}"
+
 
 # Premium-cabin deal discovery (find_deals.py) — separate from economy region monitor.
 PREMIUM_DEAL_ORIGINS = ["SLC", "PVU"]

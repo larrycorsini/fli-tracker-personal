@@ -13,6 +13,7 @@
   ],
   "domesticRegions": [
     "DFW",
+    "Seattle",
     "California Coast",
     "Georgia"
   ],
@@ -28,6 +29,7 @@
   },
   "regions": [
     "DFW",
+    "Seattle",
     "California Coast",
     "Georgia",
     "Cancun",
@@ -46,6 +48,10 @@
     {
       "region": "DFW",
       "price": 209
+    },
+    {
+      "region": "Seattle",
+      "price": null
     },
     {
       "region": "California Coast",
@@ -346,6 +352,11 @@
         "outDateFmt": "Wed, Jan 06",
         "retDateFmt": "Sat, Jan 09"
       }
+    },
+    "Seattle": {
+      "groups": [],
+      "best": null,
+      "groupCount": 0
     },
     "California Coast": {
       "groups": [],

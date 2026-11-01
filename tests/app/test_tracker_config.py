@@ -4,7 +4,18 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from tracker_config import heatmap_tier, planner_track_url, region_active
+from tracker_config import (
+    DOMESTIC_TRIP_DURATIONS,
+    INTERNATIONAL_TRIP_DURATIONS,
+    ORIGINS,
+    REGIONS,
+    heatmap_tier,
+    planner_track_url,
+    region_active,
+    region_adults,
+    region_origins,
+    region_trip_durations,
+)
 
 
 class TestRegionActive:
@@ -32,3 +43,26 @@ class TestPlannerTrackUrl:
         assert "flights.larrycorsini.com" in url
         assert "watch=" in url
         assert "localhost" not in url
+
+
+class TestRegionSearchOverrides:
+    def test_seattle_is_slc_nonstop_two_adults(self):
+        config = REGIONS["Seattle"]
+        assert config["destinations"] == ["SEA"]
+        assert config["max_stops"] == "0"
+        assert config["adults"] == 2
+        assert region_origins(config) == ["SLC"]
+        assert region_adults(config) == 2
+        assert region_trip_durations(config) == [3, 4, 2]
+
+    def test_defaults_match_global_origins_and_durations(self):
+        config = REGIONS["DFW"]
+        assert region_origins(config) == ORIGINS
+        assert region_adults(config) == 1
+        assert region_trip_durations(config) == DOMESTIC_TRIP_DURATIONS
+        europe = REGIONS["Europe"]
+        assert region_trip_durations(europe) == INTERNATIONAL_TRIP_DURATIONS
+
+    def test_invalid_adults_falls_back_to_one(self):
+        assert region_adults({"adults": "two"}) == 1
+        assert region_adults({"adults": 0}) == 1
