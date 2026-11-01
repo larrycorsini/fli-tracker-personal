@@ -1,0 +1,6 @@
+# Applied from the publish directory so CLI deploys get the same cache rules as git deploys.
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/data/*
+  Cache-Control: public, max-age=0, must-revalidate

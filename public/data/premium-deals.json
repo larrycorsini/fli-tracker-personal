@@ -7,102 +7,6 @@
   ],
   "deals": [
     {
-      "destination": "Portland",
-      "airport": "PDX",
-      "regionLabel": "US West",
-      "origin": "SLC",
-      "cabin": "Business",
-      "price": 387,
-      "points": 30960,
-      "paymentType": "both",
-      "valueScore": "cash",
-      "hasCashPrice": true,
-      "isRoundTrip": true,
-      "tripDuration": 10,
-      "outDate": "2026-10-17",
-      "retDate": "2026-10-27",
-      "outDateFmt": "Sat, Oct 17",
-      "retDateFmt": "Tue, Oct 27",
-      "airline": "Alaska Airlines",
-      "duration": 248,
-      "stops": 0,
-      "isDomestic": true,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTEwLTE3Ih8KA1NMQxIKMjAyNi0xMC0xNxoDUERYKgJBUzIDNDQ2agcIARIDU0xDcgcIARIDUERYGkASCjIwMjYtMTAtMjciIAoDUERYEgoyMDI2LTEwLTI3GgNTTEMqAkFTMgQzMzU1agcIARIDUERYcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-      "google_flights_url": ""
-    },
-    {
-      "destination": "Portland",
-      "airport": "PDX",
-      "regionLabel": "US West",
-      "origin": "SLC",
-      "cabin": "Business",
-      "price": 387,
-      "points": 30960,
-      "paymentType": "both",
-      "valueScore": "cash",
-      "hasCashPrice": true,
-      "isRoundTrip": true,
-      "tripDuration": 10,
-      "outDate": "2026-10-17",
-      "retDate": "2026-10-27",
-      "outDateFmt": "Sat, Oct 17",
-      "retDateFmt": "Tue, Oct 27",
-      "airline": "Alaska Airlines",
-      "duration": 240,
-      "stops": 0,
-      "isDomestic": true,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTEwLTE3Ih8KA1NMQxIKMjAyNi0xMC0xNxoDUERYKgJBUzIDNDQ2agcIARIDU0xDcgcIARIDUERYGkASCjIwMjYtMTAtMjciIAoDUERYEgoyMDI2LTEwLTI3GgNTTEMqAkFTMgQzMjg4agcIARIDUERYcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-      "google_flights_url": ""
-    },
-    {
-      "destination": "Portland",
-      "airport": "PDX",
-      "regionLabel": "US West",
-      "origin": "SLC",
-      "cabin": "Business",
-      "price": 387,
-      "points": 30960,
-      "paymentType": "both",
-      "valueScore": "cash",
-      "hasCashPrice": true,
-      "isRoundTrip": true,
-      "tripDuration": 10,
-      "outDate": "2026-10-17",
-      "retDate": "2026-10-27",
-      "outDateFmt": "Sat, Oct 17",
-      "retDateFmt": "Tue, Oct 27",
-      "airline": "Alaska Airlines",
-      "duration": 233,
-      "stops": 0,
-      "isDomestic": true,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTEwLTE3Ih8KA1NMQxIKMjAyNi0xMC0xNxoDUERYKgJBUzIDNDQ2agcIARIDU0xDcgcIARIDUERYGj8SCjIwMjYtMTAtMjciHwoDUERYEgoyMDI2LTEwLTI3GgNTTEMqAkFTMgM3MzBqBwgBEgNQRFhyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-      "google_flights_url": ""
-    },
-    {
-      "destination": "New York",
-      "airport": "JFK",
-      "regionLabel": "US East",
-      "origin": "SLC",
-      "cabin": "Premium Economy",
-      "price": 625,
-      "points": 50000,
-      "paymentType": "both",
-      "valueScore": "cash",
-      "hasCashPrice": true,
-      "isRoundTrip": true,
-      "tripDuration": 3,
-      "outDate": "2026-10-28",
-      "retDate": "2026-10-31",
-      "outDateFmt": "Wed, Oct 28",
-      "retDateFmt": "Sat, Oct 31",
-      "airline": "JetBlue",
-      "duration": 587,
-      "stops": 0,
-      "isDomestic": true,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTEwLTI4Ih8KA1NMQxIKMjAyNi0xMC0yOBoDSkZLKgJCNjIDMzcyagcIARIDU0xDcgcIARIDSkZLGj4SCjIwMjYtMTAtMzEiHgoDSkZLEgoyMDI2LTEwLTMxGgNTTEMqAkI2MgI3MWoHCAESA0pGS3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-      "google_flights_url": ""
-    },
-    {
       "destination": "Newark",
       "airport": "EWR",
       "regionLabel": "US East",
@@ -124,7 +28,7 @@
       "stops": 0,
       "isDomestic": true,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTExLTExIiAKA1NMQxIKMjAyNi0xMS0xMRoDRVdSKgJETDIEMjAzOGoHCAESA1NMQ3IHCAESA0VXUhpAEgoyMDI2LTExLTE0IiAKA0VXUhIKMjAyNi0xMS0xNBoDU0xDKgJETDIEMTAwOWoHCAESA0VXUnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-      "google_flights_url": ""
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20EWR%20on%202026-11-11%20through%202026-11-14"
     },
     {
       "destination": "Newark",
@@ -148,7 +52,7 @@
       "stops": 1,
       "isDomestic": true,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTExLTExIiAKA1NMQxIKMjAyNi0xMS0xMRoDRVdSKgJETDIEMjAzOGoHCAESA1NMQ3IHCAESA0VXUhphEgoyMDI2LTExLTE0IiAKA0VXUhIKMjAyNi0xMS0xNBoDRFRXKgJETDIEMjU2NiIfCgNEVFcSCjIwMjYtMTEtMTQaA1NMQyoCREwyAzkzNWoHCAESA0VXUnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-      "google_flights_url": ""
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20EWR%20on%202026-11-11%20through%202026-11-14"
     },
     {
       "destination": "Newark",
@@ -172,7 +76,7 @@
       "stops": 1,
       "isDomestic": true,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTExLTExIiAKA1NMQxIKMjAyNi0xMS0xMRoDRVdSKgJETDIEMjAzOGoHCAESA1NMQ3IHCAESA0VXUhpiEgoyMDI2LTExLTE0IiAKA0VXUhIKMjAyNi0xMS0xNBoDTVNQKgJETDIEMjg2NCIgCgNNU1ASCjIwMjYtMTEtMTQaA1NMQyoCREwyBDI2NThqBwgBEgNFV1JyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-      "google_flights_url": ""
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20EWR%20on%202026-11-11%20through%202026-11-14"
     },
     {
       "destination": "Mexico City",
@@ -196,7 +100,7 @@
       "stops": 2,
       "isDomestic": false,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTExLTA5Ih8KA1NMQxIKMjAyNi0xMS0wORoDR0RMKgJBTTIDNzkzIh8KA0dETBIKMjAyNi0xMS0wORoDTUVYKgJBTTIDMjQzagcIARIDU0xDcgcIARIDTUVYGmASCjIwMjYtMTEtMTYiHwoDTUVYEgoyMDI2LTExLTE2GgNHREwqAkFNMgMyMjQiHwoDR0RMEgoyMDI2LTExLTE2GgNTTEMqAkFNMgM3OTJqBwgBEgNNRVhyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-      "google_flights_url": ""
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20MEX%20on%202026-11-09%20through%202026-11-16"
     },
     {
       "destination": "Mexico City",
@@ -220,7 +124,7 @@
       "stops": 2,
       "isDomestic": false,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTExLTA5Ih8KA1NMQxIKMjAyNi0xMS0wORoDR0RMKgJBTTIDNzkzIh8KA0dETBIKMjAyNi0xMS0wORoDTUVYKgJBTTIDMjQzagcIARIDU0xDcgcIARIDTUVYGmASCjIwMjYtMTEtMTYiHwoDTUVYEgoyMDI2LTExLTE2GgNHREwqAkFNMgMyMzIiHwoDR0RMEgoyMDI2LTExLTE2GgNTTEMqAkFNMgM3OTJqBwgBEgNNRVhyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-      "google_flights_url": ""
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20MEX%20on%202026-11-09%20through%202026-11-16"
     },
     {
       "destination": "Mexico City",
@@ -244,7 +148,7 @@
       "stops": 2,
       "isDomestic": false,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTExLTA5Ih8KA1NMQxIKMjAyNi0xMS0wORoDR0RMKgJBTTIDNzkzIh8KA0dETBIKMjAyNi0xMS0wORoDTUVYKgJBTTIDMjQzagcIARIDU0xDcgcIARIDTUVYGmESCjIwMjYtMTEtMTYiHwoDTUVYEgoyMDI2LTExLTE2GgNJQUgqAkFNMgM0NzIiIAoDSUFIEgoyMDI2LTExLTE2GgNTTEMqAkRMMgQxNTMyagcIARIDTUVYcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-      "google_flights_url": ""
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20MEX%20on%202026-11-09%20through%202026-11-16"
     },
     {
       "destination": "Cancun",
@@ -268,7 +172,7 @@
       "stops": 2,
       "isDomestic": false,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA1IiAKA1NMQxIKMjAyNi0xMi0wNRoDU0VBKgJETDIEMjk5OCIfCgNTRUESCjIwMjYtMTItMDYaA0NVTioCREwyAzU5NGoHCAESA1NMQ3IHCAESA0NVThpgEgoyMDI2LTEyLTEwIh8KA0NVThIKMjAyNi0xMi0xMBoDTUVYKgJBTTIDNTA1Ih8KA01FWBIKMjAyNi0xMi0xMBoDU0xDKgJETDIDNjQyagcIARIDQ1VOcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-      "google_flights_url": ""
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-05%20through%202026-12-10"
     },
     {
       "destination": "Cancun",
@@ -292,7 +196,7 @@
       "stops": 1,
       "isDomestic": false,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA1IiAKA1NMQxIKMjAyNi0xMi0wNRoDU0VBKgJETDIEMjk5OCIfCgNTRUESCjIwMjYtMTItMDYaA0NVTioCREwyAzU5NGoHCAESA1NMQ3IHCAESA0NVTho_EgoyMDI2LTEyLTEwIh8KA0NVThIKMjAyNi0xMi0xMBoDU0xDKgJETDIDNjQ3agcIARIDQ1VOcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-      "google_flights_url": ""
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-05%20through%202026-12-10"
     },
     {
       "destination": "Cancun",
@@ -316,223 +220,7 @@
       "stops": 2,
       "isDomestic": false,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA1IiAKA1NMQxIKMjAyNi0xMi0wNRoDU0VBKgJETDIEMjk5OCIfCgNTRUESCjIwMjYtMTItMDYaA0NVTioCREwyAzU5NGoHCAESA1NMQ3IHCAESA0NVThphEgoyMDI2LTEyLTEwIh8KA0NVThIKMjAyNi0xMi0xMBoDRFRXKgJETDIDNjE4IiAKA0RUVxIKMjAyNi0xMi0xMBoDU0xDKgJETDIEMjc1M2oHCAESA0NVTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-      "google_flights_url": ""
-    },
-    {
-      "destination": "Frankfurt",
-      "airport": "FRA",
-      "regionLabel": "Europe",
-      "origin": "SLC",
-      "cabin": "Premium Economy",
-      "price": 1080,
-      "points": 86400,
-      "paymentType": "both",
-      "valueScore": "cash",
-      "hasCashPrice": true,
-      "isRoundTrip": true,
-      "tripDuration": 10,
-      "outDate": "2026-10-27",
-      "retDate": "2026-11-06",
-      "outDateFmt": "Tue, Oct 27",
-      "retDateFmt": "Fri, Nov 06",
-      "airline": "Alaska Airlines",
-      "duration": 2047,
-      "stops": 2,
-      "isDomestic": false,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEwLTI3Ih8KA1NMQxIKMjAyNi0xMC0yNxoDU0VBKgJBUzIDNzM0IiAKA1NFQRIKMjAyNi0xMC0yNxoDRlJBKgJERTIEMjAzM2oHCAESA1NMQ3IHCAESA0ZSQRpgEgoyMDI2LTExLTA2IiAKA0ZSQRIKMjAyNi0xMS0wNhoDSkZLKgJERTIEMjAxNiIeCgNKRksSCjIwMjYtMTEtMDYaA1NMQyoCQjYyAjcxagcIARIDRlJBcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-      "google_flights_url": ""
-    },
-    {
-      "destination": "Frankfurt",
-      "airport": "FRA",
-      "regionLabel": "Europe",
-      "origin": "SLC",
-      "cabin": "Premium Economy",
-      "price": 1081,
-      "points": 86480,
-      "paymentType": "both",
-      "valueScore": "cash",
-      "hasCashPrice": true,
-      "isRoundTrip": true,
-      "tripDuration": 14,
-      "outDate": "2026-10-21",
-      "retDate": "2026-11-04",
-      "outDateFmt": "Wed, Oct 21",
-      "retDateFmt": "Wed, Nov 04",
-      "airline": "Alaska Airlines",
-      "duration": 2292,
-      "stops": 2,
-      "isDomestic": false,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEwLTIxIh8KA1NMQxIKMjAyNi0xMC0yMRoDU0VBKgJBUzIDNzE5IiAKA1NFQRIKMjAyNi0xMC0yMRoDRlJBKgJERTIEMjAzM2oHCAESA1NMQ3IHCAESA0ZSQRpgEgoyMDI2LTExLTA0IiAKA0ZSQRIKMjAyNi0xMS0wNBoDSkZLKgJERTIEMjAxNiIeCgNKRksSCjIwMjYtMTEtMDQaA1NMQyoCQjYyAjcxagcIARIDRlJBcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-      "google_flights_url": ""
-    },
-    {
-      "destination": "Frankfurt",
-      "airport": "FRA",
-      "regionLabel": "Europe",
-      "origin": "SLC",
-      "cabin": "Premium Economy",
-      "price": 1103,
-      "points": 88240,
-      "paymentType": "both",
-      "valueScore": "cash",
-      "hasCashPrice": true,
-      "isRoundTrip": true,
-      "tripDuration": 10,
-      "outDate": "2026-10-27",
-      "retDate": "2026-11-06",
-      "outDateFmt": "Tue, Oct 27",
-      "retDateFmt": "Fri, Nov 06",
-      "airline": "Alaska Airlines",
-      "duration": 2367,
-      "stops": 2,
-      "isDomestic": false,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEwLTI3Ih8KA1NMQxIKMjAyNi0xMC0yNxoDU0VBKgJBUzIDNzE5IiAKA1NFQRIKMjAyNi0xMC0yNxoDRlJBKgJERTIEMjAzM2oHCAESA1NMQ3IHCAESA0ZSQRpgEgoyMDI2LTExLTA2IiAKA0ZSQRIKMjAyNi0xMS0wNhoDSkZLKgJERTIEMjAxNiIeCgNKRksSCjIwMjYtMTEtMDYaA1NMQyoCQjYyAjcxagcIARIDRlJBcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-      "google_flights_url": ""
-    },
-    {
-      "destination": "Bogota",
-      "airport": "BOG",
-      "regionLabel": "South America",
-      "origin": "SLC",
-      "cabin": "Business",
-      "price": 1149,
-      "points": 91920,
-      "paymentType": "both",
-      "valueScore": "cash",
-      "hasCashPrice": true,
-      "isRoundTrip": true,
-      "tripDuration": 5,
-      "outDate": "2026-10-23",
-      "retDate": "2026-10-28",
-      "outDateFmt": "Fri, Oct 23",
-      "retDateFmt": "Wed, Oct 28",
-      "airline": "American Airlines",
-      "duration": 1487,
-      "stops": 2,
-      "isDomestic": false,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEwLTIzIiAKA1NMQxIKMjAyNi0xMC0yMxoDREZXKgJBQTIEMjE5NSIgCgNERlcSCjIwMjYtMTAtMjMaA0JPRyoCQUEyBDExMzdqBwgBEgNTTENyBwgBEgNCT0caYhIKMjAyNi0xMC0yOCIgCgNCT0cSCjIwMjYtMTAtMjgaA0RGVyoCQUEyBDExMjIiIAoDREZXEgoyMDI2LTEwLTI5GgNTTEMqAkFBMgQxODc4agcIARIDQk9HcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-      "google_flights_url": ""
-    },
-    {
-      "destination": "Bogota",
-      "airport": "BOG",
-      "regionLabel": "South America",
-      "origin": "SLC",
-      "cabin": "Business",
-      "price": 1149,
-      "points": 91920,
-      "paymentType": "both",
-      "valueScore": "cash",
-      "hasCashPrice": true,
-      "isRoundTrip": true,
-      "tripDuration": 5,
-      "outDate": "2026-10-23",
-      "retDate": "2026-10-28",
-      "outDateFmt": "Fri, Oct 23",
-      "retDateFmt": "Wed, Oct 28",
-      "airline": "American Airlines",
-      "duration": 2009,
-      "stops": 2,
-      "isDomestic": false,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEwLTIzIiAKA1NMQxIKMjAyNi0xMC0yMxoDREZXKgJBQTIEMjE5NSIgCgNERlcSCjIwMjYtMTAtMjMaA0JPRyoCQUEyBDExMzdqBwgBEgNTTENyBwgBEgNCT0caYRIKMjAyNi0xMC0yOCIgCgNCT0cSCjIwMjYtMTAtMjgaA0RGVyoCQUEyBDExMjIiHwoDREZXEgoyMDI2LTEwLTI5GgNTTEMqAkFBMgM1NThqBwgBEgNCT0dyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-      "google_flights_url": ""
-    },
-    {
-      "destination": "Bogota",
-      "airport": "BOG",
-      "regionLabel": "South America",
-      "origin": "SLC",
-      "cabin": "Business",
-      "price": 1149,
-      "points": 91920,
-      "paymentType": "both",
-      "valueScore": "cash",
-      "hasCashPrice": true,
-      "isRoundTrip": true,
-      "tripDuration": 5,
-      "outDate": "2026-10-23",
-      "retDate": "2026-10-28",
-      "outDateFmt": "Fri, Oct 23",
-      "retDateFmt": "Wed, Oct 28",
-      "airline": "American Airlines",
-      "duration": 2168,
-      "stops": 2,
-      "isDomestic": false,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEwLTIzIiAKA1NMQxIKMjAyNi0xMC0yMxoDREZXKgJBQTIEMjE5NSIgCgNERlcSCjIwMjYtMTAtMjMaA0JPRyoCQUEyBDExMzdqBwgBEgNTTENyBwgBEgNCT0caYhIKMjAyNi0xMC0yOCIgCgNCT0cSCjIwMjYtMTAtMjgaA0RGVyoCQUEyBDExMjIiIAoDREZXEgoyMDI2LTEwLTI5GgNTTEMqAkFBMgQyOTkzagcIARIDQk9HcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-      "google_flights_url": ""
-    },
-    {
-      "destination": "Boston",
-      "airport": "BOS",
-      "regionLabel": "US East",
-      "origin": "SLC",
-      "cabin": "Business",
-      "price": 1197,
-      "points": 95760,
-      "paymentType": "both",
-      "valueScore": "cash",
-      "hasCashPrice": true,
-      "isRoundTrip": true,
-      "tripDuration": 3,
-      "outDate": "2026-10-24",
-      "retDate": "2026-10-27",
-      "outDateFmt": "Sat, Oct 24",
-      "retDateFmt": "Tue, Oct 27",
-      "airline": "American Airlines",
-      "duration": 951,
-      "stops": 2,
-      "isDomestic": true,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEwLTI0IiAKA1NMQxIKMjAyNi0xMC0yNBoDREZXKgJBQTIEMTIxNCIgCgNERlcSCjIwMjYtMTAtMjQaA0JPUyoCQUEyBDMxMDJqBwgBEgNTTENyBwgBEgNCT1MaYhIKMjAyNi0xMC0yNyIgCgNCT1MSCjIwMjYtMTAtMjcaA09SRCoCQUEyBDI2MDAiIAoDT1JEEgoyMDI2LTEwLTI3GgNTTEMqAkFBMgQxODczagcIARIDQk9TcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-      "google_flights_url": ""
-    },
-    {
-      "destination": "Boston",
-      "airport": "BOS",
-      "regionLabel": "US East",
-      "origin": "SLC",
-      "cabin": "Business",
-      "price": 1197,
-      "points": 95760,
-      "paymentType": "both",
-      "valueScore": "cash",
-      "hasCashPrice": true,
-      "isRoundTrip": true,
-      "tripDuration": 3,
-      "outDate": "2026-10-24",
-      "retDate": "2026-10-27",
-      "outDateFmt": "Sat, Oct 24",
-      "retDateFmt": "Tue, Oct 27",
-      "airline": "American Airlines",
-      "duration": 940,
-      "stops": 2,
-      "isDomestic": true,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEwLTI0IiAKA1NMQxIKMjAyNi0xMC0yNBoDREZXKgJBQTIEMTIxNCIgCgNERlcSCjIwMjYtMTAtMjQaA0JPUyoCQUEyBDMxMDJqBwgBEgNTTENyBwgBEgNCT1MaYRIKMjAyNi0xMC0yNyIfCgNCT1MSCjIwMjYtMTAtMjcaA1BITCoCQUEyAzg1NyIgCgNQSEwSCjIwMjYtMTAtMjcaA1NMQyoCQUEyBDI2MzBqBwgBEgNCT1NyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-      "google_flights_url": ""
-    },
-    {
-      "destination": "Boston",
-      "airport": "BOS",
-      "regionLabel": "US East",
-      "origin": "SLC",
-      "cabin": "Business",
-      "price": 1197,
-      "points": 95760,
-      "paymentType": "both",
-      "valueScore": "cash",
-      "hasCashPrice": true,
-      "isRoundTrip": true,
-      "tripDuration": 3,
-      "outDate": "2026-10-24",
-      "retDate": "2026-10-27",
-      "outDateFmt": "Sat, Oct 24",
-      "retDateFmt": "Tue, Oct 27",
-      "airline": "American Airlines",
-      "duration": 915,
-      "stops": 2,
-      "isDomestic": true,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEwLTI0IiAKA1NMQxIKMjAyNi0xMC0yNBoDREZXKgJBQTIEMTIxNCIgCgNERlcSCjIwMjYtMTAtMjQaA0JPUyoCQUEyBDMxMDJqBwgBEgNTTENyBwgBEgNCT1MaYhIKMjAyNi0xMC0yNyIgCgNCT1MSCjIwMjYtMTAtMjcaA09SRCoCQUEyBDMxNjAiIAoDT1JEEgoyMDI2LTEwLTI3GgNTTEMqAkFBMgQyNTQ1agcIARIDQk9TcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-      "google_flights_url": ""
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-05%20through%202026-12-10"
     },
     {
       "destination": "Honolulu",
@@ -556,7 +244,7 @@
       "stops": 0,
       "isDomestic": true,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTExLTMwIh8KA1NMQxIKMjAyNi0xMS0zMBoDSE5MKgJBUzIDMzQwagcIARIDU0xDcgcIARIDSE5MGj8SCjIwMjYtMTItMTAiHwoDSE5MEgoyMDI2LTEyLTEwGgNTTEMqAkFTMgMzNDFqBwgBEgNITkxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-      "google_flights_url": ""
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HNL%20on%202026-11-30%20through%202026-12-10"
     },
     {
       "destination": "Honolulu",
@@ -580,7 +268,7 @@
       "stops": 1,
       "isDomestic": true,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTExLTMwIh8KA1NMQxIKMjAyNi0xMS0zMBoDSE5MKgJBUzIDMzQwagcIARIDU0xDcgcIARIDSE5MGmASCjIwMjYtMTItMTAiHgoDSE5MEgoyMDI2LTEyLTEwGgNTQU4qAkFTMgI5MyIgCgNTQU4SCjIwMjYtMTItMTEaA1NMQyoCQVMyBDMwMTdqBwgBEgNITkxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-      "google_flights_url": ""
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HNL%20on%202026-11-30%20through%202026-12-10"
     },
     {
       "destination": "Honolulu",
@@ -604,7 +292,7 @@
       "stops": 1,
       "isDomestic": true,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTExLTMwIh8KA1NMQxIKMjAyNi0xMS0zMBoDSE5MKgJBUzIDMzQwagcIARIDU0xDcgcIARIDSE5MGmESCjIwMjYtMTItMTAiHwoDSE5MEgoyMDI2LTEyLTEwGgNTQU4qAkFTMgM4ODQiIAoDU0FOEgoyMDI2LTEyLTEwGgNTTEMqAkFTMgQzMDE3agcIARIDSE5McgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-      "google_flights_url": ""
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HNL%20on%202026-11-30%20through%202026-12-10"
     },
     {
       "destination": "San Jose CR",
@@ -628,7 +316,7 @@
       "stops": 2,
       "isDomestic": false,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTExLTA4IiAKA1NMQxIKMjAyNi0xMS0wOBoDSUFIKgJVQTIENTM3OSIgCgNJQUgSCjIwMjYtMTEtMDkaA1NKTyoCVUEyBDI0NDhqBwgBEgNTTENyBwgBEgNTSk8aYhIKMjAyNi0xMS0xMyIgCgNTSk8SCjIwMjYtMTEtMTMaA0lBSCoCVUEyBDE0NDciIAoDSUFIEgoyMDI2LTExLTEzGgNTTEMqAlVBMgQyMTU3agcIARIDU0pPcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-      "google_flights_url": ""
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SJO%20on%202026-11-08%20through%202026-11-13"
     },
     {
       "destination": "San Jose CR",
@@ -652,7 +340,7 @@
       "stops": 2,
       "isDomestic": false,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTExLTA4IiAKA1NMQxIKMjAyNi0xMS0wOBoDSUFIKgJVQTIENTM3OSIgCgNJQUgSCjIwMjYtMTEtMDkaA1NKTyoCVUEyBDI0NDhqBwgBEgNTTENyBwgBEgNTSk8aYhIKMjAyNi0xMS0xMyIgCgNTSk8SCjIwMjYtMTEtMTMaA0lBSCoCVUEyBDE1ODkiIAoDSUFIEgoyMDI2LTExLTEzGgNTTEMqAlVBMgQyMTU3agcIARIDU0pPcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-      "google_flights_url": ""
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SJO%20on%202026-11-08%20through%202026-11-13"
     },
     {
       "destination": "San Jose CR",
@@ -676,7 +364,7 @@
       "stops": 2,
       "isDomestic": false,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTExLTA4IiAKA1NMQxIKMjAyNi0xMS0wOBoDSUFIKgJVQTIENTM3OSIgCgNJQUgSCjIwMjYtMTEtMDkaA1NKTyoCVUEyBDI0NDhqBwgBEgNTTENyBwgBEgNTSk8aYhIKMjAyNi0xMS0xMyIgCgNTSk8SCjIwMjYtMTEtMTMaA0lBSCoCVUEyBDE1ODkiIAoDSUFIEgoyMDI2LTExLTE0GgNTTEMqAlVBMgQ2MTEwagcIARIDU0pPcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-      "google_flights_url": ""
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SJO%20on%202026-11-08%20through%202026-11-13"
     },
     {
       "destination": "Lima",
@@ -700,7 +388,7 @@
       "stops": 2,
       "isDomestic": false,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI3LTAxLTE0IiAKA1NMQxIKMjAyNy0wMS0xNBoDSUFIKgJVQTIEMjM2NiIfCgNJQUgSCjIwMjctMDEtMTQaA0xJTSoCVUEyAzg1NGoHCAESA1NMQ3IHCAESA0xJTRphEgoyMDI3LTAxLTI4Ih8KA0xJTRIKMjAyNy0wMS0yOBoDSUFIKgJVQTIDODU1IiAKA0lBSBIKMjAyNy0wMS0yOBoDU0xDKgJVQTIEMjI0MmoHCAESA0xJTXIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-      "google_flights_url": ""
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20LIM%20on%202027-01-14%20through%202027-01-28"
     },
     {
       "destination": "Lima",
@@ -724,7 +412,7 @@
       "stops": 2,
       "isDomestic": false,
       "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI3LTAxLTE0IiAKA1NMQxIKMjAyNy0wMS0xNBoDSUFIKgJVQTIEMjM2NiIfCgNJQUgSCjIwMjctMDEtMTQaA0xJTSoCVUEyAzg1NGoHCAESA1NMQ3IHCAESA0xJTRpgEgoyMDI3LTAxLTI4Ih8KA0xJTRIKMjAyNy0wMS0yOBoDSUFIKgJVQTIDODU1Ih8KA0lBSBIKMjAyNy0wMS0yOBoDU0xDKgJVQTIDNjU1agcIARIDTElNcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-      "google_flights_url": ""
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20LIM%20on%202027-01-14%20through%202027-01-28"
     }
   ]
 }

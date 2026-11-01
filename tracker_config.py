@@ -102,6 +102,22 @@ INTERNATIONAL_REGIONS = [
 ]
 
 
+def is_current_travel_date(date_str: str, *, today: datetime | None = None) -> bool:
+    """Return True when the travel date is today or later.
+
+    Missing/invalid dates are treated as current so legacy rows without
+    ``out_date`` are not dropped during checkpoint restore.
+    """
+    if not date_str:
+        return True
+    today = today or datetime.now()
+    try:
+        travel_day = datetime.strptime(str(date_str)[:10], "%Y-%m-%d").date()
+    except (ValueError, TypeError):
+        return True
+    return travel_day >= today.date()
+
+
 def region_active(region_name: str, when: datetime | None = None) -> bool:
     """Return whether a region should be searched on the given date."""
     from datetime import datetime as dt

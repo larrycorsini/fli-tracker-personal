@@ -132,3 +132,36 @@ class TestCapRegionResults:
         ]
         capped = find_direct.cap_region_results(flights)
         assert len(capped) == 2
+
+
+class TestKeepCurrentFares:
+    def test_restore_keeps_future_prior_fares(self):
+        today = datetime(2026, 10, 31)
+        prior = {
+            "California Coast": [
+                {
+                    "origin": "SLC",
+                    "destination": "SAN",
+                    "out_date": "2026-09-23",
+                    "price": 167,
+                },
+                {
+                    "origin": "SLC",
+                    "destination": "SAN",
+                    "out_date": "2026-12-09",
+                    "price": 198,
+                },
+            ]
+        }
+        current = {name: [] for name in find_direct.REGIONS}
+        find_direct.restore_prior_region_if_empty(
+            "California Coast", current, prior, today=today
+        )
+        assert [f["out_date"] for f in current["California Coast"]] == ["2026-12-09"]
+
+    def test_restore_skips_when_region_already_has_fares(self):
+        today = datetime(2026, 10, 31)
+        current = {"DFW": [{"out_date": "2027-01-06", "price": 209}]}
+        prior = {"DFW": [{"out_date": "2027-01-20", "price": 250}]}
+        find_direct.restore_prior_region_if_empty("DFW", current, prior, today=today)
+        assert current["DFW"][0]["price"] == 209

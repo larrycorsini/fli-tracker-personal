@@ -38,6 +38,7 @@ from tracker_config import (
     REGIONS,
     SHORTLIST_SIZE,
     SHORTLIST_SIZE_TEST,
+    is_current_travel_date,
     region_active,
 )
 from tracker_io import atomic_write_json
@@ -109,6 +110,34 @@ def _flight_matches(flight: dict, r_type: str) -> bool:
 
 def _count_flights(all_results: dict[str, list[dict]]) -> int:
     return sum(len(flights) for flights in all_results.values())
+
+
+def current_flights(flights: list[dict], *, today: datetime | None = None) -> list[dict]:
+    """Keep fares whose outbound date is today or later."""
+    return [
+        flight
+        for flight in flights
+        if is_current_travel_date(flight.get("out_date") or "", today=today)
+    ]
+
+
+def restore_prior_region_if_empty(
+    region_name: str,
+    all_results: dict[str, list[dict]],
+    prior_results: dict[str, list[dict]] | None,
+    *,
+    today: datetime | None = None,
+) -> None:
+    """When today's search finds nothing, keep still-bookable fares from yesterday."""
+    if all_results.get(region_name):
+        return
+    if not prior_results:
+        return
+    kept = current_flights(prior_results.get(region_name, []), today=today)
+    if not kept:
+        return
+    all_results[region_name] = kept
+    log.info("%s: empty search — keeping %d prior current fares", region_name, len(kept))
 
 
 def _load_checkpoint(*, force: bool) -> dict[str, list[dict]]:
@@ -522,6 +551,7 @@ def main(argv: list[str] | None = None) -> int:
 
         if not shortlist:
             log.warning("%s: empty shortlist, skipping phase 2", region_name)
+            restore_prior_region_if_empty(region_name, all_results, prior_results)
             atomic_write_json(OUTPUT_JSON, all_results)
             continue
 
@@ -540,6 +570,8 @@ def main(argv: list[str] | None = None) -> int:
 
         sorted_flights = _sort_region(all_results[region_name])
         all_results[region_name] = cap_region_results(sorted_flights)
+        if not all_results[region_name]:
+            restore_prior_region_if_empty(region_name, all_results, prior_results)
         atomic_write_json(OUTPUT_JSON, all_results)
         log.info("Checkpoint %s: %d flights", region_name, len(all_results[region_name]))
 
@@ -557,12 +589,15 @@ def main(argv: list[str] | None = None) -> int:
         log.info("%s: %d matching flights", region_name, len(all_results[region_name]))
 
     if _count_flights(all_results) == 0 and prior_results is not None:
+        kept_prior = {
+            name: current_flights(flights) for name, flights in prior_results.items()
+        }
         log.warning(
-            "Search returned zero flights — preserving prior %s (%d flights)",
+            "Search returned zero flights — preserving prior %s (%d current flights)",
             OUTPUT_JSON,
-            _count_flights(prior_results),
+            _count_flights(kept_prior),
         )
-        atomic_write_json(OUTPUT_JSON, prior_results)
+        atomic_write_json(OUTPUT_JSON, kept_prior)
         return 0
 
     return _compute_exit_code(all_results)

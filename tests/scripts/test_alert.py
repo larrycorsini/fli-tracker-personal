@@ -6,6 +6,8 @@ import importlib.util
 import sys
 from pathlib import Path
 
+from alert_format import region_deep_link
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 ALERT_PATH = REPO_ROOT / "alert.py"
 
@@ -24,11 +26,11 @@ alert = _load_alert()
 
 class TestRegionDeepLink:
     def test_tab_query_param(self):
-        link = alert.region_deep_link("California Coast")
+        link = region_deep_link("California Coast")
         assert link == "https://flights.larrycorsini.com/?tab=California%20Coast"
 
     def test_cancun_tab(self):
-        link = alert.region_deep_link("Cancun")
+        link = region_deep_link("Cancun")
         assert link.endswith("?tab=Cancun")
 
 
@@ -38,8 +40,8 @@ class TestCollectDeals:
             "price": 280,
             "origin": "SLC",
             "destination": "DFW",
-            "out_date": "2026-07-01",
-            "ret_date": "2026-07-04",
+            "out_date": "2027-01-06",
+            "ret_date": "2027-01-09",
             "airline": "Delta",
             "url": "https://example.com/book",
         }
@@ -47,8 +49,8 @@ class TestCollectDeals:
             "price": 400,
             "origin": "SLC",
             "destination": "LAX",
-            "out_date": "2026-07-02",
-            "ret_date": "2026-07-05",
+            "out_date": "2027-01-07",
+            "ret_date": "2027-01-10",
             "airline": "United",
             "url": "",
         }

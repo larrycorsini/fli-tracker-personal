@@ -26,6 +26,7 @@ from tracker_config import (
     PRIOR_PRICES_JSON,
     REGIONS,
     SITE_URL,
+    is_current_travel_date,
 )
 from tracker_io import atomic_write_json, atomic_write_text
 
@@ -127,6 +128,26 @@ def format_chart_date(dt_str: str) -> str:
 
 def priced_flights(flights: list[dict]) -> list[dict]:
     return [f for f in flights if f.get("price") is not None]
+
+
+def drop_expired_flights(flights: list[dict], *, today: datetime | None = None) -> list[dict]:
+    """Drop economy rows whose outbound date has already passed."""
+    kept: list[dict] = []
+    for flight in flights:
+        out_date = flight.get("out_date") or flight.get("outDate") or ""
+        if is_current_travel_date(out_date, today=today):
+            kept.append(flight)
+    return kept
+
+
+def drop_expired_premium_deals(deals: list[dict], *, today: datetime | None = None) -> list[dict]:
+    """Drop premium deals whose outbound date has already passed."""
+    kept: list[dict] = []
+    for deal in deals:
+        out_date = deal.get("out_date") or deal.get("outDate") or ""
+        if is_current_travel_date(out_date, today=today):
+            kept.append(deal)
+    return kept
 
 
 def compute_max_price(all_results: dict[str, list[dict]]) -> int:
@@ -311,11 +332,8 @@ def get_base_html_head(
         "        .heatmap-high { background: var(--heatmap-high); color: #fff; }",
         "        .focus-ring:focus-visible { outline: none; box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--accent-interactive); }",
         "        .time-option-card {",
-        "            display: flex; flex-direction: column; gap: 10px; padding: 12px 16px;",
+        "            display: flex; flex-direction: column; gap: 12px; padding: 12px 16px;",
         "            background: var(--surface-card); border: 1px solid var(--border-default); border-radius: 8px;",
-        "        }",
-        "        @media (min-width: 640px) {",
-        "            .time-option-card { flex-direction: row; align-items: center; justify-content: space-between; gap: 16px; }",
         "        }",
         "        .time-option-times { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }",
         "        .time-option-row {",
@@ -344,6 +362,7 @@ def get_base_html_head(
         "            html { scroll-behavior: auto; }",
         "            .nav-shell, .nav-links { transition: none !important; }",
         "            .hero-airplane { animation: none !important; opacity: 0 !important; }",
+        "            .deal-highlight { animation: none; }",
         "        }",
         "        .hero-airplane {",
         "            position: absolute; top: 18%; right: -80px; width: 72px; height: 72px;",
@@ -369,7 +388,8 @@ def get_base_html_head(
         "        }",
         "        .time-option-actions { display: flex; flex-direction: column; gap: 8px; width: 100%; }",
         "        @media (min-width: 640px) {",
-        "            .time-option-actions { flex-direction: row; flex-wrap: wrap; width: auto; justify-content: flex-end; }",
+        "            .time-option-actions { flex-direction: row; flex-wrap: wrap; }",
+        "            .time-option-cta { width: auto; min-width: 5.5rem; }",
         "        }",
         "        .time-option-cta-outline {",
         "            background: transparent; color: var(--accent-interactive);",
@@ -393,6 +413,16 @@ def get_base_html_head(
         "            display: flex; flex-direction: column; gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--accent-interactive-border);",
         "        }",
         "        .watch-panel-item:last-child { border-bottom: none; padding-bottom: 0; }",
+        "        .deal-highlight {",
+        "            box-shadow: inset 0 0 0 3px var(--accent-interactive), 0 8px 24px rgba(26, 115, 232, 0.18);",
+        "            background: var(--accent-interactive-muted) !important;",
+        "            border-radius: 12px;",
+        "            animation: deal-pulse 1.4s ease-in-out 3;",
+        "        }",
+        "        @keyframes deal-pulse {",
+        "            0%, 100% { box-shadow: inset 0 0 0 3px var(--accent-interactive), 0 8px 24px rgba(26, 115, 232, 0.18); }",
+        "            50% { box-shadow: inset 0 0 0 5px var(--accent-interactive), 0 12px 28px rgba(26, 115, 232, 0.28); }",
+        "        }",
         "        @media (min-width: 640px) {",
         "            .watch-panel-item { flex-direction: row; align-items: center; justify-content: space-between; }",
         "        }",
@@ -717,6 +747,7 @@ def build_region_groups(
                         "outDepFmt": format_datetime(f["out_dep"]),
                         "retArrFmt": format_datetime(f["ret_arr"]),
                         "url": f.get("url") or "",
+                        "searchUrl": google_flights_url(origin, dest, out_date, ret_date or None),
                     }
                     for f in group_flights
                 ],
@@ -901,7 +932,7 @@ def build_premium_deals_payload(
                 "stops": stops,
                 "isDomestic": infer_premium_deal_is_domestic(deal),
                 "booking_url": booking_url,
-                "google_flights_url": gf_url if not has_cash else "",
+                "google_flights_url": gf_url,
             }
         )
     deals_out.sort(key=lambda row: deal_sort_key(_public_deal_to_sort_row(row)))
@@ -934,12 +965,17 @@ def _existing_premium_deals_json_has_data() -> bool:
 def render_premium_deals_report(last_updated: str, last_updated_at: str) -> None:
     """Write public/data/premium-deals.json from find_deals.py output."""
     raw = load_premium_deals()
+    raw = {**raw, "deals": drop_expired_premium_deals(raw.get("deals", []))}
     if os.path.exists(PREMIUM_DEAL_OUTPUT_JSON):
         premium_updated, premium_updated_at = resolve_last_updated(PREMIUM_DEAL_OUTPUT_JSON)
     else:
         premium_updated, premium_updated_at = last_updated, last_updated_at
     payload = build_premium_deals_payload(raw, premium_updated, premium_updated_at)
-    if not payload.get("deals") and _existing_premium_deals_json_has_data():
+    if (
+        not payload.get("deals")
+        and not os.path.exists(PREMIUM_DEAL_OUTPUT_JSON)
+        and _existing_premium_deals_json_has_data()
+    ):
         print("No premium_deals.json source — keeping existing premium-deals.json")
         return
     write_premium_deals_json(payload)
@@ -1027,12 +1063,16 @@ def render_premium_deals_section() -> list[str]:
         "             role='list' aria-label='Premium flight deals'>",
         "            <template x-for='(deal, i) in filteredDeals' :key=\"'premium-' + i\">",
         "                <article class='p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-gray-50 transition-colors'",
+        "                         :class=\"isHighlighted(deal) ? 'deal-highlight' : ''\"",
+        "                         :aria-current=\"isHighlighted(deal) ? 'true' : 'false'\"",
         "                         role='listitem'>",
         "                    <div class='flex-1 min-w-0'>",
         "                        <div class='flex flex-wrap items-center gap-2 mb-2'>",
         "                            <h3 class='text-xl font-bold text-gray-800' x-text='deal.destination'></h3>",
         "                            <span class='text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-600 border' x-text='deal.airport'></span>",
         "                            <span class='text-xs font-semibold px-3 py-1 rounded-full' style='background:var(--accent-interactive-muted);color:var(--accent-interactive);border:1px solid var(--accent-interactive-border)' x-text='deal.cabin'></span>",
+        "                            <span x-show='isHighlighted(deal)' class='text-xs font-bold px-3 py-1 rounded-full text-white'",
+        "                                  style='background: var(--accent-interactive)'>From your text</span>",
         "                        </div>",
         "                        <p class='text-sm text-gray-500 mb-1'>",
         "                            <span x-text='deal.origin'></span> → <span x-text='deal.airport'></span>",
@@ -1061,8 +1101,11 @@ def render_premium_deals_section() -> list[str]:
         "                        </div>",
         "                        <a x-show='deal.hasCashPrice && deal.booking_url' :href='deal.booking_url' target='_blank' rel='noopener noreferrer'",
         "                           class='btn-accent focus-ring text-sm w-full sm:w-auto text-center' :aria-label=\"'Book round trip to ' + deal.destination + ' on Google Flights'\">Book</a>",
-        "                        <a x-show='!deal.hasCashPrice && deal.google_flights_url' :href='deal.google_flights_url' target='_blank' rel='noopener noreferrer'",
-        "                           class='btn-accent focus-ring text-sm w-full sm:w-auto text-center' :aria-label=\"'Search round trip to ' + deal.destination + ' on Google Flights'\">Search on Google Flights</a>",
+        "                        <a x-show='deal.google_flights_url' :href='deal.google_flights_url' target='_blank' rel='noopener noreferrer'",
+        "                           class='btn-accent focus-ring text-sm w-full sm:w-auto text-center'",
+        "                           :class=\"deal.hasCashPrice && deal.booking_url ? 'time-option-cta-outline' : ''\"",
+        "                           :aria-label=\"'Search round trip to ' + deal.destination + ' on Google Flights'\"",
+        "                           x-text=\"deal.hasCashPrice && deal.booking_url ? 'Search dates' : 'Search on Google Flights'\"></a>",
         "                    </div>",
         "                </article>",
         "            </template>",
@@ -1081,6 +1124,7 @@ def render_premium_deals_section() -> list[str]:
         "                maxOneStop: false,",
         "                maxPrice: null,",
         "                paymentFilter: 'cash',",
+        "                highlight: null,",
         "                paymentOptions: [",
         "                    { label: 'Any', value: 'any' },",
         "                    { label: 'Cash', value: 'cash' },",
@@ -1121,15 +1165,43 @@ def render_premium_deals_section() -> list[str]:
         "                    this.maxPrice = null;",
         "                    this.paymentFilter = 'cash';",
         "                },",
+        "                isHighlighted(deal) {",
+        "                    const h = this.highlight;",
+        "                    if (!h || !deal) return false;",
+        "                    if (h.airport && deal.airport !== h.airport) return false;",
+        "                    if (h.origin && deal.origin !== h.origin) return false;",
+        "                    if (h.out && deal.outDate !== h.out) return false;",
+        "                    return true;",
+        "                },",
+        "                applyDealHighlight() {",
+        "                    const params = new URLSearchParams(window.location.search);",
+        "                    const airport = params.get('deal');",
+        "                    if (!airport) return;",
+        "                    this.highlight = {",
+        "                        airport: airport,",
+        "                        origin: params.get('o') || params.get('origin') || '',",
+        "                        out: params.get('out') || '',",
+        "                    };",
+        "                    const match = this.allDeals.find((deal) => this.isHighlighted(deal));",
+        "                    if (match && !match.hasCashPrice) {",
+        "                        this.cashOnly = false;",
+        "                        this.paymentFilter = 'any';",
+        "                    }",
+        "                    this.$nextTick(() => {",
+        "                        const el = document.querySelector('#premium-deals .deal-highlight');",
+        "                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });",
+        "                    });",
+        "                },",
         "                async init() {",
         "                    try {",
-        "                        const resp = await fetch('data/premium-deals.json');",
+        "                        const resp = await fetch('data/premium-deals.json', { cache: 'no-store' });",
         "                        if (!resp.ok) throw new Error('Could not load premium deals (' + resp.status + ')');",
         "                        const data = await resp.json();",
         "                        this.allDeals = data.deals || [];",
         "                        this.lastUpdated = data.lastUpdated || null;",
         "                        this.lastUpdatedAt = data.lastUpdatedAt || null;",
         "                        this.loading = false;",
+        "                        this.applyDealHighlight();",
         "                    } catch (err) {",
         "                        this.error = err.message || 'Failed to load premium deals';",
         "                        this.loading = false;",
@@ -1148,7 +1220,10 @@ def render_index(
     prior_prices: dict[str, int] | None = None,
     last_updated_at: str | None = None,
 ) -> None:
-    all_results = normalized_results(all_results)
+    all_results = {
+        name: drop_expired_flights(flights)
+        for name, flights in normalized_results(all_results).items()
+    }
     payload = build_flights_payload(
         all_results, last_updated, hist_avg, prior_prices, last_updated_at
     )
@@ -1290,14 +1365,18 @@ def render_index(
             "                        </div>",
             "                        <template x-for='(group, gi) in (regionData[region]?.groups || [])' :key=\"region + '-' + gi\">",
             "                            <div x-show='groupMatches(group)' x-cloak>",
-            "                                <div x-data='{ expanded: false }' class='hover:bg-gray-50 transition-colors'>",
+            "                                <div x-data='{ expanded: false }' x-effect='if (groupIsHighlighted(group)) expanded = true'",
+        "                                     :class=\"(groupIsHighlighted(group) ? 'deal-highlight ' : '') + 'hover:bg-gray-50 transition-colors'\"",
+        "                                     :aria-current=\"groupIsHighlighted(group) ? 'true' : 'false'\">",
             "                                    <button type='button' @click='expanded = !expanded' :aria-expanded='expanded'",
             "                                        class='focus-ring w-full text-left cursor-pointer p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between'>",
             "                                        <div class='flex-1 mb-4 md:mb-0'>",
             "                                            <div class='flex items-center flex-wrap gap-2 mb-2'>",
             "                                                <span class='text-[22px] font-bold text-gray-800' x-text='group.airline'></span>",
-            "                                                <span class='text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-600 border'",
-            "                                                    x-text=\"group.origin + ' → ' + group.destination\"></span>",
+        "                                                <span class='text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-600 border'",
+        "                                                    x-text=\"group.origin + ' → ' + group.destination\"></span>",
+        "                                                <span x-show='groupIsHighlighted(group)' class='text-xs font-bold px-3 py-1 rounded-full text-white'",
+        "                                                    style='background: var(--accent-interactive)'>From your text</span>",
             "                                                <span x-show='group.dropPct > 0' class='deal-badge text-xs font-bold px-2 py-1 rounded-full'",
             "                                                    x-text=\"'↓' + group.dropPct + '% vs avg'\"></span>",
             "                                                <span x-show='group.priceDelta > 0' class='deal-badge text-xs font-bold px-2 py-1 rounded-full'",
@@ -1337,8 +1416,9 @@ def render_index(
             "                                                        </div>",
             "                                                    </div>",
             "                                                    <div class='time-option-actions'>",
-            "                                                        <a :href='time.url || \"#\"' target='_blank' rel='noopener noreferrer' class='time-option-cta focus-ring'>Book</a>",
-            "                                                        <button type='button' @click.stop='$root.watchFare(group)' class='time-option-cta time-option-cta-outline focus-ring'>Watch</button>",
+            "                                                        <a x-show='time.url' :href='time.url' target='_blank' rel='noopener noreferrer' class='time-option-cta focus-ring'>Book</a>",
+        "                                                        <a x-show='time.searchUrl' :href='time.searchUrl' target='_blank' rel='noopener noreferrer' class='time-option-cta time-option-cta-outline focus-ring'>Search dates</a>",
+            "                                                        <button type='button' @click.stop='watchFare(group)' class='time-option-cta time-option-cta-outline focus-ring'>Watch</button>",
             "                                                    </div>",
             "                                                </div>",
             "                                            </template>",
@@ -1422,9 +1502,10 @@ def render_index(
             "                weekendOnly: false,",
             "                domesticRegions: [],",
             "                watchlist: [],",
-            "                watchToast: '',",
-            "                showWatchPanel: false,",
-            "                watchToastTimer: null,",
+        "                watchToast: '',",
+        "                showWatchPanel: false,",
+        "                watchToastTimer: null,",
+        "                highlightFare: null,",
             "                get maxPrice() {",
             "                    const f = this.tabFilters[this.activeTab];",
             "                    return f ? f.maxPrice : this.globalMaxPrice;",
@@ -1455,25 +1536,56 @@ def render_index(
             "                    }",
             "                    return true;",
             "                },",
-            "                resolveInitialTab(regions) {",
-            "                    const params = new URLSearchParams(window.location.search);",
-            "                    const tabParam = params.get('tab');",
-            "                    if (tabParam && regions.includes(tabParam)) return tabParam;",
-            "                    const hash = decodeURIComponent(window.location.hash.slice(1));",
-            "                    if (hash && regions.includes(hash)) return hash;",
-            "                    return regions[0] || 'DFW';",
-            "                },",
-            "                updateUrl(tab) {",
-            "                    const url = new URL(window.location.href);",
-            "                    url.searchParams.set('tab', tab);",
-            "                    url.hash = '';",
-            "                    history.replaceState(null, '', url.pathname + url.search);",
-            "                },",
-            "                setTab(tab) {",
-            "                    this.activeTab = tab;",
-            "                    this.ensureTabFilters(tab);",
-            "                    this.updateUrl(tab);",
-            "                },",
+        "                resolveInitialTab(regions) {",
+        "                    const params = new URLSearchParams(window.location.search);",
+        "                    const tabParam = params.get('tab');",
+        "                    if (tabParam && regions.includes(tabParam)) return tabParam;",
+        "                    const hash = decodeURIComponent(window.location.hash.slice(1));",
+        "                    if (hash && regions.includes(hash)) return hash;",
+        "                    return regions[0] || 'DFW';",
+        "                },",
+        "                updateUrl(tab, replaceHighlight) {",
+        "                    const url = new URL(window.location.href);",
+        "                    url.searchParams.set('tab', tab);",
+        "                    if (replaceHighlight) {",
+        "                        ['o', 'd', 'out', 'ret', 'origin', 'dest', 'airline'].forEach((key) => url.searchParams.delete(key));",
+        "                        this.highlightFare = null;",
+        "                    }",
+        "                    const keepHash = window.location.hash === '#premium-deals' ? '#premium-deals' : '';",
+        "                    history.replaceState(null, '', url.pathname + url.search + keepHash);",
+        "                },",
+        "                setTab(tab) {",
+        "                    this.activeTab = tab;",
+        "                    this.ensureTabFilters(tab);",
+        "                    this.updateUrl(tab, true);",
+        "                },",
+        "                groupIsHighlighted(group) {",
+        "                    const h = this.highlightFare;",
+        "                    if (!h || !group) return false;",
+        "                    if (h.origin && group.origin !== h.origin) return false;",
+        "                    if (h.dest && group.destination !== h.dest) return false;",
+        "                    if (h.out && group.outDate !== h.out) return false;",
+        "                    if (h.ret && group.retDate !== h.ret) return false;",
+        "                    return true;",
+        "                },",
+        "                applyFareHighlight() {",
+        "                    const params = new URLSearchParams(window.location.search);",
+        "                    if (params.get('deal')) return;",
+        "                    const origin = params.get('o') || params.get('origin');",
+        "                    const dest = params.get('d') || params.get('dest');",
+        "                    const out = params.get('out');",
+        "                    const ret = params.get('ret');",
+        "                    if (!origin && !dest && !out) return;",
+        "                    this.highlightFare = { origin: origin || '', dest: dest || '', out: out || '', ret: ret || '' };",
+        "                    const scrollToHighlight = () => {",
+        "                        const el = document.querySelector('#flights .deal-highlight');",
+        "                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });",
+        "                    };",
+        "                    this.$nextTick(() => {",
+        "                        scrollToHighlight();",
+        "                        setTimeout(scrollToHighlight, 200);",
+        "                    });",
+        "                },",
             "                refreshWatchlist() {",
             "                    this.watchlist = fliLoadWatchlist();",
             "                },",
@@ -1529,7 +1641,7 @@ def render_index(
             "                async init() {",
             "                    this.refreshWatchlist();",
             "                    try {",
-            "                        const resp = await fetch('data/flights.json');",
+            "                        const resp = await fetch('data/flights.json', { cache: 'no-store' });",
             "                        if (!resp.ok) throw new Error('Could not load flight data (' + resp.status + ')');",
             "                        const data = await resp.json();",
             "                        window.__FLI_META = {",
@@ -1547,9 +1659,10 @@ def render_index(
             "                        if (this.weekendOnly) this.showFilters = true;",
             "                        this.activeTab = this.resolveInitialTab(this.regions);",
             "                        this.ensureTabFilters(this.activeTab);",
-            "                        this.updateUrl(this.activeTab);",
-            "                        this.loading = false;",
-            "                        this.handleWatchQuery();",
+        "                        this.updateUrl(this.activeTab);",
+        "                        this.loading = false;",
+        "                        this.applyFareHighlight();",
+        "                        this.handleWatchQuery();",
             "                    } catch (err) {",
             "                        this.error = err.message || 'Failed to load flights';",
             "                        this.loading = false;",
@@ -1574,7 +1687,10 @@ def render_index(
 
 
 def render_heatmap(all_results: dict[str, list[dict]]) -> None:
-    all_results = normalized_results(all_results)
+    all_results = {
+        name: drop_expired_flights(flights)
+        for name, flights in normalized_results(all_results).items()
+    }
     heatmap_data: dict[str, dict[str, dict]] = {}
     for region_name, flights in all_results.items():
         by_date: dict[str, dict] = {}
@@ -1585,22 +1701,9 @@ def render_heatmap(all_results: dict[str, list[dict]]) -> None:
         heatmap_data[region_name] = by_date
 
     regions = list(REGIONS.keys())
-    first_region = regions[0]
     data_json = json.dumps(heatmap_data)
     thresholds_json = json.dumps(HEATMAP_THRESHOLDS)
     region_types_json = json.dumps({name: cfg.get("type", "domestic") for name, cfg in REGIONS.items()})
-    heatmap_alpine = (
-        f"{{ activeRegion: {json.dumps(first_region)}, "
-        f"get heatmapData() {{ return window.HEATMAP_DATA }}, "
-        f"get thresholds() {{ return window.HEATMAP_THRESHOLDS }}, "
-        f"get regionTypes() {{ return window.HEATMAP_REGION_TYPES }}, "
-        f"heatmapClass(price, region) {{ "
-        f"const t = this.thresholds[this.regionTypes[region] || 'domestic'] || this.thresholds.domestic; "
-        f"if (price < t.low) return 'heatmap-low'; "
-        f"if (price <= t.mid) return 'heatmap-mid'; "
-        f"return 'heatmap-high'; "
-        f"}} }}"
-    )
 
     lines = get_base_html_head(
         "Fli-Tracker | Calendar Heatmap",
@@ -1611,9 +1714,27 @@ def render_heatmap(all_results: dict[str, list[dict]]) -> None:
             f"    <script>window.HEATMAP_DATA = {data_json};</script>",
             f"    <script>window.HEATMAP_THRESHOLDS = {thresholds_json};</script>",
             f"    <script>window.HEATMAP_REGION_TYPES = {region_types_json};</script>",
+            f"    <script>window.HEATMAP_DEFAULT = {json.dumps(regions[0])};</script>",
+            "    <script>",
+            "        function heatmapPage() {",
+            "            return {",
+            "                activeRegion: window.HEATMAP_DEFAULT,",
+            "                get heatmapData() { return window.HEATMAP_DATA; },",
+            "                get thresholds() { return window.HEATMAP_THRESHOLDS; },",
+            "                get regionTypes() { return window.HEATMAP_REGION_TYPES; },",
+            "                heatmapClass(price, region) {",
+            "                    const kind = this.regionTypes[region] || 'domestic';",
+            "                    const t = this.thresholds[kind] || this.thresholds.domestic;",
+            "                    if (price < t.low) return 'heatmap-low';",
+            "                    if (price <= t.mid) return 'heatmap-mid';",
+            "                    return 'heatmap-high';",
+            "                },",
+            "            };",
+            "        }",
+            "    </script>",
             get_skip_link("#main-content", "Skip to heatmap"),
             *render_nav("heatmap", [("index.html", "&larr; Back to Flights", True)]),
-            f"    <section id='main-content' class='py-12 px-6 max-w-5xl mx-auto scroll-mt-24' x-data='{heatmap_alpine}'>",
+            "    <section id='main-content' class='py-12 px-6 max-w-5xl mx-auto scroll-mt-24' x-data='heatmapPage()'>",
             "        <div class='mb-8 text-center'>",
             "            <h3 class='text-3xl font-bold text-gray-800 mb-2'>Calendar Heatmap</h3>",
             "            <p class='text-gray-500'>Best outbound price per day — <span x-text='activeRegion'></span></p>",

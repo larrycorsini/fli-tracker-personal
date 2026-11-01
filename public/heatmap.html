@@ -132,11 +132,8 @@
         .heatmap-high { background: var(--heatmap-high); color: #fff; }
         .focus-ring:focus-visible { outline: none; box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--accent-interactive); }
         .time-option-card {
-            display: flex; flex-direction: column; gap: 10px; padding: 12px 16px;
+            display: flex; flex-direction: column; gap: 12px; padding: 12px 16px;
             background: var(--surface-card); border: 1px solid var(--border-default); border-radius: 8px;
-        }
-        @media (min-width: 640px) {
-            .time-option-card { flex-direction: row; align-items: center; justify-content: space-between; gap: 16px; }
         }
         .time-option-times { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
         .time-option-row {
@@ -165,6 +162,7 @@
             html { scroll-behavior: auto; }
             .nav-shell, .nav-links { transition: none !important; }
             .hero-airplane { animation: none !important; opacity: 0 !important; }
+            .deal-highlight { animation: none; }
         }
         .hero-airplane {
             position: absolute; top: 18%; right: -80px; width: 72px; height: 72px;
@@ -190,7 +188,8 @@
         }
         .time-option-actions { display: flex; flex-direction: column; gap: 8px; width: 100%; }
         @media (min-width: 640px) {
-            .time-option-actions { flex-direction: row; flex-wrap: wrap; width: auto; justify-content: flex-end; }
+            .time-option-actions { flex-direction: row; flex-wrap: wrap; }
+            .time-option-cta { width: auto; min-width: 5.5rem; }
         }
         .time-option-cta-outline {
             background: transparent; color: var(--accent-interactive);
@@ -214,6 +213,16 @@
             display: flex; flex-direction: column; gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--accent-interactive-border);
         }
         .watch-panel-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .deal-highlight {
+            box-shadow: inset 0 0 0 3px var(--accent-interactive), 0 8px 24px rgba(26, 115, 232, 0.18);
+            background: var(--accent-interactive-muted) !important;
+            border-radius: 12px;
+            animation: deal-pulse 1.4s ease-in-out 3;
+        }
+        @keyframes deal-pulse {
+            0%, 100% { box-shadow: inset 0 0 0 3px var(--accent-interactive), 0 8px 24px rgba(26, 115, 232, 0.18); }
+            50% { box-shadow: inset 0 0 0 5px var(--accent-interactive), 0 12px 28px rgba(26, 115, 232, 0.28); }
+        }
         @media (min-width: 640px) {
             .watch-panel-item { flex-direction: row; align-items: center; justify-content: space-between; }
         }
@@ -238,6 +247,24 @@
     <script>window.HEATMAP_DATA = {"DFW": {"2027-01-06": {"origin": "PVU", "destination": "DFW", "out_date": "2027-01-06", "ret_date": "2027-01-09", "price": 209.0, "airline": "American Airlines", "out_dep": "2027-01-06T14:24:00", "ret_arr": "2027-01-09T14:03:00", "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1BWVRIKMjAyNy0wMS0wNhoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI3LTAxLTA5IiAKA0RGVxIKMjAyNy0wMS0wORoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB"}, "2027-01-13": {"origin": "PVU", "destination": "DFW", "out_date": "2027-01-13", "ret_date": "2027-01-16", "price": 209.0, "airline": "American Airlines", "out_dep": "2027-01-13T14:24:00", "ret_arr": "2027-01-16T14:03:00", "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTEzIiAKA1BWVRIKMjAyNy0wMS0xMxoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI3LTAxLTE2IiAKA0RGVxIKMjAyNy0wMS0xNhoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB"}, "2026-12-02": {"origin": "PVU", "destination": "DFW", "out_date": "2026-12-02", "ret_date": "2026-12-05", "price": 249.0, "airline": "American Airlines", "out_dep": "2026-12-02T13:54:00", "ret_arr": "2026-12-05T13:23:00", "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTAyIiAKA1BWVRIKMjAyNi0xMi0wMhoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI2LTEyLTA1IiAKA0RGVxIKMjAyNi0xMi0wNRoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB"}, "2026-12-09": {"origin": "PVU", "destination": "DFW", "out_date": "2026-12-09", "ret_date": "2026-12-12", "price": 249.0, "airline": "American Airlines", "out_dep": "2026-12-09T13:54:00", "ret_arr": "2026-12-12T13:23:00", "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTA5IiAKA1BWVRIKMjAyNi0xMi0wORoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI2LTEyLTEyIiAKA0RGVxIKMjAyNi0xMi0xMhoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB"}, "2026-12-16": {"origin": "SLC", "destination": "DFW", "out_date": "2026-12-16", "ret_date": "2026-12-20", "price": 353.0, "airline": "American Airlines", "out_dep": "2026-12-16T16:44:00", "ret_arr": "2026-12-20T10:29:00", "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1NMQxIKMjAyNi0xMi0xNhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTIwIiAKA0RGVxIKMjAyNi0xMi0yMBoDU0xDKgJBQTIEMjE3OGoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"}}, "California Coast": {}, "Georgia": {}, "Cancun": {}, "El Salvador": {}, "Europe": {}, "Greece": {}, "Japan": {}, "South Korea": {}};</script>
     <script>window.HEATMAP_THRESHOLDS = {"domestic": {"low": 320, "mid": 500}, "international": {"low": 700, "mid": 1100}};</script>
     <script>window.HEATMAP_REGION_TYPES = {"DFW": "domestic", "California Coast": "domestic", "Georgia": "domestic", "Cancun": "international", "El Salvador": "international", "Europe": "international", "Greece": "international", "Japan": "international", "South Korea": "international"};</script>
+    <script>window.HEATMAP_DEFAULT = "DFW";</script>
+    <script>
+        function heatmapPage() {
+            return {
+                activeRegion: window.HEATMAP_DEFAULT,
+                get heatmapData() { return window.HEATMAP_DATA; },
+                get thresholds() { return window.HEATMAP_THRESHOLDS; },
+                get regionTypes() { return window.HEATMAP_REGION_TYPES; },
+                heatmapClass(price, region) {
+                    const kind = this.regionTypes[region] || 'domestic';
+                    const t = this.thresholds[kind] || this.thresholds.domestic;
+                    if (price < t.low) return 'heatmap-low';
+                    if (price <= t.mid) return 'heatmap-mid';
+                    return 'heatmap-high';
+                },
+            };
+        }
+    </script>
     <a href='#main-content' class='skip-link focus-ring'>Skip to heatmap</a>
     <nav class='bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50'
          x-data='{ navCompact: false }'
@@ -250,7 +277,7 @@
             </div>
         </div>
     </nav>
-    <section id='main-content' class='py-12 px-6 max-w-5xl mx-auto scroll-mt-24' x-data='{ activeRegion: "DFW", get heatmapData() { return window.HEATMAP_DATA }, get thresholds() { return window.HEATMAP_THRESHOLDS }, get regionTypes() { return window.HEATMAP_REGION_TYPES }, heatmapClass(price, region) { const t = this.thresholds[this.regionTypes[region] || 'domestic'] || this.thresholds.domestic; if (price < t.low) return 'heatmap-low'; if (price <= t.mid) return 'heatmap-mid'; return 'heatmap-high'; } }'>
+    <section id='main-content' class='py-12 px-6 max-w-5xl mx-auto scroll-mt-24' x-data='heatmapPage()'>
         <div class='mb-8 text-center'>
             <h3 class='text-3xl font-bold text-gray-800 mb-2'>Calendar Heatmap</h3>
             <p class='text-gray-500'>Best outbound price per day — <span x-text='activeRegion'></span></p>

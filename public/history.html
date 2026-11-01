@@ -132,11 +132,8 @@
         .heatmap-high { background: var(--heatmap-high); color: #fff; }
         .focus-ring:focus-visible { outline: none; box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--accent-interactive); }
         .time-option-card {
-            display: flex; flex-direction: column; gap: 10px; padding: 12px 16px;
+            display: flex; flex-direction: column; gap: 12px; padding: 12px 16px;
             background: var(--surface-card); border: 1px solid var(--border-default); border-radius: 8px;
-        }
-        @media (min-width: 640px) {
-            .time-option-card { flex-direction: row; align-items: center; justify-content: space-between; gap: 16px; }
         }
         .time-option-times { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
         .time-option-row {
@@ -165,6 +162,7 @@
             html { scroll-behavior: auto; }
             .nav-shell, .nav-links { transition: none !important; }
             .hero-airplane { animation: none !important; opacity: 0 !important; }
+            .deal-highlight { animation: none; }
         }
         .hero-airplane {
             position: absolute; top: 18%; right: -80px; width: 72px; height: 72px;
@@ -190,7 +188,8 @@
         }
         .time-option-actions { display: flex; flex-direction: column; gap: 8px; width: 100%; }
         @media (min-width: 640px) {
-            .time-option-actions { flex-direction: row; flex-wrap: wrap; width: auto; justify-content: flex-end; }
+            .time-option-actions { flex-direction: row; flex-wrap: wrap; }
+            .time-option-cta { width: auto; min-width: 5.5rem; }
         }
         .time-option-cta-outline {
             background: transparent; color: var(--accent-interactive);
@@ -214,6 +213,16 @@
             display: flex; flex-direction: column; gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--accent-interactive-border);
         }
         .watch-panel-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .deal-highlight {
+            box-shadow: inset 0 0 0 3px var(--accent-interactive), 0 8px 24px rgba(26, 115, 232, 0.18);
+            background: var(--accent-interactive-muted) !important;
+            border-radius: 12px;
+            animation: deal-pulse 1.4s ease-in-out 3;
+        }
+        @keyframes deal-pulse {
+            0%, 100% { box-shadow: inset 0 0 0 3px var(--accent-interactive), 0 8px 24px rgba(26, 115, 232, 0.18); }
+            50% { box-shadow: inset 0 0 0 5px var(--accent-interactive), 0 12px 28px rgba(26, 115, 232, 0.28); }
+        }
         @media (min-width: 640px) {
             .watch-panel-item { flex-direction: row; align-items: center; justify-content: space-between; }
         }

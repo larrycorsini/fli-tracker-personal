@@ -11,23 +11,22 @@ from alert_format import (
     _morning_digest_cards,
     _premium_digest_cards,
     combine_alert_content,
-    format_morning_digest_plain,
     format_morning_digest_imessage,
-    format_premium_digest_plain,
+    format_morning_digest_plain,
     format_premium_digest_imessage,
+    format_premium_digest_plain,
     morning_digest_subject,
     premium_digest_subject,
-    premium_deals_deep_link,
-    region_deep_link,
 )
 from alert_notifiers import dispatch_alert
 from tracker_config import (
     OUTPUT_JSON,
+    PREMIUM_ALERT_MAX_DEALS,
     PREMIUM_DEAL_MAX_POINTS,
     PREMIUM_DEAL_MAX_PRICE,
     PREMIUM_DEAL_OUTPUT_JSON,
-    PREMIUM_ALERT_MAX_DEALS,
     REGIONS,
+    is_current_travel_date,
 )
 from tracker_io import atomic_write_json
 
@@ -69,6 +68,10 @@ def collect_deals_under_threshold(all_results: dict) -> list[dict]:
 
         threshold = REGIONS.get(region_name, {}).get("alert_threshold")
         if threshold is None:
+            continue
+
+        priced = [row for row in priced if is_current_travel_date(row.get("out_date", ""))]
+        if not priced:
             continue
 
         best = min(priced, key=lambda row: row["price"])
@@ -134,14 +137,17 @@ def collect_premium_deals() -> list[dict]:
         if not isinstance(deal, dict):
             continue
         market = deal.get("type", "international")
-        cabin = deal.get("cabin_class", "BUSINESS")
-        max_cash = PREMIUM_DEAL_MAX_PRICE.get(market, {}).get(cabin)
-        max_points = PREMIUM_DEAL_MAX_POINTS.get(market, {}).get(cabin)
+        cabin = deal.get("cabin") or deal.get("cabin_class") or "BUSINESS"
+        cabin_key = str(cabin).replace(" ", "_").upper()
+        max_cash = PREMIUM_DEAL_MAX_PRICE.get(market, {}).get(cabin_key)
+        max_points = PREMIUM_DEAL_MAX_POINTS.get(market, {}).get(cabin_key)
         price = deal.get("price")
         points = deal.get("points")
         cash_ok = price is not None and max_cash is not None and price <= max_cash
         points_ok = points is not None and max_points is not None and points <= max_points
         if not cash_ok and not points_ok:
+            continue
+        if not is_current_travel_date(deal.get("out_date") or deal.get("outDate") or ""):
             continue
         qualifying.append(
             {

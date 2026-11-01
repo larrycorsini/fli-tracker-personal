@@ -132,11 +132,8 @@
         .heatmap-high { background: var(--heatmap-high); color: #fff; }
         .focus-ring:focus-visible { outline: none; box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--accent-interactive); }
         .time-option-card {
-            display: flex; flex-direction: column; gap: 10px; padding: 12px 16px;
+            display: flex; flex-direction: column; gap: 12px; padding: 12px 16px;
             background: var(--surface-card); border: 1px solid var(--border-default); border-radius: 8px;
-        }
-        @media (min-width: 640px) {
-            .time-option-card { flex-direction: row; align-items: center; justify-content: space-between; gap: 16px; }
         }
         .time-option-times { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
         .time-option-row {
@@ -165,6 +162,7 @@
             html { scroll-behavior: auto; }
             .nav-shell, .nav-links { transition: none !important; }
             .hero-airplane { animation: none !important; opacity: 0 !important; }
+            .deal-highlight { animation: none; }
         }
         .hero-airplane {
             position: absolute; top: 18%; right: -80px; width: 72px; height: 72px;
@@ -190,7 +188,8 @@
         }
         .time-option-actions { display: flex; flex-direction: column; gap: 8px; width: 100%; }
         @media (min-width: 640px) {
-            .time-option-actions { flex-direction: row; flex-wrap: wrap; width: auto; justify-content: flex-end; }
+            .time-option-actions { flex-direction: row; flex-wrap: wrap; }
+            .time-option-cta { width: auto; min-width: 5.5rem; }
         }
         .time-option-cta-outline {
             background: transparent; color: var(--accent-interactive);
@@ -214,6 +213,16 @@
             display: flex; flex-direction: column; gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--accent-interactive-border);
         }
         .watch-panel-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .deal-highlight {
+            box-shadow: inset 0 0 0 3px var(--accent-interactive), 0 8px 24px rgba(26, 115, 232, 0.18);
+            background: var(--accent-interactive-muted) !important;
+            border-radius: 12px;
+            animation: deal-pulse 1.4s ease-in-out 3;
+        }
+        @keyframes deal-pulse {
+            0%, 100% { box-shadow: inset 0 0 0 3px var(--accent-interactive), 0 8px 24px rgba(26, 115, 232, 0.18); }
+            50% { box-shadow: inset 0 0 0 5px var(--accent-interactive), 0 12px 28px rgba(26, 115, 232, 0.28); }
+        }
         @media (min-width: 640px) {
             .watch-panel-item { flex-direction: row; align-items: center; justify-content: space-between; }
         }
@@ -346,12 +355,16 @@
              role='list' aria-label='Premium flight deals'>
             <template x-for='(deal, i) in filteredDeals' :key="'premium-' + i">
                 <article class='p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-gray-50 transition-colors'
+                         :class="isHighlighted(deal) ? 'deal-highlight' : ''"
+                         :aria-current="isHighlighted(deal) ? 'true' : 'false'"
                          role='listitem'>
                     <div class='flex-1 min-w-0'>
                         <div class='flex flex-wrap items-center gap-2 mb-2'>
                             <h3 class='text-xl font-bold text-gray-800' x-text='deal.destination'></h3>
                             <span class='text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-600 border' x-text='deal.airport'></span>
                             <span class='text-xs font-semibold px-3 py-1 rounded-full' style='background:var(--accent-interactive-muted);color:var(--accent-interactive);border:1px solid var(--accent-interactive-border)' x-text='deal.cabin'></span>
+                            <span x-show='isHighlighted(deal)' class='text-xs font-bold px-3 py-1 rounded-full text-white'
+                                  style='background: var(--accent-interactive)'>From your text</span>
                         </div>
                         <p class='text-sm text-gray-500 mb-1'>
                             <span x-text='deal.origin'></span> → <span x-text='deal.airport'></span>
@@ -380,8 +393,11 @@
                         </div>
                         <a x-show='deal.hasCashPrice && deal.booking_url' :href='deal.booking_url' target='_blank' rel='noopener noreferrer'
                            class='btn-accent focus-ring text-sm w-full sm:w-auto text-center' :aria-label="'Book round trip to ' + deal.destination + ' on Google Flights'">Book</a>
-                        <a x-show='!deal.hasCashPrice && deal.google_flights_url' :href='deal.google_flights_url' target='_blank' rel='noopener noreferrer'
-                           class='btn-accent focus-ring text-sm w-full sm:w-auto text-center' :aria-label="'Search round trip to ' + deal.destination + ' on Google Flights'">Search on Google Flights</a>
+                        <a x-show='deal.google_flights_url' :href='deal.google_flights_url' target='_blank' rel='noopener noreferrer'
+                           class='btn-accent focus-ring text-sm w-full sm:w-auto text-center'
+                           :class="deal.hasCashPrice && deal.booking_url ? 'time-option-cta-outline' : ''"
+                           :aria-label="'Search round trip to ' + deal.destination + ' on Google Flights'"
+                           x-text="deal.hasCashPrice && deal.booking_url ? 'Search dates' : 'Search on Google Flights'"></a>
                     </div>
                 </article>
             </template>
@@ -400,6 +416,7 @@
                 maxOneStop: false,
                 maxPrice: null,
                 paymentFilter: 'cash',
+                highlight: null,
                 paymentOptions: [
                     { label: 'Any', value: 'any' },
                     { label: 'Cash', value: 'cash' },
@@ -440,15 +457,43 @@
                     this.maxPrice = null;
                     this.paymentFilter = 'cash';
                 },
+                isHighlighted(deal) {
+                    const h = this.highlight;
+                    if (!h || !deal) return false;
+                    if (h.airport && deal.airport !== h.airport) return false;
+                    if (h.origin && deal.origin !== h.origin) return false;
+                    if (h.out && deal.outDate !== h.out) return false;
+                    return true;
+                },
+                applyDealHighlight() {
+                    const params = new URLSearchParams(window.location.search);
+                    const airport = params.get('deal');
+                    if (!airport) return;
+                    this.highlight = {
+                        airport: airport,
+                        origin: params.get('o') || params.get('origin') || '',
+                        out: params.get('out') || '',
+                    };
+                    const match = this.allDeals.find((deal) => this.isHighlighted(deal));
+                    if (match && !match.hasCashPrice) {
+                        this.cashOnly = false;
+                        this.paymentFilter = 'any';
+                    }
+                    this.$nextTick(() => {
+                        const el = document.querySelector('#premium-deals .deal-highlight');
+                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    });
+                },
                 async init() {
                     try {
-                        const resp = await fetch('data/premium-deals.json');
+                        const resp = await fetch('data/premium-deals.json', { cache: 'no-store' });
                         if (!resp.ok) throw new Error('Could not load premium deals (' + resp.status + ')');
                         const data = await resp.json();
                         this.allDeals = data.deals || [];
                         this.lastUpdated = data.lastUpdated || null;
                         this.lastUpdatedAt = data.lastUpdatedAt || null;
                         this.loading = false;
+                        this.applyDealHighlight();
                     } catch (err) {
                         this.error = err.message || 'Failed to load premium deals';
                         this.loading = false;
@@ -550,7 +595,9 @@
                         </div>
                         <template x-for='(group, gi) in (regionData[region]?.groups || [])' :key="region + '-' + gi">
                             <div x-show='groupMatches(group)' x-cloak>
-                                <div x-data='{ expanded: false }' class='hover:bg-gray-50 transition-colors'>
+                                <div x-data='{ expanded: false }' x-effect='if (groupIsHighlighted(group)) expanded = true'
+                                     :class="(groupIsHighlighted(group) ? 'deal-highlight ' : '') + 'hover:bg-gray-50 transition-colors'"
+                                     :aria-current="groupIsHighlighted(group) ? 'true' : 'false'">
                                     <button type='button' @click='expanded = !expanded' :aria-expanded='expanded'
                                         class='focus-ring w-full text-left cursor-pointer p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between'>
                                         <div class='flex-1 mb-4 md:mb-0'>
@@ -558,6 +605,8 @@
                                                 <span class='text-[22px] font-bold text-gray-800' x-text='group.airline'></span>
                                                 <span class='text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-600 border'
                                                     x-text="group.origin + ' → ' + group.destination"></span>
+                                                <span x-show='groupIsHighlighted(group)' class='text-xs font-bold px-3 py-1 rounded-full text-white'
+                                                    style='background: var(--accent-interactive)'>From your text</span>
                                                 <span x-show='group.dropPct > 0' class='deal-badge text-xs font-bold px-2 py-1 rounded-full'
                                                     x-text="'↓' + group.dropPct + '% vs avg'"></span>
                                                 <span x-show='group.priceDelta > 0' class='deal-badge text-xs font-bold px-2 py-1 rounded-full'
@@ -597,8 +646,9 @@
                                                         </div>
                                                     </div>
                                                     <div class='time-option-actions'>
-                                                        <a :href='time.url || "#"' target='_blank' rel='noopener noreferrer' class='time-option-cta focus-ring'>Book</a>
-                                                        <button type='button' @click.stop='$root.watchFare(group)' class='time-option-cta time-option-cta-outline focus-ring'>Watch</button>
+                                                        <a x-show='time.url' :href='time.url' target='_blank' rel='noopener noreferrer' class='time-option-cta focus-ring'>Book</a>
+                                                        <a x-show='time.searchUrl' :href='time.searchUrl' target='_blank' rel='noopener noreferrer' class='time-option-cta time-option-cta-outline focus-ring'>Search dates</a>
+                                                        <button type='button' @click.stop='watchFare(group)' class='time-option-cta time-option-cta-outline focus-ring'>Watch</button>
                                                     </div>
                                                 </div>
                                             </template>
@@ -685,6 +735,7 @@
                 watchToast: '',
                 showWatchPanel: false,
                 watchToastTimer: null,
+                highlightFare: null,
                 get maxPrice() {
                     const f = this.tabFilters[this.activeTab];
                     return f ? f.maxPrice : this.globalMaxPrice;
@@ -723,16 +774,47 @@
                     if (hash && regions.includes(hash)) return hash;
                     return regions[0] || 'DFW';
                 },
-                updateUrl(tab) {
+                updateUrl(tab, replaceHighlight) {
                     const url = new URL(window.location.href);
                     url.searchParams.set('tab', tab);
-                    url.hash = '';
-                    history.replaceState(null, '', url.pathname + url.search);
+                    if (replaceHighlight) {
+                        ['o', 'd', 'out', 'ret', 'origin', 'dest', 'airline'].forEach((key) => url.searchParams.delete(key));
+                        this.highlightFare = null;
+                    }
+                    const keepHash = window.location.hash === '#premium-deals' ? '#premium-deals' : '';
+                    history.replaceState(null, '', url.pathname + url.search + keepHash);
                 },
                 setTab(tab) {
                     this.activeTab = tab;
                     this.ensureTabFilters(tab);
-                    this.updateUrl(tab);
+                    this.updateUrl(tab, true);
+                },
+                groupIsHighlighted(group) {
+                    const h = this.highlightFare;
+                    if (!h || !group) return false;
+                    if (h.origin && group.origin !== h.origin) return false;
+                    if (h.dest && group.destination !== h.dest) return false;
+                    if (h.out && group.outDate !== h.out) return false;
+                    if (h.ret && group.retDate !== h.ret) return false;
+                    return true;
+                },
+                applyFareHighlight() {
+                    const params = new URLSearchParams(window.location.search);
+                    if (params.get('deal')) return;
+                    const origin = params.get('o') || params.get('origin');
+                    const dest = params.get('d') || params.get('dest');
+                    const out = params.get('out');
+                    const ret = params.get('ret');
+                    if (!origin && !dest && !out) return;
+                    this.highlightFare = { origin: origin || '', dest: dest || '', out: out || '', ret: ret || '' };
+                    const scrollToHighlight = () => {
+                        const el = document.querySelector('#flights .deal-highlight');
+                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    };
+                    this.$nextTick(() => {
+                        scrollToHighlight();
+                        setTimeout(scrollToHighlight, 200);
+                    });
                 },
                 refreshWatchlist() {
                     this.watchlist = fliLoadWatchlist();
@@ -789,7 +871,7 @@
                 async init() {
                     this.refreshWatchlist();
                     try {
-                        const resp = await fetch('data/flights.json');
+                        const resp = await fetch('data/flights.json', { cache: 'no-store' });
                         if (!resp.ok) throw new Error('Could not load flight data (' + resp.status + ')');
                         const data = await resp.json();
                         window.__FLI_META = {
@@ -809,6 +891,7 @@
                         this.ensureTabFilters(this.activeTab);
                         this.updateUrl(this.activeTab);
                         this.loading = false;
+                        this.applyFareHighlight();
                         this.handleWatchQuery();
                     } catch (err) {
                         this.error = err.message || 'Failed to load flights';

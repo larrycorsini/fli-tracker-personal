@@ -8,9 +8,11 @@ from alert_format import (
     format_morning_digest_imessage,
     format_morning_digest_plain,
     format_premium_digest_html,
+    format_premium_digest_imessage,
     format_premium_digest_plain,
     format_short_date_range,
     morning_digest_subject,
+    premium_deal_deep_link,
     region_deep_link,
     site_link_display,
 )
@@ -128,3 +130,93 @@ class TestHelpers:
 
     def test_region_deep_link(self):
         assert region_deep_link("California Coast").endswith("?tab=California%20Coast")
+
+    def test_region_deep_link_includes_fare_params(self):
+        link = region_deep_link("DFW", SAMPLE_ECONOMY[1])
+        assert "tab=DFW" in link
+        assert "o=SLC" in link
+        assert "d=DFW" in link
+        assert "out=2026-07-22" in link
+        assert "ret=2026-07-25" in link
+        assert link.endswith("#flights")
+
+    def test_premium_deal_deep_link_is_unique(self):
+        portland = {
+            "destination": "Portland",
+            "airport": "PDX",
+            "origin": "SLC",
+            "out_date": "2026-12-05",
+            "cabin_class": "BUSINESS",
+        }
+        cancun = {
+            "destination": "Cancun",
+            "airport": "CUN",
+            "origin": "SLC",
+            "out_date": "2026-12-05",
+            "cabin_class": "BUSINESS",
+        }
+        portland_link = premium_deal_deep_link(portland)
+        cancun_link = premium_deal_deep_link(cancun)
+        assert portland_link != cancun_link
+        assert "deal=PDX" in portland_link
+        assert "o=SLC" in portland_link
+        assert "out=2026-12-05" in portland_link
+        assert portland_link.endswith("#premium-deals")
+        assert "deal=CUN" in cancun_link
+
+
+class TestPremiumDigestImessage:
+    def test_uses_cabin_field_instead_of_defaulting_to_business(self):
+        deals = [
+            {
+                "destination": "Mexico City",
+                "airport": "MEX",
+                "origin": "SLC",
+                "cabin": "Premium Economy",
+                "price": 952,
+                "points": 76160,
+                "out_date": "2026-11-09",
+                "ret_date": "2026-11-16",
+            }
+        ]
+        msg = format_premium_digest_imessage(deals)
+        assert "Premium Economy" in msg
+        assert "Business" not in msg
+
+    def test_each_deal_gets_its_own_dashboard_url(self):
+        deals = [
+            {
+                "destination": "Portland",
+                "airport": "PDX",
+                "origin": "SLC",
+                "cabin_class": "BUSINESS",
+                "price": 387,
+                "points": 30960,
+                "out_date": "2026-12-05",
+                "ret_date": "2026-12-15",
+            },
+            {
+                "destination": "Cancun",
+                "airport": "CUN",
+                "origin": "SLC",
+                "cabin_class": "BUSINESS",
+                "price": 1080,
+                "points": 86400,
+                "out_date": "2026-12-05",
+                "ret_date": "2026-12-10",
+            },
+        ]
+        msg = format_premium_digest_imessage(deals)
+        assert msg.count("#premium-deals") >= 2
+        assert "deal=PDX" in msg
+        assert "deal=CUN" in msg
+        assert msg.split("deal=PDX")[0].count("deal=CUN") == 0
+
+
+class TestMorningDigestImessageHighlight:
+    def test_imessage_points_at_specific_fare(self):
+        msg = format_morning_digest_imessage(SAMPLE_ECONOMY)
+        assert "tab=DFW" in msg
+        assert "o=SLC" in msg
+        assert "out=2026-07-22" in msg
+        assert "ret=2026-07-25" in msg

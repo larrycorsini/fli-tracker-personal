@@ -49,6 +49,7 @@ from tracker_config import (
     PREMIUM_TRIP_DURATIONS,
     PREMIUM_TRIP_DURATIONS_PER_RUN,
     PREMIUM_TRIP_DURATIONS_PER_RUN_TEST,
+    is_current_travel_date,
 )
 from tracker_io import atomic_write_json
 
@@ -248,10 +249,21 @@ def _deal_key(deal: dict) -> tuple:
     )
 
 
+def drop_expired_deals(deals: list[dict], *, today: datetime | None = None) -> list[dict]:
+    """Drop premium deals whose outbound date has already passed."""
+    return [
+        deal
+        for deal in deals
+        if is_current_travel_date(deal.get("out_date") or deal.get("outDate") or "", today=today)
+    ]
+
+
 def merge_rotated_results(
     prior_deals: list[dict],
     new_deals: list[dict],
     searched_airports: set[str],
+    *,
+    today: datetime | None = None,
 ) -> list[dict]:
     """Keep stale deals for destinations not searched today; replace searched ones."""
     kept = [
@@ -259,7 +271,7 @@ def merge_rotated_results(
         for deal in prior_deals
         if deal.get("airport", deal.get("destination", "")) not in searched_airports
     ]
-    merged = kept + new_deals
+    merged = drop_expired_deals(kept + new_deals, today=today)
     return rank_deals(merged)
 
 
@@ -935,7 +947,7 @@ def main(argv: list[str] | None = None) -> int:
             PREMIUM_DEAL_OUTPUT_JSON,
             _count_deals(prior_deals),
         )
-        payload["deals"] = prior_deals
+        payload["deals"] = drop_expired_deals(prior_deals)
         payload["searched_destinations"] = prior.get("searched_destinations", [])
 
     atomic_write_json(PREMIUM_DEAL_OUTPUT_JSON, payload)

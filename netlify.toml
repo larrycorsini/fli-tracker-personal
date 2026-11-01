@@ -4,6 +4,8 @@
 [build]
   command = "echo 'Publishing committed public/'; test -f public/index.html"
   publish = "public"
+  # Skip Netlify builds when public/ did not change (saves free-plan minutes).
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- public netlify.toml"
 
 # Security headers for the public flight dashboard
 [[headers]]
@@ -25,3 +27,9 @@
   for = "/manifest.json"
   [headers.values]
     Cache-Control = "public, max-age=3600"
+
+# Daily fare JSON must revalidate so Book links never serve departed itineraries
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

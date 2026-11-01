@@ -51,12 +51,43 @@ def format_short_date_range(out_date: str, ret_date: str) -> str:
     return f"{format_short_date(out_date)}–{format_short_date(ret_date)}"
 
 
-def region_deep_link(region_name: str) -> str:
-    return f"{SITE_URL}/?tab={quote(region_name)}"
+def region_deep_link(region_name: str, deal: dict | None = None) -> str:
+    """Dashboard link for a region, optionally highlighting one fare."""
+    url = f"{SITE_URL}/?tab={quote(region_name)}"
+    if not deal:
+        return url
+    origin = str(deal.get("origin") or "")
+    dest = str(deal.get("destination") or "")
+    out = str(deal.get("out_date") or deal.get("outDate") or "")[:10]
+    ret = str(deal.get("ret_date") or deal.get("retDate") or "")[:10]
+    extra: list[str] = []
+    if origin:
+        extra.append(f"o={quote(origin)}")
+    if dest:
+        extra.append(f"d={quote(dest)}")
+    if out:
+        extra.append(f"out={quote(out)}")
+    if ret:
+        extra.append(f"ret={quote(ret)}")
+    if extra:
+        return f"{url}&{'&'.join(extra)}#flights"
+    return url
 
 
 def premium_deals_deep_link() -> str:
+    """Dashboard link to the premium deals section."""
     return f"{SITE_URL}/#premium-deals"
+
+
+def premium_deal_deep_link(deal: dict) -> str:
+    """Dashboard link that opens and highlights one premium deal."""
+    airport = str(deal.get("airport") or deal.get("destination") or "")
+    origin = str(deal.get("origin") or "SLC")
+    out = str(deal.get("out_date") or deal.get("outDate") or "")[:10]
+    params = [f"deal={quote(airport)}", f"o={quote(origin)}"]
+    if out:
+        params.append(f"out={quote(out)}")
+    return f"{SITE_URL}/?{'&'.join(params)}#premium-deals"
 
 
 def format_money(amount: int | float) -> str:
@@ -96,7 +127,7 @@ def _format_economy_deal_plain(deal: dict, index: int, *, include_booking_url: b
     dest = deal["destination"]
     dates = format_short_date_range(deal["out_date"], deal["ret_date"])
     airline = deal.get("airline") or "—"
-    board = region_deep_link(region)
+    board = region_deep_link(region, deal)
     book = deal.get("url") or board
 
     lines = [
@@ -117,7 +148,7 @@ def _format_economy_deal_imessage(deal: dict) -> str:
     dest = deal["destination"]
     dates = format_short_date_range(deal["out_date"], deal["ret_date"])
     airline = deal.get("airline") or "—"
-    board = region_deep_link(region)
+    board = region_deep_link(region, deal)
     return (
         f"{region} · ${price}\n"
         f"{origin}→{dest} · {dates} · {airline}\n"
@@ -144,10 +175,10 @@ def format_morning_digest_plain(deals: list[dict]) -> str:
 
 
 def format_morning_digest_imessage(deals: list[dict]) -> str:
-    """iMessage digest — short tappable site links only (no tfs walls).
+    """IMessage digest — short tappable site links only (no tfs walls).
 
     iMessage cannot render custom hyperlink text via AppleScript; URLs must
-  appear as plain text. Google Flights booking links are omitted here because
+    appear as plain text. Google Flights booking links are omitted here because
     they wrap across dozens of lines on iPhone. Tap the region link to open
     the dashboard and book from there. Direct book links are in HTML email.
     """
@@ -165,14 +196,14 @@ def format_morning_digest_imessage(deals: list[dict]) -> str:
 
 def _format_premium_deal_plain(deal: dict, index: int, *, include_booking_url: bool) -> list[str]:
     dest = deal.get("destination") or deal.get("airport", "")
-    cabin = deal.get("cabin_class", "BUSINESS").replace("_", " ").title()
+    cabin = str(deal.get("cabin") or deal.get("cabin_class") or "BUSINESS").replace("_", " ").title()
     origin = deal.get("origin", "SLC")
     dates = format_short_date_range(deal.get("out_date", ""), deal.get("ret_date", ""))
     price_part = format_money(deal["price"]) if deal.get("price") is not None else ""
     points_part = format_points(deal["points"]) if deal.get("points") is not None else ""
     fare = " · ".join(part for part in (price_part, points_part) if part) or "—"
-    book = deal.get("url") or premium_deals_deep_link()
-    board = premium_deals_deep_link()
+    board = premium_deal_deep_link(deal)
+    book = deal.get("url") or board
 
     lines = [
         f"{index}. {dest} · {cabin} · {fare}",
@@ -186,13 +217,13 @@ def _format_premium_deal_plain(deal: dict, index: int, *, include_booking_url: b
 
 def _format_premium_deal_imessage(deal: dict) -> str:
     dest = deal.get("destination") or deal.get("airport", "")
-    cabin = deal.get("cabin_class", "BUSINESS").replace("_", " ").title()
+    cabin = str(deal.get("cabin") or deal.get("cabin_class") or "BUSINESS").replace("_", " ").title()
     origin = deal.get("origin", "SLC")
     dates = format_short_date_range(deal.get("out_date", ""), deal.get("ret_date", ""))
     price_part = format_money(deal["price"]) if deal.get("price") is not None else ""
     points_part = format_points(deal["points"]) if deal.get("points") is not None else ""
     fare = " · ".join(part for part in (price_part, points_part) if part) or "—"
-    board = premium_deals_deep_link()
+    board = premium_deal_deep_link(deal)
     return f"{dest} · {cabin} · {fare}\n{origin} · {dates}\n{board}"
 
 
@@ -215,7 +246,7 @@ def format_premium_digest_plain(deals: list[dict]) -> str:
 
 
 def format_premium_digest_imessage(deals: list[dict]) -> str:
-    """iMessage premium digest with short dashboard links only."""
+    """IMessage premium digest with short dashboard links only."""
     if not deals:
         return ""
 
@@ -300,7 +331,7 @@ def _morning_digest_cards(deals: list[dict]) -> str:
         dest = deal["destination"]
         dates = format_short_date_range(deal["out_date"], deal["ret_date"])
         airline = deal.get("airline") or "—"
-        board = region_deep_link(region)
+        board = region_deep_link(region, deal)
         book = deal.get("url") or board
         cards.append(
             _html_deal_card(
@@ -318,13 +349,13 @@ def _premium_digest_cards(deals: list[dict]) -> str:
     cards = []
     for deal in deals:
         dest = deal.get("destination") or deal.get("airport", "")
-        cabin = deal.get("cabin_class", "BUSINESS").replace("_", " ").title()
+        cabin = str(deal.get("cabin") or deal.get("cabin_class") or "BUSINESS").replace("_", " ").title()
         origin = deal.get("origin", "SLC")
         dates = format_short_date_range(deal.get("out_date", ""), deal.get("ret_date", ""))
         price_part = format_money(deal["price"]) if deal.get("price") is not None else ""
         points_part = format_points(deal["points"]) if deal.get("points") is not None else ""
         fare = " · ".join(part for part in (price_part, points_part) if part) or "—"
-        board = premium_deals_deep_link()
+        board = premium_deal_deep_link(deal)
         book = deal.get("url") or board
         cards.append(
             _html_deal_card(

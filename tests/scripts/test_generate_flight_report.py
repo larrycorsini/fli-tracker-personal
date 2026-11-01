@@ -5,6 +5,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import sys
+from datetime import datetime
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -247,7 +248,7 @@ class TestBuildPremiumDealsPayload:
         payload = report.build_premium_deals_payload(raw, "now")
         deal = payload["deals"][0]
         assert deal["booking_url"] == deep
-        assert deal["google_flights_url"] == ""
+        assert deal["google_flights_url"].startswith("https://www.google.com/travel/flights")
 
     def test_cash_deals_rank_before_points_in_payload(self):
         deep = "https://www.google.com/travel/flights/booking?tfs=ABC"
@@ -276,3 +277,87 @@ class TestBuildPremiumDealsPayload:
         assert "deal.hasCashPrice && deal.booking_url" in section
         assert "Search on Google Flights" in section
         assert "Cash deals only" in section
+
+    def test_cash_deals_keep_search_fallback_url(self):
+        deep = "https://www.google.com/travel/flights/booking?tfs=ABC"
+        raw = {
+            "deals": [
+                {
+                    "destination": "San Diego",
+                    "airport": "SAN",
+                    "origin": "SLC",
+                    "out_date": "2026-12-02",
+                    "ret_date": "2026-12-06",
+                    "price": 359,
+                    "hasCashPrice": True,
+                    "booking_url": deep,
+                }
+            ]
+        }
+        payload = report.build_premium_deals_payload(raw, "now")
+        deal = payload["deals"][0]
+        assert deal["booking_url"] == deep
+        assert deal["google_flights_url"].startswith("https://www.google.com/travel/flights")
+        assert "SLC" in deal["google_flights_url"]
+        assert "SAN" in deal["google_flights_url"]
+
+    def test_premium_section_highlights_alert_deal(self):
+        section = "\n".join(report.render_premium_deals_section())
+        assert "deal-highlight" in section
+        assert "applyDealHighlight" in section
+        assert "Search dates" in section
+
+
+class TestDropExpired:
+    def test_drops_departed_economy_flights(self):
+        today = datetime(2026, 10, 31)
+        flights = [
+            _sample_flight(209, out="2026-09-23", ret="2026-09-26"),
+            _sample_flight(209, out="2027-01-06", ret="2027-01-09"),
+        ]
+        kept = report.drop_expired_flights(flights, today=today)
+        assert [f["out_date"] for f in kept] == ["2027-01-06"]
+
+    def test_keeps_today_outbound(self):
+        today = datetime(2026, 10, 31)
+        flights = [_sample_flight(180, out="2026-10-31", ret="2026-11-03")]
+        assert report.drop_expired_flights(flights, today=today) == flights
+
+    def test_drops_departed_premium_deals(self):
+        today = datetime(2026, 10, 31)
+        deals = [
+            {"airport": "PDX", "out_date": "2026-10-17", "price": 387},
+            {"airport": "CUN", "out_date": "2026-12-05", "price": 1080},
+        ]
+        kept = report.drop_expired_premium_deals(deals, today=today)
+        assert [d["airport"] for d in kept] == ["CUN"]
+
+
+class TestSearchFallback:
+    def test_region_groups_include_search_url(self):
+        payload = report.build_region_groups([_sample_flight(280)], "DFW", {"DFW": 350})
+        search_url = payload["groups"][0]["times"][0]["searchUrl"]
+        assert search_url.startswith("https://www.google.com/travel/flights")
+        assert "SLC" in search_url
+        assert "DFW" in search_url
+        assert "2026-07-01" in search_url
+
+
+class TestHighlightMarkup:
+    def test_economy_section_reads_alert_query_params(self):
+        source = Path(REPORT_PATH).read_text(encoding="utf-8")
+        assert "applyFareHighlight" in source
+        assert "deal-highlight" in source
+        assert "Search dates" in source
+        assert "From your text" in source
+        assert "x-effect" in source
+        assert "if (groupIsHighlighted(group)) expanded = true" in source
+        assert "$root.groupIsHighlighted" not in source
+
+
+class TestHeatmapMarkup:
+    def test_heatmap_uses_function_scope_not_inline_x_data(self):
+        source = Path(REPORT_PATH).read_text(encoding="utf-8")
+        assert "function heatmapPage()" in source
+        assert "x-data='heatmapPage()'" in source
+        assert "x-data='{heatmap_alpine}'" not in source

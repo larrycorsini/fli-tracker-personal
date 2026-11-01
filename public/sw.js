@@ -1,10 +1,5 @@
-const CACHE_VERSION = 'fli-tracker-v' + new Date().toISOString().slice(0, 10).replace(/-/g, '');
-const CACHE_NAME = CACHE_VERSION;
+const CACHE_NAME = 'fli-tracker-assets-v2';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/history.html',
-  '/heatmap.html',
   '/manifest.json',
   '/apple-touch-icon.png'
 ];
@@ -18,7 +13,6 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('activate', event => {
-  // Clean up old caches
   event.waitUntil(
     caches.keys().then(cacheNames =>
       Promise.all(
@@ -31,7 +25,17 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  // Network first, fallback to cache
+  const requestUrl = new URL(event.request.url);
+  const isNavigate = event.request.mode === 'navigate';
+  const isHtml = requestUrl.pathname === '/' || requestUrl.pathname.endsWith('.html');
+  const isData = requestUrl.pathname.startsWith('/data/');
+  const isServiceWorker = requestUrl.pathname === '/sw.js';
+  // Never cache HTML, fare JSON, or the worker itself — stale Book links
+  // and missed dashboard deploys are worse than a cold fetch.
+  if (isNavigate || isHtml || isData || isServiceWorker) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
   event.respondWith(
     fetch(event.request)
       .then(response => {

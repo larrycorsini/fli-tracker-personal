@@ -95,13 +95,14 @@
           "outDateFmt": "Wed, Jan 06",
           "retDateFmt": "Sat, Jan 09",
           "dropPct": 2,
-          "priceDelta": -10,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
               "outDepFmt": "Wed, Jan 06, 02:24 PM",
               "retArrFmt": "Sat, Jan 09, 02:03 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1BWVRIKMjAyNy0wMS0wNhoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI3LTAxLTA5IiAKA0RGVxIKMjAyNy0wMS0wORoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1BWVRIKMjAyNy0wMS0wNhoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI3LTAxLTA5IiAKA0RGVxIKMjAyNy0wMS0wORoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20DFW%20on%202027-01-06%20through%202027-01-09"
             }
           ]
         },
@@ -117,13 +118,14 @@
           "outDateFmt": "Wed, Jan 13",
           "retDateFmt": "Sat, Jan 16",
           "dropPct": 2,
-          "priceDelta": -10,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
               "outDepFmt": "Wed, Jan 13, 02:24 PM",
               "retArrFmt": "Sat, Jan 16, 02:03 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTEzIiAKA1BWVRIKMjAyNy0wMS0xMxoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI3LTAxLTE2IiAKA0RGVxIKMjAyNy0wMS0xNhoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTEzIiAKA1BWVRIKMjAyNy0wMS0xMxoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI3LTAxLTE2IiAKA0RGVxIKMjAyNy0wMS0xNhoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20DFW%20on%202027-01-13%20through%202027-01-16"
             }
           ]
         },
@@ -139,13 +141,14 @@
           "outDateFmt": "Wed, Dec 02",
           "retDateFmt": "Sat, Dec 05",
           "dropPct": 0,
-          "priceDelta": -50,
+          "priceDelta": -40,
           "weekendEscape": true,
           "times": [
             {
               "outDepFmt": "Wed, Dec 02, 01:54 PM",
               "retArrFmt": "Sat, Dec 05, 01:23 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTAyIiAKA1BWVRIKMjAyNi0xMi0wMhoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI2LTEyLTA1IiAKA0RGVxIKMjAyNi0xMi0wNRoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTAyIiAKA1BWVRIKMjAyNi0xMi0wMhoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI2LTEyLTA1IiAKA0RGVxIKMjAyNi0xMi0wNRoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20DFW%20on%202026-12-02%20through%202026-12-05"
             }
           ]
         },
@@ -161,13 +164,14 @@
           "outDateFmt": "Wed, Dec 09",
           "retDateFmt": "Sat, Dec 12",
           "dropPct": 0,
-          "priceDelta": -50,
+          "priceDelta": -40,
           "weekendEscape": true,
           "times": [
             {
               "outDepFmt": "Wed, Dec 09, 01:54 PM",
               "retArrFmt": "Sat, Dec 12, 01:23 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTA5IiAKA1BWVRIKMjAyNi0xMi0wORoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI2LTEyLTEyIiAKA0RGVxIKMjAyNi0xMi0xMhoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTA5IiAKA1BWVRIKMjAyNi0xMi0wORoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI2LTEyLTEyIiAKA0RGVxIKMjAyNi0xMi0xMhoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20DFW%20on%202026-12-09%20through%202026-12-12"
             }
           ]
         },
@@ -183,13 +187,14 @@
           "outDateFmt": "Wed, Jan 06",
           "retDateFmt": "Sat, Jan 09",
           "dropPct": 0,
-          "priceDelta": -78,
+          "priceDelta": -68,
           "weekendEscape": true,
           "times": [
             {
               "outDepFmt": "Wed, Jan 06, 01:40 PM",
               "retArrFmt": "Sat, Jan 09, 10:15 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDREZXKgJETDIEMjgxMWoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI3LTAxLTA5IiAKA0RGVxIKMjAyNy0wMS0wORoDU0xDKgJETDIEMTI5MWoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDREZXKgJETDIEMjgxMWoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI3LTAxLTA5IiAKA0RGVxIKMjAyNy0wMS0wORoDU0xDKgJETDIEMTI5MWoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20DFW%20on%202027-01-06%20through%202027-01-09"
             }
           ]
         },
@@ -205,18 +210,20 @@
           "outDateFmt": "Wed, Jan 06",
           "retDateFmt": "Sat, Jan 09",
           "dropPct": 0,
-          "priceDelta": -78,
+          "priceDelta": -68,
           "weekendEscape": true,
           "times": [
             {
               "outDepFmt": "Wed, Jan 06, 04:58 PM",
               "retArrFmt": "Sat, Jan 09, 10:38 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI3LTAxLTA5IiAKA0RGVxIKMjAyNy0wMS0wORoDU0xDKgJBQTIEMjE3OGoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI3LTAxLTA5IiAKA0RGVxIKMjAyNy0wMS0wORoDU0xDKgJBQTIEMjE3OGoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20DFW%20on%202027-01-06%20through%202027-01-09"
             },
             {
               "outDepFmt": "Wed, Jan 06, 04:58 PM",
               "retArrFmt": "Sat, Jan 09, 01:02 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI3LTAxLTA5IiAKA0RGVxIKMjAyNy0wMS0wORoDU0xDKgJBQTIEMTQzMGoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI3LTAxLTA5IiAKA0RGVxIKMjAyNy0wMS0wORoDU0xDKgJBQTIEMTQzMGoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20DFW%20on%202027-01-06%20through%202027-01-09"
             }
           ]
         },
@@ -232,13 +239,14 @@
           "outDateFmt": "Wed, Jan 06",
           "retDateFmt": "Sun, Jan 10",
           "dropPct": 0,
-          "priceDelta": -151,
+          "priceDelta": -141,
           "weekendEscape": true,
           "times": [
             {
               "outDepFmt": "Wed, Jan 06, 02:24 PM",
               "retArrFmt": "Sun, Jan 10, 01:38 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1BWVRIKMjAyNy0wMS0wNhoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxo_EgoyMDI3LTAxLTEwIh8KA0RGVxIKMjAyNy0wMS0xMBoDUFZVKgJBQTIDNzUzagcIARIDREZXcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1BWVRIKMjAyNy0wMS0wNhoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxo_EgoyMDI3LTAxLTEwIh8KA0RGVxIKMjAyNy0wMS0xMBoDUFZVKgJBQTIDNzUzagcIARIDREZXcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20DFW%20on%202027-01-06%20through%202027-01-10"
             }
           ]
         },
@@ -254,13 +262,14 @@
           "outDateFmt": "Wed, Jan 13",
           "retDateFmt": "Sun, Jan 17",
           "dropPct": 0,
-          "priceDelta": -151,
+          "priceDelta": -141,
           "weekendEscape": true,
           "times": [
             {
               "outDepFmt": "Wed, Jan 13, 02:24 PM",
               "retArrFmt": "Sun, Jan 17, 01:38 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTEzIiAKA1BWVRIKMjAyNy0wMS0xMxoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxo_EgoyMDI3LTAxLTE3Ih8KA0RGVxIKMjAyNy0wMS0xNxoDUFZVKgJBQTIDNzUzagcIARIDREZXcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTEzIiAKA1BWVRIKMjAyNy0wMS0xMxoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxo_EgoyMDI3LTAxLTE3Ih8KA0RGVxIKMjAyNy0wMS0xNxoDUFZVKgJBQTIDNzUzagcIARIDREZXcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20DFW%20on%202027-01-13%20through%202027-01-17"
             }
           ]
         },
@@ -276,23 +285,26 @@
           "outDateFmt": "Wed, Dec 16",
           "retDateFmt": "Sun, Dec 20",
           "dropPct": 0,
-          "priceDelta": -154,
+          "priceDelta": -144,
           "weekendEscape": true,
           "times": [
             {
               "outDepFmt": "Wed, Dec 16, 04:44 PM",
               "retArrFmt": "Sun, Dec 20, 10:29 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1NMQxIKMjAyNi0xMi0xNhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTIwIiAKA0RGVxIKMjAyNi0xMi0yMBoDU0xDKgJBQTIEMjE3OGoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1NMQxIKMjAyNi0xMi0xNhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTIwIiAKA0RGVxIKMjAyNi0xMi0yMBoDU0xDKgJBQTIEMjE3OGoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20DFW%20on%202026-12-16%20through%202026-12-20"
             },
             {
               "outDepFmt": "Wed, Dec 16, 04:44 PM",
               "retArrFmt": "Sun, Dec 20, 01:03 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1NMQxIKMjAyNi0xMi0xNhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTIwIiAKA0RGVxIKMjAyNi0xMi0yMBoDU0xDKgJBQTIEMjg0NWoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1NMQxIKMjAyNi0xMi0xNhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTIwIiAKA0RGVxIKMjAyNi0xMi0yMBoDU0xDKgJBQTIEMjg0NWoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20DFW%20on%202026-12-16%20through%202026-12-20"
             },
             {
               "outDepFmt": "Wed, Dec 16, 04:44 PM",
               "retArrFmt": "Sun, Dec 20, 03:55 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1NMQxIKMjAyNi0xMi0xNhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTIwIiAKA0RGVxIKMjAyNi0xMi0yMBoDU0xDKgJBQTIEMTQ1NmoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1NMQxIKMjAyNi0xMi0xNhoDREZXKgJBQTIEMTQ1NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTIwIiAKA0RGVxIKMjAyNi0xMi0yMBoDU0xDKgJBQTIEMTQ1NmoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20DFW%20on%202026-12-16%20through%202026-12-20"
             }
           ]
         },
@@ -308,18 +320,20 @@
           "outDateFmt": "Wed, Dec 16",
           "retDateFmt": "Sun, Dec 20",
           "dropPct": 0,
-          "priceDelta": -154,
+          "priceDelta": -144,
           "weekendEscape": true,
           "times": [
             {
               "outDepFmt": "Wed, Dec 16, 05:44 PM",
               "retArrFmt": "Sun, Dec 20, 10:15 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1NMQxIKMjAyNi0xMi0xNhoDREZXKgJETDIEMjc5NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTIwIiAKA0RGVxIKMjAyNi0xMi0yMBoDU0xDKgJETDIEMTI5MWoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1NMQxIKMjAyNi0xMi0xNhoDREZXKgJETDIEMjc5NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTIwIiAKA0RGVxIKMjAyNi0xMi0yMBoDU0xDKgJETDIEMTI5MWoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20DFW%20on%202026-12-16%20through%202026-12-20"
             },
             {
               "outDepFmt": "Wed, Dec 16, 05:44 PM",
               "retArrFmt": "Sun, Dec 20, 02:30 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1NMQxIKMjAyNi0xMi0xNhoDREZXKgJETDIEMjc5NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTIwIiAKA0RGVxIKMjAyNi0xMi0yMBoDU0xDKgJETDIEMjc5OGoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB"
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1NMQxIKMjAyNi0xMi0xNhoDREZXKgJETDIEMjc5NmoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTIwIiAKA0RGVxIKMjAyNi0xMi0yMBoDU0xDKgJETDIEMjc5OGoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20DFW%20on%202026-12-16%20through%202026-12-20"
             }
           ]
         }

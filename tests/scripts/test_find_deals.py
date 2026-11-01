@@ -149,6 +149,15 @@ class TestMergeRotatedResults:
         assert len(lhr) == 1
         assert lhr[0]["price"] == 1700
 
+    def test_drops_departed_prior_deals(self):
+        today = datetime(2026, 10, 31)
+        prior = [
+            {"airport": "PDX", "cabin": "Business", "price": 387, "out_date": "2026-10-17"},
+            {"airport": "CUN", "cabin": "Business", "price": 1080, "out_date": "2026-12-05"},
+        ]
+        merged = find_deals.merge_rotated_results(prior, [], {"LHR"}, today=today)
+        assert [d["airport"] for d in merged] == ["CUN"]
+
 
 class TestLoadPrior:
     def test_load_prior_validates_deals_list(self, tmp_path, monkeypatch):
