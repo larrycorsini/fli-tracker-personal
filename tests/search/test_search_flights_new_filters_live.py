@@ -372,7 +372,9 @@ class TestLapInfantPricing:
             flight_segments=_segments(*self.ROUTE),
             airlines=[Airline.BA],
         )
-        results = client.search(filters, currency="USD")
+        # Same retry helper as the rest of this module — bare client.search
+        # was the canary flake source (two live fetches, no tenacity wrap).
+        results = _search_with_retry(client, filters, currency="USD")
         return {
             f.legs[0].flight_number: f.price
             for f in (results or [])
