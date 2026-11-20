@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "Thu, Nov 19, 2026 at 06:38 AM MST",
-  "lastUpdatedAt": "2026-11-19T13:38:58.020070+00:00",
+  "lastUpdated": "Fri, Nov 20, 2026 at 06:29 AM MST",
+  "lastUpdatedAt": "2026-11-20T13:29:11.114285+00:00",
   "origins": [
     "SLC",
     "PVU"
@@ -523,16 +523,16 @@
       "hasCashPrice": true,
       "isRoundTrip": true,
       "tripDuration": 3,
-      "outDate": "2026-12-02",
-      "retDate": "2026-12-05",
-      "outDateFmt": "Wed, Dec 02",
-      "retDateFmt": "Sat, Dec 05",
+      "outDate": "2026-12-05",
+      "retDate": "2026-12-08",
+      "outDateFmt": "Sat, Dec 05",
+      "retDateFmt": "Tue, Dec 08",
       "airline": "JetBlue",
       "duration": 593,
       "stops": 0,
       "isDomestic": true,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTEyLTAyIh8KA1NMQxIKMjAyNi0xMi0wMhoDSkZLKgJCNjIDODcyagcIARIDU0xDcgcIARIDSkZLGj8SCjIwMjYtMTItMDUiHwoDSkZLEgoyMDI2LTEyLTA1GgNTTEMqAkI2MgM4NzFqBwgBEgNKRktyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20JFK%20on%202026-12-02%20through%202026-12-05"
+      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTEyLTA1Ih8KA1NMQxIKMjAyNi0xMi0wNRoDSkZLKgJCNjIDODcyagcIARIDU0xDcgcIARIDSkZLGj8SCjIwMjYtMTItMDgiHwoDSkZLEgoyMDI2LTEyLTA4GgNTTEMqAkI2MgM4NzFqBwgBEgNKRktyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20JFK%20on%202026-12-05%20through%202026-12-08"
     },
     {
       "destination": "New York",
@@ -547,16 +547,16 @@
       "hasCashPrice": true,
       "isRoundTrip": true,
       "tripDuration": 3,
-      "outDate": "2026-12-05",
-      "retDate": "2026-12-08",
-      "outDateFmt": "Sat, Dec 05",
-      "retDateFmt": "Tue, Dec 08",
+      "outDate": "2026-12-08",
+      "retDate": "2026-12-11",
+      "outDateFmt": "Tue, Dec 08",
+      "retDateFmt": "Fri, Dec 11",
       "airline": "JetBlue",
       "duration": 593,
       "stops": 0,
       "isDomestic": true,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTEyLTA1Ih8KA1NMQxIKMjAyNi0xMi0wNRoDSkZLKgJCNjIDODcyagcIARIDU0xDcgcIARIDSkZLGj8SCjIwMjYtMTItMDgiHwoDSkZLEgoyMDI2LTEyLTA4GgNTTEMqAkI2MgM4NzFqBwgBEgNKRktyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20JFK%20on%202026-12-05%20through%202026-12-08"
+      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTEyLTA4Ih8KA1NMQxIKMjAyNi0xMi0wOBoDSkZLKgJCNjIDODcyagcIARIDU0xDcgcIARIDSkZLGj8SCjIwMjYtMTItMTEiHwoDSkZLEgoyMDI2LTEyLTExGgNTTEMqAkI2MgM4NzFqBwgBEgNKRktyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20JFK%20on%202026-12-08%20through%202026-12-11"
     },
     {
       "destination": "Austin",
@@ -703,28 +703,28 @@
       "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20DFW%20on%202026-12-08%20through%202026-12-15"
     },
     {
-      "destination": "Boston",
-      "airport": "BOS",
-      "regionLabel": "US East",
+      "destination": "Atlanta",
+      "airport": "ATL",
+      "regionLabel": "US South",
       "origin": "SLC",
-      "cabin": "Premium Economy",
-      "price": 699,
-      "points": 55920,
+      "cabin": "Business",
+      "price": 717,
+      "points": 57360,
       "paymentType": "both",
       "valueScore": "cash",
       "hasCashPrice": true,
       "isRoundTrip": true,
       "tripDuration": 3,
-      "outDate": "2026-12-17",
-      "retDate": "2026-12-20",
-      "outDateFmt": "Thu, Dec 17",
-      "retDateFmt": "Sun, Dec 20",
-      "airline": "JetBlue",
-      "duration": 601,
-      "stops": 0,
+      "outDate": "2027-01-06",
+      "retDate": "2027-01-09",
+      "outDateFmt": "Wed, Jan 06",
+      "retDateFmt": "Sat, Jan 09",
+      "airline": "American Airlines",
+      "duration": 830,
+      "stops": 2,
       "isDomestic": true,
-      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTEyLTE3Ih8KA1NMQxIKMjAyNi0xMi0xNxoDQk9TKgJCNjIDMjQ4agcIARIDU0xDcgcIARIDQk9TGj8SCjIwMjYtMTItMjAiHwoDQk9TEgoyMDI2LTEyLTIwGgNTTEMqAkI2MgMyNDdqBwgBEgNCT1NyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20BOS%20on%202026-12-17%20through%202026-12-20"
+      "booking_url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI3LTAxLTA2Ih8KA1NMQxIKMjAyNy0wMS0wNhoDT1JEKgJBQTIDNjg3IiAKA09SRBIKMjAyNy0wMS0wNhoDQVRMKgJBQTIENDY1OGoHCAESA1NMQ3IHCAESA0FUTBpiEgoyMDI3LTAxLTA5IiAKA0FUTBIKMjAyNy0wMS0wORoDREZXKgJBQTIEMTA1MSIgCgNERlcSCjIwMjctMDEtMDkaA1NMQyoCQUEyBDE2ODNqBwgBEgNBVExyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
+      "google_flights_url": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ATL%20on%202027-01-06%20through%202027-01-09"
     }
   ]
 }
