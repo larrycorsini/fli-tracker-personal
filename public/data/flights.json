@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "Sun, Nov 22, 2026 at 06:09 AM MST",
-  "lastUpdatedAt": "2026-11-22T13:09:47.989419+00:00",
+  "lastUpdated": "Mon, Nov 23, 2026 at 06:13 AM MST",
+  "lastUpdatedAt": "2026-11-23T13:13:40.798320+00:00",
   "siteUrl": "https://flights.larrycorsini.com",
   "plannerUrl": "https://flights.larrycorsini.com",
   "intlTabs": [
@@ -39,13 +39,12 @@
     "Japan",
     "South Korea"
   ],
-  "maxPriceDefault": 1700,
+  "maxPriceDefault": 1850,
   "airlines": [
     "AeroMexico",
     "Alaska Airlines",
     "American Airlines",
     "Delta Air Lines",
-    "Southwest Airlines",
     "United Airlines"
   ],
   "deals": [
@@ -104,7 +103,7 @@
           "retDate": "2027-01-16",
           "outDateFmt": "Wed, Jan 13",
           "retDateFmt": "Sat, Jan 16",
-          "dropPct": 12,
+          "dropPct": 11,
           "priceDelta": 0,
           "weekendEscape": true,
           "times": [
@@ -123,11 +122,34 @@
           "price": 199,
           "points": 15920,
           "earn": 995,
+          "outDate": "2027-01-27",
+          "retDate": "2027-01-30",
+          "outDateFmt": "Wed, Jan 27",
+          "retDateFmt": "Sat, Jan 30",
+          "dropPct": 11,
+          "priceDelta": 0,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Jan 27, 02:24 PM",
+              "retArrFmt": "Sat, Jan 30, 02:03 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTI3IiAKA1BWVRIKMjAyNy0wMS0yNxoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI3LTAxLTMwIiAKA0RGVxIKMjAyNy0wMS0zMBoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20DFW%20on%202027-01-27%20through%202027-01-30"
+            }
+          ]
+        },
+        {
+          "origin": "PVU",
+          "destination": "DFW",
+          "airline": "American Airlines",
+          "price": 199,
+          "points": 15920,
+          "earn": 995,
           "outDate": "2027-02-03",
           "retDate": "2027-02-06",
           "outDateFmt": "Wed, Feb 03",
           "retDateFmt": "Sat, Feb 06",
-          "dropPct": 12,
+          "dropPct": 11,
           "priceDelta": 0,
           "weekendEscape": true,
           "times": [
@@ -279,6 +301,29 @@
           "price": 323,
           "points": 25840,
           "earn": 1615,
+          "outDate": "2027-01-06",
+          "retDate": "2027-01-09",
+          "outDateFmt": "Wed, Jan 06",
+          "retDateFmt": "Sat, Jan 09",
+          "dropPct": 0,
+          "priceDelta": -124,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Jan 06, 02:24 PM",
+              "retArrFmt": "Sat, Jan 09, 02:03 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1BWVRIKMjAyNy0wMS0wNhoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI3LTAxLTA5IiAKA0RGVxIKMjAyNy0wMS0wORoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20DFW%20on%202027-01-06%20through%202027-01-09"
+            }
+          ]
+        },
+        {
+          "origin": "PVU",
+          "destination": "DFW",
+          "airline": "American Airlines",
+          "price": 323,
+          "points": 25840,
+          "earn": 1615,
           "outDate": "2027-01-20",
           "retDate": "2027-01-23",
           "outDateFmt": "Wed, Jan 20",
@@ -292,29 +337,6 @@
               "retArrFmt": "Sat, Jan 23, 02:03 PM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTIwIiAKA1BWVRIKMjAyNy0wMS0yMBoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI3LTAxLTIzIiAKA0RGVxIKMjAyNy0wMS0yMxoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20DFW%20on%202027-01-20%20through%202027-01-23"
-            }
-          ]
-        },
-        {
-          "origin": "PVU",
-          "destination": "DFW",
-          "airline": "American Airlines",
-          "price": 323,
-          "points": 25840,
-          "earn": 1615,
-          "outDate": "2027-01-27",
-          "retDate": "2027-01-30",
-          "outDateFmt": "Wed, Jan 27",
-          "retDateFmt": "Sat, Jan 30",
-          "dropPct": 0,
-          "priceDelta": -124,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Wed, Jan 27, 02:24 PM",
-              "retArrFmt": "Sat, Jan 30, 02:03 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTI3IiAKA1BWVRIKMjAyNy0wMS0yNxoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxpAEgoyMDI3LTAxLTMwIiAKA0RGVxIKMjAyNy0wMS0zMBoDUFZVKgJBQTIENjMyMWoHCAESA0RGV3IHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20DFW%20on%202027-01-27%20through%202027-01-30"
             }
           ]
         },
@@ -350,6 +372,29 @@
               "retArrFmt": "Sat, Dec 19, 12:57 PM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTE2IiAKA1NMQxIKMjAyNi0xMi0xNhoDREZXKgJBQTIEMjg0NWoHCAESA1NMQ3IHCAESA0RGVxpAEgoyMDI2LTEyLTE5IiAKA0RGVxIKMjAyNi0xMi0xORoDU0xDKgJBQTIEMjg0NWoHCAESA0RGV3IHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20DFW%20on%202026-12-16%20through%202026-12-19"
+            }
+          ]
+        },
+        {
+          "origin": "PVU",
+          "destination": "DFW",
+          "airline": "American Airlines",
+          "price": 355,
+          "points": 28400,
+          "earn": 1775,
+          "outDate": "2027-01-06",
+          "retDate": "2027-01-10",
+          "outDateFmt": "Wed, Jan 06",
+          "retDateFmt": "Sun, Jan 10",
+          "dropPct": 0,
+          "priceDelta": -156,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Jan 06, 02:24 PM",
+              "retArrFmt": "Sun, Jan 10, 01:38 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1BWVRIKMjAyNy0wMS0wNhoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxo_EgoyMDI3LTAxLTEwIh8KA0RGVxIKMjAyNy0wMS0xMBoDUFZVKgJBQTIDNzUzagcIARIDREZXcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20DFW%20on%202027-01-06%20through%202027-01-10"
             }
           ]
         },
@@ -421,52 +466,6 @@
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20DFW%20on%202027-01-27%20through%202027-01-31"
             }
           ]
-        },
-        {
-          "origin": "PVU",
-          "destination": "DFW",
-          "airline": "American Airlines",
-          "price": 355,
-          "points": 28400,
-          "earn": 1775,
-          "outDate": "2027-02-03",
-          "retDate": "2027-02-07",
-          "outDateFmt": "Wed, Feb 03",
-          "retDateFmt": "Sun, Feb 07",
-          "dropPct": 0,
-          "priceDelta": -156,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Wed, Feb 03, 02:24 PM",
-              "retArrFmt": "Sun, Feb 07, 01:38 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAyLTAzIiAKA1BWVRIKMjAyNy0wMi0wMxoDREZXKgJBQTIENDk4MGoHCAESA1BWVXIHCAESA0RGVxo_EgoyMDI3LTAyLTA3Ih8KA0RGVxIKMjAyNy0wMi0wNxoDUFZVKgJBQTIDNzUzagcIARIDREZXcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20DFW%20on%202027-02-03%20through%202027-02-07"
-            }
-          ]
-        },
-        {
-          "origin": "PVU",
-          "destination": "DFW",
-          "airline": "American Airlines",
-          "price": 395,
-          "points": 31600,
-          "earn": 1975,
-          "outDate": "2027-01-07",
-          "retDate": "2027-01-10",
-          "outDateFmt": "Thu, Jan 07",
-          "retDateFmt": "Sun, Jan 10",
-          "dropPct": 0,
-          "priceDelta": -196,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Thu, Jan 07, 07:00 AM",
-              "retArrFmt": "Sun, Jan 10, 01:38 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA3IiAKA1BWVRIKMjAyNy0wMS0wNxoDREZXKgJBQTIENDkyOGoHCAESA1BWVXIHCAESA0RGVxo_EgoyMDI3LTAxLTEwIh8KA0RGVxIKMjAyNy0wMS0xMBoDUFZVKgJBQTIDNzUzagcIARIDREZXcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20DFW%20on%202027-01-07%20through%202027-01-10"
-            }
-          ]
         }
       ],
       "groupCount": 15,
@@ -497,6 +496,12 @@
           "times": [
             {
               "outDepFmt": "Wed, Jan 06, 01:35 PM",
+              "retArrFmt": "Sat, Jan 09, 02:05 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDU0VBKgJETDIEMjUzN2oHCAESA1NMQ3IHCAESA1NFQRpAEgoyMDI3LTAxLTA5IiAKA1NFQRIKMjAyNy0wMS0wORoDU0xDKgJETDIEMTI2NWoHCAESA1NFQXIHCAESA1NMQ0ABQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SEA%20on%202027-01-06%20through%202027-01-09"
+            },
+            {
+              "outDepFmt": "Wed, Jan 06, 01:35 PM",
               "retArrFmt": "Sat, Jan 09, 08:41 AM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDU0VBKgJETDIEMjUzN2oHCAESA1NMQ3IHCAESA1NFQRpAEgoyMDI3LTAxLTA5IiAKA1NFQRIKMjAyNy0wMS0wORoDU0xDKgJETDIEMTEyOGoHCAESA1NFQXIHCAESA1NMQ0ABQAFIAXABggELCP___________wGYAQE",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SEA%20on%202027-01-06%20through%202027-01-09"
@@ -505,12 +510,6 @@
               "outDepFmt": "Wed, Jan 06, 01:35 PM",
               "retArrFmt": "Sat, Jan 09, 12:30 PM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDU0VBKgJETDIEMjUzN2oHCAESA1NMQ3IHCAESA1NFQRpAEgoyMDI3LTAxLTA5IiAKA1NFQRIKMjAyNy0wMS0wORoDU0xDKgJETDIEMTAxNmoHCAESA1NFQXIHCAESA1NMQ0ABQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SEA%20on%202027-01-06%20through%202027-01-09"
-            },
-            {
-              "outDepFmt": "Wed, Jan 06, 01:35 PM",
-              "retArrFmt": "Sat, Jan 09, 02:05 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDU0VBKgJETDIEMjUzN2oHCAESA1NMQ3IHCAESA1NFQRpAEgoyMDI3LTAxLTA5IiAKA1NFQRIKMjAyNy0wMS0wORoDU0xDKgJETDIEMTI2NWoHCAESA1NFQXIHCAESA1NMQ0ABQAFIAXABggELCP___________wGYAQE",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SEA%20on%202027-01-06%20through%202027-01-09"
             }
           ]
@@ -736,6 +735,12 @@
           "times": [
             {
               "outDepFmt": "Wed, Jan 06, 01:35 PM",
+              "retArrFmt": "Sun, Jan 10, 02:05 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDU0VBKgJETDIEMjUzN2oHCAESA1NMQ3IHCAESA1NFQRpAEgoyMDI3LTAxLTEwIiAKA1NFQRIKMjAyNy0wMS0xMBoDU0xDKgJETDIEMTI2NWoHCAESA1NFQXIHCAESA1NMQ0ABQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SEA%20on%202027-01-06%20through%202027-01-10"
+            },
+            {
+              "outDepFmt": "Wed, Jan 06, 01:35 PM",
               "retArrFmt": "Sun, Jan 10, 08:41 AM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDU0VBKgJETDIEMjUzN2oHCAESA1NMQ3IHCAESA1NFQRpAEgoyMDI3LTAxLTEwIiAKA1NFQRIKMjAyNy0wMS0xMBoDU0xDKgJETDIEMTEyOGoHCAESA1NFQXIHCAESA1NMQ0ABQAFIAXABggELCP___________wGYAQE",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SEA%20on%202027-01-06%20through%202027-01-10"
@@ -744,12 +749,6 @@
               "outDepFmt": "Wed, Jan 06, 01:35 PM",
               "retArrFmt": "Sun, Jan 10, 12:30 PM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDU0VBKgJETDIEMjUzN2oHCAESA1NMQ3IHCAESA1NFQRpAEgoyMDI3LTAxLTEwIiAKA1NFQRIKMjAyNy0wMS0xMBoDU0xDKgJETDIEMTAxNmoHCAESA1NFQXIHCAESA1NMQ0ABQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SEA%20on%202027-01-06%20through%202027-01-10"
-            },
-            {
-              "outDepFmt": "Wed, Jan 06, 01:35 PM",
-              "retArrFmt": "Sun, Jan 10, 02:05 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDU0VBKgJETDIEMjUzN2oHCAESA1NMQ3IHCAESA1NFQRpAEgoyMDI3LTAxLTEwIiAKA1NFQRIKMjAyNy0wMS0xMBoDU0xDKgJETDIEMTI2NWoHCAESA1NFQXIHCAESA1NMQ0ABQAFIAXABggELCP___________wGYAQE",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SEA%20on%202027-01-06%20through%202027-01-10"
             }
           ]
@@ -926,6 +925,35 @@
         {
           "origin": "SLC",
           "destination": "SEA",
+          "airline": "Alaska Airlines",
+          "price": 594,
+          "points": 47520,
+          "earn": 2970,
+          "outDate": "2027-01-27",
+          "retDate": "2027-01-31",
+          "outDateFmt": "Wed, Jan 27",
+          "retDateFmt": "Sun, Jan 31",
+          "dropPct": 0,
+          "priceDelta": -20,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Jan 27, 02:29 PM",
+              "retArrFmt": "Sun, Jan 31, 10:12 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI3LTAxLTI3Ih8KA1NMQxIKMjAyNy0wMS0yNxoDU0VBKgJBUzIDNzMzagcIARIDU0xDcgcIARIDU0VBGkASCjIwMjctMDEtMzEiIAoDU0VBEgoyMDI3LTAxLTMxGgNTTEMqAkFTMgQyMDA5agcIARIDU0VBcgcIARIDU0xDQAFAAUgBcAGCAQsI____________AZgBAQ",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SEA%20on%202027-01-27%20through%202027-01-31"
+            },
+            {
+              "outDepFmt": "Wed, Jan 27, 02:29 PM",
+              "retArrFmt": "Sun, Jan 31, 01:33 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI3LTAxLTI3Ih8KA1NMQxIKMjAyNy0wMS0yNxoDU0VBKgJBUzIDNzMzagcIARIDU0xDcgcIARIDU0VBGj8SCjIwMjctMDEtMzEiHwoDU0VBEgoyMDI3LTAxLTMxGgNTTEMqAkFTMgM3MzNqBwgBEgNTRUFyBwgBEgNTTENAAUABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SEA%20on%202027-01-27%20through%202027-01-31"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "SEA",
           "airline": "Delta Air Lines",
           "price": 594,
           "points": 47520,
@@ -957,41 +985,6 @@
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SEA%20on%202027-02-03%20through%202027-02-07"
             }
           ]
-        },
-        {
-          "origin": "SLC",
-          "destination": "SEA",
-          "airline": "Alaska Airlines",
-          "price": 594,
-          "points": 47520,
-          "earn": 2970,
-          "outDate": "2027-01-07",
-          "retDate": "2027-01-09",
-          "outDateFmt": "Thu, Jan 07",
-          "retDateFmt": "Sat, Jan 09",
-          "dropPct": 0,
-          "priceDelta": -20,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Thu, Jan 07, 09:00 AM",
-              "retArrFmt": "Sat, Jan 09, 10:12 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA3IiAKA1NMQxIKMjAyNy0wMS0wNxoDU0VBKgJBUzIEMTU0MmoHCAESA1NMQ3IHCAESA1NFQRpAEgoyMDI3LTAxLTA5IiAKA1NFQRIKMjAyNy0wMS0wORoDU0xDKgJBUzIEMjAwOWoHCAESA1NFQXIHCAESA1NMQ0ABQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SEA%20on%202027-01-07%20through%202027-01-09"
-            },
-            {
-              "outDepFmt": "Thu, Jan 07, 09:00 AM",
-              "retArrFmt": "Sat, Jan 09, 01:33 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA3IiAKA1NMQxIKMjAyNy0wMS0wNxoDU0VBKgJBUzIEMTU0MmoHCAESA1NMQ3IHCAESA1NFQRo_EgoyMDI3LTAxLTA5Ih8KA1NFQRIKMjAyNy0wMS0wORoDU0xDKgJBUzIDNzMzagcIARIDU0VBcgcIARIDU0xDQAFAAUgBcAGCAQsI____________AZgBAQ",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SEA%20on%202027-01-07%20through%202027-01-09"
-            },
-            {
-              "outDepFmt": "Thu, Jan 07, 10:49 AM",
-              "retArrFmt": "Sat, Jan 09, 10:12 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA3IiAKA1NMQxIKMjAyNy0wMS0wNxoDU0VBKgJBUzIEMjAyMGoHCAESA1NMQ3IHCAESA1NFQRpAEgoyMDI3LTAxLTA5IiAKA1NFQRIKMjAyNy0wMS0wORoDU0xDKgJBUzIEMjAwOWoHCAESA1NFQXIHCAESA1NMQ0ABQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SEA%20on%202027-01-07%20through%202027-01-09"
-            }
-          ]
         }
       ],
       "groupCount": 15,
@@ -1017,7 +1010,7 @@
           "outDateFmt": "Thu, Dec 17",
           "retDateFmt": "Sun, Dec 20",
           "dropPct": 5,
-          "priceDelta": 10,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1040,7 +1033,7 @@
           "outDateFmt": "Wed, Jan 20",
           "retDateFmt": "Sat, Jan 23",
           "dropPct": 5,
-          "priceDelta": 10,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1063,7 +1056,7 @@
           "outDateFmt": "Thu, Jan 21",
           "retDateFmt": "Sun, Jan 24",
           "dropPct": 5,
-          "priceDelta": 10,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1086,7 +1079,7 @@
           "outDateFmt": "Wed, Jan 27",
           "retDateFmt": "Sat, Jan 30",
           "dropPct": 5,
-          "priceDelta": 10,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1104,12 +1097,35 @@
           "price": 197,
           "points": 15760,
           "earn": 985,
+          "outDate": "2027-01-28",
+          "retDate": "2027-01-31",
+          "outDateFmt": "Thu, Jan 28",
+          "retDateFmt": "Sun, Jan 31",
+          "dropPct": 5,
+          "priceDelta": 0,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Thu, Jan 28, 08:45 AM",
+              "retArrFmt": "Sun, Jan 31, 11:28 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTI4IiAKA1NMQxIKMjAyNy0wMS0yOBoDU0FOKgJBUzIEMzAxOGoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI3LTAxLTMxIiAKA1NBThIKMjAyNy0wMS0zMRoDU0xDKgJBUzIEMzExOGoHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAN%20on%202027-01-28%20through%202027-01-31"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "SAN",
+          "airline": "Alaska Airlines",
+          "price": 197,
+          "points": 15760,
+          "earn": 985,
           "outDate": "2027-02-03",
           "retDate": "2027-02-06",
           "outDateFmt": "Wed, Feb 03",
           "retDateFmt": "Sat, Feb 06",
           "dropPct": 5,
-          "priceDelta": 10,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1132,36 +1148,13 @@
           "outDateFmt": "Thu, Feb 04",
           "retDateFmt": "Sun, Feb 07",
           "dropPct": 5,
-          "priceDelta": 10,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
               "outDepFmt": "Thu, Feb 04, 08:45 AM",
               "retArrFmt": "Sun, Feb 07, 11:28 AM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAyLTA0IiAKA1NMQxIKMjAyNy0wMi0wNBoDU0FOKgJBUzIEMzAxOGoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI3LTAyLTA3IiAKA1NBThIKMjAyNy0wMi0wNxoDU0xDKgJBUzIEMzExOGoHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAN%20on%202027-02-04%20through%202027-02-07"
-            }
-          ]
-        },
-        {
-          "origin": "SLC",
-          "destination": "SAN",
-          "airline": "Southwest Airlines",
-          "price": 197,
-          "points": 15760,
-          "earn": 985,
-          "outDate": "2027-02-04",
-          "retDate": "2027-02-07",
-          "outDateFmt": "Thu, Feb 04",
-          "retDateFmt": "Sun, Feb 07",
-          "dropPct": 5,
-          "priceDelta": 10,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Thu, Feb 04, 10:00 AM",
-              "retArrFmt": "Sun, Feb 07, 11:10 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAyLTA0IiAKA1NMQxIKMjAyNy0wMi0wNBoDU0FOKgJXTjIEMzE4MWoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI3LTAyLTA3IiAKA1NBThIKMjAyNy0wMi0wNxoDU0xDKgJXTjIEMzYxMmoHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAN%20on%202027-02-04%20through%202027-02-07"
             }
           ]
@@ -1178,7 +1171,7 @@
           "outDateFmt": "Wed, Jan 20",
           "retDateFmt": "Sun, Jan 24",
           "dropPct": 5,
-          "priceDelta": 10,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1201,7 +1194,7 @@
           "outDateFmt": "Wed, Jan 27",
           "retDateFmt": "Sun, Jan 31",
           "dropPct": 5,
-          "priceDelta": 10,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1224,7 +1217,7 @@
           "outDateFmt": "Wed, Feb 03",
           "retDateFmt": "Sun, Feb 07",
           "dropPct": 5,
-          "priceDelta": 10,
+          "priceDelta": 0,
           "weekendEscape": true,
           "times": [
             {
@@ -1232,41 +1225,6 @@
               "retArrFmt": "Sun, Feb 07, 11:28 AM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAyLTAzIiAKA1NMQxIKMjAyNy0wMi0wMxoDU0FOKgJBUzIEMzExOWoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI3LTAyLTA3IiAKA1NBThIKMjAyNy0wMi0wNxoDU0xDKgJBUzIEMzExOGoHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAN%20on%202027-02-03%20through%202027-02-07"
-            }
-          ]
-        },
-        {
-          "origin": "SLC",
-          "destination": "SAN",
-          "airline": "Delta Air Lines",
-          "price": 207,
-          "points": 16560,
-          "earn": 1035,
-          "outDate": "2026-12-23",
-          "retDate": "2026-12-26",
-          "outDateFmt": "Wed, Dec 23",
-          "retDateFmt": "Sat, Dec 26",
-          "dropPct": 1,
-          "priceDelta": 0,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Wed, Dec 23, 05:10 PM",
-              "retArrFmt": "Sat, Dec 26, 09:31 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTIzIiAKA1NMQxIKMjAyNi0xMi0yMxoDU0FOKgJETDIEMTI1MmoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTEyLTI2IiAKA1NBThIKMjAyNi0xMi0yNhoDU0xDKgJETDIEMTExN2oHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAN%20on%202026-12-23%20through%202026-12-26"
-            },
-            {
-              "outDepFmt": "Wed, Dec 23, 05:10 PM",
-              "retArrFmt": "Sat, Dec 26, 01:07 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTIzIiAKA1NMQxIKMjAyNi0xMi0yMxoDU0FOKgJETDIEMTI1MmoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTEyLTI2IiAKA1NBThIKMjAyNi0xMi0yNhoDU0xDKgJETDIEMTE3N2oHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAN%20on%202026-12-23%20through%202026-12-26"
-            },
-            {
-              "outDepFmt": "Wed, Dec 23, 05:10 PM",
-              "retArrFmt": "Sat, Dec 26, 02:30 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTIzIiAKA1NMQxIKMjAyNi0xMi0yMxoDU0FOKgJETDIEMTI1MmoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI2LTEyLTI2IiAKA1NBThIKMjAyNi0xMi0yNhoDU0xDKgJETDIENDAzOWoHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAN%20on%202026-12-23%20through%202026-12-26"
             }
           ]
         },
@@ -1282,7 +1240,7 @@
           "outDateFmt": "Wed, Dec 16",
           "retDateFmt": "Sat, Dec 19",
           "dropPct": 0,
-          "priceDelta": -10,
+          "priceDelta": -20,
           "weekendEscape": true,
           "times": [
             {
@@ -1317,7 +1275,7 @@
           "outDateFmt": "Thu, Dec 17",
           "retDateFmt": "Sun, Dec 20",
           "dropPct": 0,
-          "priceDelta": -10,
+          "priceDelta": -20,
           "weekendEscape": true,
           "times": [
             {
@@ -1352,7 +1310,7 @@
           "outDateFmt": "Wed, Jan 06",
           "retDateFmt": "Sat, Jan 09",
           "dropPct": 0,
-          "priceDelta": -10,
+          "priceDelta": -20,
           "weekendEscape": true,
           "times": [
             {
@@ -1381,7 +1339,7 @@
           "outDateFmt": "Wed, Jan 13",
           "retDateFmt": "Sat, Jan 16",
           "dropPct": 0,
-          "priceDelta": -10,
+          "priceDelta": -20,
           "weekendEscape": true,
           "times": [
             {
@@ -1395,6 +1353,35 @@
               "retArrFmt": "Sat, Jan 16, 12:54 PM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTEzIiAKA1NMQxIKMjAyNy0wMS0xMxoDU0FOKgJETDIEMTIwMmoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI3LTAxLTE2IiAKA1NBThIKMjAyNy0wMS0xNhoDU0xDKgJETDIEMTE3N2oHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAN%20on%202027-01-13%20through%202027-01-16"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "SAN",
+          "airline": "Delta Air Lines",
+          "price": 217,
+          "points": 17360,
+          "earn": 1085,
+          "outDate": "2027-01-20",
+          "retDate": "2027-01-23",
+          "outDateFmt": "Wed, Jan 20",
+          "retDateFmt": "Sat, Jan 23",
+          "dropPct": 0,
+          "priceDelta": -20,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Jan 20, 03:06 PM",
+              "retArrFmt": "Sat, Jan 23, 09:25 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTIwIiAKA1NMQxIKMjAyNy0wMS0yMBoDU0FOKgJETDIEMTIxMGoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI3LTAxLTIzIiAKA1NBThIKMjAyNy0wMS0yMxoDU0xDKgJETDIEMTExN2oHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAN%20on%202027-01-20%20through%202027-01-23"
+            },
+            {
+              "outDepFmt": "Wed, Jan 20, 03:06 PM",
+              "retArrFmt": "Sat, Jan 23, 12:54 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTIwIiAKA1NMQxIKMjAyNy0wMS0yMBoDU0FOKgJETDIEMTIxMGoHCAESA1NMQ3IHCAESA1NBThpAEgoyMDI3LTAxLTIzIiAKA1NBThIKMjAyNy0wMS0yMxoDU0xDKgJETDIEMTE3N2oHCAESA1NBTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAN%20on%202027-01-20%20through%202027-01-23"
             }
           ]
         }
@@ -1421,7 +1408,7 @@
           "retDate": "2027-01-09",
           "outDateFmt": "Wed, Jan 06",
           "retDateFmt": "Sat, Jan 09",
-          "dropPct": 7,
+          "dropPct": 6,
           "priceDelta": 0,
           "weekendEscape": true,
           "times": [
@@ -1637,6 +1624,35 @@
           "price": 285,
           "points": 22800,
           "earn": 1425,
+          "outDate": "2027-01-13",
+          "retDate": "2027-01-17",
+          "outDateFmt": "Wed, Jan 13",
+          "retDateFmt": "Sun, Jan 17",
+          "dropPct": 0,
+          "priceDelta": -28,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Jan 13, 02:24 PM",
+              "retArrFmt": "Sun, Jan 17, 01:38 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI3LTAxLTEzIiAKA1BWVRIKMjAyNy0wMS0xMxoDREZXKgJBQTIENDk4MCIgCgNERlcSCjIwMjctMDEtMTMaA0FUTCoCQUEyBDMxNjdqBwgBEgNQVlVyBwgBEgNBVEwaYRIKMjAyNy0wMS0xNyIgCgNBVEwSCjIwMjctMDEtMTcaA0RGVyoCQUEyBDE1NjciHwoDREZXEgoyMDI3LTAxLTE3GgNQVlUqAkFBMgM3NTNqBwgBEgNBVExyBwgBEgNQVlVAAUgBcAGCAQsI____________AZgBAQ",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20ATL%20on%202027-01-13%20through%202027-01-17"
+            },
+            {
+              "outDepFmt": "Wed, Jan 13, 02:24 PM",
+              "retArrFmt": "Mon, Jan 18, 01:53 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI3LTAxLTEzIiAKA1BWVRIKMjAyNy0wMS0xMxoDREZXKgJBQTIENDk4MCIgCgNERlcSCjIwMjctMDEtMTMaA0FUTCoCQUEyBDMxNjdqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNy0wMS0xNyIgCgNBVEwSCjIwMjctMDEtMTcaA0RGVyoCQUEyBDEwNTEiIAoDREZXEgoyMDI3LTAxLTE4GgNQVlUqAkFBMgQ2MzIxagcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20ATL%20on%202027-01-13%20through%202027-01-17"
+            }
+          ]
+        },
+        {
+          "origin": "PVU",
+          "destination": "ATL",
+          "airline": "American Airlines",
+          "price": 285,
+          "points": 22800,
+          "earn": 1425,
           "outDate": "2027-01-20",
           "retDate": "2027-01-24",
           "outDateFmt": "Wed, Jan 20",
@@ -1702,41 +1718,6 @@
               "retArrFmt": "Mon, Feb 08, 01:53 PM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI3LTAyLTAzIiAKA1BWVRIKMjAyNy0wMi0wMxoDREZXKgJBQTIENDk4MCIgCgNERlcSCjIwMjctMDItMDMaA0FUTCoCQUEyBDMxNjdqBwgBEgNQVlVyBwgBEgNBVEwaYhIKMjAyNy0wMi0wNyIgCgNBVEwSCjIwMjctMDItMDcaA0RGVyoCQUEyBDEwNTEiIAoDREZXEgoyMDI3LTAyLTA4GgNQVlUqAkFBMgQ2MzIxagcIARIDQVRMcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20ATL%20on%202027-02-03%20through%202027-02-07"
-            }
-          ]
-        },
-        {
-          "origin": "SLC",
-          "destination": "ATL",
-          "airline": "American Airlines",
-          "price": 307,
-          "points": 24560,
-          "earn": 1535,
-          "outDate": "2027-01-06",
-          "retDate": "2027-01-10",
-          "outDateFmt": "Wed, Jan 06",
-          "retDateFmt": "Sun, Jan 10",
-          "dropPct": 0,
-          "priceDelta": -50,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Wed, Jan 06, 01:33 PM",
-              "retArrFmt": "Sun, Jan 10, 01:02 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDUEhYKgJBQTIENjIyOSIgCgNQSFgSCjIwMjctMDEtMDYaA0FUTCoCQUEyBDIzOTFqBwgBEgNTTENyBwgBEgNBVEwaYhIKMjAyNy0wMS0xMCIgCgNBVEwSCjIwMjctMDEtMTAaA0NMVCoCQUEyBDUyNzMiIAoDQ0xUEgoyMDI3LTAxLTEwGgNTTEMqAkFBMgQyODc4agcIARIDQVRMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ATL%20on%202027-01-06%20through%202027-01-10"
-            },
-            {
-              "outDepFmt": "Wed, Jan 06, 01:33 PM",
-              "retArrFmt": "Sun, Jan 10, 10:38 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDUEhYKgJBQTIENjIyOSIgCgNQSFgSCjIwMjctMDEtMDYaA0FUTCoCQUEyBDIzOTFqBwgBEgNTTENyBwgBEgNBVEwaYhIKMjAyNy0wMS0xMCIgCgNBVEwSCjIwMjctMDEtMTAaA0RGVyoCQUEyBDI3NzAiIAoDREZXEgoyMDI3LTAxLTEwGgNTTEMqAkFBMgQyMTc4agcIARIDQVRMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ATL%20on%202027-01-06%20through%202027-01-10"
-            },
-            {
-              "outDepFmt": "Wed, Jan 06, 01:33 PM",
-              "retArrFmt": "Sun, Jan 10, 12:53 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI3LTAxLTA2IiAKA1NMQxIKMjAyNy0wMS0wNhoDUEhYKgJBQTIENjIyOSIgCgNQSFgSCjIwMjctMDEtMDYaA0FUTCoCQUEyBDIzOTFqBwgBEgNTTENyBwgBEgNBVEwaYhIKMjAyNy0wMS0xMCIgCgNBVEwSCjIwMjctMDEtMTAaA01JQSoCQUEyBDE0NjMiIAoDTUlBEgoyMDI3LTAxLTEwGgNTTEMqAkFBMgQzMjU3agcIARIDQVRMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ATL%20on%202027-01-06%20through%202027-01-10"
             }
           ]
         },
@@ -1885,50 +1866,15 @@
             },
             {
               "outDepFmt": "Wed, Dec 23, 07:57 AM",
-              "retArrFmt": "Thu, Dec 31, 08:54 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTIzIiAKA1NMQxIKMjAyNi0xMi0yMxoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVThphEgoyMDI2LTEyLTMwIh8KA0NVThIKMjAyNi0xMi0zMBoDTEFYKgJETDIDNjE0IiAKA0xBWBIKMjAyNi0xMi0zMRoDU0xDKgJETDIEMjkwNmoHCAESA0NVTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "retArrFmt": "Wed, Dec 30, 08:25 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTIzIiAKA1NMQxIKMjAyNi0xMi0yMxoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVTho_EgoyMDI2LTEyLTMwIh8KA0NVThIKMjAyNi0xMi0zMBoDU0xDKgJETDIDNjQ3agcIARIDQ1VOcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-23%20through%202026-12-30"
             },
             {
               "outDepFmt": "Wed, Dec 23, 07:57 AM",
-              "retArrFmt": "Wed, Dec 30, 08:25 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTIzIiAKA1NMQxIKMjAyNi0xMi0yMxoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVTho_EgoyMDI2LTEyLTMwIh8KA0NVThIKMjAyNi0xMi0zMBoDU0xDKgJETDIDNjQ3agcIARIDQ1VOcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "retArrFmt": "Wed, Dec 30, 04:33 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTIzIiAKA1NMQxIKMjAyNi0xMi0yMxoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVThphEgoyMDI2LTEyLTMwIh8KA0NVThIKMjAyNi0xMi0zMBoDTEFYKgJETDIDNjM3IiAKA0xBWBIKMjAyNi0xMi0zMBoDU0xDKgJETDIEMTY0N2oHCAESA0NVTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-23%20through%202026-12-30"
-            }
-          ]
-        },
-        {
-          "origin": "SLC",
-          "destination": "CUN",
-          "airline": "Delta Air Lines",
-          "price": 651,
-          "points": 52080,
-          "earn": 3255,
-          "outDate": "2026-12-06",
-          "retDate": "2026-12-16",
-          "outDateFmt": "Sun, Dec 06",
-          "retDateFmt": "Wed, Dec 16",
-          "dropPct": 0,
-          "priceDelta": 0,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Sun, Dec 06, 09:25 AM",
-              "retArrFmt": "Wed, Dec 16, 08:16 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTEyLTA2Ih8KA1NMQxIKMjAyNi0xMi0wNhoDQ1VOKgJETDIDNjQ5agcIARIDU0xDcgcIARIDQ1VOGj8SCjIwMjYtMTItMTYiHwoDQ1VOEgoyMDI2LTEyLTE2GgNTTEMqAkRMMgM2NDdqBwgBEgNDVU5yBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-06%20through%202026-12-16"
-            },
-            {
-              "outDepFmt": "Sun, Dec 06, 09:25 AM",
-              "retArrFmt": "Thu, Dec 17, 01:27 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTEyLTA2Ih8KA1NMQxIKMjAyNi0xMi0wNhoDQ1VOKgJETDIDNjQ5agcIARIDU0xDcgcIARIDQ1VOGmASCjIwMjYtMTItMTYiHwoDQ1VOEgoyMDI2LTEyLTE2GgNNRVgqAkFNMgM1NjMiHwoDTUVYEgoyMDI2LTEyLTE3GgNTTEMqAkFNMgM3OTBqBwgBEgNDVU5yBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-06%20through%202026-12-16"
-            },
-            {
-              "outDepFmt": "Sun, Dec 06, 09:25 AM",
-              "retArrFmt": "Thu, Dec 17, 08:44 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAho_EgoyMDI2LTEyLTA2Ih8KA1NMQxIKMjAyNi0xMi0wNhoDQ1VOKgJETDIDNjQ5agcIARIDU0xDcgcIARIDQ1VOGmESCjIwMjYtMTItMTYiHwoDQ1VOEgoyMDI2LTEyLTE2GgNMQVgqAkRMMgM2MTQiIAoDTEFYEgoyMDI2LTEyLTE3GgNTTEMqAkRMMgQyOTA2agcIARIDQ1VOcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-06%20through%202026-12-16"
             }
           ]
         },
@@ -2031,8 +1977,8 @@
             },
             {
               "outDepFmt": "Thu, Dec 31, 07:57 AM",
-              "retArrFmt": "Mon, Jan 11, 09:13 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTMxIiAKA1NMQxIKMjAyNi0xMi0zMRoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVThpiEgoyMDI3LTAxLTEwIiAKA0NVThIKMjAyNy0wMS0xMBoDTVNQKgJETDIEMTkzNCIgCgNNU1ASCjIwMjctMDEtMTEaA1NMQyoCREwyBDI2MjhqBwgBEgNDVU5yBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
+              "retArrFmt": "Sun, Jan 10, 01:20 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTMxIiAKA1NMQxIKMjAyNi0xMi0zMRoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVThpgEgoyMDI3LTAxLTEwIh8KA0NVThIKMjAyNy0wMS0xMBoDTUVYKgJBTTIDNTA1Ih8KA01FWBIKMjAyNy0wMS0xMBoDU0xDKgJBTTIDNzkwagcIARIDQ1VOcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-31%20through%202027-01-10"
             }
           ]
@@ -2063,41 +2009,6 @@
               "retArrFmt": "Sun, Jan 10, 07:10 PM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTEyLTMxIh8KA1NMQxIKMjAyNi0xMi0zMRoDTUVYKgJBTTIDNzkxIh8KA01FWBIKMjAyNy0wMS0wMRoDQ1VOKgJBTTIDNTAwagcIARIDU0xDcgcIARIDQ1VOGkASCjIwMjctMDEtMTAiIAoDQ1VOEgoyMDI3LTAxLTEwGgNTTEMqAkRMMgQxOTMyagcIARIDQ1VOcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-31%20through%202027-01-10"
-            }
-          ]
-        },
-        {
-          "origin": "SLC",
-          "destination": "CUN",
-          "airline": "Delta Air Lines",
-          "price": 655,
-          "points": 52400,
-          "earn": 3275,
-          "outDate": "2026-12-06",
-          "retDate": "2026-12-16",
-          "outDateFmt": "Sun, Dec 06",
-          "retDateFmt": "Wed, Dec 16",
-          "dropPct": 0,
-          "priceDelta": -4,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Sun, Dec 06, 11:35 PM",
-              "retArrFmt": "Wed, Dec 16, 08:16 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA2Ih8KA1NMQxIKMjAyNi0xMi0wNhoDQVRMKgJETDIDOTEyIiAKA0FUTBIKMjAyNi0xMi0wNxoDQ1VOKgJETDIEMTk2NGoHCAESA1NMQ3IHCAESA0NVTho_EgoyMDI2LTEyLTE2Ih8KA0NVThIKMjAyNi0xMi0xNhoDU0xDKgJETDIDNjQ3agcIARIDQ1VOcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-06%20through%202026-12-16"
-            },
-            {
-              "outDepFmt": "Sun, Dec 06, 11:35 PM",
-              "retArrFmt": "Thu, Dec 17, 08:44 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA2Ih8KA1NMQxIKMjAyNi0xMi0wNhoDQVRMKgJETDIDOTEyIiAKA0FUTBIKMjAyNi0xMi0wNxoDQ1VOKgJETDIEMTk2NGoHCAESA1NMQ3IHCAESA0NVThphEgoyMDI2LTEyLTE2Ih8KA0NVThIKMjAyNi0xMi0xNhoDTEFYKgJETDIDNjE0IiAKA0xBWBIKMjAyNi0xMi0xNxoDU0xDKgJETDIEMjkwNmoHCAESA0NVTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-06%20through%202026-12-16"
-            },
-            {
-              "outDepFmt": "Sun, Dec 06, 11:35 PM",
-              "retArrFmt": "Wed, Dec 16, 07:27 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA2Ih8KA1NMQxIKMjAyNi0xMi0wNhoDQVRMKgJETDIDOTEyIiAKA0FUTBIKMjAyNi0xMi0wNxoDQ1VOKgJETDIEMTk2NGoHCAESA1NMQ3IHCAESA0NVThpgEgoyMDI2LTEyLTE2Ih8KA0NVThIKMjAyNi0xMi0xNhoDTUVYKgJBTTIDNTMxIh8KA01FWBIKMjAyNi0xMi0xNhoDU0xDKgJETDIDNjQyagcIARIDQ1VOcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-06%20through%202026-12-16"
             }
           ]
         },
@@ -2178,31 +2089,66 @@
           "price": 655,
           "points": 52400,
           "earn": 3275,
-          "outDate": "2026-12-13",
-          "retDate": "2026-12-20",
-          "outDateFmt": "Sun, Dec 13",
-          "retDateFmt": "Sun, Dec 20",
+          "outDate": "2026-12-12",
+          "retDate": "2026-12-22",
+          "outDateFmt": "Sat, Dec 12",
+          "retDateFmt": "Tue, Dec 22",
           "dropPct": 0,
           "priceDelta": -4,
           "weekendEscape": true,
           "times": [
             {
-              "outDepFmt": "Sun, Dec 13, 07:00 AM",
-              "retArrFmt": "Sun, Dec 20, 06:58 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTEzIh8KA1NMQxIKMjAyNi0xMi0xMxoDQVRMKgJETDIDODk3IiAKA0FUTBIKMjAyNi0xMi0xMxoDQ1VOKgJETDIEMTkzOWoHCAESA1NMQ3IHCAESA0NVThpAEgoyMDI2LTEyLTIwIiAKA0NVThIKMjAyNi0xMi0yMBoDU0xDKgJETDIEMTkzMmoHCAESA0NVTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-13%20through%202026-12-20"
+              "outDepFmt": "Sat, Dec 12, 09:40 PM",
+              "retArrFmt": "Tue, Dec 22, 06:58 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTEyIiAKA1NMQxIKMjAyNi0xMi0xMhoDTEFYKgJETDIEMTE0MiIfCgNMQVgSCjIwMjYtMTItMTMaA0NVTioCREwyAzYxNWoHCAESA1NMQ3IHCAESA0NVThpAEgoyMDI2LTEyLTIyIiAKA0NVThIKMjAyNi0xMi0yMhoDU0xDKgJETDIEMTkzMmoHCAESA0NVTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-12%20through%202026-12-22"
             },
             {
-              "outDepFmt": "Sun, Dec 13, 07:00 AM",
-              "retArrFmt": "Sun, Dec 20, 08:25 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTEzIh8KA1NMQxIKMjAyNi0xMi0xMxoDQVRMKgJETDIDODk3IiAKA0FUTBIKMjAyNi0xMi0xMxoDQ1VOKgJETDIEMTkzOWoHCAESA1NMQ3IHCAESA0NVTho_EgoyMDI2LTEyLTIwIh8KA0NVThIKMjAyNi0xMi0yMBoDU0xDKgJETDIDNjQ3agcIARIDQ1VOcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-13%20through%202026-12-20"
+              "outDepFmt": "Sat, Dec 12, 09:40 PM",
+              "retArrFmt": "Tue, Dec 22, 08:25 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTEyIiAKA1NMQxIKMjAyNi0xMi0xMhoDTEFYKgJETDIEMTE0MiIfCgNMQVgSCjIwMjYtMTItMTMaA0NVTioCREwyAzYxNWoHCAESA1NMQ3IHCAESA0NVTho_EgoyMDI2LTEyLTIyIh8KA0NVThIKMjAyNi0xMi0yMhoDU0xDKgJETDIDNjQ3agcIARIDQ1VOcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-12%20through%202026-12-22"
             },
             {
-              "outDepFmt": "Sun, Dec 13, 07:00 AM",
-              "retArrFmt": "Sun, Dec 20, 03:58 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTEzIh8KA1NMQxIKMjAyNi0xMi0xMxoDQVRMKgJETDIDODk3IiAKA0FUTBIKMjAyNi0xMi0xMxoDQ1VOKgJETDIEMTkzOWoHCAESA1NMQ3IHCAESA0NVThpgEgoyMDI2LTEyLTIwIh8KA0NVThIKMjAyNi0xMi0yMBoDQVRMKgJETDIDNjA5Ih8KA0FUTBIKMjAyNi0xMi0yMBoDU0xDKgJETDIDNDIzagcIARIDQ1VOcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-13%20through%202026-12-20"
+              "outDepFmt": "Sat, Dec 12, 09:40 PM",
+              "retArrFmt": "Tue, Dec 22, 04:33 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTEyIiAKA1NMQxIKMjAyNi0xMi0xMhoDTEFYKgJETDIEMTE0MiIfCgNMQVgSCjIwMjYtMTItMTMaA0NVTioCREwyAzYxNWoHCAESA1NMQ3IHCAESA0NVThphEgoyMDI2LTEyLTIyIh8KA0NVThIKMjAyNi0xMi0yMhoDTEFYKgJETDIDNjM3IiAKA0xBWBIKMjAyNi0xMi0yMhoDU0xDKgJETDIEMTY0N2oHCAESA0NVTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-12%20through%202026-12-22"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "CUN",
+          "airline": "Delta Air Lines",
+          "price": 660,
+          "points": 52800,
+          "earn": 3300,
+          "outDate": "2027-01-04",
+          "retDate": "2027-01-11",
+          "outDateFmt": "Mon, Jan 04",
+          "retDateFmt": "Mon, Jan 11",
+          "dropPct": 0,
+          "priceDelta": -9,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Mon, Jan 04, 08:00 AM",
+              "retArrFmt": "Mon, Jan 11, 07:10 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA0IiAKA1NMQxIKMjAyNy0wMS0wNBoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVThpAEgoyMDI3LTAxLTExIiAKA0NVThIKMjAyNy0wMS0xMRoDU0xDKgJETDIEMTkzMmoHCAESA0NVTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202027-01-04%20through%202027-01-11"
+            },
+            {
+              "outDepFmt": "Mon, Jan 04, 08:00 AM",
+              "retArrFmt": "Mon, Jan 11, 08:33 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA0IiAKA1NMQxIKMjAyNy0wMS0wNBoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVTho_EgoyMDI3LTAxLTExIh8KA0NVThIKMjAyNy0wMS0xMRoDU0xDKgJETDIDNjQ3agcIARIDQ1VOcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202027-01-04%20through%202027-01-11"
+            },
+            {
+              "outDepFmt": "Mon, Jan 04, 08:00 AM",
+              "retArrFmt": "Tue, Jan 12, 09:13 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA0IiAKA1NMQxIKMjAyNy0wMS0wNBoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVThpiEgoyMDI3LTAxLTExIiAKA0NVThIKMjAyNy0wMS0xMRoDTVNQKgJETDIEMTkzNCIgCgNNU1ASCjIwMjctMDEtMTIaA1NMQyoCREwyBDI2MjhqBwgBEgNDVU5yBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202027-01-04%20through%202027-01-11"
             }
           ]
         },
@@ -2235,9 +2181,44 @@
             },
             {
               "outDepFmt": "Fri, Jan 01, 07:57 AM",
-              "retArrFmt": "Tue, Jan 12, 10:33 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTAxIiAKA1NMQxIKMjAyNy0wMS0wMRoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVThphEgoyMDI3LTAxLTExIh8KA0NVThIKMjAyNy0wMS0xMRoDTEFYKgJETDIDNjE0IiAKA0xBWBIKMjAyNy0wMS0xMhoDU0xDKgJETDIEMjkwNmoHCAESA0NVTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "retArrFmt": "Tue, Jan 12, 09:13 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTAxIiAKA1NMQxIKMjAyNy0wMS0wMRoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVThpiEgoyMDI3LTAxLTExIiAKA0NVThIKMjAyNy0wMS0xMRoDTVNQKgJETDIEMTkzNCIgCgNNU1ASCjIwMjctMDEtMTIaA1NMQyoCREwyBDI2MjhqBwgBEgNDVU5yBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202027-01-01%20through%202027-01-11"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "CUN",
+          "airline": "Delta Air Lines",
+          "price": 660,
+          "points": 52800,
+          "earn": 3300,
+          "outDate": "2027-01-04",
+          "retDate": "2027-01-14",
+          "outDateFmt": "Mon, Jan 04",
+          "retDateFmt": "Thu, Jan 14",
+          "dropPct": 0,
+          "priceDelta": -9,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Mon, Jan 04, 08:00 AM",
+              "retArrFmt": "Thu, Jan 14, 07:10 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA0IiAKA1NMQxIKMjAyNy0wMS0wNBoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVThpAEgoyMDI3LTAxLTE0IiAKA0NVThIKMjAyNy0wMS0xNBoDU0xDKgJETDIEMTkzMmoHCAESA0NVTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202027-01-04%20through%202027-01-14"
+            },
+            {
+              "outDepFmt": "Mon, Jan 04, 08:00 AM",
+              "retArrFmt": "Thu, Jan 14, 08:33 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA0IiAKA1NMQxIKMjAyNy0wMS0wNBoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVTho_EgoyMDI3LTAxLTE0Ih8KA0NVThIKMjAyNy0wMS0xNBoDU0xDKgJETDIDNjQ3agcIARIDQ1VOcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202027-01-04%20through%202027-01-14"
+            },
+            {
+              "outDepFmt": "Mon, Jan 04, 08:00 AM",
+              "retArrFmt": "Fri, Jan 15, 10:33 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI3LTAxLTA0IiAKA1NMQxIKMjAyNy0wMS0wNBoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVThphEgoyMDI3LTAxLTE0Ih8KA0NVThIKMjAyNy0wMS0xNBoDTEFYKgJETDIDNjE0IiAKA0xBWBIKMjAyNy0wMS0xNRoDU0xDKgJETDIEMjkwNmoHCAESA0NVTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202027-01-04%20through%202027-01-14"
             }
           ]
         },
@@ -2283,6 +2264,41 @@
           "price": 661,
           "points": 52880,
           "earn": 3305,
+          "outDate": "2026-12-30",
+          "retDate": "2027-01-06",
+          "outDateFmt": "Wed, Dec 30",
+          "retDateFmt": "Wed, Jan 06",
+          "dropPct": 0,
+          "priceDelta": -10,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Wed, Dec 30, 07:57 AM",
+              "retArrFmt": "Wed, Jan 06, 10:04 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTMwIiAKA1NMQxIKMjAyNi0xMi0zMBoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVThpgEgoyMDI3LTAxLTA2Ih8KA0NVThIKMjAyNy0wMS0wNhoDTUlBKgJBTTIDNDI2Ih8KA01JQRIKMjAyNy0wMS0wNhoDU0xDKgJETDIDNjUyagcIARIDQ1VOcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-30%20through%202027-01-06"
+            },
+            {
+              "outDepFmt": "Wed, Dec 30, 07:57 AM",
+              "retArrFmt": "Thu, Jan 07, 09:13 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTMwIiAKA1NMQxIKMjAyNi0xMi0zMBoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVThpiEgoyMDI3LTAxLTA2IiAKA0NVThIKMjAyNy0wMS0wNhoDTVNQKgJETDIEMTkzNCIgCgNNU1ASCjIwMjctMDEtMDcaA1NMQyoCREwyBDI2MjhqBwgBEgNDVU5yBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-30%20through%202027-01-06"
+            },
+            {
+              "outDepFmt": "Wed, Dec 30, 07:57 AM",
+              "retArrFmt": "Wed, Jan 06, 08:09 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTMwIiAKA1NMQxIKMjAyNi0xMi0zMBoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVThpiEgoyMDI3LTAxLTA2IiAKA0NVThIKMjAyNy0wMS0wNhoDQVVTKgJETDIEMjQ5OSIgCgNBVVMSCjIwMjctMDEtMDYaA1NMQyoCREwyBDI1ODFqBwgBEgNDVU5yBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-30%20through%202027-01-06"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "CUN",
+          "airline": "Delta Air Lines",
+          "price": 661,
+          "points": 52880,
+          "earn": 3305,
           "outDate": "2026-12-31",
           "retDate": "2027-01-07",
           "outDateFmt": "Thu, Dec 31",
@@ -2307,35 +2323,6 @@
               "outDepFmt": "Thu, Dec 31, 07:57 AM",
               "retArrFmt": "Thu, Jan 07, 07:10 PM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpAEgoyMDI2LTEyLTMxIiAKA1NMQxIKMjAyNi0xMi0zMRoDQ1VOKgJETDIEMTkzM2oHCAESA1NMQ3IHCAESA0NVThpAEgoyMDI3LTAxLTA3IiAKA0NVThIKMjAyNy0wMS0wNxoDU0xDKgJETDIEMTkzMmoHCAESA0NVTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-31%20through%202027-01-07"
-            }
-          ]
-        },
-        {
-          "origin": "SLC",
-          "destination": "CUN",
-          "airline": "AeroMexico",
-          "price": 661,
-          "points": 52880,
-          "earn": 3305,
-          "outDate": "2026-12-31",
-          "retDate": "2027-01-07",
-          "outDateFmt": "Thu, Dec 31",
-          "retDateFmt": "Thu, Jan 07",
-          "dropPct": 0,
-          "priceDelta": -10,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Thu, Dec 31, 03:20 PM",
-              "retArrFmt": "Thu, Jan 07, 10:04 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTEyLTMxIh8KA1NMQxIKMjAyNi0xMi0zMRoDTUVYKgJBTTIDNzkxIh8KA01FWBIKMjAyNy0wMS0wMRoDQ1VOKgJBTTIDNTAwagcIARIDU0xDcgcIARIDQ1VOGmASCjIwMjctMDEtMDciHwoDQ1VOEgoyMDI3LTAxLTA3GgNNSUEqAkFNMgM0MjYiHwoDTUlBEgoyMDI3LTAxLTA3GgNTTEMqAkRMMgM2NTJqBwgBEgNDVU5yBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-31%20through%202027-01-07"
-            },
-            {
-              "outDepFmt": "Thu, Dec 31, 03:20 PM",
-              "retArrFmt": "Thu, Jan 07, 07:10 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTEyLTMxIh8KA1NMQxIKMjAyNi0xMi0zMRoDTUVYKgJBTTIDNzkxIh8KA01FWBIKMjAyNy0wMS0wMRoDQ1VOKgJBTTIDNTAwagcIARIDU0xDcgcIARIDQ1VOGkASCjIwMjctMDEtMDciIAoDQ1VOEgoyMDI3LTAxLTA3GgNTTEMqAkRMMgQxOTMyagcIARIDQ1VOcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20CUN%20on%202026-12-31%20through%202027-01-07"
             }
           ]
@@ -2391,21 +2378,21 @@
           "weekendEscape": true,
           "times": [
             {
-              "outDepFmt": "Mon, Dec 07, 06:45 AM",
+              "outDepFmt": "Mon, Dec 07, 04:38 PM",
               "retArrFmt": "Thu, Dec 17, 10:35 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMTItMDcaA1NBTCoCVUEyBDEyOTBqBwgBEgNTTENyBwgBEgNTQUwaYhIKMjAyNi0xMi0xNyIgCgNTQUwSCjIwMjYtMTItMTcaA0lBSCoCVUEyBDE0NjgiIAoDSUFIEgoyMDI2LTEyLTE3GgNTTEMqAlVBMgQyMTU3agcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDSUFIKgJVQTIENTc5NCIfCgNJQUgSCjIwMjYtMTItMDcaA1NBTCoCVUEyAzc0MmoHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE3IiAKA1NBTBIKMjAyNi0xMi0xNxoDSUFIKgJVQTIEMTQ2OCIgCgNJQUgSCjIwMjYtMTItMTcaA1NMQyoCVUEyBDIxNTdqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-07%20through%202026-12-17"
             },
             {
-              "outDepFmt": "Mon, Dec 07, 06:45 AM",
+              "outDepFmt": "Mon, Dec 07, 04:38 PM",
               "retArrFmt": "Thu, Dec 17, 10:05 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMTItMDcaA1NBTCoCVUEyBDEyOTBqBwgBEgNTTENyBwgBEgNTQUwaYhIKMjAyNi0xMi0xNyIgCgNTQUwSCjIwMjYtMTItMTcaA0lBSCoCVUEyBDIyMDMiIAoDSUFIEgoyMDI2LTEyLTE3GgNTTEMqAlVBMgQxMTgyagcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDSUFIKgJVQTIENTc5NCIfCgNJQUgSCjIwMjYtMTItMDcaA1NBTCoCVUEyAzc0MmoHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE3IiAKA1NBTBIKMjAyNi0xMi0xNxoDSUFIKgJVQTIEMjIwMyIgCgNJQUgSCjIwMjYtMTItMTcaA1NMQyoCVUEyBDExODJqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-07%20through%202026-12-17"
             },
             {
-              "outDepFmt": "Mon, Dec 07, 06:45 AM",
+              "outDepFmt": "Mon, Dec 07, 04:38 PM",
               "retArrFmt": "Thu, Dec 17, 12:22 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMTItMDcaA1NBTCoCVUEyBDEyOTBqBwgBEgNTTENyBwgBEgNTQUwaYhIKMjAyNi0xMi0xNyIgCgNTQUwSCjIwMjYtMTItMTcaA0xBWCoCVUEyBDE2NzAiIAoDTEFYEgoyMDI2LTEyLTE3GgNTTEMqAlVBMgQ0NjI5agcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDSUFIKgJVQTIENTc5NCIfCgNJQUgSCjIwMjYtMTItMDcaA1NBTCoCVUEyAzc0MmoHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE3IiAKA1NBTBIKMjAyNi0xMi0xNxoDTEFYKgJVQTIEMTY3MCIgCgNMQVgSCjIwMjYtMTItMTcaA1NMQyoCVUEyBDQ2MjlqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-07%20through%202026-12-17"
             }
           ]
@@ -2461,21 +2448,21 @@
           "weekendEscape": true,
           "times": [
             {
-              "outDepFmt": "Tue, Dec 08, 01:14 PM",
+              "outDepFmt": "Tue, Dec 08, 04:38 PM",
+              "retArrFmt": "Tue, Dec 15, 10:41 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4IiAKA1NMQxIKMjAyNi0xMi0wOBoDSUFIKgJVQTIENTc5NCIfCgNJQUgSCjIwMjYtMTItMDgaA1NBTCoCVUEyAzc0MmoHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE1IiAKA1NBTBIKMjAyNi0xMi0xNRoDSUFIKgJVQTIEMTQ2OCIgCgNJQUgSCjIwMjYtMTItMTUaA1NMQyoCVUEyBDIxNTdqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-08%20through%202026-12-15"
+            },
+            {
+              "outDepFmt": "Tue, Dec 08, 04:38 PM",
               "retArrFmt": "Tue, Dec 15, 12:12 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4Ih8KA1NMQxIKMjAyNi0xMi0wOBoDSUFIKgJVQTIDNDk3IiAKA0lBSBIKMjAyNi0xMi0wOBoDU0FMKgJVQTIEMTQ2MWoHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE1IiAKA1NBTBIKMjAyNi0xMi0xNRoDSUFIKgJVQTIEMjIwMyIgCgNJQUgSCjIwMjYtMTItMTUaA1NMQyoCVUEyBDIyNDJqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4IiAKA1NMQxIKMjAyNi0xMi0wOBoDSUFIKgJVQTIENTc5NCIfCgNJQUgSCjIwMjYtMTItMDgaA1NBTCoCVUEyAzc0MmoHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE1IiAKA1NBTBIKMjAyNi0xMi0xNRoDSUFIKgJVQTIEMjIwMyIgCgNJQUgSCjIwMjYtMTItMTUaA1NMQyoCVUEyBDIyNDJqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-08%20through%202026-12-15"
             },
             {
-              "outDepFmt": "Tue, Dec 08, 01:14 PM",
+              "outDepFmt": "Tue, Dec 08, 04:38 PM",
               "retArrFmt": "Tue, Dec 15, 01:32 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4Ih8KA1NMQxIKMjAyNi0xMi0wOBoDSUFIKgJVQTIDNDk3IiAKA0lBSBIKMjAyNi0xMi0wOBoDU0FMKgJVQTIEMTQ2MWoHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE1IiAKA1NBTBIKMjAyNi0xMi0xNRoDTEFYKgJVQTIEMTY3MCIgCgNMQVgSCjIwMjYtMTItMTUaA1NMQyoCVUEyBDUyNDdqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-08%20through%202026-12-15"
-            },
-            {
-              "outDepFmt": "Tue, Dec 08, 01:14 PM",
-              "retArrFmt": "Tue, Dec 15, 03:03 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4Ih8KA1NMQxIKMjAyNi0xMi0wOBoDSUFIKgJVQTIDNDk3IiAKA0lBSBIKMjAyNi0xMi0wOBoDU0FMKgJVQTIEMTQ2MWoHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE1IiAKA1NBTBIKMjAyNi0xMi0xNRoDSUFIKgJVQTIEMTQ2NyIgCgNJQUgSCjIwMjYtMTItMTUaA1NMQyoCVUEyBDU1MzZqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4IiAKA1NMQxIKMjAyNi0xMi0wOBoDSUFIKgJVQTIENTc5NCIfCgNJQUgSCjIwMjYtMTItMDgaA1NBTCoCVUEyAzc0MmoHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE1IiAKA1NBTBIKMjAyNi0xMi0xNRoDTEFYKgJVQTIEMTY3MCIgCgNMQVgSCjIwMjYtMTItMTUaA1NMQyoCVUEyBDUyNDdqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-08%20through%202026-12-15"
             }
           ]
@@ -2577,15 +2564,50 @@
           "origin": "SLC",
           "destination": "SAL",
           "airline": "United Airlines",
-          "price": 772,
-          "points": 61760,
-          "earn": 3860,
+          "price": 768,
+          "points": 61440,
+          "earn": 3840,
           "outDate": "2026-12-07",
           "retDate": "2026-12-17",
           "outDateFmt": "Mon, Dec 07",
           "retDateFmt": "Thu, Dec 17",
           "dropPct": 0,
-          "priceDelta": -29,
+          "priceDelta": -25,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Mon, Dec 07, 06:45 AM",
+              "retArrFmt": "Thu, Dec 17, 10:35 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMTItMDcaA1NBTCoCVUEyBDEyOTBqBwgBEgNTTENyBwgBEgNTQUwaYhIKMjAyNi0xMi0xNyIgCgNTQUwSCjIwMjYtMTItMTcaA0lBSCoCVUEyBDE0NjgiIAoDSUFIEgoyMDI2LTEyLTE3GgNTTEMqAlVBMgQyMTU3agcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-07%20through%202026-12-17"
+            },
+            {
+              "outDepFmt": "Mon, Dec 07, 06:45 AM",
+              "retArrFmt": "Thu, Dec 17, 10:05 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMTItMDcaA1NBTCoCVUEyBDEyOTBqBwgBEgNTTENyBwgBEgNTQUwaYhIKMjAyNi0xMi0xNyIgCgNTQUwSCjIwMjYtMTItMTcaA0lBSCoCVUEyBDIyMDMiIAoDSUFIEgoyMDI2LTEyLTE3GgNTTEMqAlVBMgQxMTgyagcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-07%20through%202026-12-17"
+            },
+            {
+              "outDepFmt": "Mon, Dec 07, 06:45 AM",
+              "retArrFmt": "Thu, Dec 17, 12:22 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMTItMDcaA1NBTCoCVUEyBDEyOTBqBwgBEgNTTENyBwgBEgNTQUwaYhIKMjAyNi0xMi0xNyIgCgNTQUwSCjIwMjYtMTItMTcaA0xBWCoCVUEyBDE2NzAiIAoDTEFYEgoyMDI2LTEyLTE3GgNTTEMqAlVBMgQ0NjI5agcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-07%20through%202026-12-17"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "SAL",
+          "airline": "United Airlines",
+          "price": 779,
+          "points": 62320,
+          "earn": 3895,
+          "outDate": "2026-12-07",
+          "retDate": "2026-12-17",
+          "outDateFmt": "Mon, Dec 07",
+          "retDateFmt": "Thu, Dec 17",
+          "dropPct": 0,
+          "priceDelta": -36,
           "weekendEscape": true,
           "times": [
             {
@@ -2605,41 +2627,6 @@
               "retArrFmt": "Thu, Dec 17, 12:22 PM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3Ih8KA1NMQxIKMjAyNi0xMi0wNxoDSUFIKgJVQTIDNDk3IiAKA0lBSBIKMjAyNi0xMi0wNxoDU0FMKgJVQTIEMTQ2MWoHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE3IiAKA1NBTBIKMjAyNi0xMi0xNxoDTEFYKgJVQTIEMTY3MCIgCgNMQVgSCjIwMjYtMTItMTcaA1NMQyoCVUEyBDQ2MjlqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-07%20through%202026-12-17"
-            }
-          ]
-        },
-        {
-          "origin": "SLC",
-          "destination": "SAL",
-          "airline": "United Airlines",
-          "price": 772,
-          "points": 61760,
-          "earn": 3860,
-          "outDate": "2026-12-07",
-          "retDate": "2026-12-14",
-          "outDateFmt": "Mon, Dec 07",
-          "retDateFmt": "Mon, Dec 14",
-          "dropPct": 0,
-          "priceDelta": -29,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Mon, Dec 07, 01:14 PM",
-              "retArrFmt": "Mon, Dec 14, 12:12 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3Ih8KA1NMQxIKMjAyNi0xMi0wNxoDSUFIKgJVQTIDNDk3IiAKA0lBSBIKMjAyNi0xMi0wNxoDU0FMKgJVQTIEMTQ2MWoHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE0IiAKA1NBTBIKMjAyNi0xMi0xNBoDSUFIKgJVQTIEMjIwMyIgCgNJQUgSCjIwMjYtMTItMTQaA1NMQyoCVUEyBDIyNDJqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-07%20through%202026-12-14"
-            },
-            {
-              "outDepFmt": "Mon, Dec 07, 01:14 PM",
-              "retArrFmt": "Mon, Dec 14, 01:29 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3Ih8KA1NMQxIKMjAyNi0xMi0wNxoDSUFIKgJVQTIDNDk3IiAKA0lBSBIKMjAyNi0xMi0wNxoDU0FMKgJVQTIEMTQ2MWoHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE0IiAKA1NBTBIKMjAyNi0xMi0xNBoDTEFYKgJVQTIEMTY3MCIgCgNMQVgSCjIwMjYtMTItMTQaA1NMQyoCVUEyBDI4MTdqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-07%20through%202026-12-14"
-            },
-            {
-              "outDepFmt": "Mon, Dec 07, 01:14 PM",
-              "retArrFmt": "Mon, Dec 14, 03:03 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3Ih8KA1NMQxIKMjAyNi0xMi0wNxoDSUFIKgJVQTIDNDk3IiAKA0lBSBIKMjAyNi0xMi0wNxoDU0FMKgJVQTIEMTQ2MWoHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE0IiAKA1NBTBIKMjAyNi0xMi0xNBoDSUFIKgJVQTIEMTQ2NyIgCgNJQUgSCjIwMjYtMTItMTQaA1NMQyoCVUEyBDU1MzZqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-07%20through%202026-12-14"
             }
           ]
         },
@@ -2669,41 +2656,6 @@
               "retArrFmt": "Mon, Dec 14, 11:49 PM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDTUlBKgJBQTIEMTk0MyIfCgNNSUESCjIwMjYtMTItMDgaA1NBTCoCQUEyAzMyN2oHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE0IiAKA1NBTBIKMjAyNi0xMi0xNBoDREZXKgJBQTIEMTEwNCIgCgNERlcSCjIwMjYtMTItMTQaA1NMQyoCQUEyBDI1MDdqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-07%20through%202026-12-14"
-            }
-          ]
-        },
-        {
-          "origin": "SLC",
-          "destination": "SAL",
-          "airline": "United Airlines",
-          "price": 787,
-          "points": 62960,
-          "earn": 3935,
-          "outDate": "2026-12-06",
-          "retDate": "2026-12-16",
-          "outDateFmt": "Sun, Dec 06",
-          "retDateFmt": "Wed, Dec 16",
-          "dropPct": 0,
-          "priceDelta": -44,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Sun, Dec 06, 06:45 AM",
-              "retArrFmt": "Wed, Dec 16, 03:03 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEyLTA2IiAKA1NMQxIKMjAyNi0xMi0wNhoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMTItMDYaA1NBTCoCVUEyBDEyOTBqBwgBEgNTTENyBwgBEgNTQUwaYhIKMjAyNi0xMi0xNiIgCgNTQUwSCjIwMjYtMTItMTYaA0lBSCoCVUEyBDE0NjciIAoDSUFIEgoyMDI2LTEyLTE2GgNTTEMqAlVBMgQ1NTM2agcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-06%20through%202026-12-16"
-            },
-            {
-              "outDepFmt": "Sun, Dec 06, 06:45 AM",
-              "retArrFmt": "Wed, Dec 16, 10:39 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEyLTA2IiAKA1NMQxIKMjAyNi0xMi0wNhoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMTItMDYaA1NBTCoCVUEyBDEyOTBqBwgBEgNTTENyBwgBEgNTQUwaYhIKMjAyNi0xMi0xNiIgCgNTQUwSCjIwMjYtMTItMTYaA0lBSCoCVUEyBDE0NjgiIAoDSUFIEgoyMDI2LTEyLTE2GgNTTEMqAlVBMgQyMTU3agcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-06%20through%202026-12-16"
-            },
-            {
-              "outDepFmt": "Sun, Dec 06, 06:45 AM",
-              "retArrFmt": "Wed, Dec 16, 12:12 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEyLTA2IiAKA1NMQxIKMjAyNi0xMi0wNhoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMTItMDYaA1NBTCoCVUEyBDEyOTBqBwgBEgNTTENyBwgBEgNTQUwaYhIKMjAyNi0xMi0xNiIgCgNTQUwSCjIwMjYtMTItMTYaA0lBSCoCVUEyBDIyMDMiIAoDSUFIEgoyMDI2LTEyLTE2GgNTTEMqAlVBMgQyMjQyagcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-06%20through%202026-12-16"
             }
           ]
         },
@@ -2781,34 +2733,34 @@
           "origin": "SLC",
           "destination": "SAL",
           "airline": "United Airlines",
-          "price": 787,
-          "points": 62960,
-          "earn": 3935,
-          "outDate": "2026-12-10",
-          "retDate": "2026-12-20",
-          "outDateFmt": "Thu, Dec 10",
-          "retDateFmt": "Sun, Dec 20",
+          "price": 797,
+          "points": 63760,
+          "earn": 3985,
+          "outDate": "2026-12-08",
+          "retDate": "2026-12-18",
+          "outDateFmt": "Tue, Dec 08",
+          "retDateFmt": "Fri, Dec 18",
           "dropPct": 0,
-          "priceDelta": -44,
+          "priceDelta": -54,
           "weekendEscape": true,
           "times": [
             {
-              "outDepFmt": "Thu, Dec 10, 06:45 AM",
-              "retArrFmt": "Sun, Dec 20, 10:05 AM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEyLTEwIiAKA1NMQxIKMjAyNi0xMi0xMBoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMTItMTAaA1NBTCoCVUEyBDE0NjFqBwgBEgNTTENyBwgBEgNTQUwaYhIKMjAyNi0xMi0yMCIgCgNTQUwSCjIwMjYtMTItMjAaA0lBSCoCVUEyBDIyMDMiIAoDSUFIEgoyMDI2LTEyLTIwGgNTTEMqAlVBMgQxMTgyagcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-10%20through%202026-12-20"
+              "outDepFmt": "Tue, Dec 08, 01:14 PM",
+              "retArrFmt": "Fri, Dec 18, 10:05 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4Ih8KA1NMQxIKMjAyNi0xMi0wOBoDSUFIKgJVQTIDNDk3IiAKA0lBSBIKMjAyNi0xMi0wOBoDU0FMKgJVQTIEMTQ2MWoHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE4IiAKA1NBTBIKMjAyNi0xMi0xOBoDSUFIKgJVQTIEMjIwMyIgCgNJQUgSCjIwMjYtMTItMTgaA1NMQyoCVUEyBDExODJqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-08%20through%202026-12-18"
             },
             {
-              "outDepFmt": "Thu, Dec 10, 06:45 AM",
-              "retArrFmt": "Sun, Dec 20, 10:35 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEyLTEwIiAKA1NMQxIKMjAyNi0xMi0xMBoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMTItMTAaA1NBTCoCVUEyBDE0NjFqBwgBEgNTTENyBwgBEgNTQUwaYhIKMjAyNi0xMi0yMCIgCgNTQUwSCjIwMjYtMTItMjAaA0lBSCoCVUEyBDE0NjgiIAoDSUFIEgoyMDI2LTEyLTIwGgNTTEMqAlVBMgQyMTU3agcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-10%20through%202026-12-20"
+              "outDepFmt": "Tue, Dec 08, 01:14 PM",
+              "retArrFmt": "Fri, Dec 18, 12:22 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4Ih8KA1NMQxIKMjAyNi0xMi0wOBoDSUFIKgJVQTIDNDk3IiAKA0lBSBIKMjAyNi0xMi0wOBoDU0FMKgJVQTIEMTQ2MWoHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE4IiAKA1NBTBIKMjAyNi0xMi0xOBoDTEFYKgJVQTIEMTY3MCIgCgNMQVgSCjIwMjYtMTItMTgaA1NMQyoCVUEyBDQ2MjlqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-08%20through%202026-12-18"
             },
             {
-              "outDepFmt": "Thu, Dec 10, 06:45 AM",
-              "retArrFmt": "Sun, Dec 20, 03:01 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEyLTEwIiAKA1NMQxIKMjAyNi0xMi0xMBoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMTItMTAaA1NBTCoCVUEyBDE0NjFqBwgBEgNTTENyBwgBEgNTQUwaYhIKMjAyNi0xMi0yMCIgCgNTQUwSCjIwMjYtMTItMjAaA0lBSCoCVUEyBDE0NjciIAoDSUFIEgoyMDI2LTEyLTIwGgNTTEMqAlVBMgQ2MjA2agcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-10%20through%202026-12-20"
+              "outDepFmt": "Tue, Dec 08, 01:14 PM",
+              "retArrFmt": "Sat, Dec 19, 10:05 AM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4Ih8KA1NMQxIKMjAyNi0xMi0wOBoDSUFIKgJVQTIDNDk3IiAKA0lBSBIKMjAyNi0xMi0wOBoDU0FMKgJVQTIEMTQ2MWoHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE4IiAKA1NBTBIKMjAyNi0xMi0xOBoDSUFIKgJVQTIEMTEzMCIgCgNJQUgSCjIwMjYtMTItMTkaA1NMQyoCVUEyBDExODJqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-08%20through%202026-12-18"
             }
           ]
         },
@@ -2816,22 +2768,63 @@
           "origin": "SLC",
           "destination": "SAL",
           "airline": "American Airlines",
-          "price": 788,
-          "points": 63040,
-          "earn": 3940,
-          "outDate": "2026-12-06",
-          "retDate": "2026-12-16",
-          "outDateFmt": "Sun, Dec 06",
-          "retDateFmt": "Wed, Dec 16",
+          "price": 812,
+          "points": 64960,
+          "earn": 4060,
+          "outDate": "2026-12-07",
+          "retDate": "2026-12-14",
+          "outDateFmt": "Mon, Dec 07",
+          "retDateFmt": "Mon, Dec 14",
           "dropPct": 0,
-          "priceDelta": -45,
+          "priceDelta": -69,
           "weekendEscape": true,
           "times": [
             {
-              "outDepFmt": "Sun, Dec 06, 11:40 PM",
-              "retArrFmt": "Thu, Dec 17, 12:53 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA2IiAKA1NMQxIKMjAyNi0xMi0wNhoDTUlBKgJBQTIEMTk0MyIfCgNNSUESCjIwMjYtMTItMDcaA1NBTCoCQUEyAzMyN2oHCAESA1NMQ3IHCAESA1NBTBpiEgoyMDI2LTEyLTE2IiAKA1NBTBIKMjAyNi0xMi0xNhoDTUlBKgJBQTIEMjM4NCIgCgNNSUESCjIwMjYtMTItMTcaA1NMQyoCQUEyBDMwNzBqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-06%20through%202026-12-16"
+              "outDepFmt": "Mon, Dec 07, 05:00 AM",
+              "retArrFmt": "Mon, Dec 14, 11:19 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDREZXKgJBQTIEMjE5NSIgCgNERlcSCjIwMjYtMTItMDcaA1NBTCoCQUEyBDEwMzVqBwgBEgNTTENyBwgBEgNTQUwaYRIKMjAyNi0xMi0xNCIfCgNTQUwSCjIwMjYtMTItMTQaA01JQSoCQUEyAzMwNCIgCgNNSUESCjIwMjYtMTItMTQaA1NMQyoCQUEyBDI5MjJqBwgBEgNTQUxyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-07%20through%202026-12-14"
+            },
+            {
+              "outDepFmt": "Mon, Dec 07, 05:00 AM",
+              "retArrFmt": "Mon, Dec 14, 11:49 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDREZXKgJBQTIEMjE5NSIgCgNERlcSCjIwMjYtMTItMDcaA1NBTCoCQUEyBDEwMzVqBwgBEgNTTENyBwgBEgNTQUwaYhIKMjAyNi0xMi0xNCIgCgNTQUwSCjIwMjYtMTItMTQaA0RGVyoCQUEyBDExMDQiIAoDREZXEgoyMDI2LTEyLTE0GgNTTEMqAkFBMgQyNTA3agcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-07%20through%202026-12-14"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "SAL",
+          "airline": "United Airlines",
+          "price": 854,
+          "points": 68320,
+          "earn": 4270,
+          "outDate": "2026-12-08",
+          "retDate": "2026-12-15",
+          "outDateFmt": "Tue, Dec 08",
+          "retDateFmt": "Tue, Dec 15",
+          "dropPct": 0,
+          "priceDelta": -111,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Tue, Dec 08, 06:45 AM",
+              "retArrFmt": "Tue, Dec 15, 10:41 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEyLTA4IiAKA1NMQxIKMjAyNi0xMi0wOBoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMTItMDgaA1NBTCoCVUEyBDEyOTBqBwgBEgNTTENyBwgBEgNTQUwaYhIKMjAyNi0xMi0xNSIgCgNTQUwSCjIwMjYtMTItMTUaA0lBSCoCVUEyBDE0NjgiIAoDSUFIEgoyMDI2LTEyLTE1GgNTTEMqAlVBMgQyMTU3agcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-08%20through%202026-12-15"
+            },
+            {
+              "outDepFmt": "Tue, Dec 08, 06:45 AM",
+              "retArrFmt": "Tue, Dec 15, 12:12 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEyLTA4IiAKA1NMQxIKMjAyNi0xMi0wOBoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMTItMDgaA1NBTCoCVUEyBDEyOTBqBwgBEgNTTENyBwgBEgNTQUwaYhIKMjAyNi0xMi0xNSIgCgNTQUwSCjIwMjYtMTItMTUaA0lBSCoCVUEyBDIyMDMiIAoDSUFIEgoyMDI2LTEyLTE1GgNTTEMqAlVBMgQyMjQyagcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-08%20through%202026-12-15"
+            },
+            {
+              "outDepFmt": "Tue, Dec 08, 06:45 AM",
+              "retArrFmt": "Tue, Dec 15, 01:32 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpiEgoyMDI2LTEyLTA4IiAKA1NMQxIKMjAyNi0xMi0wOBoDSUFIKgJVQTIEMjM2NiIgCgNJQUgSCjIwMjYtMTItMDgaA1NBTCoCVUEyBDEyOTBqBwgBEgNTTENyBwgBEgNTQUwaYhIKMjAyNi0xMi0xNSIgCgNTQUwSCjIwMjYtMTItMTUaA0xBWCoCVUEyBDE2NzAiIAoDTEFYEgoyMDI2LTEyLTE1GgNTTEMqAlVBMgQ1MjQ3agcIARIDU0FMcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20SAL%20on%202026-12-08%20through%202026-12-15"
             }
           ]
         }
@@ -2858,41 +2851,6 @@
     "Japan": {
       "groups": [
         {
-          "origin": "SLC",
-          "destination": "HND",
-          "airline": "American Airlines",
-          "price": 946,
-          "points": 75680,
-          "earn": 4730,
-          "outDate": "2026-12-08",
-          "retDate": "2026-12-15",
-          "outDateFmt": "Tue, Dec 08",
-          "retDateFmt": "Tue, Dec 15",
-          "dropPct": 1,
-          "priceDelta": 0,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Tue, Dec 08, 08:25 AM",
-              "retArrFmt": "Tue, Dec 15, 10:02 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4IiAKA1NMQxIKMjAyNi0xMi0wOBoDREZXKgJBQTIEMjA2NiIfCgNERlcSCjIwMjYtMTItMDgaA0hORCoCQUEyAzE3NWoHCAESA1NMQ3IHCAESA0hORBphEgoyMDI2LTEyLTE1Ih8KA0hORBIKMjAyNi0xMi0xNRoDREZXKgJBQTIDMTc2IiAKA0RGVxIKMjAyNi0xMi0xNRoDU0xDKgJBQTIEMTY4M2oHCAESA0hORHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-08%20through%202026-12-15"
-            },
-            {
-              "outDepFmt": "Tue, Dec 08, 08:25 AM",
-              "retArrFmt": "Tue, Dec 15, 04:37 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4IiAKA1NMQxIKMjAyNi0xMi0wOBoDREZXKgJBQTIEMjA2NiIfCgNERlcSCjIwMjYtMTItMDgaA0hORCoCQUEyAzE3NWoHCAESA1NMQ3IHCAESA0hORBpgEgoyMDI2LTEyLTE1Ih4KA0hORBIKMjAyNi0xMi0xNRoDT1JEKgJKTDICMTAiIAoDT1JEEgoyMDI2LTEyLTE1GgNTTEMqAkFBMgQyNTcwagcIARIDSE5EcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-08%20through%202026-12-15"
-            },
-            {
-              "outDepFmt": "Tue, Dec 08, 08:25 AM",
-              "retArrFmt": "Tue, Dec 15, 01:04 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4IiAKA1NMQxIKMjAyNi0xMi0wOBoDREZXKgJBQTIEMjA2NiIfCgNERlcSCjIwMjYtMTItMDgaA0hORCoCQUEyAzE3NWoHCAESA1NMQ3IHCAESA0hORBpgEgoyMDI2LTEyLTE1Ih4KA0hORBIKMjAyNi0xMi0xNRoDREZXKgJKTDICMTIiIAoDREZXEgoyMDI2LTEyLTE1GgNTTEMqAkFBMgQyODQ1agcIARIDSE5EcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-08%20through%202026-12-15"
-            }
-          ]
-        },
-        {
           "origin": "PVU",
           "destination": "HND",
           "airline": "American Airlines",
@@ -2918,41 +2876,6 @@
               "retArrFmt": "Tue, Dec 15, 01:23 PM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4IiAKA1BWVRIKMjAyNi0xMi0wOBoDREZXKgJBQTIENDkyOCIfCgNERlcSCjIwMjYtMTItMDgaA0hORCoCQUEyAzE3NWoHCAESA1BWVXIHCAESA0hORBpgEgoyMDI2LTEyLTE1Ih4KA0hORBIKMjAyNi0xMi0xNRoDREZXKgJKTDICMTIiIAoDREZXEgoyMDI2LTEyLTE1GgNQVlUqAkFBMgQ2MzIxagcIARIDSE5EcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20HND%20on%202026-12-08%20through%202026-12-15"
-            }
-          ]
-        },
-        {
-          "origin": "SLC",
-          "destination": "HND",
-          "airline": "American Airlines",
-          "price": 946,
-          "points": 75680,
-          "earn": 4730,
-          "outDate": "2026-12-06",
-          "retDate": "2026-12-16",
-          "outDateFmt": "Sun, Dec 06",
-          "retDateFmt": "Wed, Dec 16",
-          "dropPct": 1,
-          "priceDelta": 0,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Sun, Dec 06, 08:25 AM",
-              "retArrFmt": "Wed, Dec 16, 10:04 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA2IiAKA1NMQxIKMjAyNi0xMi0wNhoDREZXKgJBQTIEMjA2NiIfCgNERlcSCjIwMjYtMTItMDYaA0hORCoCQUEyAzE3NWoHCAESA1NMQ3IHCAESA0hORBphEgoyMDI2LTEyLTE2Ih8KA0hORBIKMjAyNi0xMi0xNhoDREZXKgJBQTIDMTc2IiAKA0RGVxIKMjAyNi0xMi0xNhoDU0xDKgJBQTIEMTY4M2oHCAESA0hORHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-06%20through%202026-12-16"
-            },
-            {
-              "outDepFmt": "Sun, Dec 06, 08:25 AM",
-              "retArrFmt": "Wed, Dec 16, 04:37 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA2IiAKA1NMQxIKMjAyNi0xMi0wNhoDREZXKgJBQTIEMjA2NiIfCgNERlcSCjIwMjYtMTItMDYaA0hORCoCQUEyAzE3NWoHCAESA1NMQ3IHCAESA0hORBpgEgoyMDI2LTEyLTE2Ih4KA0hORBIKMjAyNi0xMi0xNhoDT1JEKgJKTDICMTAiIAoDT1JEEgoyMDI2LTEyLTE2GgNTTEMqAkFBMgQyNTcwagcIARIDSE5EcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-06%20through%202026-12-16"
-            },
-            {
-              "outDepFmt": "Sun, Dec 06, 08:25 AM",
-              "retArrFmt": "Wed, Dec 16, 01:04 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA2IiAKA1NMQxIKMjAyNi0xMi0wNhoDREZXKgJBQTIEMjA2NiIfCgNERlcSCjIwMjYtMTItMDYaA0hORCoCQUEyAzE3NWoHCAESA1NMQ3IHCAESA0hORBpgEgoyMDI2LTEyLTE2Ih4KA0hORBIKMjAyNi0xMi0xNhoDREZXKgJKTDICMTIiIAoDREZXEgoyMDI2LTEyLTE2GgNTTEMqAkFBMgQyODQ1agcIARIDSE5EcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-06%20through%202026-12-16"
             }
           ]
         },
@@ -2998,35 +2921,6 @@
           "price": 946,
           "points": 75680,
           "earn": 4730,
-          "outDate": "2026-12-06",
-          "retDate": "2026-12-16",
-          "outDateFmt": "Sun, Dec 06",
-          "retDateFmt": "Wed, Dec 16",
-          "dropPct": 1,
-          "priceDelta": 0,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Sun, Dec 06, 07:14 AM",
-              "retArrFmt": "Wed, Dec 16, 09:53 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA2IiAKA1BWVRIKMjAyNi0xMi0wNhoDREZXKgJBQTIENDkyOCIfCgNERlcSCjIwMjYtMTItMDYaA0hORCoCQUEyAzE3NWoHCAESA1BWVXIHCAESA0hORBphEgoyMDI2LTEyLTE2Ih8KA0hORBIKMjAyNi0xMi0xNhoDREZXKgJBQTIDMTc2IiAKA0RGVxIKMjAyNi0xMi0xNhoDUFZVKgJBQTIENjQyMWoHCAESA0hORHIHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20HND%20on%202026-12-06%20through%202026-12-16"
-            },
-            {
-              "outDepFmt": "Sun, Dec 06, 07:14 AM",
-              "retArrFmt": "Wed, Dec 16, 01:23 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA2IiAKA1BWVRIKMjAyNi0xMi0wNhoDREZXKgJBQTIENDkyOCIfCgNERlcSCjIwMjYtMTItMDYaA0hORCoCQUEyAzE3NWoHCAESA1BWVXIHCAESA0hORBpgEgoyMDI2LTEyLTE2Ih4KA0hORBIKMjAyNi0xMi0xNhoDREZXKgJKTDICMTIiIAoDREZXEgoyMDI2LTEyLTE2GgNQVlUqAkFBMgQ2MzIxagcIARIDSE5EcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20HND%20on%202026-12-06%20through%202026-12-16"
-            }
-          ]
-        },
-        {
-          "origin": "PVU",
-          "destination": "HND",
-          "airline": "American Airlines",
-          "price": 946,
-          "points": 75680,
-          "earn": 4730,
           "outDate": "2026-12-07",
           "retDate": "2026-12-17",
           "outDateFmt": "Mon, Dec 07",
@@ -3056,76 +2950,6 @@
           "price": 947,
           "points": 75760,
           "earn": 4735,
-          "outDate": "2026-12-08",
-          "retDate": "2026-12-15",
-          "outDateFmt": "Tue, Dec 08",
-          "retDateFmt": "Tue, Dec 15",
-          "dropPct": 1,
-          "priceDelta": -1,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Tue, Dec 08, 07:30 AM",
-              "retArrFmt": "Tue, Dec 15, 03:35 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4IiAKA1NMQxIKMjAyNi0xMi0wOBoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMTItMDgaA0hORCoCVUEyAzg3NWoHCAESA1NMQ3IHCAESA0hORBphEgoyMDI2LTEyLTE1Ih8KA0hORBIKMjAyNi0xMi0xNRoDU0ZPKgJVQTIDODc2IiAKA1NGTxIKMjAyNi0xMi0xNRoDU0xDKgJVQTIEMTQxM2oHCAESA0hORHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-08%20through%202026-12-15"
-            },
-            {
-              "outDepFmt": "Tue, Dec 08, 07:30 AM",
-              "retArrFmt": "Tue, Dec 15, 07:36 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4IiAKA1NMQxIKMjAyNi0xMi0wOBoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMTItMDgaA0hORCoCVUEyAzg3NWoHCAESA1NMQ3IHCAESA0hORBpgEgoyMDI2LTEyLTE1Ih4KA0hORBIKMjAyNi0xMi0xNRoDTEFYKgJVQTICMzgiIAoDTEFYEgoyMDI2LTEyLTE1GgNTTEMqAlVBMgQ1MzA3agcIARIDSE5EcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-08%20through%202026-12-15"
-            },
-            {
-              "outDepFmt": "Tue, Dec 08, 07:30 AM",
-              "retArrFmt": "Tue, Dec 15, 07:36 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4IiAKA1NMQxIKMjAyNi0xMi0wOBoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMTItMDgaA0hORCoCVUEyAzg3NWoHCAESA1NMQ3IHCAESA0hORBphEgoyMDI2LTEyLTE1Ih8KA0hORBIKMjAyNi0xMi0xNRoDTEFYKgJOSDIDMTI2IiAKA0xBWBIKMjAyNi0xMi0xNRoDU0xDKgJVQTIENTMwN2oHCAESA0hORHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-08%20through%202026-12-15"
-            }
-          ]
-        },
-        {
-          "origin": "SLC",
-          "destination": "HND",
-          "airline": "United Airlines",
-          "price": 947,
-          "points": 75760,
-          "earn": 4735,
-          "outDate": "2026-12-06",
-          "retDate": "2026-12-16",
-          "outDateFmt": "Sun, Dec 06",
-          "retDateFmt": "Wed, Dec 16",
-          "dropPct": 1,
-          "priceDelta": -1,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Sun, Dec 06, 08:15 AM",
-              "retArrFmt": "Wed, Dec 16, 03:35 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTEyLTA2IiAKA1NMQxIKMjAyNi0xMi0wNhoDTEFYKgJVQTIENTQwOCIeCgNMQVgSCjIwMjYtMTItMDYaA0hORCoCVUEyAjM5agcIARIDU0xDcgcIARIDSE5EGmESCjIwMjYtMTItMTYiHwoDSE5EEgoyMDI2LTEyLTE2GgNTRk8qAlVBMgM4NzYiIAoDU0ZPEgoyMDI2LTEyLTE2GgNTTEMqAlVBMgQxNDEzagcIARIDSE5EcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-06%20through%202026-12-16"
-            },
-            {
-              "outDepFmt": "Sun, Dec 06, 08:15 AM",
-              "retArrFmt": "Wed, Dec 16, 07:36 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTEyLTA2IiAKA1NMQxIKMjAyNi0xMi0wNhoDTEFYKgJVQTIENTQwOCIeCgNMQVgSCjIwMjYtMTItMDYaA0hORCoCVUEyAjM5agcIARIDU0xDcgcIARIDSE5EGmASCjIwMjYtMTItMTYiHgoDSE5EEgoyMDI2LTEyLTE2GgNMQVgqAlVBMgIzOCIgCgNMQVgSCjIwMjYtMTItMTYaA1NMQyoCVUEyBDUzMDdqBwgBEgNITkRyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-06%20through%202026-12-16"
-            },
-            {
-              "outDepFmt": "Sun, Dec 06, 08:15 AM",
-              "retArrFmt": "Wed, Dec 16, 07:36 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTEyLTA2IiAKA1NMQxIKMjAyNi0xMi0wNhoDTEFYKgJVQTIENTQwOCIeCgNMQVgSCjIwMjYtMTItMDYaA0hORCoCVUEyAjM5agcIARIDU0xDcgcIARIDSE5EGmESCjIwMjYtMTItMTYiHwoDSE5EEgoyMDI2LTEyLTE2GgNMQVgqAk5IMgMxMjYiIAoDTEFYEgoyMDI2LTEyLTE2GgNTTEMqAlVBMgQ1MzA3agcIARIDSE5EcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-06%20through%202026-12-16"
-            }
-          ]
-        },
-        {
-          "origin": "SLC",
-          "destination": "HND",
-          "airline": "United Airlines",
-          "price": 947,
-          "points": 75760,
-          "earn": 4735,
           "outDate": "2026-12-07",
           "retDate": "2026-12-17",
           "outDateFmt": "Mon, Dec 07",
@@ -3142,14 +2966,14 @@
             },
             {
               "outDepFmt": "Mon, Dec 07, 07:30 AM",
-              "retArrFmt": "Fri, Dec 18, 12:36 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMTItMDcaA0hORCoCVUEyAzg3NWoHCAESA1NMQ3IHCAESA0hORBphEgoyMDI2LTEyLTE3Ih8KA0hORBIKMjAyNi0xMi0xNxoDU0ZPKgJOSDIDMTA4IiAKA1NGTxIKMjAyNi0xMi0xOBoDU0xDKgJVQTIENTUwM2oHCAESA0hORHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "retArrFmt": "Thu, Dec 17, 07:38 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMTItMDcaA0hORCoCVUEyAzg3NWoHCAESA1NMQ3IHCAESA0hORBphEgoyMDI2LTEyLTE3Ih8KA0hORBIKMjAyNi0xMi0xNxoDTEFYKgJOSDIDMTI2IiAKA0xBWBIKMjAyNi0xMi0xNxoDU0xDKgJVQTIENTU0MGoHCAESA0hORHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-07%20through%202026-12-17"
             },
             {
-              "outDepFmt": "Mon, Dec 07, 07:30 AM",
+              "outDepFmt": "Mon, Dec 07, 08:15 AM",
               "retArrFmt": "Thu, Dec 17, 07:38 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMTItMDcaA0hORCoCVUEyAzg3NWoHCAESA1NMQ3IHCAESA0hORBphEgoyMDI2LTEyLTE3Ih8KA0hORBIKMjAyNi0xMi0xNxoDTEFYKgJOSDIDMTI2IiAKA0xBWBIKMjAyNi0xMi0xNxoDU0xDKgJVQTIENTU0MGoHCAESA0hORHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDTEFYKgJVQTIENTQwOCIeCgNMQVgSCjIwMjYtMTItMDcaA0hORCoCVUEyAjM5agcIARIDU0xDcgcIARIDSE5EGmASCjIwMjYtMTItMTciHgoDSE5EEgoyMDI2LTEyLTE3GgNMQVgqAlVBMgIzOCIgCgNMQVgSCjIwMjYtMTItMTcaA1NMQyoCVUEyBDU1NDBqBwgBEgNITkRyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-07%20through%202026-12-17"
             }
           ]
@@ -3170,21 +2994,21 @@
           "weekendEscape": true,
           "times": [
             {
-              "outDepFmt": "Wed, Dec 09, 07:30 AM",
+              "outDepFmt": "Wed, Dec 09, 08:15 AM",
               "retArrFmt": "Wed, Dec 16, 03:35 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA5IiAKA1NMQxIKMjAyNi0xMi0wORoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMTItMDkaA0hORCoCVUEyAzg3NWoHCAESA1NMQ3IHCAESA0hORBphEgoyMDI2LTEyLTE2Ih8KA0hORBIKMjAyNi0xMi0xNhoDU0ZPKgJVQTIDODc2IiAKA1NGTxIKMjAyNi0xMi0xNhoDU0xDKgJVQTIEMTQxM2oHCAESA0hORHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTEyLTA5IiAKA1NMQxIKMjAyNi0xMi0wORoDTEFYKgJVQTIENTQwOCIeCgNMQVgSCjIwMjYtMTItMDkaA0hORCoCVUEyAjM5agcIARIDU0xDcgcIARIDSE5EGmESCjIwMjYtMTItMTYiHwoDSE5EEgoyMDI2LTEyLTE2GgNTRk8qAlVBMgM4NzYiIAoDU0ZPEgoyMDI2LTEyLTE2GgNTTEMqAlVBMgQxNDEzagcIARIDSE5EcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-09%20through%202026-12-16"
             },
             {
-              "outDepFmt": "Wed, Dec 09, 07:30 AM",
+              "outDepFmt": "Wed, Dec 09, 08:15 AM",
               "retArrFmt": "Wed, Dec 16, 07:36 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA5IiAKA1NMQxIKMjAyNi0xMi0wORoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMTItMDkaA0hORCoCVUEyAzg3NWoHCAESA1NMQ3IHCAESA0hORBpgEgoyMDI2LTEyLTE2Ih4KA0hORBIKMjAyNi0xMi0xNhoDTEFYKgJVQTICMzgiIAoDTEFYEgoyMDI2LTEyLTE2GgNTTEMqAlVBMgQ1MzA3agcIARIDSE5EcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTEyLTA5IiAKA1NMQxIKMjAyNi0xMi0wORoDTEFYKgJVQTIENTQwOCIeCgNMQVgSCjIwMjYtMTItMDkaA0hORCoCVUEyAjM5agcIARIDU0xDcgcIARIDSE5EGmASCjIwMjYtMTItMTYiHgoDSE5EEgoyMDI2LTEyLTE2GgNMQVgqAlVBMgIzOCIgCgNMQVgSCjIwMjYtMTItMTYaA1NMQyoCVUEyBDUzMDdqBwgBEgNITkRyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-09%20through%202026-12-16"
             },
             {
-              "outDepFmt": "Wed, Dec 09, 07:30 AM",
+              "outDepFmt": "Wed, Dec 09, 08:15 AM",
               "retArrFmt": "Wed, Dec 16, 07:36 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA5IiAKA1NMQxIKMjAyNi0xMi0wORoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMTItMDkaA0hORCoCVUEyAzg3NWoHCAESA1NMQ3IHCAESA0hORBphEgoyMDI2LTEyLTE2Ih8KA0hORBIKMjAyNi0xMi0xNhoDTEFYKgJOSDIDMTI2IiAKA0xBWBIKMjAyNi0xMi0xNhoDU0xDKgJVQTIENTMwN2oHCAESA0hORHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTEyLTA5IiAKA1NMQxIKMjAyNi0xMi0wORoDTEFYKgJVQTIENTQwOCIeCgNMQVgSCjIwMjYtMTItMDkaA0hORCoCVUEyAjM5agcIARIDU0xDcgcIARIDSE5EGmESCjIwMjYtMTItMTYiHwoDSE5EEgoyMDI2LTEyLTE2GgNMQVgqAk5IMgMxMjYiIAoDTEFYEgoyMDI2LTEyLTE2GgNTTEMqAlVBMgQ1MzA3agcIARIDSE5EcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-09%20through%202026-12-16"
             }
           ]
@@ -3332,35 +3156,174 @@
         {
           "origin": "SLC",
           "destination": "NRT",
-          "airline": "United Airlines",
+          "airline": "American Airlines",
           "price": 947,
           "points": 75760,
           "earn": 4735,
-          "outDate": "2026-12-06",
-          "retDate": "2026-12-16",
-          "outDateFmt": "Sun, Dec 06",
-          "retDateFmt": "Wed, Dec 16",
+          "outDate": "2026-12-07",
+          "retDate": "2026-12-17",
+          "outDateFmt": "Mon, Dec 07",
+          "retDateFmt": "Thu, Dec 17",
           "dropPct": 1,
           "priceDelta": -1,
           "weekendEscape": true,
           "times": [
             {
-              "outDepFmt": "Sun, Dec 06, 08:15 AM",
-              "retArrFmt": "Wed, Dec 16, 03:35 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTEyLTA2IiAKA1NMQxIKMjAyNi0xMi0wNhoDTEFYKgJVQTIENTQwOCIeCgNMQVgSCjIwMjYtMTItMDYaA05SVCoCVUEyAjMyagcIARIDU0xDcgcIARIDTlJUGmESCjIwMjYtMTItMTYiHwoDTlJUEgoyMDI2LTEyLTE2GgNTRk8qAlVBMgM4MzgiIAoDU0ZPEgoyMDI2LTEyLTE2GgNTTEMqAlVBMgQxNDEzagcIARIDTlJUcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20NRT%20on%202026-12-06%20through%202026-12-16"
+              "outDepFmt": "Mon, Dec 07, 05:00 AM",
+              "retArrFmt": "Thu, Dec 17, 07:35 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDREZXKgJBQTIEMjE5NSIeCgNERlcSCjIwMjYtMTItMDcaA05SVCoCQUEyAjYxagcIARIDU0xDcgcIARIDTlJUGmASCjIwMjYtMTItMTciHgoDTlJUEgoyMDI2LTEyLTE3GgNERlcqAkFBMgI2MCIgCgNERlcSCjIwMjYtMTItMTcaA1NMQyoCQUEyBDIzNzVqBwgBEgNOUlRyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20NRT%20on%202026-12-07%20through%202026-12-17"
             },
             {
-              "outDepFmt": "Sun, Dec 06, 08:15 AM",
-              "retArrFmt": "Wed, Dec 16, 07:36 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTEyLTA2IiAKA1NMQxIKMjAyNi0xMi0wNhoDTEFYKgJVQTIENTQwOCIeCgNMQVgSCjIwMjYtMTItMDYaA05SVCoCVUEyAjMyagcIARIDU0xDcgcIARIDTlJUGmASCjIwMjYtMTItMTYiHgoDTlJUEgoyMDI2LTEyLTE2GgNMQVgqAlVBMgIzMyIgCgNMQVgSCjIwMjYtMTItMTYaA1NMQyoCVUEyBDUzMDdqBwgBEgNOUlRyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20NRT%20on%202026-12-06%20through%202026-12-16"
+              "outDepFmt": "Mon, Dec 07, 05:00 AM",
+              "retArrFmt": "Thu, Dec 17, 01:23 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDREZXKgJBQTIEMjE5NSIeCgNERlcSCjIwMjYtMTItMDcaA05SVCoCQUEyAjYxagcIARIDU0xDcgcIARIDTlJUGmASCjIwMjYtMTItMTciHgoDTlJUEgoyMDI2LTEyLTE3GgNPUkQqAkpMMgI1NiIgCgNPUkQSCjIwMjYtMTItMTcaA1NMQyoCQUEyBDI1NzBqBwgBEgNOUlRyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20NRT%20on%202026-12-07%20through%202026-12-17"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "NRT",
+          "airline": "United Airlines",
+          "price": 947,
+          "points": 75760,
+          "earn": 4735,
+          "outDate": "2026-12-07",
+          "retDate": "2026-12-17",
+          "outDateFmt": "Mon, Dec 07",
+          "retDateFmt": "Thu, Dec 17",
+          "dropPct": 1,
+          "priceDelta": -1,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Mon, Dec 07, 07:30 AM",
+              "retArrFmt": "Thu, Dec 17, 03:13 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMTItMDcaA05SVCoCVUEyAzgzN2oHCAESA1NMQ3IHCAESA05SVBphEgoyMDI2LTEyLTE3Ih8KA05SVBIKMjAyNi0xMi0xNxoDU0ZPKgJVQTIDODM4IiAKA1NGTxIKMjAyNi0xMi0xNxoDU0xDKgJVQTIEMTQxM2oHCAESA05SVHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20NRT%20on%202026-12-07%20through%202026-12-17"
             },
             {
-              "outDepFmt": "Sun, Dec 06, 08:15 AM",
-              "retArrFmt": "Wed, Dec 16, 03:10 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTEyLTA2IiAKA1NMQxIKMjAyNi0xMi0wNhoDTEFYKgJVQTIENTQwOCIeCgNMQVgSCjIwMjYtMTItMDYaA05SVCoCVUEyAjMyagcIARIDU0xDcgcIARIDTlJUGmESCjIwMjYtMTItMTYiHwoDTlJUEgoyMDI2LTEyLTE2GgNERU4qAlVBMgMxNDIiIAoDREVOEgoyMDI2LTEyLTE2GgNTTEMqAlVBMgQ1Nzk0agcIARIDTlJUcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20NRT%20on%202026-12-06%20through%202026-12-16"
+              "outDepFmt": "Mon, Dec 07, 07:30 AM",
+              "retArrFmt": "Thu, Dec 17, 03:24 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMTItMDcaA05SVCoCVUEyAzgzN2oHCAESA1NMQ3IHCAESA05SVBphEgoyMDI2LTEyLTE3Ih8KA05SVBIKMjAyNi0xMi0xNxoDREVOKgJVQTIDMTQyIiAKA0RFThIKMjAyNi0xMi0xNxoDU0xDKgJVQTIENTc5NGoHCAESA05SVHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20NRT%20on%202026-12-07%20through%202026-12-17"
+            },
+            {
+              "outDepFmt": "Mon, Dec 07, 07:30 AM",
+              "retArrFmt": "Thu, Dec 17, 03:13 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMTItMDcaA05SVCoCVUEyAzgzN2oHCAESA1NMQ3IHCAESA05SVBpfEgoyMDI2LTEyLTE3Ih0KA05SVBIKMjAyNi0xMi0xNxoDU0ZPKgJOSDIBOCIgCgNTRk8SCjIwMjYtMTItMTcaA1NMQyoCVUEyBDE0MTNqBwgBEgNOUlRyBwgBEgNTTENAAUgBcAGCAQsI____________AZgBAQ",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20NRT%20on%202026-12-07%20through%202026-12-17"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "NRT",
+          "airline": "United Airlines",
+          "price": 947,
+          "points": 75760,
+          "earn": 4735,
+          "outDate": "2026-12-08",
+          "retDate": "2026-12-18",
+          "outDateFmt": "Tue, Dec 08",
+          "retDateFmt": "Fri, Dec 18",
+          "dropPct": 1,
+          "priceDelta": -1,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Tue, Dec 08, 07:30 AM",
+              "retArrFmt": "Fri, Dec 18, 03:13 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4IiAKA1NMQxIKMjAyNi0xMi0wOBoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMTItMDgaA05SVCoCVUEyAzgzN2oHCAESA1NMQ3IHCAESA05SVBphEgoyMDI2LTEyLTE4Ih8KA05SVBIKMjAyNi0xMi0xOBoDU0ZPKgJVQTIDODM4IiAKA1NGTxIKMjAyNi0xMi0xOBoDU0xDKgJVQTIEMTQxM2oHCAESA05SVHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20NRT%20on%202026-12-08%20through%202026-12-18"
+            },
+            {
+              "outDepFmt": "Tue, Dec 08, 07:30 AM",
+              "retArrFmt": "Fri, Dec 18, 07:38 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4IiAKA1NMQxIKMjAyNi0xMi0wOBoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMTItMDgaA05SVCoCVUEyAzgzN2oHCAESA1NMQ3IHCAESA05SVBpgEgoyMDI2LTEyLTE4Ih4KA05SVBIKMjAyNi0xMi0xOBoDTEFYKgJVQTICMzMiIAoDTEFYEgoyMDI2LTEyLTE4GgNTTEMqAlVBMgQ1NTQwagcIARIDTlJUcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20NRT%20on%202026-12-08%20through%202026-12-18"
+            },
+            {
+              "outDepFmt": "Tue, Dec 08, 07:30 AM",
+              "retArrFmt": "Fri, Dec 18, 10:11 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA4IiAKA1NMQxIKMjAyNi0xMi0wOBoDU0ZPKgJVQTIENTk3MCIfCgNTRk8SCjIwMjYtMTItMDgaA05SVCoCVUEyAzgzN2oHCAESA1NMQ3IHCAESA05SVBphEgoyMDI2LTEyLTE4Ih8KA05SVBIKMjAyNi0xMi0xOBoDREVOKgJVQTIDMTQyIiAKA0RFThIKMjAyNi0xMi0xOBoDU0xDKgJVQTIENDgwNWoHCAESA05SVHIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20NRT%20on%202026-12-08%20through%202026-12-18"
+            }
+          ]
+        },
+        {
+          "origin": "PVU",
+          "destination": "HND",
+          "airline": "American Airlines",
+          "price": 951,
+          "points": 76080,
+          "earn": 4755,
+          "outDate": "2026-12-07",
+          "retDate": "2026-12-17",
+          "outDateFmt": "Mon, Dec 07",
+          "retDateFmt": "Thu, Dec 17",
+          "dropPct": 1,
+          "priceDelta": -5,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Mon, Dec 07, 01:54 PM",
+              "retArrFmt": "Thu, Dec 17, 10:27 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3IiAKA1BWVRIKMjAyNi0xMi0wNxoDREZXKgJBQTIENDk4MCIfCgNERlcSCjIwMjYtMTItMDgaA0hORCoCQUEyAzE3NWoHCAESA1BWVXIHCAESA0hORBphEgoyMDI2LTEyLTE3Ih8KA0hORBIKMjAyNi0xMi0xNxoDREZXKgJBQTIDMTc2IiAKA0RGVxIKMjAyNi0xMi0xNxoDUFZVKgJBQTIENjQyMWoHCAESA0hORHIHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20HND%20on%202026-12-07%20through%202026-12-17"
+            },
+            {
+              "outDepFmt": "Mon, Dec 07, 01:54 PM",
+              "retArrFmt": "Thu, Dec 17, 01:03 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3IiAKA1BWVRIKMjAyNi0xMi0wNxoDREZXKgJBQTIENDk4MCIfCgNERlcSCjIwMjYtMTItMDgaA0hORCoCQUEyAzE3NWoHCAESA1BWVXIHCAESA0hORBpfEgoyMDI2LTEyLTE3Ih4KA0hORBIKMjAyNi0xMi0xNxoDREZXKgJKTDICMTIiHwoDREZXEgoyMDI2LTEyLTE3GgNQVlUqAkFBMgM3NTlqBwgBEgNITkRyBwgBEgNQVlVAAUgBcAGCAQsI____________AZgBAQ",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20HND%20on%202026-12-07%20through%202026-12-17"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "HND",
+          "airline": "United Airlines",
+          "price": 953,
+          "points": 76240,
+          "earn": 4765,
+          "outDate": "2026-12-07",
+          "retDate": "2026-12-17",
+          "outDateFmt": "Mon, Dec 07",
+          "retDateFmt": "Thu, Dec 17",
+          "dropPct": 1,
+          "priceDelta": -7,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Mon, Dec 07, 08:24 PM",
+              "retArrFmt": "Thu, Dec 17, 07:38 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDU0ZPKgJVQTIENTQ1NyIfCgNTRk8SCjIwMjYtMTItMDgaA0hORCoCVUEyAzg3NWoHCAESA1NMQ3IHCAESA0hORBpgEgoyMDI2LTEyLTE3Ih4KA0hORBIKMjAyNi0xMi0xNxoDTEFYKgJVQTICMzgiIAoDTEFYEgoyMDI2LTEyLTE3GgNTTEMqAlVBMgQ1NTQwagcIARIDSE5EcgcIARIDU0xDQAFIAXABggELCP___________wGYAQE",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20HND%20on%202026-12-07%20through%202026-12-17"
+            }
+          ]
+        },
+        {
+          "origin": "PVU",
+          "destination": "NRT",
+          "airline": "American Airlines",
+          "price": 953,
+          "points": 76240,
+          "earn": 4765,
+          "outDate": "2026-12-08",
+          "retDate": "2026-12-18",
+          "outDateFmt": "Tue, Dec 08",
+          "retDateFmt": "Fri, Dec 18",
+          "dropPct": 1,
+          "priceDelta": -7,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Tue, Dec 08, 01:54 PM",
+              "retArrFmt": "Fri, Dec 18, 10:27 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTEyLTA4IiAKA1BWVRIKMjAyNi0xMi0wOBoDREZXKgJBQTIENDk4MCIeCgNERlcSCjIwMjYtMTItMDkaA05SVCoCQUEyAjYxagcIARIDUFZVcgcIARIDTlJUGmASCjIwMjYtMTItMTgiHgoDTlJUEgoyMDI2LTEyLTE4GgNERlcqAkFBMgI2MCIgCgNERlcSCjIwMjYtMTItMTgaA1BWVSoCQUEyBDY0MjFqBwgBEgNOUlRyBwgBEgNQVlVAAUgBcAGCAQsI____________AZgBAQ",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20NRT%20on%202026-12-08%20through%202026-12-18"
             }
           ]
         }
@@ -3495,114 +3458,22 @@
           "origin": "SLC",
           "destination": "ICN",
           "airline": "American Airlines",
-          "price": 1170,
-          "points": 93600,
-          "earn": 5850,
-          "outDate": "2026-12-06",
-          "retDate": "2026-12-16",
-          "outDateFmt": "Sun, Dec 06",
-          "retDateFmt": "Wed, Dec 16",
-          "dropPct": 0,
-          "priceDelta": -6,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Sun, Dec 06, 04:44 PM",
-              "retArrFmt": "Wed, Dec 16, 10:04 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA2IiAKA1NMQxIKMjAyNi0xMi0wNhoDREZXKgJBQTIEMTQ1NiIfCgNERlcSCjIwMjYtMTItMDcaA0lDTioCQUEyAzI4MWoHCAESA1NMQ3IHCAESA0lDThphEgoyMDI2LTEyLTE2Ih8KA0lDThIKMjAyNi0xMi0xNhoDREZXKgJBQTIDMjgwIiAKA0RGVxIKMjAyNi0xMi0xNhoDU0xDKgJBQTIEMTY4M2oHCAESA0lDTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ICN%20on%202026-12-06%20through%202026-12-16"
-            }
-          ]
-        },
-        {
-          "origin": "SLC",
-          "destination": "ICN",
-          "airline": "American Airlines",
-          "price": 1214,
-          "points": 97120,
-          "earn": 6070,
-          "outDate": "2026-12-06",
-          "retDate": "2026-12-16",
-          "outDateFmt": "Sun, Dec 06",
-          "retDateFmt": "Wed, Dec 16",
-          "dropPct": 0,
-          "priceDelta": -50,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Sun, Dec 06, 05:00 AM",
-              "retArrFmt": "Wed, Dec 16, 10:04 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA2IiAKA1NMQxIKMjAyNi0xMi0wNhoDREZXKgJBQTIEMjE5NSIfCgNERlcSCjIwMjYtMTItMDYaA0lDTioCQUEyAzI4MWoHCAESA1NMQ3IHCAESA0lDThphEgoyMDI2LTEyLTE2Ih8KA0lDThIKMjAyNi0xMi0xNhoDREZXKgJBQTIDMjgwIiAKA0RGVxIKMjAyNi0xMi0xNhoDU0xDKgJBQTIEMTY4M2oHCAESA0lDTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ICN%20on%202026-12-06%20through%202026-12-16"
-            }
-          ]
-        },
-        {
-          "origin": "SLC",
-          "destination": "ICN",
-          "airline": "American Airlines",
-          "price": 1214,
-          "points": 97120,
-          "earn": 6070,
-          "outDate": "2026-12-06",
-          "retDate": "2026-12-13",
-          "outDateFmt": "Sun, Dec 06",
-          "retDateFmt": "Sun, Dec 13",
-          "dropPct": 0,
-          "priceDelta": -50,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Sun, Dec 06, 05:00 AM",
-              "retArrFmt": "Sun, Dec 13, 10:02 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA2IiAKA1NMQxIKMjAyNi0xMi0wNhoDREZXKgJBQTIEMjE5NSIfCgNERlcSCjIwMjYtMTItMDYaA0lDTioCQUEyAzI4MWoHCAESA1NMQ3IHCAESA0lDThphEgoyMDI2LTEyLTEzIh8KA0lDThIKMjAyNi0xMi0xMxoDREZXKgJBQTIDMjgwIiAKA0RGVxIKMjAyNi0xMi0xMxoDU0xDKgJBQTIEMTY4M2oHCAESA0lDTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ICN%20on%202026-12-06%20through%202026-12-13"
-            }
-          ]
-        },
-        {
-          "origin": "PVU",
-          "destination": "ICN",
-          "airline": "American Airlines",
-          "price": 1609,
-          "points": 128720,
-          "earn": 8045,
+          "price": 1610,
+          "points": 128800,
+          "earn": 8050,
           "outDate": "2026-12-07",
           "retDate": "2026-12-14",
           "outDateFmt": "Mon, Dec 07",
           "retDateFmt": "Mon, Dec 14",
           "dropPct": 0,
-          "priceDelta": -445,
+          "priceDelta": -446,
           "weekendEscape": true,
           "times": [
             {
-              "outDepFmt": "Mon, Dec 07, 01:54 PM",
-              "retArrFmt": "Mon, Dec 14, 09:53 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3IiAKA1BWVRIKMjAyNi0xMi0wNxoDREZXKgJBQTIENDk4MCIfCgNERlcSCjIwMjYtMTItMDgaA0lDTioCQUEyAzI4MWoHCAESA1BWVXIHCAESA0lDThphEgoyMDI2LTEyLTE0Ih8KA0lDThIKMjAyNi0xMi0xNBoDREZXKgJBQTIDMjgwIiAKA0RGVxIKMjAyNi0xMi0xNBoDUFZVKgJBQTIENjQyMWoHCAESA0lDTnIHCAESA1BWVUABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20ICN%20on%202026-12-07%20through%202026-12-14"
-            }
-          ]
-        },
-        {
-          "origin": "PVU",
-          "destination": "ICN",
-          "airline": "American Airlines",
-          "price": 1659,
-          "points": 132720,
-          "earn": 8295,
-          "outDate": "2026-12-06",
-          "retDate": "2026-12-13",
-          "outDateFmt": "Sun, Dec 06",
-          "retDateFmt": "Sun, Dec 13",
-          "dropPct": 0,
-          "priceDelta": -495,
-          "weekendEscape": true,
-          "times": [
-            {
-              "outDepFmt": "Sun, Dec 06, 01:54 PM",
-              "retArrFmt": "Sun, Dec 13, 09:53 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhpgEgoyMDI2LTEyLTA2Ih8KA1BWVRIKMjAyNi0xMi0wNhoDREZXKgJBQTIDNTI4Ih8KA0RGVxIKMjAyNi0xMi0wNxoDSUNOKgJBQTIDMjgxagcIARIDUFZVcgcIARIDSUNOGmESCjIwMjYtMTItMTMiHwoDSUNOEgoyMDI2LTEyLTEzGgNERlcqAkFBMgMyODAiIAoDREZXEgoyMDI2LTEyLTEzGgNQVlUqAkFBMgQ2NDIxagcIARIDSUNOcgcIARIDUFZVQAFIAXABggELCP___________wGYAQE",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20PVU%20to%20ICN%20on%202026-12-06%20through%202026-12-13"
+              "outDepFmt": "Mon, Dec 07, 04:44 PM",
+              "retArrFmt": "Mon, Dec 14, 10:02 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA3IiAKA1NMQxIKMjAyNi0xMi0wNxoDREZXKgJBQTIEMTQ1NiIfCgNERlcSCjIwMjYtMTItMDgaA0lDTioCQUEyAzI4MWoHCAESA1NMQ3IHCAESA0lDThphEgoyMDI2LTEyLTE0Ih8KA0lDThIKMjAyNi0xMi0xNBoDREZXKgJBQTIDMjgwIiAKA0RGVxIKMjAyNi0xMi0xNBoDU0xDKgJBQTIEMTY4M2oHCAESA0lDTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ICN%20on%202026-12-07%20through%202026-12-14"
             }
           ]
         },
@@ -3610,22 +3481,22 @@
           "origin": "SLC",
           "destination": "ICN",
           "airline": "American Airlines",
-          "price": 1660,
-          "points": 132800,
-          "earn": 8300,
-          "outDate": "2026-12-06",
-          "retDate": "2026-12-13",
-          "outDateFmt": "Sun, Dec 06",
-          "retDateFmt": "Sun, Dec 13",
+          "price": 1662,
+          "points": 132960,
+          "earn": 8310,
+          "outDate": "2027-01-04",
+          "retDate": "2027-01-11",
+          "outDateFmt": "Mon, Jan 04",
+          "retDateFmt": "Mon, Jan 11",
           "dropPct": 0,
-          "priceDelta": -496,
+          "priceDelta": -498,
           "weekendEscape": true,
           "times": [
             {
-              "outDepFmt": "Sun, Dec 06, 04:44 PM",
-              "retArrFmt": "Sun, Dec 13, 10:02 PM",
-              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI2LTEyLTA2IiAKA1NMQxIKMjAyNi0xMi0wNhoDREZXKgJBQTIEMTQ1NiIfCgNERlcSCjIwMjYtMTItMDcaA0lDTioCQUEyAzI4MWoHCAESA1NMQ3IHCAESA0lDThphEgoyMDI2LTEyLTEzIh8KA0lDThIKMjAyNi0xMi0xMxoDREZXKgJBQTIDMjgwIiAKA0RGVxIKMjAyNi0xMi0xMxoDU0xDKgJBQTIEMTY4M2oHCAESA0lDTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
-              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ICN%20on%202026-12-06%20through%202026-12-13"
+              "outDepFmt": "Mon, Jan 04, 05:00 AM",
+              "retArrFmt": "Mon, Jan 11, 10:20 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI3LTAxLTA0IiAKA1NMQxIKMjAyNy0wMS0wNBoDREZXKgJBQTIEMjE5NSIfCgNERlcSCjIwMjctMDEtMDQaA0lDTioCQUEyAzI4MWoHCAESA1NMQ3IHCAESA0lDThphEgoyMDI3LTAxLTExIh8KA0lDThIKMjAyNy0wMS0xMRoDREZXKgJBQTIDMjgwIiAKA0RGVxIKMjAyNy0wMS0xMRoDU0xDKgJBQTIEMjM3NWoHCAESA0lDTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ICN%20on%202027-01-04%20through%202027-01-11"
             }
           ]
         },
@@ -3702,6 +3573,29 @@
           "origin": "SLC",
           "destination": "ICN",
           "airline": "American Airlines",
+          "price": 1662,
+          "points": 132960,
+          "earn": 8310,
+          "outDate": "2027-01-04",
+          "retDate": "2027-01-14",
+          "outDateFmt": "Mon, Jan 04",
+          "retDateFmt": "Thu, Jan 14",
+          "dropPct": 0,
+          "priceDelta": -498,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Mon, Jan 04, 05:00 AM",
+              "retArrFmt": "Thu, Jan 14, 10:20 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI3LTAxLTA0IiAKA1NMQxIKMjAyNy0wMS0wNBoDREZXKgJBQTIEMjE5NSIfCgNERlcSCjIwMjctMDEtMDQaA0lDTioCQUEyAzI4MWoHCAESA1NMQ3IHCAESA0lDThphEgoyMDI3LTAxLTE0Ih8KA0lDThIKMjAyNy0wMS0xNBoDREZXKgJBQTIDMjgwIiAKA0RGVxIKMjAyNy0wMS0xNBoDU0xDKgJBQTIEMjM3NWoHCAESA0lDTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ICN%20on%202027-01-04%20through%202027-01-14"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "ICN",
+          "airline": "American Airlines",
           "price": 1669,
           "points": 133520,
           "earn": 8345,
@@ -3718,6 +3612,75 @@
               "retArrFmt": "Mon, Jan 11, 10:20 PM",
               "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI3LTAxLTAxIiAKA1NMQxIKMjAyNy0wMS0wMRoDREZXKgJBQTIEMTQ1NiIfCgNERlcSCjIwMjctMDEtMDIaA0lDTioCQUEyAzI4MWoHCAESA1NMQ3IHCAESA0lDThphEgoyMDI3LTAxLTExIh8KA0lDThIKMjAyNy0wMS0xMRoDREZXKgJBQTIDMjgwIiAKA0RGVxIKMjAyNy0wMS0xMRoDU0xDKgJBQTIEMjM3NWoHCAESA0lDTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
               "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ICN%20on%202027-01-01%20through%202027-01-11"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "ICN",
+          "airline": "American Airlines",
+          "price": 1669,
+          "points": 133520,
+          "earn": 8345,
+          "outDate": "2027-01-02",
+          "retDate": "2027-01-12",
+          "outDateFmt": "Sat, Jan 02",
+          "retDateFmt": "Tue, Jan 12",
+          "dropPct": 0,
+          "priceDelta": -505,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Sat, Jan 02, 07:05 AM",
+              "retArrFmt": "Tue, Jan 12, 08:27 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI3LTAxLTAyIiAKA1NMQxIKMjAyNy0wMS0wMhoDREZXKgJBQTIEMTIxNCIfCgNERlcSCjIwMjctMDEtMDMaA0lDTioCQUEyAzI4MWoHCAESA1NMQ3IHCAESA0lDThphEgoyMDI3LTAxLTEyIh8KA0lDThIKMjAyNy0wMS0xMhoDREZXKgJBQTIDMjgwIiAKA0RGVxIKMjAyNy0wMS0xMhoDU0xDKgJBQTIEMjM3NWoHCAESA0lDTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ICN%20on%202027-01-02%20through%202027-01-12"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "ICN",
+          "airline": "American Airlines",
+          "price": 1756,
+          "points": 140480,
+          "earn": 8780,
+          "outDate": "2027-01-02",
+          "retDate": "2027-01-12",
+          "outDateFmt": "Sat, Jan 02",
+          "retDateFmt": "Tue, Jan 12",
+          "dropPct": 0,
+          "priceDelta": -592,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Sat, Jan 02, 01:53 PM",
+              "retArrFmt": "Tue, Jan 12, 08:27 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI3LTAxLTAyIiAKA1NMQxIKMjAyNy0wMS0wMhoDREZXKgJBQTIEMjg0NSIfCgNERlcSCjIwMjctMDEtMDMaA0lDTioCQUEyAzI4MWoHCAESA1NMQ3IHCAESA0lDThphEgoyMDI3LTAxLTEyIh8KA0lDThIKMjAyNy0wMS0xMhoDREZXKgJBQTIDMjgwIiAKA0RGVxIKMjAyNy0wMS0xMhoDU0xDKgJBQTIEMjM3NWoHCAESA0lDTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ICN%20on%202027-01-02%20through%202027-01-12"
+            }
+          ]
+        },
+        {
+          "origin": "SLC",
+          "destination": "ICN",
+          "airline": "American Airlines",
+          "price": 1813,
+          "points": 145040,
+          "earn": 9065,
+          "outDate": "2027-01-02",
+          "retDate": "2027-01-12",
+          "outDateFmt": "Sat, Jan 02",
+          "retDateFmt": "Tue, Jan 12",
+          "dropPct": 0,
+          "priceDelta": -649,
+          "weekendEscape": true,
+          "times": [
+            {
+              "outDepFmt": "Sat, Jan 02, 04:45 PM",
+              "retArrFmt": "Tue, Jan 12, 08:27 PM",
+              "url": "https://www.google.com/travel/flights/booking?tfs=CBwQAhphEgoyMDI3LTAxLTAyIiAKA1NMQxIKMjAyNy0wMS0wMhoDREZXKgJBQTIEMTQ1NiIfCgNERlcSCjIwMjctMDEtMDMaA0lDTioCQUEyAzI4MWoHCAESA1NMQ3IHCAESA0lDThphEgoyMDI3LTAxLTEyIh8KA0lDThIKMjAyNy0wMS0xMhoDREZXKgJBQTIDMjgwIiAKA0RGVxIKMjAyNy0wMS0xMhoDU0xDKgJBQTIEMjM3NWoHCAESA0lDTnIHCAESA1NMQ0ABSAFwAYIBCwj___________8BmAEB",
+              "searchUrl": "https://www.google.com/travel/flights?q=Flights%20from%20SLC%20to%20ICN%20on%202027-01-02%20through%202027-01-12"
             }
           ]
         }
